@@ -1,0 +1,45 @@
+{
+    "name": "php-etl/fast-map",
+    "description": "This library implements the Extract-Transform-Load pattern asynchronously in PHP with the help of iterators and generators",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kiboko SAS",
+            "homepage": "http://kiboko.fr"
+        },
+        {
+            "name": "Grégory Planchat",
+            "email": "gregory@kiboko.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.1",
+        "nikic/php-parser": "^4.2",
+        "symfony/property-access": "^5.0@dev",
+        "doctrine/inflector": "^2.0@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^5.1",
+        "phpunit/phpunit": "^7.0",
+        "johnkary/phpunit-speedtrap": "^3.1@dev",
+        "mybuilder/phpunit-accelerator": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kiboko\\Component\\ETL\\FastMap\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "unit\\Kiboko\\Component\\ETL\\FastMap\\": "unit/",
+            "functional\\Kiboko\\Component\\ETL\\FastMap\\": "functional/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

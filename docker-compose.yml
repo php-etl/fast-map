@@ -1,0 +1,98 @@
+version: '2'
+
+services:
+  sh:
+    build:
+      context: .docker/php@7.2/cli
+    user: docker:docker
+    volumes:
+      - ./.docker/php@7.2/cli/config/memory.ini:/usr/local/etc/php/conf.d/memory.ini:ro
+      - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
+      - ./:/var/www/html
+    restart: "no"
+
+  sh-xdebug:
+    build:
+      context: .docker/php@7.2/cli-xdebug
+    user: docker:docker
+    volumes:
+      - ./.docker/php@7.2/cli-xdebug/config/memory.ini:/usr/local/etc/php/conf.d/memory.ini:ro
+      - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
+      - ./.docker/php@7.2/cli-xdebug/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+      - ./:/var/www/html
+    restart: "no"
+
+  sh74:
+    build:
+      context: .docker/php@7.4/cli
+    user: docker:docker
+    volumes:
+      - ./.docker/php@7.4/cli/config/memory.ini:/usr/local/etc/php/conf.d/memory.ini:ro
+      - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
+      - ./:/var/www/html
+    restart: "no"
+
+  sh74-xdebug:
+    build:
+      context: .docker/php@7.4/cli-xdebug
+    user: docker:docker
+    volumes:
+      - ./.docker/php@7.4/cli-xdebug/config/memory.ini:/usr/local/etc/php/conf.d/memory.ini:ro
+      - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
+      - ./.docker/php@7.4/cli-xdebug/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+      - ./:/var/www/html
+    restart: "no"
+
+  composer:
+    extends:
+      service: sh
+    volumes:
+      - composer:/opt/docker/.composer/:cached
+    environment:
+      COMPOSER_AUTH: '{"github-oauth":{"github.com": "d5477b3328aed0f69979cb7bda92ff2d66db36ea"}}'
+    entrypoint: [ "composer" ]
+    restart: "no"
+
+  phpunit:
+    extends:
+      service: sh
+    entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
+    restart: "no"
+
+  phpunit-xdebug:
+    extends:
+      service: sh-xdebug
+    entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
+    restart: "no"
+
+  phpunit74:
+    extends:
+      service: sh74
+    entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
+    restart: "no"
+
+  phpunit74-xdebug:
+    extends:
+      service: sh74-xdebug
+    entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
+    restart: "no"
+
+  phpspec:
+    extends:
+      service: sh
+    entrypoint: [ "vendor/bin/phpspec" ]
+    restart: "no"
+
+  phpspec-xdebug:
+    extends:
+      service: sh-xdebug
+    entrypoint: [ "vendor/bin/phpspec" ]
+    restart: "no"
+
+volumes:
+  composer:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "size=2048m,uid=1000,gid=1000"

@@ -1,0 +1,5 @@
+suites:
+  acme_suite:
+    namespace: Kiboko\Component\ETL\FastMap
+    psr4_prefix: Kiboko\Component\ETL\FastMap
+    src_path: '%paths.config%'
