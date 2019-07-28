@@ -18,7 +18,8 @@
         "php": "^7.1",
         "nikic/php-parser": "^4.2",
         "symfony/property-access": "^5.0@dev",
-        "doctrine/inflector": "^2.0@dev"
+        "doctrine/inflector": "^2.0@dev",
+        "php-etl/metadata": "^1.0@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.1",

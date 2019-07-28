@@ -37,7 +37,7 @@ RUN apk add --update icu-dev icu \
     && apk del icu-dev
 
 RUN docker-php-source extract \
-    && pecl install xdebug-2.8.0alpha1 \
+    && pecl install xdebug-2.6.1 \
     && docker-php-ext-enable xdebug \
     && docker-php-source delete
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d10277574f2d8cdd3c813b0fbaede51d",
+    "content-hash": "be982cf4cc9e2e4545a82f87e0f9915a",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -133,6 +133,101 @@
                 "php"
             ],
             "time": "2019-07-14T08:56:13+00:00"
+        },
+        {
+            "name": "php-etl/metadata",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/metadata.git",
+                "reference": "c2f7f6fb590f5e135d13c61a9aa467ee7b056991"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/metadata/zipball/c2f7f6fb590f5e135d13c61a9aa467ee7b056991",
+                "reference": "c2f7f6fb590f5e135d13c61a9aa467ee7b056991",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2",
+                "phpactor/docblock": "^0.3.0@dev"
+            },
+            "require-dev": {
+                "johnkary/phpunit-speedtrap": "^3.1@dev",
+                "mybuilder/phpunit-accelerator": "dev-master",
+                "phpspec/phpspec": "^5.1",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Component\\ETL\\Metadata\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiboko SAS",
+                    "homepage": "http://kiboko.fr"
+                },
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "This library implements the Extract-Transform-Load pattern asynchronously in PHP with the help of iterators and generators",
+            "time": "2019-07-26T00:41:32+00:00"
+        },
+        {
+            "name": "phpactor/docblock",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpactor/docblock.git",
+                "reference": "ffe5c3b70bea2785d3c00266c1008d44eef5f075"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpactor/docblock/zipball/ffe5c3b70bea2785d3c00266c1008d44eef5f075",
+                "reference": "ffe5c3b70bea2785d3c00266c1008d44eef5f075",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.15.0",
+                "phpstan/phpstan": "~0.11.0",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phpactor\\Docblock\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Leech",
+                    "email": "daniel@dantleech.com"
+                }
+            ],
+            "description": "Simple Docblock Parser",
+            "time": "2019-07-11T12:06:40+00:00"
         },
         {
             "name": "symfony/inflector",
@@ -2539,6 +2634,7 @@
     "stability-flags": {
         "symfony/property-access": 20,
         "doctrine/inflector": 20,
+        "php-etl/metadata": 20,
         "johnkary/phpunit-speedtrap": 20,
         "mybuilder/phpunit-accelerator": 20
     },
