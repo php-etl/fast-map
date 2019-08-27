@@ -2,14 +2,17 @@
 
 namespace Kiboko\Component\ETL\FastMap;
 
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\ObjectInitialisationPreconditionBuilder;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\RequiredValuePreconditionBuilder;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\ArrayInitialisationPreconditionBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
+use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 class FieldCopyValueMapper implements
     Contracts\ArrayMapperInterface,
@@ -52,12 +55,23 @@ class FieldCopyValueMapper implements
             ],
             ($count = iterator_count($iterator = $outputPath->getIterator())) > 1 ?
                 array_map(
-                    function($item) use($outputPath, &$outputNode) {
-                        $outputNode = new Node\Expr\ArrayDimFetch(
-                            $outputNode,
-                            new Node\Scalar\String_($item)
-                        );
-                        return (new ArrayInitialisationPreconditionBuilder($outputPath, $outputNode));
+                    function($item) use($iterator, $outputPath, &$outputNode) {
+                        if ($iterator->isIndex()) {
+                            $outputNode = new Node\Expr\ArrayDimFetch(
+                                $outputNode,
+                                is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Scalar\String_($item)
+                            );
+                            return (new ArrayInitialisationPreconditionBuilder($outputPath, $outputNode));
+                        }
+                        if ($iterator->isProperty()) {
+                            $outputNode = new Node\Expr\PropertyFetch(
+                                $outputNode,
+                                new Node\Name($item)
+                            );
+                            return (new ObjectInitialisationPreconditionBuilder($outputPath, $outputNode, new ClassTypeMetadata('Baz', 'Foo\\Bar')));
+                        }
+
+                        throw new \RuntimeException('Object initialization is not implemented yet.');
                     },
                     iterator_to_array(new \LimitIterator($iterator, 0, iterator_count($iterator) - 1))
                 ) : [],

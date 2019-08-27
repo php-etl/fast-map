@@ -2,20 +2,20 @@
 
 namespace Kiboko\Component\ETL\FastMap\MappingDefinition\Field;
 
-use Kiboko\Component\ETL\Metadata\TypeMetadata;
+use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 
 class FieldDefinition implements FieldDefinitionInterface
 {
     /** @var string */
     public $name;
-    /** @var TypeMetadata[] */
+    /** @var TypeMetadataInterface[] */
     public $types;
 
     public function __construct(
         string $name,
-        TypeMetadata ...$types
+        TypeMetadataInterface ...$types
     ) {
-        $this->types = $types;
         $this->name = $name;
+        $this->types = $types;
     }
 }

@@ -3,7 +3,7 @@
 namespace Kiboko\Component\ETL\FastMap\MappingDefinition\Field;
 
 use Kiboko\Component\ETL\Metadata\MethodMetadata;
-use Kiboko\Component\ETL\Metadata\TypeMetadata;
+use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 
 class VirtualFieldDefinition extends FieldDefinition
 {
@@ -22,7 +22,7 @@ class VirtualFieldDefinition extends FieldDefinition
         ?MethodMetadata $mutator = null,
         ?MethodMetadata $checker = null,
         ?MethodMetadata $remover = null,
-        TypeMetadata ...$types
+        TypeMetadataInterface ...$types
     ) {
         parent::__construct($name, ...$types);
         $this->accessor = $accessor;
