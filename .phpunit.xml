@@ -25,17 +25,14 @@
         enforceTimeLimit="true"
         verbose="true">
 
-    <groups>
-        <exclude>
-            <group>vendor</group>
-        </exclude>
-    </groups>
     <testsuites>
         <testsuite name="unit">
-            <directory>unit</directory>
+            <directory>unit/</directory>
+            <exclude>vendor/</exclude>
         </testsuite>
         <testsuite name="functional">
-            <directory>functional</directory>
+            <directory>functional/</directory>
+            <exclude>vendor/</exclude>
         </testsuite>
     </testsuites>
     <php>

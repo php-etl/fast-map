@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  sh:
+  sh72:
     build:
       context: .docker/php@7.2/cli
     user: docker:docker
@@ -11,7 +11,7 @@ services:
       - ./:/var/www/html
     restart: "no"
 
-  sh-xdebug:
+  sh72-xdebug:
     build:
       context: .docker/php@7.2/cli-xdebug
     user: docker:docker
@@ -45,33 +45,37 @@ services:
 
   composer:
     extends:
-      service: sh
-    volumes:
-      - composer:/opt/docker/.composer/:cached
+      service: composer74
+
+  composer72:
+    extends:
+      service: sh72
     environment:
-      COMPOSER_AUTH: '{"github-oauth":{"github.com": "d5477b3328aed0f69979cb7bda92ff2d66db36ea"}}'
+      COMPOSER_AUTH: >
+        {"github-oauth":{"github.com": "${COMPOSER_GITHUB_TOKEN}"}}
+    entrypoint: [ "composer" ]
+    restart: "no"
+
+  composer74:
+    extends:
+      service: sh74
+    environment:
+      COMPOSER_AUTH: >
+        {"github-oauth":{"github.com": "${COMPOSER_GITHUB_TOKEN}"}}
     entrypoint: [ "composer" ]
     restart: "no"
 
   phpunit:
     extends:
-      service: sh
-    entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
-    restart: "no"
+      service: phpunit74
 
-  phpunit-xdebug:
+  phpunit72:
     extends:
-      service: sh-xdebug
+      service: sh72-xdebug
     entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
     restart: "no"
 
   phpunit74:
-    extends:
-      service: sh74
-    entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
-    restart: "no"
-
-  phpunit74-xdebug:
     extends:
       service: sh74-xdebug
     entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
@@ -79,20 +83,32 @@ services:
 
   phpspec:
     extends:
-      service: sh
-    entrypoint: [ "vendor/bin/phpspec" ]
-    restart: "no"
+      service: phpspec74
 
-  phpspec-xdebug:
+  phpspec72:
     extends:
-      service: sh-xdebug
+      service: sh72-xdebug
     entrypoint: [ "vendor/bin/phpspec" ]
     restart: "no"
 
-volumes:
-  composer:
-    driver: local
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: "size=2048m,uid=1000,gid=1000"
+  phpspec74:
+    extends:
+      service: sh74-xdebug
+    entrypoint: [ "vendor/bin/phpspec" ]
+    restart: "no"
+
+  phpstan:
+    extends:
+      service: phpstan74
+
+  phpstan72:
+    extends:
+      service: sh72
+    entrypoint: [ "vendor/bin/phpstan" ]
+    restart: "no"
+
+  phpstan74:
+    extends:
+      service: sh74
+    entrypoint: [ "vendor/bin/phpstan" ]
+    restart: "no"
