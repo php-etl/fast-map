@@ -44,7 +44,7 @@ class FieldConcatCopyValuesMapper implements
         return $output;
     }
 
-    public function walkFields(array $input): \Generator
+    private function walkFields(array $input): \Generator
     {
         foreach ($this->inputFields as $field) {
             yield $this->accessor->getValue($input, $field) ?? null;
