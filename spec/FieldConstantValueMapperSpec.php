@@ -2,20 +2,21 @@
 
 namespace spec\Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\FieldCopyValueMapper;
+use Kiboko\Component\ETL\FastMap\FieldConstantValueMapper;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
-class FieldCopyValueMapperSpec extends ObjectBehavior
+class FieldConstantValueMapperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->beConstructedWith('lorem', '[ipsum]');
-        $this->shouldHaveType(FieldCopyValueMapper::class);
+        $this->beConstructedWith('[firstName]', 'James');
+        $this->shouldHaveType(FieldConstantValueMapper::class);
     }
 
     function it_is_mapping_flat_data()
     {
-        $this->beConstructedWith('[firstName]', '[first_name]');
+        $this->beConstructedWith('[firstName]', 'James');
         $this->callOnWrappedObject('__invoke', [
             [
                 'first_name' => 'John',
@@ -23,13 +24,13 @@ class FieldCopyValueMapperSpec extends ObjectBehavior
             ],
             []
         ])->shouldReturn([
-            'firstName' => 'John',
+            'firstName' => 'James',
         ]);
     }
 
     function it_is_mapping_complex_data()
     {
-        $this->beConstructedWith('[person][firstName]', '[employee][first_name]');
+        $this->beConstructedWith('[person][firstName]', 'James');
         $this->callOnWrappedObject('__invoke', [
             [
                 'employee' => [
@@ -40,14 +41,14 @@ class FieldCopyValueMapperSpec extends ObjectBehavior
             []
         ])->shouldReturn([
             'person' => [
-                'firstName' => 'John',
+                'firstName' => 'James',
             ]
         ]);
     }
 
     function it_does_keep_preexisting_data()
     {
-        $this->beConstructedWith('[person][firstName]', '[employee][first_name]');
+        $this->beConstructedWith('[person][firstName]', 'James');
         $this->callOnWrappedObject('__invoke', [
             [
                 'employee' => [
@@ -67,7 +68,7 @@ class FieldCopyValueMapperSpec extends ObjectBehavior
                 'city' => 'Oblivion'
             ],
             'person' => [
-                'firstName' => 'John',
+                'firstName' => 'James',
             ],
         ]);
     }
