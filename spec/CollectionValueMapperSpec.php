@@ -41,23 +41,61 @@ class CollectionValueMapperSpec extends ObjectBehavior
                         'username' => 'Robert Burton',
                     ],
                     [
-                        'username' => 'John Gee',
+                        'username' => 'Jane Gee',
                     ],
                 ],
             ],
-            []
+            [
+                'customers' => [
+                    [
+                        'email' => 'john@example.com',
+                    ],
+                    [
+                        'email' => 'robert@example.com',
+                    ],
+                    [
+                        'email' => 'jane@example.com',
+                    ],
+                ],
+            ]
         ])->shouldReturn([
             'customers' => [
                 [
+                    'email' => 'john@example.com',
                     'name' => 'John Doe',
                 ],
                 [
+                    'email' => 'robert@example.com',
                     'name' => 'Robert Burton',
                 ],
                 [
-                    'name' => 'John Gee',
+                    'email' => 'jane@example.com',
+                    'name' => 'Jane Gee',
                 ],
             ],
         ]);
+    }
+
+    function it_is_failing_on_invalid_dats()
+    {
+        $this->beConstructedWith(
+            '[customers]',
+            '[users]',
+            new FieldCopyValueMapper(
+                '[name]',
+                '[username]'
+            )
+        );
+
+        $this->shouldThrow(
+            new \InvalidArgumentException('The data at path [users] in first argument should be iterable.')
+        )
+            ->during('__invoke', [
+                [
+                    'users' => new \StdClass,
+                ],
+                []
+            ]
+        );
     }
 }
