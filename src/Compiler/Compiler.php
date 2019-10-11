@@ -37,8 +37,8 @@ class Compiler
 
     public function compile(CompilationContext $context)
     {
-        $namespace = $context->namespace ?? '__mapper__\\';
-        $className = $context->className ?? $this->randomClassName('mapper_');
+        $namespace = $context->namespace ?? 'Kiboko\\__Mapper__\\';
+        $className = $context->className ?? $this->randomClassName('Mapper');
 
         if (file_exists($context->path)) {
             include $context->path;
@@ -56,6 +56,7 @@ class Compiler
         );
 
         $prettyPrinter = new PrettyPrinter\Standard();
+        echo $prettyPrinter->prettyPrintFile($tree);
         if ($context->path !== null && is_writable(dirname($context->path))) {
             file_put_contents($context->path, $prettyPrinter->prettyPrintFile($tree));
             include $context->path;

@@ -36,6 +36,9 @@ RUN apk add --update icu-dev icu \
     && docker-php-ext-install intl \
     && apk del icu-dev
 
+RUN docker-php-ext-configure pcntl \
+    && docker-php-ext-install pcntl
+
 RUN docker-php-source extract \
     && pecl install xdebug-2.6.1 \
     && docker-php-ext-enable xdebug \

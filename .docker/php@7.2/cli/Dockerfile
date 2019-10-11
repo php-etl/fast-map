@@ -36,6 +36,9 @@ RUN apk add --update icu-dev icu \
     && docker-php-ext-install intl \
     && apk del icu-dev
 
+RUN docker-php-ext-configure pcntl \
+    && docker-php-ext-install pcntl
+
 RUN apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php

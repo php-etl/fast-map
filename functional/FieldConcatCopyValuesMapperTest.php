@@ -6,7 +6,6 @@ use Kiboko\Component\ETL\FastMap\Compiler\CompilationContext;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConcatCopyValuesMapper;
-use Kiboko\Component\ETL\FastMap\FieldCopyValueMapper;
 use PHPUnit\Framework\TestCase;
 
 class FieldConcatCopyValuesMapperTest extends TestCase
@@ -49,8 +48,10 @@ class FieldConcatCopyValuesMapperTest extends TestCase
 
         yield [
             [
-                'person' => [
-                    'name' => 'John Doe',
+                'persons' => [
+                    [
+                        'name' => 'John Doe',
+                    ]
                 ]
             ],
             [
@@ -61,10 +62,58 @@ class FieldConcatCopyValuesMapperTest extends TestCase
                     ]
                 ]
             ],
-            '[person][name]',
+            '[persons][0][name]',
             ' ',
             '[employees][0][first_name]',
             '[employees][0][last_name]',
+        ];
+
+        yield [
+            [
+                'persons' => [
+                    (function(): \stdClass {
+                        $object = new \stdClass;
+                        $object->name = 'John Doe';
+                        return $object;
+                    })()
+                ]
+            ],
+            [
+                'employees' => [
+                    [
+                        'first_name' => 'John',
+                        'last_name' => 'Doe',
+                    ]
+                ]
+            ],
+            '[persons][0].name',
+            ' ',
+            '[employees][0][first_name]',
+            '[employees][0][last_name]',
+        ];
+
+        yield [
+            [
+                'persons' => [
+                    [
+                        'name' => 'John Doe',
+                    ]
+                ]
+            ],
+            [
+                'employees' => [
+                    (function(): \stdClass {
+                        $object = new \stdClass;
+                        $object->first_name = 'John';
+                        $object->last_name = 'Doe';
+                        return $object;
+                    })()
+                ]
+            ],
+            '[persons][0][name]',
+            ' ',
+            '[employees][0].first_name',
+            '[employees][0].last_name',
         ];
     }
 

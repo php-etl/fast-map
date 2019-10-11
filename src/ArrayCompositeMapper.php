@@ -6,8 +6,7 @@ use Kiboko\Component\ETL\FastMap\Contracts;
 use PhpParser\Node;
 
 class ArrayCompositeMapper implements
-    Contracts\ArrayMapperInterface,
-    Contracts\CompilableMapperInterface
+    Contracts\ArrayMapperInterface
 {
     /** @var Contracts\ArrayMapperInterface[] */
     private $mappers;
@@ -24,10 +23,5 @@ class ArrayCompositeMapper implements
         }
 
         return $output;
-    }
-
-    public function compile(): array
-    {
-        // TODO: Implement compile() method.
     }
 }

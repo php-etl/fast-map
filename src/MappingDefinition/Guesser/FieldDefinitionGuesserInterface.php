@@ -3,14 +3,14 @@
 namespace Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser;
 
 use Kiboko\Component\ETL\FastMap\MappingDefinition\Field\FieldDefinitionInterface;
-use Kiboko\Component\ETL\Metadata\ClassMetadata;
+use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
 
 interface FieldDefinitionGuesserInterface
 {
     /**
-     * @param ClassMetadata $class
+     * @param ClassTypeMetadata $class
      *
      * @return FieldDefinitionInterface[]
      */
-    public function __invoke(ClassMetadata $class): \Generator;
+    public function __invoke(ClassTypeMetadata $class): \Generator;
 }

@@ -6,6 +6,7 @@ use Kiboko\Component\ETL\FastMap\Compiler\CompilationContext;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConstantValueMapper;
+use Kiboko\Component\ETL\Metadata;
 use PHPUnit\Framework\TestCase;
 
 class FieldConstantValueMapperTest extends TestCase
@@ -29,7 +30,7 @@ class FieldConstantValueMapperTest extends TestCase
         yield [
             [
                 'person' => [
-                    'firstName' => 'John F. Doe',
+                    'name' => 'John F. Doe',
                 ]
             ],
             [
@@ -38,7 +39,7 @@ class FieldConstantValueMapperTest extends TestCase
                     'last_name' => 'Doe',
                 ]
             ],
-            '[person][firstName]',
+            '[person][name]',
             'John F. Doe',
         ];
 
@@ -46,7 +47,7 @@ class FieldConstantValueMapperTest extends TestCase
             [
                 'persons' => [
                     [
-                        'firstName' => 'John F. Doe',
+                        'name' => 'John F. Doe',
                     ]
                 ]
             ],
@@ -58,7 +59,29 @@ class FieldConstantValueMapperTest extends TestCase
                     ]
                 ]
             ],
-            '[persons][0][firstName]',
+            '[persons][0][name]',
+            'John F. Doe',
+        ];
+
+        yield [
+            [
+                'persons' => [
+                    [
+                        'name' => 'John F. Doe',
+                    ]
+                ]
+            ],
+            [
+                'employees' => [
+                    (function(): \stdClass {
+                        $object = new \stdClass;
+                        $object->first_name = 'John';
+                        $object->last_name = 'Doe';
+                        return $object;
+                    })()
+                ]
+            ],
+            '[persons][0].name',
             'John F. Doe',
         ];
     }
@@ -78,6 +101,80 @@ class FieldConstantValueMapperTest extends TestCase
      * @dataProvider mappingDataProvider
      */
     public function testCompilationResults($expected, $input, $outputField, $constantValue)
+    {
+        $compiler = new Compiler();
+
+        /** @var MapperInterface $compiledMapper */
+        $compiledMapper = $compiler->compile(
+            new CompilationContext(
+                null,
+                null,
+                null,
+                new FieldConstantValueMapper($outputField, $constantValue)
+            )
+        );
+
+        $this->assertEquals($expected, $compiledMapper($input, []));
+    }
+
+    public function configuredMappingDataProvider()
+    {
+        $builder = new Metadata\ClassMetadataBuilder();
+        
+        yield [
+            [
+                'persons' => [
+                    (function(): \stdClass {
+                        $object = new \stdClass;
+                        $object->name = 'John F. Doe';
+                        return $object;
+                    })()
+                ]
+            ],
+            [
+                'employees' => [
+                    [
+                        'first_name' => 'John',
+                        'last_name' => 'Doe',
+                    ]
+                ]
+            ],
+            [
+                '@input' => new Metadata\ArrayTypeMetadata(
+                    new Metadata\ArrayEntryMetadata(
+                        'employees',
+                        new Metadata\ListTypeMetadata(
+                            new Metadata\ArrayTypeMetadata(
+                                new Metadata\ArrayEntryMetadata(
+                                    'first_name',
+                                    new Metadata\ScalarTypeMetadata('string')
+                                ),
+                                new Metadata\ArrayEntryMetadata(
+                                    'last_name',
+                                    new Metadata\ScalarTypeMetadata('string')
+                                )
+                            )
+                        )
+                    )
+                ),
+                '@output' => new Metadata\ArrayTypeMetadata(
+                    new Metadata\ArrayEntryMetadata(
+                        'persons',
+                        new Metadata\ListTypeMetadata(
+                            $builder->buildFromFQCN(\stdClass::class)
+                        )
+                    )
+                ),
+            ],
+            '[persons][0][name]',
+            'John F. Doe',
+        ];
+    }
+
+    /**
+     * @dataProvider configuredMappingDataProvider
+     */
+    public function testCompilationResultsWithMapping($expected, $input, array $mapping, $outputField, $constantValue)
     {
         $compiler = new Compiler();
 

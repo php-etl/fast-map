@@ -3,7 +3,6 @@
 namespace Kiboko\Component\ETL\FastMap\Compiler\Builder;
 
 use PhpParser\Builder;
-use PhpParser\Comment;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
