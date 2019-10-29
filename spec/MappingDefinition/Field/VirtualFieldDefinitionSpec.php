@@ -27,97 +27,97 @@ class VirtualFieldDefinitionSpec extends ObjectBehavior
         $this->remover->shouldBeNull();
     }
 
-    function it_is_using_accessor()
-    {
-        $this->beConstructedWith(
-            'foo',
-            new MethodMetadata(
-                'getFoo',
-                new ArgumentMetadataList(),
-                new ScalarTypeMetadata('string')
-            )
-        );
-
-        $this->accessor->shouldBeLike(
-            new MethodMetadata(
-                'getFoo',
-                new ArgumentMetadataList(),
-                new ScalarTypeMetadata('string')
-            )
-        );
-        $this->mutator->shouldBeNull();
-        $this->checker->shouldBeNull();
-        $this->remover->shouldBeNull();
-    }
-
-    function it_is_using_mutator()
-    {
-        $this->beConstructedWith(
-            'foo',
-            null,
-            new MethodMetadata(
-                'setFoo',
-                new ArgumentMetadataList(new ArgumentMetadata(new ScalarTypeMetadata('string')))
-            )
-        );
-
-        $this->accessor->shouldBeNull();
-        $this->mutator->shouldBeLike(
-            new MethodMetadata(
-                'setFoo',
-                new ArgumentMetadataList(new ArgumentMetadata(new ScalarTypeMetadata('string')))
-            )
-        );
-        $this->checker->shouldBeNull();
-        $this->remover->shouldBeNull();
-    }
-
-    function it_is_using_checker()
-    {
-        $this->beConstructedWith(
-            'foo',
-            null,
-            null,
-            new MethodMetadata(
-                'hasFoo',
-                new ArgumentMetadataList(),
-                new ScalarTypeMetadata('bool')
-            )
-        );
-
-        $this->accessor->shouldBeNull();
-        $this->mutator->shouldBeNull();
-        $this->checker->shouldBeLike(
-            new MethodMetadata(
-                'hasFoo',
-                new ArgumentMetadataList(),
-                new ScalarTypeMetadata('bool')
-            )
-        );
-        $this->remover->shouldBeNull();
-    }
-
-    function it_is_using_remover()
-    {
-        $this->beConstructedWith(
-            'foo',
-            null,
-            null,
-            null,
-            new MethodMetadata(
-                'unsetFoo',
-                new ArgumentMetadataList()
-            )
-        );
-
-        $this->accessor->shouldBeNull();
-        $this->mutator->shouldBeNull();
-        $this->checker->shouldBeNull();
-        $this->remover->shouldBeLike(
-            new MethodMetadata(
-                'unsetFoo',
-                new ArgumentMetadataList()
-            )
-        );
-    }
+//    function it_is_using_accessor()
+//    {
+//        $this->beConstructedWith(
+//            'foo',
+//            new MethodMetadata(
+//                'getFoo',
+//                new ArgumentMetadataList(),
+//                new ScalarTypeMetadata('string')
+//            )
+//        );
+//
+//        $this->accessor->shouldBeLike(
+//            new MethodMetadata(
+//                'getFoo',
+//                new ArgumentMetadataList(),
+//                new ScalarTypeMetadata('string')
+//            )
+//        );
+//        $this->mutator->shouldBeNull();
+//        $this->checker->shouldBeNull();
+//        $this->remover->shouldBeNull();
+//    }
+//
+//    function it_is_using_mutator()
+//    {
+//        $this->beConstructedWith(
+//            'foo',
+//            null,
+//            new MethodMetadata(
+//                'setFoo',
+//                new ArgumentMetadataList(new ArgumentMetadata(new ScalarTypeMetadata('string')))
+//            )
+//        );
+//
+//        $this->accessor->shouldBeNull();
+//        $this->mutator->shouldBeLike(
+//            new MethodMetadata(
+//                'setFoo',
+//                new ArgumentMetadataList(new ArgumentMetadata(new ScalarTypeMetadata('string')))
+//            )
+//        );
+//        $this->checker->shouldBeNull();
+//        $this->remover->shouldBeNull();
+//    }
+//
+//    function it_is_using_checker()
+//    {
+//        $this->beConstructedWith(
+//            'foo',
+//            null,
+//            null,
+//            new MethodMetadata(
+//                'hasFoo',
+//                new ArgumentMetadataList(),
+//                new ScalarTypeMetadata('bool')
+//            )
+//        );
+//
+//        $this->accessor->shouldBeNull();
+//        $this->mutator->shouldBeNull();
+//        $this->checker->shouldBeLike(
+//            new MethodMetadata(
+//                'hasFoo',
+//                new ArgumentMetadataList(),
+//                new ScalarTypeMetadata('bool')
+//            )
+//        );
+//        $this->remover->shouldBeNull();
+//    }
+//
+//    function it_is_using_remover()
+//    {
+//        $this->beConstructedWith(
+//            'foo',
+//            null,
+//            null,
+//            null,
+//            new MethodMetadata(
+//                'unsetFoo',
+//                new ArgumentMetadataList()
+//            )
+//        );
+//
+//        $this->accessor->shouldBeNull();
+//        $this->mutator->shouldBeNull();
+//        $this->checker->shouldBeNull();
+//        $this->remover->shouldBeLike(
+//            new MethodMetadata(
+//                'unsetFoo',
+//                new ArgumentMetadataList()
+//            )
+//        );
+//    }
 }

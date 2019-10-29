@@ -67,7 +67,7 @@ class FieldConcatCopyValuesMapper implements
         $nodes = array_merge(
             array_map(
                 function(PropertyPath $path) {
-                    return (new RequiredValuePreconditionBuilder($path, new Node\Expr\Variable('input')));
+                    return (new RequiredValuePreconditionBuilder($path, new Node\Expr\Variable('input')))->getNode();
                 },
                 $inputPaths
             ),
@@ -81,7 +81,7 @@ class FieldConcatCopyValuesMapper implements
                             $outputNode,
                             new Node\Scalar\String_($item)
                         );
-                        return (new ArrayInitialisationPreconditionBuilder($outputPath, $outputNode));
+                        return (new ArrayInitialisationPreconditionBuilder($outputPath, $outputNode))->getNode();
                     },
                     iterator_to_array(new \LimitIterator($iterator, 0, iterator_count($iterator) - 1))
                 ) : [],

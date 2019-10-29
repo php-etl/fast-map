@@ -2,9 +2,6 @@
 
 namespace Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Contracts;
-use PhpParser\Node;
-
 class ArrayCompositeMapper implements
     Contracts\ArrayMapperInterface
 {

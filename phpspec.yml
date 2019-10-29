@@ -12,6 +12,7 @@ extensions:
       - vendor
     whitelist:
       - src
+  KibokoPhpSpecExtension\ASTExtension:
 formatter.name: pretty
 stop_on_failure: true
 suites:

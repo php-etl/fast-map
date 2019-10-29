@@ -38,6 +38,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "KibokoPhpSpecExtension\\": "extension/",
             "unit\\Kiboko\\Component\\ETL\\FastMap\\": "unit/",
             "functional\\Kiboko\\Component\\ETL\\FastMap\\": "functional/"
         }

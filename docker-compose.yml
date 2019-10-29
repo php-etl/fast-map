@@ -1,114 +1,46 @@
 version: '2'
 
 services:
+  sh:
+    extends:
+      service: sh72
+
+  sh-xdebug:
+    extends:
+      service: sh72-xdebug
+
   sh72:
-    build:
-      context: .docker/php@7.2/cli
+    image: kiboko/php:7.2-cli-blackfire
     user: docker:docker
     volumes:
-      - ./.docker/php@7.2/cli/config/memory.ini:/usr/local/etc/php/conf.d/memory.ini:ro
       - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
       - ./:/var/www/html
     restart: "no"
+    command: [ "sleep", "31536000" ]
 
   sh72-xdebug:
-    build:
-      context: .docker/php@7.2/cli-xdebug
+    image: kiboko/php:7.2-cli-xdebug
     user: docker:docker
     volumes:
-      - ./.docker/php@7.2/cli-xdebug/config/memory.ini:/usr/local/etc/php/conf.d/memory.ini:ro
       - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
-      - ./.docker/php@7.2/cli-xdebug/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
       - ./:/var/www/html
     restart: "no"
+    command: [ "sleep", "31536000" ]
 
   sh74:
-    build:
-      context: .docker/php@7.4/cli
+    image: kiboko/php:7.4-cli-blackfire
     user: docker:docker
     volumes:
-      - ./.docker/php@7.4/cli/config/memory.ini:/usr/local/etc/php/conf.d/memory.ini:ro
-      - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
+      - ./.docker/php@7.4/cli/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
       - ./:/var/www/html
     restart: "no"
+    command: [ "sleep", "31536000" ]
 
   sh74-xdebug:
-    build:
-      context: .docker/php@7.4/cli-xdebug
+    image: kiboko/php:7.4-cli-xdebug
     user: docker:docker
     volumes:
-      - ./.docker/php@7.4/cli-xdebug/config/memory.ini:/usr/local/etc/php/conf.d/memory.ini:ro
-      - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
-      - ./.docker/php@7.4/cli-xdebug/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+      - ./.docker/php@7.4/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
       - ./:/var/www/html
     restart: "no"
-
-  composer:
-    extends:
-      service: composer74
-
-  composer72:
-    extends:
-      service: sh72
-    environment:
-      COMPOSER_AUTH: >
-        {"github-oauth":{"github.com": "${COMPOSER_GITHUB_TOKEN}"}}
-    entrypoint: [ "composer" ]
-    restart: "no"
-
-  composer74:
-    extends:
-      service: sh74
-    environment:
-      COMPOSER_AUTH: >
-        {"github-oauth":{"github.com": "${COMPOSER_GITHUB_TOKEN}"}}
-    entrypoint: [ "composer" ]
-    restart: "no"
-
-  phpunit:
-    extends:
-      service: phpunit74
-
-  phpunit72:
-    extends:
-      service: sh72-xdebug
-    entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
-    restart: "no"
-
-  phpunit74:
-    extends:
-      service: sh74-xdebug
-    entrypoint: [ "vendor/bin/phpunit", "--configuration=.phpunit.xml" ]
-    restart: "no"
-
-  phpspec:
-    extends:
-      service: phpspec74
-
-  phpspec72:
-    extends:
-      service: sh72-xdebug
-    entrypoint: [ "vendor/bin/phpspec" ]
-    restart: "no"
-
-  phpspec74:
-    extends:
-      service: sh74-xdebug
-    entrypoint: [ "vendor/bin/phpspec" ]
-    restart: "no"
-
-  phpstan:
-    extends:
-      service: phpstan74
-
-  phpstan72:
-    extends:
-      service: sh72
-    entrypoint: [ "vendor/bin/phpstan" ]
-    restart: "no"
-
-  phpstan74:
-    extends:
-      service: sh74
-    entrypoint: [ "vendor/bin/phpstan" ]
-    restart: "no"
+    command: [ "sleep", "31536000" ]

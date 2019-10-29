@@ -2,9 +2,10 @@
 
 namespace spec\Kiboko\Component\ETL\FastMap;
 
+use Kiboko\Component\ETL\FastMap\Contracts\CompilableMapperInterface;
+use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConstantValueMapper;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FieldConstantValueMapperSpec extends ObjectBehavior
 {
@@ -12,6 +13,8 @@ class FieldConstantValueMapperSpec extends ObjectBehavior
     {
         $this->beConstructedWith('[firstName]', 'James');
         $this->shouldHaveType(FieldConstantValueMapper::class);
+        $this->shouldHaveType(MapperInterface::class);
+        $this->shouldHaveType(CompilableMapperInterface::class);
     }
 
     function it_is_mapping_flat_data()
@@ -71,5 +74,67 @@ class FieldConstantValueMapperSpec extends ObjectBehavior
                 'firstName' => 'James',
             ],
         ]);
+    }
+
+    function it_is_mapping_flat_data_as_compiled()
+    {
+        $this->beConstructedWith('[firstName]', 'James');
+        $this->compile()->shouldExecuteCompiledTransformation(
+            [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+            ],
+            [],
+            [
+                'firstName' => 'James',
+            ]
+        );
+    }
+
+    function it_is_mapping_complex_data_as_compiled()
+    {
+        $this->beConstructedWith('[person][firstName]', 'James');
+        $this->compile()->shouldExecuteCompiledTransformation(
+            [
+                'employee' => [
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                ]
+            ],
+            [],
+            [
+                'person' => [
+                    'firstName' => 'James',
+                ]
+            ]
+        );
+    }
+
+    function it_does_keep_preexisting_data_as_compiled()
+    {
+        $this->beConstructedWith('[person][firstName]', 'James');
+        $this->compile()->shouldExecuteCompiledTransformation(
+            [
+                'employee' => [
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                ]
+            ],
+            [
+                'address' => [
+                    'street' => 'Main Street, 42',
+                    'city' => 'Oblivion'
+                ]
+            ],
+            [
+                'address' => [
+                    'street' => 'Main Street, 42',
+                    'city' => 'Oblivion'
+                ],
+                'person' => [
+                    'firstName' => 'James',
+                ],
+            ]
+        );
     }
 }
