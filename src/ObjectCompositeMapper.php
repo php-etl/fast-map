@@ -2,13 +2,13 @@
 
 namespace Kiboko\Component\ETL\FastMap;
 
-class ArrayCompositeMapper implements
-    Contracts\ArrayMapperInterface
+class ObjectCompositeMapper implements
+    Contracts\ObjectMapperInterface
 {
-    /** @var Contracts\ArrayMapperInterface[] */
+    /** @var Contracts\ObjectMapperInterface[] */
     private $mappers;
 
-    public function __construct(Contracts\ArrayMapperInterface ...$mappers)
+    public function __construct(Contracts\ObjectMapperInterface ...$mappers)
     {
         $this->mappers = $mappers;
     }

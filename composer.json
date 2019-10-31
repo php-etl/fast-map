@@ -15,7 +15,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "nikic/php-parser": "^4.2",
         "symfony/property-access": "^5.0@dev",
         "doctrine/inflector": "^2.0@dev",
@@ -39,6 +39,7 @@
     "autoload-dev": {
         "psr-4": {
             "KibokoPhpSpecExtension\\": "extension/",
+            "spec\\Kiboko\\Component\\ETL\\FastMap\\": "spec/",
             "unit\\Kiboko\\Component\\ETL\\FastMap\\": "unit/",
             "functional\\Kiboko\\Component\\ETL\\FastMap\\": "functional/"
         }

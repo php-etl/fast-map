@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
@@ -8,7 +8,7 @@ use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConcatCopyValuesMapper;
 use PHPUnit\Framework\TestCase;
 
-class FieldConcatCopyValuesMapperTest extends TestCase
+final class FieldConcatCopyValuesMapperTest extends TestCase
 {
     public function mappingDataProvider()
     {

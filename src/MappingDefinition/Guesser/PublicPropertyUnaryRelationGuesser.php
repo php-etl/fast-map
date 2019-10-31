@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser;
 
 use Kiboko\Component\ETL\FastMap\MappingDefinition\Relation\UnaryRelationDefinition;
 use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
-use Kiboko\Component\ETL\Metadata\CompositeTypeMetadata;
-use Kiboko\Component\ETL\Metadata\TypeMetadata;
+use Kiboko\Component\ETL\Metadata\CompositeTypeMetadataInterface;
+use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 
 class PublicPropertyUnaryRelationGuesser implements RelationDefinitionGuesserInterface
 {
@@ -24,10 +24,10 @@ class PublicPropertyUnaryRelationGuesser implements RelationDefinitionGuesserInt
         }
     }
 
-    private function filterTypes(TypeMetadata ...$types): \Generator
+    private function filterTypes(TypeMetadataInterface ...$types): \Generator
     {
         foreach ($types as $type) {
-            if (!$type instanceof CompositeTypeMetadata) {
+            if (!$type instanceof CompositeTypeMetadataInterface) {
                 continue;
             }
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
@@ -9,7 +9,7 @@ use Kiboko\Component\ETL\FastMap\FieldConstantValueMapper;
 use Kiboko\Component\ETL\Metadata;
 use PHPUnit\Framework\TestCase;
 
-class FieldConstantValueMapperTest extends TestCase
+final class FieldConstantValueMapperTest extends TestCase
 {
     public function mappingDataProvider()
     {

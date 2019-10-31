@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser;
 
@@ -14,7 +14,7 @@ class FieldDefinitionGuesserChain implements FieldDefinitionGuesserInterface
         $this->inner = $inner;
     }
 
-    public function __invoke(ClassTypeMetadata $class): \Generator
+    public function __invoke(ClassTypeMetadata $class): \Iterator
     {
         foreach ($this->inner as $guesser) {
             yield from $guesser($class);

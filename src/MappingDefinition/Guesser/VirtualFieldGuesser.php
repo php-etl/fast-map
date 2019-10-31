@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser;
 
@@ -25,7 +25,7 @@ class VirtualFieldGuesser implements FieldDefinitionGuesserInterface
         return $this->inflector->singularize($field) === $field;
     }
 
-    public function __invoke(ClassTypeMetadata $class): \Generator
+    public function __invoke(ClassTypeMetadata $class): \Iterator
     {
         $methodCandidates = [];
         /** @var MethodMetadata $method */
@@ -56,7 +56,7 @@ class VirtualFieldGuesser implements FieldDefinitionGuesserInterface
                 }
 
                 $methodCandidates[$fieldName][$action] = $method;
-            } else if (preg_match('/(?<action>unset|get|has)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) &&
+            } else if (preg_match('/(?<action>unset|remove|get|has)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) &&
                 count($method->argumentList->arguments) === 0
             ) {
                 $action = $matches['action'];
@@ -87,7 +87,7 @@ class VirtualFieldGuesser implements FieldDefinitionGuesserInterface
                 $accessor,
                 $mutator,
                 $actions['has'] ?? null,
-                $actions['unset'] ?? null
+                $actions['unset'] ?? $actions['remove'] ?? null
             );
         }
     }

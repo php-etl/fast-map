@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace spec\Kiboko\Component\ETL\FastMap\MappingDefinition;
 
@@ -6,9 +6,8 @@ use Kiboko\Component\ETL\FastMap\MappingDefinition\MappingIterationFactoryInterf
 use Kiboko\Component\ETL\FastMap\MappingDefinition\MappingIterator;
 use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
-class MappingIteratorSpec extends ObjectBehavior
+final class MappingIteratorSpec extends ObjectBehavior
 {
     function it_is_initializable(TypeMetadataInterface $metadata, MappingIterationFactoryInterface $builder)
     {

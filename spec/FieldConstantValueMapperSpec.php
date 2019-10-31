@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace spec\Kiboko\Component\ETL\FastMap;
 
@@ -7,7 +7,7 @@ use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConstantValueMapper;
 use PhpSpec\ObjectBehavior;
 
-class FieldConstantValueMapperSpec extends ObjectBehavior
+final class FieldConstantValueMapperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

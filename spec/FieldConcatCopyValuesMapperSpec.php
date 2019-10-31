@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace spec\Kiboko\Component\ETL\FastMap;
 
@@ -7,7 +7,7 @@ use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConcatCopyValuesMapper;
 use PhpSpec\ObjectBehavior;
 
-class FieldConcatCopyValuesMapperSpec extends ObjectBehavior
+final class FieldConcatCopyValuesMapperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

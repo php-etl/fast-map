@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser;
 
@@ -10,7 +10,7 @@ interface RelationDefinitionGuesserInterface
     /**
      * @param ClassTypeMetadata $class
      *
-     * @return RelationDefinitionInterface[]
+     * @return RelationDefinitionInterface[]|\Generator
      */
     public function __invoke(ClassTypeMetadata $class): \Generator;
 }

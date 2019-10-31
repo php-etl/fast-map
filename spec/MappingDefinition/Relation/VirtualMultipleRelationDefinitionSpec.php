@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace spec\Kiboko\Component\ETL\FastMap\MappingDefinition\Relation;
 
@@ -7,7 +7,7 @@ use Kiboko\Component\ETL\Metadata\IterableTypeMetadataInterface;
 use Kiboko\Component\ETL\Metadata\MethodMetadata;
 use PhpSpec\ObjectBehavior;
 
-class VirtualMultipleRelationDefinitionSpec extends ObjectBehavior
+final class VirtualMultipleRelationDefinitionSpec extends ObjectBehavior
 {
     function it_is_initializable(IterableTypeMetadataInterface $type)
     {

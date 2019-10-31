@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
@@ -22,7 +22,7 @@ use Kiboko\Component\ETL\Metadata\PropertyMetadata;
 use Kiboko\Component\ETL\Metadata\ScalarTypeMetadata;
 use PHPUnit\Framework\TestCase;
 
-class MappingTest extends TestCase
+final class MappingTest extends TestCase
 {
     public function dataProvider()
     {
@@ -115,9 +115,9 @@ class MappingTest extends TestCase
                 new VirtualFieldGuesser()
             ),
             new RelationDefinitionGuesserChain(
-                new PublicPropertyUnaryRelationGuesser(),
-//                new PublicPropertyMultipleRelationGuesser(),
-//                new VirtualRelationGuesser()
+                new PublicPropertyUnaryRelationGuesser()/*,
+                new PublicPropertyMultipleRelationGuesser(),
+                new VirtualRelationGuesser()*/
             )
         );
 
@@ -125,7 +125,7 @@ class MappingTest extends TestCase
     }
 }
 
-class CustomerDTO
+final class CustomerDTO
 {
     public string $firstName;
     public string $lastName;
@@ -161,7 +161,7 @@ class CustomerDTO
     }
 }
 
-class AddressDTO
+final class AddressDTO
 {
     public string $name;
     public string $street;

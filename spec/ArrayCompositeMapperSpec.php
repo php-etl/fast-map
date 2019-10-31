@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace spec\Kiboko\Component\ETL\FastMap;
 
@@ -6,9 +6,8 @@ use Kiboko\Component\ETL\FastMap\ArrayCompositeMapper;
 use Kiboko\Component\ETL\FastMap\FieldConcatCopyValuesMapper;
 use Kiboko\Component\ETL\FastMap\FieldCopyValueMapper;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
-class ArrayCompositeMapperSpec extends ObjectBehavior
+final class ArrayCompositeMapperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

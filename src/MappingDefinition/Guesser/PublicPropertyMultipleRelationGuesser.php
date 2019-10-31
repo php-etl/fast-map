@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser;
 
@@ -6,7 +6,7 @@ use Kiboko\Component\ETL\FastMap\MappingDefinition\Relation\MultipleRelationDefi
 use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
 use Kiboko\Component\ETL\Metadata\CollectionTypeMetadata;
 use Kiboko\Component\ETL\Metadata\ListTypeMetadata;
-use Kiboko\Component\ETL\Metadata\TypeMetadata;
+use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 
 class PublicPropertyMultipleRelationGuesser implements RelationDefinitionGuesserInterface
 {
@@ -25,7 +25,7 @@ class PublicPropertyMultipleRelationGuesser implements RelationDefinitionGuesser
         }
     }
 
-    private function filterTypes(TypeMetadata ...$types): \Generator
+    private function filterTypes(TypeMetadataInterface ...$types): \Generator
     {
         foreach ($types as $type) {
             if (!$type instanceof ListTypeMetadata &&

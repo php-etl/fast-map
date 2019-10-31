@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
@@ -9,7 +9,7 @@ use Kiboko\Component\ETL\FastMap\FieldCopyValueMapper;
 use Kiboko\Component\ETL\Metadata;
 use PHPUnit\Framework\TestCase;
 
-class FieldCopyValueMapperTest extends TestCase
+final class FieldCopyValueMapperTest extends TestCase
 {
     public function automaticMappingDataProvider()
     {

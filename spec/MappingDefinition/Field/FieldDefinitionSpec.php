@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace spec\Kiboko\Component\ETL\FastMap\MappingDefinition\Field;
 
@@ -10,7 +10,7 @@ use Kiboko\Component\ETL\Metadata\ScalarTypeMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class FieldDefinitionSpec extends ObjectBehavior
+final class FieldDefinitionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

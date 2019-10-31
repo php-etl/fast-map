@@ -1,16 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace spec\Kiboko\Component\ETL\FastMap\MappingDefinition;
 
 use Kiboko\Component\ETL\FastMap\MappingDefinition\PathMappingIterator;
 use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathIterator;
 use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
-class PathMappingIteratorSpec extends ObjectBehavior
+final class PathMappingIteratorSpec extends ObjectBehavior
 {
     function it_is_initializable(PropertyPathIteratorInterface $inner, TypeMetadataInterface $metadata)
     {
