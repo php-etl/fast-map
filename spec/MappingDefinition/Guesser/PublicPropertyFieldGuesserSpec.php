@@ -35,7 +35,6 @@ final class PublicPropertyFieldGuesserSpec extends ObjectBehavior
         $this->__invoke($metadata)
             ->shouldIterateLike(new \ArrayIterator([
                 new FieldDefinition('foo', new ScalarTypeMetadata('string')),
-                new FieldDefinition('foz'),
             ]))
         ;
     }
