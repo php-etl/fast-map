@@ -30,7 +30,7 @@ class RequiredValuePreconditionBuilder implements Builder
             [
                 'stmts' => [
                     new Node\Stmt\Throw_(
-                        new Node\Expr\New_(new Node\Name(\RuntimeException::class), [
+                        new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), [
                             new Node\Scalar\String_(strtr(
                                 'Could not evaluate path %path%',
                                 [
