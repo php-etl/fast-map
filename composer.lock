@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2add64c47cdc179a44db772521223c83",
+    "content-hash": "c4d1094b1a83a3b293ee249df9aecb4a",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -185,21 +185,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/metadata.git",
-                "reference": "e28e83cb2d9a2cac4f24863ef5f273c2945c721a"
+                "reference": "99c0dd559eff3243927ee1aed03965ababd9049b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/metadata/zipball/e28e83cb2d9a2cac4f24863ef5f273c2945c721a",
-                "reference": "e28e83cb2d9a2cac4f24863ef5f273c2945c721a",
+                "url": "https://api.github.com/repos/php-etl/metadata/zipball/99c0dd559eff3243927ee1aed03965ababd9049b",
+                "reference": "99c0dd559eff3243927ee1aed03965ababd9049b",
                 "shasum": ""
             },
             "require": {
+                "doctrine/inflector": "^2.0@dev",
                 "nikic/php-parser": "^4.2",
                 "php": "^7.2",
                 "phpactor/docblock": "^0.3.0@dev"
             },
             "require-dev": {
                 "drupol/phpspec-code-coverage": "^4.0@dev",
+                "ext-xdebug": "*",
                 "infection/infection": "dev-master",
                 "johnkary/phpunit-speedtrap": "^3.1@dev",
                 "mybuilder/phpunit-accelerator": "dev-master",
@@ -234,7 +236,7 @@
                 }
             ],
             "description": "Describe data structures, to auto-configure and handle data transformation and data manipulation.",
-            "time": "2019-07-30T03:21:59+00:00"
+            "time": "2019-11-03T22:01:46+00:00"
         },
         {
             "name": "phpactor/docblock",
@@ -637,6 +639,7 @@
                 "test",
                 "tests"
             ],
+            "abandoned": "friends-of-phpspec/phpspec-code-coverage",
             "time": "2019-07-04T12:42:34+00:00"
         },
         {
@@ -4046,7 +4049,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1"
+        "php": "^7.2"
     },
     "platform-dev": []
 }

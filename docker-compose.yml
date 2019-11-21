@@ -1,6 +1,12 @@
 version: '2.2'
 
 services:
+  blackfire:
+    image: blackfire/blackfire
+    environment:
+      - BLACKFIRE_SERVER_ID
+      - BLACKFIRE_SERVER_TOKEN
+
   sh:
     extends:
       service: sh72
@@ -17,6 +23,9 @@ services:
       - ./:/var/www/html
     restart: "no"
     command: [ "sleep", "31536000" ]
+    environment:
+      - BLACKFIRE_CLIENT_ID
+      - BLACKFIRE_CLIENT_TOKEN
 
   sh72-xdebug:
     image: kiboko/php:7.2-cli-xdebug
@@ -28,13 +37,16 @@ services:
     command: [ "sleep", "31536000" ]
 
   sh74:
-    image: kiboko/php:7.4-cli-blackfire
+    image: kiboko/php:7.4-cli
     user: docker:docker
     volumes:
       - ./.docker/php@7.4/cli/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
       - ./:/var/www/html
     restart: "no"
     command: [ "sleep", "31536000" ]
+    environment:
+      - BLACKFIRE_CLIENT_ID
+      - BLACKFIRE_CLIENT_TOKEN
 
   sh74-xdebug:
     image: kiboko/php:7.4-cli-xdebug

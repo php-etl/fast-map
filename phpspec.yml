@@ -14,7 +14,7 @@ extensions:
       - src
   KibokoPhpSpecExtension\ASTExtension:
 formatter.name: pretty
-stop_on_failure: true
+stop_on_failure: false
 suites:
   fastmap_suite:
     namespace: Kiboko\Component\ETL\FastMap

@@ -10,7 +10,7 @@ final class ASTExtension implements Extension
 {
     public function load(ServiceContainer $container, array $params)
     {
-        $container->define('matchers.comparison', function (IndexedServiceContainer $c) {
+        $container->define('matchers.execute_compiled_transformation', function (IndexedServiceContainer $c) {
             return new Matcher\ExecuteCompiledTransformation($c->get('formatter.presenter'));
         }, ['matchers']);
     }

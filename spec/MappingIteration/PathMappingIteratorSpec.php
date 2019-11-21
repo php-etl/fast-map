@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap\MappingDefinition;
+namespace spec\Kiboko\Component\ETL\FastMap\MappingIteration;
 
-use Kiboko\Component\ETL\FastMap\MappingDefinition\PathMappingIterator;
+use Kiboko\Component\ETL\FastMap\MappingIteration\PathMappingIterator;
 use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPath;

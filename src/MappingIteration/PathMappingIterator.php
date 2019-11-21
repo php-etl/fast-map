@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\MappingDefinition;
+namespace Kiboko\Component\ETL\FastMap\MappingIteration;
 
 use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
-class PathMappingIterator implements \OuterIterator
+class PathMappingIterator implements \Iterator
 {
     /** @var PropertyPathIteratorInterface */
     private $inner;
@@ -16,11 +16,6 @@ class PathMappingIterator implements \OuterIterator
     {
         $this->inner = $inner;
         $this->metadata = $metadata;
-    }
-
-    public function getInnerIterator()
-    {
-        return $this->inner;
     }
 
     public function current()

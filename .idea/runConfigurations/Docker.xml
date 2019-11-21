@@ -6,6 +6,7 @@
           <list>
             <option value="sh" />
             <option value="sh-xdebug" />
+            <option value="blackfire" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker-compose.yml" />

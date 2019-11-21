@@ -6,6 +6,7 @@ use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\Rules\English\InflectorFactory;
 use Kiboko\Component\ETL\FastMap\Compiler\Strategy\Spaghetti;
 use Kiboko\Component\ETL\FastMap\Compiler\Strategy\StrategyInterface;
+use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use PhpParser\PrettyPrinter;
 
 class Compiler
@@ -31,13 +32,15 @@ class Compiler
         return $this->inflector->classify($prefix . $this->randomIdentifier());
     }
 
-    public function compile(CompilationContext $context)
-    {
-        $namespace = $context->namespace ?? 'Kiboko\\__Mapper__\\';
-        $className = $context->className ?? $this->randomClassName('Mapper');
+    public function compile(
+        CompilationContextInterface $context,
+        MapperInterface ...$mappers
+    ) {
+        $namespace = $context->namespace() ?? 'Kiboko\\__Mapper__\\';
+        $className = $context->className() ?? $this->randomClassName('Mapper');
 
-        if (file_exists($context->path)) {
-            include $context->path;
+        if ($context->path() !== null && file_exists($context->path())) {
+            include $context->path();
         }
 
         $fqcn = $namespace . $className;
@@ -48,14 +51,13 @@ class Compiler
         $tree = $this->strategy->buildTree(
             $namespace,
             $className,
-            ...$context->mappers
+            ...$mappers
         );
 
         $prettyPrinter = new PrettyPrinter\Standard();
-        echo $prettyPrinter->prettyPrintFile($tree);
-        if ($context->path !== null && is_writable(dirname($context->path))) {
-            file_put_contents($context->path, $prettyPrinter->prettyPrintFile($tree));
-            include $context->path;
+        if ($context->path() !== null && is_writable(dirname($context->path()))) {
+            file_put_contents($context->path(), $prettyPrinter->prettyPrintFile($tree));
+            include $context->path();
         } else {
             include 'data://text/plain;base64,' . base64_encode($prettyPrinter->prettyPrintFile($tree));
         }

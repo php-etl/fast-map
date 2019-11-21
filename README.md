@@ -76,6 +76,36 @@ $output = $mapper($input, []);
 Object Mappings
 ---
 
+### Mapping definition building
+
+The object mapping is more complex than what we can see when using arrays,
+let it be object creation or accessing to virtual properties made up from
+get/set methods (eg. `getFoo()` and `setFoo()` for a virtual `foo` property).
+
+In order to make it more comfortable while doing various mapping operations,
+we will need to declare the way we want our mapping to be done.
+
+Here comes the `MappingDefinition` sub-package. It is a set of data objects and
+factories respectively for defining your object structure and building this 
+structure with reflection.
+
+Here is the basic mapping factory:
+
+
+Then, the factory can be used to generate your mapping definition.
+
+```php
+<?php
+use Kiboko\Component\ETL\FastMap\MappingIteration;
+use Kiboko\Component\ETL\Metadata;
+
+/** @var Metadata\ClassTypeMetadata $metadata */
+$metadata = (new Metadata\ClassMetadataBuilder())->buildFromFQCN('Lorem\\Ipsum\\Dolor');
+
+/** @var MappingIteration\MappedClassTypeFactory $mappingFactory */
+$mappingDefinition = $mappingFactory($metadata);
+```
+
 Compiled mapper
 ---
 
@@ -87,7 +117,7 @@ marked as compilable that can combine into a new native mapper and execute it.
 
 use Kiboko\Component\ETL\FastMap\CompiledMapper;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
-use Kiboko\Component\ETL\FastMap\FieldConcatCopyValuesMapper;
+use Kiboko\Component\ETL\FastMap\Compiler\StandardCompilationContext;use Kiboko\Component\ETL\FastMap\FieldConcatCopyValuesMapper;
 use Kiboko\Component\ETL\FastMap\FieldConstantValueMapper;
 
 $input = [
@@ -103,8 +133,7 @@ $compiler = new Compiler();
 
 $mapper = new CompiledMapper(
     $compiler,
-    'Foo\\BarMapper',
-    'var/mappers/',
+    StandardCompilationContext::build('var/mappers/', 'Foo\\BarMapper'),
     new FieldConstantValueMapper('[customer][first_name]', 'John Doe'),
     new FieldConcatCopyValuesMapper(
         '[address]',

@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler\CompilationContext;
+use Kiboko\Component\ETL\FastMap\Compiler\CompilationContextInterface;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 
@@ -10,36 +10,32 @@ class CompiledMapper implements MapperInterface
 {
     /** @var Compiler */
     private $compiler;
-    /** @var CompilationContext */
+    /** @var CompilationContextInterface */
     private $compilationContext;
+    /** @var iterable<MapperInterface> */
+    private $mappers;
     /** @var MapperInterface */
     private $compiledMapper;
 
     public function __construct(
         Compiler $compiler,
-        string $fqcn,
-        string $cachePath,
+        CompilationContextInterface $context,
         MapperInterface... $mappers
     ) {
         $this->compiler = $compiler;
-
-        $namespace = substr($fqcn, 0, strpos($fqcn, '\\') + 1);
-        $className = substr($fqcn, strpos($fqcn, '\\') + 1);
-
-        $this->compilationContext = new CompilationContext(
-            $cachePath . $className . '.php',
-            $namespace,
-            $className,
-            ...$mappers
-        );
+        $this->compilationContext = $context;
+        $this->mappers = $mappers;
     }
 
     public function __invoke($input, $output): array
     {
         if ($this->compiledMapper === null) {
-            $this->compiledMapper = $this->compiler->compile($this->compilationContext);
+            $this->compiledMapper = $this->compiler->compile(
+                $this->compilationContext,
+                ...$this->mappers
+            );
         }
 
-        return $this->compiledMapper->map($input, $output);
+        return ($this->compiledMapper)($input, $output);
     }
 }
