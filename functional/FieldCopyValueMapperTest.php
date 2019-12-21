@@ -2,7 +2,7 @@
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler\CompilationContext;
+use Kiboko\Component\ETL\FastMap\Compiler\StandardCompilationContext;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldCopyValueMapper;
@@ -106,12 +106,12 @@ final class FieldCopyValueMapperTest extends TestCase
 
         /** @var MapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(
-            new CompilationContext(
+            new StandardCompilationContext(
                 null,
                 null,
-                null,
-                new FieldCopyValueMapper($outputField, $inputField)
-            )
+                null
+            ),
+            new FieldCopyValueMapper($outputField, $inputField)
         );
 
         $this->assertEquals($expected, $compiledMapper($input, []));
@@ -180,12 +180,12 @@ final class FieldCopyValueMapperTest extends TestCase
 
         /** @var MapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(
-            new CompilationContext(
+            new StandardCompilationContext(
                 null,
                 null,
-                null,
-                new FieldCopyValueMapper($outputField, $inputField)
-            )
+                null
+            ),
+            new FieldCopyValueMapper($outputField, $inputField)
         );
 
         $this->assertEquals($expected, $compiledMapper($input, []));

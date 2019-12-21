@@ -2,24 +2,27 @@
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\MappingDefinition\Field\FieldDefinition;
-use Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser\FieldDefinitionGuesserChain;
-use Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser\PublicPropertyFieldGuesser;
-use Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser\PublicPropertyUnaryRelationGuesser;
-use Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser\RelationDefinitionGuesserChain;
-use Kiboko\Component\ETL\FastMap\MappingDefinition\Guesser\VirtualFieldGuesser;
-use Kiboko\Component\ETL\FastMap\MappingDefinition\MappedClassType;
-use Kiboko\Component\ETL\FastMap\MappingDefinition\MappedClassTypeFactory;
-use Kiboko\Component\ETL\FastMap\MappingDefinition\Relation\UnaryRelationDefinition;
+use Kiboko\Component\ETL\Metadata\ArgumentListMetadata;
+use Kiboko\Component\ETL\Metadata\FieldMetadata;
+use Kiboko\Component\ETL\Metadata\FieldGuesser;
 use Kiboko\Component\ETL\Metadata\ArgumentMetadata;
-use Kiboko\Component\ETL\Metadata\ArgumentMetadataList;
 use Kiboko\Component\ETL\Metadata\ClassMetadataBuilder;
 use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
 use Kiboko\Component\ETL\Metadata\ListTypeMetadata;
+use Kiboko\Component\ETL\Metadata\MethodGuesser\ReflectionMethodGuesser;
 use Kiboko\Component\ETL\Metadata\MethodMetadata;
+use Kiboko\Component\ETL\Metadata\PropertyGuesser\ReflectionPropertyGuesser;
 use Kiboko\Component\ETL\Metadata\PropertyMetadata;
+use Kiboko\Component\ETL\Metadata\RelationGuesser;
 use Kiboko\Component\ETL\Metadata\ScalarTypeMetadata;
+use Kiboko\Component\ETL\Metadata\TypeGuesser\CompositeTypeGuesser;
+use Kiboko\Component\ETL\Metadata\TypeGuesser\Docblock\DocblockTypeGuesser;
+use Kiboko\Component\ETL\Metadata\TypeGuesser\Native\Php74TypeGuesser;
+use Kiboko\Component\ETL\Metadata\UnaryRelationMetadata;
+use Kiboko\Component\ETL\Metadata\VariadicArgumentMetadata;
+use Phpactor\Docblock\DocblockFactory;
+use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
 
 final class MappingTest extends TestCase
@@ -27,101 +30,109 @@ final class MappingTest extends TestCase
     public function dataProvider()
     {
         yield [
-            (new MappedClassType(
-                (new ClassTypeMetadata('CustomerDTO', 'functional\Kiboko\Component\ETL\FastMap'))
-                    ->properties(
-                        new PropertyMetadata(
-                            'firstName',
-                            new ScalarTypeMetadata('string')
-                        ),
-                        new PropertyMetadata(
-                            'lastName',
-                            new ScalarTypeMetadata('string')
-                        ),
-                        new PropertyMetadata(
-                            'mainAddress',
-                            new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
-                        )
-                    )
-                    ->methods(
-                        new MethodMetadata(
-                            'setAddresses',
-                            new ArgumentMetadataList(
-                                new ArgumentMetadata(
-                                    'addresses',
-                                    true,
-                                    new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
-                                )
-                            )
-                        ),
-                        new MethodMetadata(
-                            'addAddress',
-                            new ArgumentMetadataList(
-                                new ArgumentMetadata(
-                                    'addresses',
-                                    true,
-                                    new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
-                                )
-                            )
-                        ),
-                        new MethodMetadata(
-                            'removeAddress',
-                            new ArgumentMetadataList(
-                                new ArgumentMetadata(
-                                    'addresses',
-                                    true,
-                                    new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
-                                )
-                            )
-                        ),
-                        new MethodMetadata(
-                            'getAddresses',
-                            new ArgumentMetadataList(),
-                            new ScalarTypeMetadata('iterable'),
-                            new ListTypeMetadata(
-                                new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
-                            )
-                        )
-                    )
-            ))
-                ->fields(
-                    new FieldDefinition(
+            (new ClassTypeMetadata('CustomerDTO', 'functional\Kiboko\Component\ETL\FastMap'))
+                ->addProperties(
+                    new PropertyMetadata(
                         'firstName',
                         new ScalarTypeMetadata('string')
                     ),
-                    new FieldDefinition(
+                    new PropertyMetadata(
+                        'lastName',
+                        new ScalarTypeMetadata('string')
+                    ),
+                    new PropertyMetadata(
+                        'addresses',
+                        new ListTypeMetadata(new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap'))
+                    ),
+                    new PropertyMetadata(
+                        'mainAddress',
+                        new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                    )
+                )
+                ->addMethods(
+                    new MethodMetadata(
+                        'setAddresses',
+                        new ArgumentListMetadata(
+                            new VariadicArgumentMetadata(
+                                'addresses',
+                                new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                            )
+                        )
+                    ),
+                    new MethodMetadata(
+                        'addAddress',
+                        new ArgumentListMetadata(
+                            new VariadicArgumentMetadata(
+                                'addresses',
+                                new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                            )
+                        )
+                    ),
+                    new MethodMetadata(
+                        'removeAddress',
+                        new ArgumentListMetadata(
+                            new VariadicArgumentMetadata(
+                                'addresses',
+                                new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                            )
+                        )
+                    ),
+                    new MethodMetadata(
+                        'getAddresses',
+                        new ArgumentListMetadata(),
+                        new ScalarTypeMetadata('iterable'),
+                        new ListTypeMetadata(
+                            new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                        )
+                    )
+                )
+                ->addFields(
+                    new FieldMetadata(
+                        'firstName',
+                        new ScalarTypeMetadata('string')
+                    ),
+                    new FieldMetadata(
                         'lastName',
                         new ScalarTypeMetadata('string')
                     )
                 )
-                ->relations(
-                    new UnaryRelationDefinition(
+                ->addRelations(
+                    new UnaryRelationMetadata(
                         'mainAddress',
                         new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
                     )
-                ),
+                )
         ];
     }
 
     /**
      * @dataProvider dataProvider
      */
-    public function testMapping(MappedClassType $expected)
+    public function testMapping(ClassTypeMetadata $expected)
     {
-        $metadataBuilder = new ClassMetadataBuilder();
-        $factory = new MappedClassTypeFactory(
-            new FieldDefinitionGuesserChain(
-                new PublicPropertyFieldGuesser(),
-                new VirtualFieldGuesser()
-            ),
-            new RelationDefinitionGuesserChain(
-                new PublicPropertyUnaryRelationGuesser()/*,
-                new PublicPropertyMultipleRelationGuesser(),
-                new VirtualRelationGuesser()*/
+        $typeGuesser = new CompositeTypeGuesser(
+            new Php74TypeGuesser(),
+            new DocblockTypeGuesser(
+                (new ParserFactory())->create(ParserFactory::PREFER_PHP7),
+                new DocblockFactory()
             )
         );
 
-        $this->assertEquals($expected, $factory($metadataBuilder->buildFromFQCN(CustomerDTO::class)));
+        $factory = new ClassMetadataBuilder(
+            new ReflectionPropertyGuesser($typeGuesser),
+            new ReflectionMethodGuesser($typeGuesser),
+            new FieldGuesser\FieldGuesserChain(
+                new FieldGuesser\PublicPropertyFieldGuesser(),
+                new FieldGuesser\VirtualFieldGuesser()
+            ),
+            new RelationGuesser\RelationGuesserChain(
+                new RelationGuesser\PublicPropertyUnaryRelationGuesser(),
+                new RelationGuesser\PublicPropertyMultipleRelationGuesser(),
+                new RelationGuesser\VirtualRelationGuesser()
+            )
+        );
+
+        $this->assertEquals($expected, $factory->buildFromFQCN(CustomerDTO::class));
     }
 }
 

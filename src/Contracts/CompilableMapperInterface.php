@@ -4,10 +4,6 @@ namespace Kiboko\Component\ETL\FastMap\Contracts;
 
 use PhpParser\Node;
 
-interface CompilableMapperInterface extends MapperInterface
+interface CompilableMapperInterface extends MapperInterface, CompilableInterface
 {
-    /**
-     * @return Node[]
-     */
-    public function compile(): array;
 }

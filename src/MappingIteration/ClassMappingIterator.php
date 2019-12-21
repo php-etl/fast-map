@@ -8,15 +8,17 @@ use Kiboko\Component\ETL\Metadata\RelationMetadataInterface;
 
 final class ClassMappingIterator implements \RecursiveIterator
 {
-    private ClassTypeMetadata $metadata;
-    private \Iterator $inner;
+    /** @var ClassTypeMetadata  */
+    private $metadata;
+    /** @var \Iterator  */
+    private $inner;
 
     public function __construct(ClassTypeMetadata $metadata)
     {
         $this->metadata = $metadata;
         $this->inner = new \AppendIterator();
-        $this->inner->append(new \ArrayIterator($metadata->fields));
-        $this->inner->append(new \ArrayIterator($metadata->relations));
+        $this->inner->append(new \ArrayIterator($metadata->getFields()));
+        $this->inner->append(new \ArrayIterator($metadata->getRelations()));
     }
 
     public function current()
@@ -56,9 +58,12 @@ final class ClassMappingIterator implements \RecursiveIterator
         /** @var FieldMetadataInterface|RelationMetadataInterface $current */
         $current = $this->inner->current();
         if (!$current instanceof RelationMetadataInterface) {
-            throw new \RangeException('This item has no child');
+            throw new \RangeException('This item has no child.');
+        }
+        if (count($current->getTypes()) > 1) {
+            throw new \OutOfBoundsException('There is more than one type in the .');
         }
 
-        return new self($current->);
+        return new self($current->getTypes());
     }
 }

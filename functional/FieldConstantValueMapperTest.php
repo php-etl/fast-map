@@ -2,7 +2,7 @@
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler\CompilationContext;
+use Kiboko\Component\ETL\FastMap\Compiler\StandardCompilationContext;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConstantValueMapper;
@@ -81,7 +81,7 @@ final class FieldConstantValueMapperTest extends TestCase
                     })()
                 ]
             ],
-            '[persons][0].name',
+            '[persons][0][name]',
             'John F. Doe',
         ];
     }
@@ -106,12 +106,12 @@ final class FieldConstantValueMapperTest extends TestCase
 
         /** @var MapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(
-            new CompilationContext(
+            new StandardCompilationContext(
                 null,
                 null,
-                null,
-                new FieldConstantValueMapper($outputField, $constantValue)
-            )
+                null
+            ),
+            new FieldConstantValueMapper($outputField, $constantValue)
         );
 
         $this->assertEquals($expected, $compiledMapper($input, []));
@@ -180,12 +180,12 @@ final class FieldConstantValueMapperTest extends TestCase
 
         /** @var MapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(
-            new CompilationContext(
+            new StandardCompilationContext(
                 null,
                 null,
-                null,
-                new FieldConstantValueMapper($outputField, $constantValue)
-            )
+                null
+            ),
+            new FieldConstantValueMapper($outputField, $constantValue)
         );
 
         $this->assertEquals($expected, $compiledMapper($input, []));

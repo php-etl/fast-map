@@ -5,7 +5,7 @@ namespace Kiboko\Component\ETL\FastMap\MappingIteration;
 use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
 use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
-class PathMappingIterator implements \Iterator
+final class PathMappingIterator implements \Iterator
 {
     /** @var PropertyPathIteratorInterface */
     private $inner;

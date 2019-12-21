@@ -73,6 +73,38 @@ $output = $mapper($input, []);
 // array(1) { "address" => "John P. Doe, Main Street, 42, 12345, Oblivion" }
 ```
 
+### Use Symfony's Expression Language
+
+If you need to do more complex stuff, the integration with the `symfony/expression-language` is integrated into the `FieldExpressionLanguageValueMapper` mapper.
+This mapper will use `symfony/property-access` syntax to copy-paste values from the input to the output array.
+
+```php
+<?php
+
+use Kiboko\Component\ETL\FastMap\FieldExpressionLanguageValueMapper;
+use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+
+$interpreter = new ExpressionLanguage();
+
+$input = [
+    'ean' => '1234567890128',
+    'weight' => [
+        'value' => 5,
+        'unit' => 'POUNDS',
+    ],
+    'qty' => 23,
+];
+
+$mapper = new FieldExpressionLanguageValueMapper(
+    '[weight]',
+    new Expression('input["weight"]["unit"] == "POUNDS" ? (input["weight"]["value"] / 2.205) : input["weight"]["value"]'),
+    $interpreter
+);
+$output = $mapper($input, []);
+// array(1) { "weight" => 2.26796 }
+```
+
 Object Mappings
 ---
 

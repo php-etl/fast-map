@@ -2,7 +2,7 @@
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler\CompilationContext;
+use Kiboko\Component\ETL\FastMap\Compiler\StandardCompilationContext;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConcatCopyValuesMapper;
@@ -137,12 +137,12 @@ final class FieldConcatCopyValuesMapperTest extends TestCase
 
         /** @var MapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(
-            new CompilationContext(
+            new StandardCompilationContext(
                 null,
                 null,
-                null,
-                new FieldConcatCopyValuesMapper($outputField, $glue, ...$inputFields)
-            )
+                null
+            ),
+            new FieldConcatCopyValuesMapper($outputField, $glue, ...$inputFields)
         );
 
         $this->assertEquals($expected, $compiledMapper($input, []));
