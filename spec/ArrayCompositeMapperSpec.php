@@ -11,12 +11,14 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
+        $this->beConstructedWith('[customer]');
         $this->shouldHaveType(ArrayCompositeMapper::class);
     }
 
     function it_is_mapping_flat_data()
     {
         $this->beConstructedWith(
+            '[customer]',
             new FieldCopyValueMapper('[firstName]', '[first_name]')
         );
         $this->callOnWrappedObject('__invoke', [
@@ -26,13 +28,16 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
             ],
             []
         ])->shouldReturn([
-            'firstName' => 'John',
+            'customer' => [
+                'firstName' => 'John',
+            ],
         ]);
     }
 
     function it_is_mapping_complex_data()
     {
         $this->beConstructedWith(
+            '[company]',
             new FieldCopyValueMapper('[person][firstName]', '[employee][first_name]'),
             new FieldConcatCopyValuesMapper('[address][city]', ' ', '[address][postcode]', '[address][city]')
         );
@@ -50,11 +55,13 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
             ],
             []
         ])->shouldReturn([
-            'person' => [
-                'firstName' => 'John',
-            ],
-            'address' => [
-                'city' => '12345 Oblivion',
+            'company' => [
+                'person' => [
+                    'firstName' => 'John',
+                ],
+                'address' => [
+                    'city' => '12345 Oblivion',
+                ],
             ],
         ]);
     }
@@ -62,6 +69,7 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
     function it_does_keep_preexisting_data()
     {
         $this->beConstructedWith(
+            '[company]',
             new FieldCopyValueMapper('[person][firstName]', '[employee][first_name]')
         );
         $this->callOnWrappedObject('__invoke', [
@@ -72,18 +80,22 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
                 ],
             ],
             [
+                'company' => [
+                    'address' => [
+                        'street' => 'Main Street, 42',
+                        'city' => 'Oblivion'
+                    ],
+                ],
+            ],
+        ])->shouldReturn([
+            'company' => [
                 'address' => [
                     'street' => 'Main Street, 42',
                     'city' => 'Oblivion'
-                ]
-            ]
-        ])->shouldReturn([
-            'address' => [
-                'street' => 'Main Street, 42',
-                'city' => 'Oblivion'
-            ],
-            'person' => [
-                'firstName' => 'John',
+                ],
+                'person' => [
+                    'firstName' => 'John',
+                ],
             ],
         ]);
     }
