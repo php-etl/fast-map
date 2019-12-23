@@ -4,41 +4,37 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "edadd0b7ad11e6426bea9ae5ab8c0d44",
+    "content-hash": "ea10edfc87d08cb12e2027f1e151c099",
     "packages": [
         {
             "name": "doctrine/inflector",
-            "version": "dev-master",
+            "version": "1.3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "8c913b9bab8d797c223e11939604149617dcc3ca"
+                "reference": "ec3a55242203ffa6a4b27c58176da97ff0a7aec1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/8c913b9bab8d797c223e11939604149617dcc3ca",
-                "reference": "8c913b9bab8d797c223e11939604149617dcc3ca",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/ec3a55242203ffa6a4b27c58176da97ff0a7aec1",
+                "reference": "ec3a55242203ffa6a4b27c58176da97ff0a7aec1",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^6.0",
-                "phpstan/phpstan": "^0.11",
-                "phpstan/phpstan-phpunit": "^0.11",
-                "phpstan/phpstan-strict-rules": "^0.11",
-                "phpunit/phpunit": "^7.0"
+                "phpunit/phpunit": "^6.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
+                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -47,16 +43,16 @@
             ],
             "authors": [
                 {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
                 {
                     "name": "Benjamin Eberlei",
                     "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
                 },
                 {
                     "name": "Jonathan Wage",
@@ -67,21 +63,15 @@
                     "email": "schmittjoh@gmail.com"
                 }
             ],
-            "description": "PHP Doctrine Inflector is a small library that can perform string manipulations with regard to upper/lowercase and singular/plural forms of words.",
-            "homepage": "https://www.doctrine-project.org/projects/inflector.html",
+            "description": "Common String Manipulations with regard to casing and singular/plural rules.",
+            "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "inflection",
-                "inflector",
-                "lowercase",
-                "manipulation",
-                "php",
-                "plural",
-                "singular",
-                "strings",
-                "uppercase",
-                "words"
+                "pluralize",
+                "singularize",
+                "string"
             ],
-            "time": "2019-05-30T19:17:33+00:00"
+            "time": "2019-10-30T19:59:35+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -181,20 +171,20 @@
         },
         {
             "name": "php-etl/metadata",
-            "version": "dev-master",
+            "version": "dev-feature/oroplatform-3.1-compatibility",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/metadata.git",
-                "reference": "99c0dd559eff3243927ee1aed03965ababd9049b"
+                "reference": "48bc2fb78893209b6d9aaa2b0403ff82b14a566a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/metadata/zipball/99c0dd559eff3243927ee1aed03965ababd9049b",
-                "reference": "99c0dd559eff3243927ee1aed03965ababd9049b",
+                "url": "https://api.github.com/repos/php-etl/metadata/zipball/48bc2fb78893209b6d9aaa2b0403ff82b14a566a",
+                "reference": "48bc2fb78893209b6d9aaa2b0403ff82b14a566a",
                 "shasum": ""
             },
             "require": {
-                "doctrine/inflector": "^2.0@dev",
+                "doctrine/inflector": "^1.3",
                 "nikic/php-parser": "^4.2",
                 "php": "^7.2",
                 "phpactor/docblock": "^0.3.0@dev"
@@ -236,7 +226,7 @@
                 }
             ],
             "description": "Describe data structures, to auto-configure and handle data transformation and data manipulation.",
-            "time": "2019-11-03T22:01:46+00:00"
+            "time": "2019-12-23T17:42:19+00:00"
         },
         {
             "name": "phpactor/docblock",
@@ -4331,7 +4321,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "symfony/property-access": 20,
-        "doctrine/inflector": 20,
         "php-etl/contracts": 20,
         "php-etl/metadata": 20,
         "symfony/expression-language": 20,
