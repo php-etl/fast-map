@@ -21,9 +21,14 @@ final class StandardCompilationContext implements CompilationContextInterface
     public static function build(string $cachePath, string $fqcn): self
     {
         if ($fqcn !== null) {
-            $namespace = substr($fqcn, 0, strpos($fqcn, '\\') + 1);
-            $className = substr($fqcn, strpos($fqcn, '\\') + 1);
-            $fileName = $cachePath . $className . '.php';
+            if (false !== ($index = strrpos($fqcn, '\\'))) {
+                $namespace = substr($fqcn, 0, $index);
+                $className = substr($fqcn, $index + 1);
+            } else {
+                $namespace = null;
+                $className = $fqcn;
+            }
+            $fileName = $cachePath . '/' . $className . '.php';
         }
 
         return new self(

@@ -42,8 +42,8 @@ final class CompiledMapperSpec extends ObjectBehavior
                 'last_name' => 'Doe',
             ]
         ])->shouldReturn([
-            'first_name' => 'John',
             'last_name' => 'Doe',
+            'first_name' => 'John',
         ]);
     }
 }

@@ -21,7 +21,8 @@
         "doctrine/inflector": "^1.3",
         "php-etl/contracts": "^1.0@dev",
         "php-etl/metadata": "dev-feature/oroplatform-3.1-compatibility",
-        "symfony/expression-language": "^5.1@dev"
+        "symfony/expression-language": "^3.4",
+        "symfony/cache": "^3.4"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.1",

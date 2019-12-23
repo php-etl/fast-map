@@ -22,11 +22,11 @@ final class StandardCompilationContextSpec extends ObjectBehavior
 
     function it_is_containing_context(Compiler $compiler, MapperInterface $mapper)
     {
-        $this->beConstructedWith(__DIR__, 'Foo\\Bar', 'Baz');
+        $this->beConstructedWith(__DIR__ . '/Baz.php', 'Foo\\Bar', 'Baz');
         $this->shouldHaveType(StandardCompilationContext::class);
         $this->shouldHaveType(CompilationContextInterface::class);
 
-        $this->path()->shouldReturn(__DIR__);
+        $this->path()->shouldReturn(__DIR__ . '/Baz.php');
         $this->namespace()->shouldReturn('Foo\\Bar');
         $this->className()->shouldReturn('Baz');
     }
@@ -37,7 +37,7 @@ final class StandardCompilationContextSpec extends ObjectBehavior
         $this->shouldHaveType(StandardCompilationContext::class);
         $this->shouldHaveType(CompilationContextInterface::class);
 
-        $this->path()->shouldReturn(__DIR__);
+        $this->path()->shouldReturn(__DIR__ . '/Baz.php');
         $this->namespace()->shouldReturn('Foo\\Bar');
         $this->className()->shouldReturn('Baz');
     }
@@ -48,7 +48,7 @@ final class StandardCompilationContextSpec extends ObjectBehavior
         $this->shouldHaveType(StandardCompilationContext::class);
         $this->shouldHaveType(CompilationContextInterface::class);
 
-        $this->path()->shouldReturn(__DIR__);
+        $this->path()->shouldReturn(__DIR__ . '/Baz.php');
         $this->namespace()->shouldReturn(null);
         $this->className()->shouldReturn('Baz');
     }
