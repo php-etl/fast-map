@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa3a6eaad6ec2022c5c9fe2a8bb772c2",
+    "content-hash": "d447828bda2176e3cf98d82c46e97f11",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -577,26 +577,26 @@
         },
         {
             "name": "symfony/inflector",
-            "version": "dev-master",
+            "version": "3.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/inflector.git",
-                "reference": "c3a425d9f86ab019ec883cdae9167f8f7035e9bc"
+                "reference": "67e9285380dd1fa56b870929d0379f41b9c56e87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/inflector/zipball/c3a425d9f86ab019ec883cdae9167f8f7035e9bc",
-                "reference": "c3a425d9f86ab019ec883cdae9167f8f7035e9bc",
+                "url": "https://api.github.com/repos/symfony/inflector/zipball/67e9285380dd1fa56b870929d0379f41b9c56e87",
+                "reference": "67e9285380dd1fa56b870929d0379f41b9c56e87",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.9",
+                "php": "^5.5.9|>=7.0.8",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -631,7 +631,7 @@
                 "symfony",
                 "words"
             ],
-            "time": "2019-08-07T12:07:17+00:00"
+            "time": "2019-09-17T08:36:34+00:00"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -808,24 +808,25 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "dev-master",
+            "version": "3.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "d870b460bc11ca5df95313d4999c776a15dae8cb"
+                "reference": "fd08a3238a2624084d7f2829091c2dc972091a47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/d870b460bc11ca5df95313d4999c776a15dae8cb",
-                "reference": "d870b460bc11ca5df95313d4999c776a15dae8cb",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/fd08a3238a2624084d7f2829091c2dc972091a47",
+                "reference": "fd08a3238a2624084d7f2829091c2dc972091a47",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.9",
-                "symfony/inflector": "^4.4|^5.0"
+                "php": "^5.5.9|>=7.0.8",
+                "symfony/inflector": "~3.1|~4.0",
+                "symfony/polyfill-php70": "~1.0"
             },
             "require-dev": {
-                "symfony/cache": "^4.4|^5.0"
+                "symfony/cache": "~3.1|~4.0"
             },
             "suggest": {
                 "psr/cache-implementation": "To cache access methods."
@@ -833,7 +834,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -871,7 +872,7 @@
                 "property path",
                 "reflection"
             ],
-            "time": "2019-08-26T09:05:36+00:00"
+            "time": "2019-12-09T20:23:16+00:00"
         }
     ],
     "packages-dev": [
@@ -4516,7 +4517,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "symfony/property-access": 20,
         "php-etl/contracts": 20,
         "php-etl/metadata": 20,
         "johnkary/phpunit-speedtrap": 20,
