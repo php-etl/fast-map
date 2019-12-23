@@ -134,7 +134,7 @@ final class FieldExpressionLanguageValueMapperTest extends TestCase
     public function testStaticResults($expected, $input, $outputField, Expression $expression, ExpressionLanguage $interpreter)
     {
         /** @var MapperInterface $compiledMapper */
-        $staticMapper = new FieldExpressionLanguageValueMapper($outputField, $expression, $interpreter);
+        $staticMapper = new FieldExpressionLanguageValueMapper($outputField, $interpreter, $expression);
 
         $this->assertEquals($expected, $staticMapper($input, []));
     }
@@ -153,7 +153,7 @@ final class FieldExpressionLanguageValueMapperTest extends TestCase
                 null,
                 null
             ),
-            new FieldExpressionLanguageValueMapper($outputField, $expression, $interpreter)
+            new FieldExpressionLanguageValueMapper($outputField, $interpreter, $expression)
         );
 
         $this->assertEquals($expected, $compiledMapper($input, []));

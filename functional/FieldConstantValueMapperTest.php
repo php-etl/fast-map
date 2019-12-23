@@ -7,6 +7,8 @@ use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\ETL\FastMap\FieldConstantValueMapper;
 use Kiboko\Component\ETL\Metadata;
+use Phpactor\Docblock\DocblockFactory;
+use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
 
 final class FieldConstantValueMapperTest extends TestCase
@@ -119,7 +121,27 @@ final class FieldConstantValueMapperTest extends TestCase
 
     public function configuredMappingDataProvider()
     {
-        $builder = new Metadata\ClassMetadataBuilder();
+        $typeGuesser = new Metadata\TypeGuesser\CompositeTypeGuesser(
+            new Metadata\TypeGuesser\Native\Php74TypeGuesser(),
+            new Metadata\TypeGuesser\Docblock\DocblockTypeGuesser(
+                (new ParserFactory())->create(ParserFactory::ONLY_PHP7),
+                new DocblockFactory()
+            )
+        );
+
+        $builder = new Metadata\ClassMetadataBuilder(
+            new Metadata\PropertyGuesser\ReflectionPropertyGuesser($typeGuesser),
+            new Metadata\MethodGuesser\ReflectionMethodGuesser($typeGuesser),
+            new Metadata\FieldGuesser\FieldGuesserChain(
+                new Metadata\FieldGuesser\PublicPropertyFieldGuesser(),
+                new Metadata\FieldGuesser\VirtualFieldGuesser()
+            ),
+            new Metadata\RelationGuesser\RelationGuesserChain(
+                new Metadata\RelationGuesser\PublicPropertyUnaryRelationGuesser(),
+                new Metadata\RelationGuesser\PublicPropertyMultipleRelationGuesser(),
+                new Metadata\RelationGuesser\VirtualRelationGuesser()
+            )
+        );
         
         yield [
             [

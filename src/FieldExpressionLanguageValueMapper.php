@@ -21,21 +21,21 @@ final class FieldExpressionLanguageValueMapper implements
 {
     /** @var string */
     private $outputField;
-    /** @var Expression */
-    private $expression;
     /** @var ExpressionLanguage */
     private $interpreter;
+    /** @var Expression */
+    private $expression;
     /** @var PropertyAccessor */
     private $accessor;
 
     public function __construct(
         string $outputField,
-        Expression $expression,
-        ExpressionLanguage $interpreter
+        ExpressionLanguage $interpreter,
+        Expression $expression
     ) {
         $this->outputField = $outputField;
-        $this->expression = $expression;
         $this->interpreter = $interpreter;
+        $this->expression = $expression;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 

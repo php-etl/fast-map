@@ -217,12 +217,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/metadata.git",
-                "reference": "48bc2fb78893209b6d9aaa2b0403ff82b14a566a"
+                "reference": "13de0950c1fd15242c58eafb9d4e24f4f4f2c5c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/metadata/zipball/48bc2fb78893209b6d9aaa2b0403ff82b14a566a",
-                "reference": "48bc2fb78893209b6d9aaa2b0403ff82b14a566a",
+                "url": "https://api.github.com/repos/php-etl/metadata/zipball/13de0950c1fd15242c58eafb9d4e24f4f4f2c5c8",
+                "reference": "13de0950c1fd15242c58eafb9d4e24f4f4f2c5c8",
                 "shasum": ""
             },
             "require": {
@@ -268,7 +268,7 @@
                 }
             ],
             "description": "Describe data structures, to auto-configure and handle data transformation and data manipulation.",
-            "time": "2019-12-23T17:42:19+00:00"
+            "time": "2019-12-23T22:23:54+00:00"
         },
         {
             "name": "phpactor/docblock",

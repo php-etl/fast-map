@@ -5,7 +5,6 @@ namespace functional\Kiboko\Component\ETL\FastMap;
 use Kiboko\Component\ETL\Metadata\ArgumentListMetadata;
 use Kiboko\Component\ETL\Metadata\FieldMetadata;
 use Kiboko\Component\ETL\Metadata\FieldGuesser;
-use Kiboko\Component\ETL\Metadata\ArgumentMetadata;
 use Kiboko\Component\ETL\Metadata\ClassMetadataBuilder;
 use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;

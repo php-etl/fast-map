@@ -2,8 +2,7 @@
 
 namespace Kiboko\Component\ETL\FastMap\Compiler;
 
-use Doctrine\Inflector\Inflector;
-use Doctrine\Inflector\Rules\English\InflectorFactory;
+use Doctrine\Common\Inflector\Inflector;
 use Kiboko\Component\ETL\FastMap\Compiler\Strategy\Spaghetti;
 use Kiboko\Component\ETL\FastMap\Compiler\Strategy\StrategyInterface;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
@@ -19,7 +18,7 @@ class Compiler
     public function __construct(?StrategyInterface $strategy = null)
     {
         $this->strategy = $strategy ?? new Spaghetti();
-        $this->inflector = (new InflectorFactory())();
+        $this->inflector = new Inflector();
     }
 
     private function randomIdentifier(): string
