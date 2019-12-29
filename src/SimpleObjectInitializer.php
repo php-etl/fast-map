@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\ETL\FastMap;
 
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts\CompilableObjectInitializerInterface;
 use PhpParser\Node;
 use PhpParser\ParserFactory;
@@ -9,6 +10,7 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class SimpleObjectInitializer implements CompilableObjectInitializerInterface
 {
@@ -41,17 +43,33 @@ final class SimpleObjectInitializer implements CompilableObjectInitializerInterf
         $this->accessor->setValue(
             $output,
             $this->outputField,
-            new $this->className(...$this->walkFields($input))
+            new $this->className(...$this->walkFields($input, $output))
         );
 
         return $output;
     }
 
-    private function walkFields(array $input): \Generator
+    private function walkFields($input, $output): \Generator
     {
-        foreach ($this->inputFields as $field) {
-            yield $this->accessor->getValue($input, $field) ?? null;
+        foreach ($this->expressions as $expression) {
+            yield $this->interpreter->evaluate($expression, [
+                'input' => $input,
+                'output' => $output,
+            ]);
         }
+    }
+
+    private function compileExpression(Expression $expression): iterable
+    {
+        $compiledExpression = (new ParserFactory())
+            ->create(ParserFactory::PREFER_PHP7)
+            ->parse('<?php ' . $this->interpreter->compile($expression, ['input', 'output']) . ';');
+
+        yield from (function(Node\Stmt\Expression ...$expressions) {
+            foreach ($expressions as $expression) {
+                yield $expression->expr;
+            }
+        })(...$compiledExpression);
     }
 
     /**
@@ -61,21 +79,21 @@ final class SimpleObjectInitializer implements CompilableObjectInitializerInterf
     {
         $argumentsNodes = [];
         foreach ($this->expressions as $expression) {
-            $compiledExpression = $this->interpreter->parse($expression, ['input', 'output']);
-
-            $argumentsNodes[] = (new ParserFactory())
-                ->create(ParserFactory::PREFER_PHP7, null)
-                ->parse('<?php ' . $this->interpreter->compile($compiledExpression) . ';');
-
+            array_push($argumentsNodes, ...$this->compileExpression($expression));
         }
 
-        return [
-            new Node\Stmt\Return_(
-                new Node\Expr\New_(
-                    new Node\Name\FullyQualified($this->className),
-                    $argumentsNodes
-                )
-            )
-        ];
+        return array_merge(
+            [
+                new Node\Expr\Assign(
+                    strlen($this->outputField) !== 0 ?
+                        (new PropertyPathBuilder(new PropertyPath($this->outputField), new Node\Expr\Variable('output')))->getNode() :
+                        new Node\Expr\Variable('output'),
+                    new Node\Expr\New_(
+                        new Node\Name\FullyQualified($this->className),
+                        $argumentsNodes
+                    )
+                ),
+            ]
+        );
     }
 }

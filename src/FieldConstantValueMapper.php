@@ -10,8 +10,9 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
-class FieldConstantValueMapper implements
+final class FieldConstantValueMapper implements
     Contracts\ArrayMapperInterface,
+    Contracts\ObjectMapperInterface,
     Contracts\CompilableMapperInterface
 {
     /** @var string */

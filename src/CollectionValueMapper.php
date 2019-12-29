@@ -6,7 +6,7 @@ use Kiboko\Component\ETL\FastMap\Contracts;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
-class CollectionValueMapper implements
+final class CollectionValueMapper implements
     Contracts\ArrayMapperInterface
 {
     /** @var string */

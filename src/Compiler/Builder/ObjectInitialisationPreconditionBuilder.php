@@ -35,7 +35,7 @@ class ObjectInitialisationPreconditionBuilder implements Builder
                         new Node\Expr\Assign(
                             $this->pathNode,
                             new Node\Expr\New_(
-                                new Node\Name($this->metadata->name)
+                                new Node\Name($this->metadata->getName())
                             )
                         )
                     )

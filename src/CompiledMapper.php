@@ -6,7 +6,7 @@ use Kiboko\Component\ETL\FastMap\Compiler\CompilationContextInterface;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
 
-class CompiledMapper implements MapperInterface
+final class CompiledMapper implements MapperInterface
 {
     /** @var Compiler */
     private $compiler;

@@ -17,6 +17,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class FieldExpressionLanguageValueMapper implements
     Contracts\ArrayMapperInterface,
+    Contracts\ObjectMapperInterface,
     Contracts\CompilableMapperInterface
 {
     /** @var string */

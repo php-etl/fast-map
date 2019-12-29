@@ -15,7 +15,7 @@ final class Spaghetti implements StrategyInterface
 
         $stmts = [];
         foreach ($mappers as $mapper) {
-            $stmts = array_merge($stmts, $mapper->compile());
+            array_push($stmts, ...$mapper->compile());
         }
 
         return [

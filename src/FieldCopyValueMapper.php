@@ -13,8 +13,9 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
-class FieldCopyValueMapper implements
+final class FieldCopyValueMapper implements
     Contracts\ArrayMapperInterface,
+    Contracts\ObjectMapperInterface,
     Contracts\CompilableMapperInterface
 {
     /** @var string */

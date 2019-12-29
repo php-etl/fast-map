@@ -5,7 +5,7 @@ namespace Kiboko\Component\ETL\FastMap;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
-class ArrayCompositeMapper implements
+final class ArrayCompositeMapper implements
     Contracts\ArrayMapperInterface
 {
     /** @var string */
