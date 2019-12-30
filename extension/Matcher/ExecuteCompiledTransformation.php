@@ -74,7 +74,7 @@ final class ExecuteCompiledTransformation extends BasicMatcher
 
         $node = (new Builder\Function_($functionName))
             ->addParam((new Builder\Param('input'))->getNode())
-            ->addParam((new Builder\Param('output'))->setType('array')->setDefault([])->getNode())
+            ->addParam((new Builder\Param('output'))->getNode())
             ->addStmts($ast)
             ->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))
             ->getNode();

@@ -9,5 +9,5 @@ interface CompilableInterface
     /**
      * @return Node[]
      */
-    public function compile(): array;
+    public function compile(Node\Expr $outputNode): array;
 }

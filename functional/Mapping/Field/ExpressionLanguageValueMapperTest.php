@@ -2,20 +2,19 @@
 
 namespace functional\Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler\StandardCompilationContext;
-use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
+use Kiboko\Component\ETL\FastMap\Compiler;
+use Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\FastMap\FieldCopyValueMapper;
-use Kiboko\Component\ETL\FastMap\FieldExpressionLanguageValueMapper;
-use Kiboko\Component\ETL\Metadata;
+use Kiboko\Component\ETL\FastMap\Mapping\Field\ExpressionLanguageValueMapper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use Symfony\Component\ExpressionLanguage\ParsedExpression;
+use Symfony\Component\PropertyAccess\PropertyPath;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class FieldExpressionLanguageValueMapperTest extends TestCase
+final class ExpressionLanguageValueMapperTest extends TestCase
 {
-    public function automaticMappingDataProvider()
+    public function mappingDataProvider()
     {
         $interpreter = new ExpressionLanguage();
 
@@ -29,7 +28,7 @@ final class FieldExpressionLanguageValueMapperTest extends TestCase
                     'last_name' => 'Doe',
                 ]
             ],
-            '[person]',
+            new PropertyPath('[person]'),
             new Expression('input["employee"]["first_name"]'),
             $interpreter,
         ];
@@ -44,7 +43,7 @@ final class FieldExpressionLanguageValueMapperTest extends TestCase
                     'last_name' => 'Doe',
                 ]
             ],
-            '[person]',
+            new PropertyPath('[person]'),
             new Expression('input["employee"]["first_name"]~" "~input["employee"]["last_name"]'),
             $interpreter,
         ];
@@ -61,7 +60,7 @@ final class FieldExpressionLanguageValueMapperTest extends TestCase
                     'last_name' => 'Doe',
                 ]
             ],
-            '[person][firstName]',
+            new PropertyPath('[person][firstName]'),
             new Expression('input["employee"]["first_name"]~" "~input["employee"]["last_name"]'),
             $interpreter,
         ];
@@ -82,7 +81,7 @@ final class FieldExpressionLanguageValueMapperTest extends TestCase
                     ]
                 ]
             ],
-            '[persons][0][firstName]',
+            new PropertyPath('[persons][0][firstName]'),
             new Expression('input["employees"][0]["first_name"]~" "~input["employees"][0]["last_name"]'),
             $interpreter,
         ];
@@ -105,7 +104,7 @@ final class FieldExpressionLanguageValueMapperTest extends TestCase
                     })()
                 ]
             ],
-            '[persons][0][firstName]',
+            new PropertyPath('[persons][0][firstName]'),
             new Expression('input["employees"][0].first_name~" "~input["employees"][0].last_name'),
             $interpreter,
         ];
@@ -122,38 +121,73 @@ final class FieldExpressionLanguageValueMapperTest extends TestCase
                 ],
                 'qty' => 23,
             ],
-            '[weight]',
+            new PropertyPath('[weight]'),
             new Expression('input["weight"]["unit"] == "POUNDS" ? (input["weight"]["value"] / 2.205) : input["weight"]["value"]'),
             $interpreter
         ];
     }
 
     /**
-     * @dataProvider automaticMappingDataProvider
+     * @dataProvider mappingDataProvider
      */
-    public function testStaticResults($expected, $input, $outputField, Expression $expression, ExpressionLanguage $interpreter)
-    {
+    public function testDynamicResults(
+        $expected,
+        $input,
+        PropertyPathInterface $outputField,
+        Expression $expression,
+        ExpressionLanguage $interpreter
+    ) {
         /** @var MapperInterface $compiledMapper */
-        $staticMapper = new FieldExpressionLanguageValueMapper($outputField, $interpreter, $expression);
+        $staticMapper = new ExpressionLanguageValueMapper($interpreter, $expression);
 
-        $this->assertEquals($expected, $staticMapper($input, []));
+        $this->assertEquals($expected, $staticMapper($input, [], $outputField));
     }
 
     /**
-     * @dataProvider automaticMappingDataProvider
+     * @dataProvider mappingDataProvider
      */
-    public function testCompilationResults($expected, $input, $outputField, Expression $expression, ExpressionLanguage $interpreter)
-    {
-        $compiler = new Compiler();
+    public function testCompilationResultsWithSpaghettiStrategy(
+        $expected,
+        $input,
+        PropertyPathInterface $outputField,
+        Expression $expression,
+        ExpressionLanguage $interpreter
+    ) {
+        $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
 
-        /** @var MapperInterface $compiledMapper */
+        /** @var CompiledMapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(
-            new StandardCompilationContext(
-                null,
+            new Compiler\StandardCompilationContext(
+                $outputField,
                 null,
                 null
             ),
-            new FieldExpressionLanguageValueMapper($outputField, $interpreter, $expression)
+            new ExpressionLanguageValueMapper($interpreter, $expression)
+        );
+
+        $this->assertEquals($expected, $compiledMapper($input, []));
+    }
+
+    /**
+     * @dataProvider mappingDataProvider
+     */
+    public function testCompilationResultsWithReduceStrategy(
+        $expected,
+        $input,
+        PropertyPathInterface $outputField,
+        Expression $expression,
+        ExpressionLanguage $interpreter
+    ) {
+        $compiler = new Compiler\Compiler(new Compiler\Strategy\Reduce());
+
+        /** @var CompiledMapperInterface $compiledMapper */
+        $compiledMapper = $compiler->compile(
+            new Compiler\StandardCompilationContext(
+                $outputField,
+                null,
+                null
+            ),
+            new ExpressionLanguageValueMapper($interpreter, $expression)
         );
 
         $this->assertEquals($expected, $compiledMapper($input, []));

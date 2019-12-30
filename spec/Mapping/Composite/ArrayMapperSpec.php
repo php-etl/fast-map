@@ -1,32 +1,35 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap;
+namespace spec\Kiboko\Component\ETL\FastMap\Mapping\Composite;
 
-use Kiboko\Component\ETL\FastMap\ArrayCompositeMapper;
-use Kiboko\Component\ETL\FastMap\FieldConcatCopyValuesMapper;
-use Kiboko\Component\ETL\FastMap\FieldCopyValueMapper;
+use Kiboko\Component\ETL\FastMap\Mapping\Composite\ArrayMapper;
+use Kiboko\Component\ETL\FastMap\Mapping\Field;
+use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
-final class ArrayCompositeMapperSpec extends ObjectBehavior
+final class ArrayMapperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->beConstructedWith('[customer]');
-        $this->shouldHaveType(ArrayCompositeMapper::class);
+        $this->shouldHaveType(ArrayMapper::class);
     }
 
     function it_is_mapping_flat_data()
     {
         $this->beConstructedWith(
-            '[customer]',
-            new FieldCopyValueMapper('[firstName]', '[first_name]')
+            new Field(
+                new PropertyPath('[customer][firstName]'),
+                new Field\CopyValueMapper(new PropertyPath('[first_name]'))
+            )
         );
         $this->callOnWrappedObject('__invoke', [
             [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
             ],
-            []
+            [],
+            new EmptyPropertyPath(),
         ])->shouldReturn([
             'customer' => [
                 'firstName' => 'John',
@@ -37,9 +40,14 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
     function it_is_mapping_complex_data()
     {
         $this->beConstructedWith(
-            '[company]',
-            new FieldCopyValueMapper('[person][firstName]', '[employee][first_name]'),
-            new FieldConcatCopyValuesMapper('[address][city]', ' ', '[address][postcode]', '[address][city]')
+            new Field(
+                new PropertyPath('[company][person][firstName]'),
+                new Field\CopyValueMapper(new PropertyPath('[employee][first_name]')),
+            ),
+            new Field(
+                new PropertyPath('[company][address][city]'),
+                new Field\ConcatCopyValuesMapper(' ', new PropertyPath('[address][postcode]'), new PropertyPath('[address][city]'))
+            )
         );
         $this->callOnWrappedObject('__invoke', [
             [
@@ -53,7 +61,8 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
                     'city' => 'Oblivion'
                 ]
             ],
-            []
+            [],
+            new EmptyPropertyPath(),
         ])->shouldReturn([
             'company' => [
                 'person' => [
@@ -69,8 +78,10 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
     function it_does_keep_preexisting_data()
     {
         $this->beConstructedWith(
-            '[company]',
-            new FieldCopyValueMapper('[person][firstName]', '[employee][first_name]')
+            new Field(
+                new PropertyPath('[company][person][firstName]'),
+                new Field\CopyValueMapper(new PropertyPath('[employee][first_name]'))
+            )
         );
         $this->callOnWrappedObject('__invoke', [
             [
@@ -87,6 +98,7 @@ final class ArrayCompositeMapperSpec extends ObjectBehavior
                     ],
                 ],
             ],
+            new EmptyPropertyPath(),
         ])->shouldReturn([
             'company' => [
                 'address' => [

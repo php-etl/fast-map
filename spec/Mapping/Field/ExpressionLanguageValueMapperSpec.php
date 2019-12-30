@@ -1,31 +1,39 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap;
+namespace spec\Kiboko\Component\ETL\FastMap\Mapping\Field;
 
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts\CompilableMapperInterface;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\FastMap\FieldCopyValueMapper;
+use Kiboko\Component\ETL\FastMap\Mapping\Field\ExpressionLanguageValueMapper;
+use PhpParser\Node;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
-final class FieldCopyValueMapperSpec extends ObjectBehavior
+final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->beConstructedWith('lorem', '[ipsum]');
-        $this->shouldHaveType(FieldCopyValueMapper::class);
+        $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["ipsum"]'));
+
+        $this->shouldHaveType(ExpressionLanguageValueMapper::class);
         $this->shouldHaveType(MapperInterface::class);
         $this->shouldHaveType(CompilableMapperInterface::class);
     }
 
     function it_is_mapping_flat_data()
     {
-        $this->beConstructedWith('[firstName]', '[first_name]');
+        $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["first_name"]'));
+
         $this->callOnWrappedObject('__invoke', [
             [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
             ],
-            []
+            [],
+            new PropertyPath('[firstName]'),
         ])->shouldReturn([
             'firstName' => 'John',
         ]);
@@ -33,7 +41,8 @@ final class FieldCopyValueMapperSpec extends ObjectBehavior
 
     function it_is_mapping_complex_data()
     {
-        $this->beConstructedWith('[person][firstName]', '[employee][first_name]');
+        $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
+
         $this->callOnWrappedObject('__invoke', [
             [
                 'employee' => [
@@ -41,7 +50,8 @@ final class FieldCopyValueMapperSpec extends ObjectBehavior
                     'last_name' => 'Doe',
                 ]
             ],
-            []
+            [],
+            new PropertyPath('[person][firstName]'),
         ])->shouldReturn([
             'person' => [
                 'firstName' => 'John',
@@ -51,7 +61,8 @@ final class FieldCopyValueMapperSpec extends ObjectBehavior
 
     function it_does_keep_preexisting_data()
     {
-        $this->beConstructedWith('[person][firstName]', '[employee][first_name]');
+        $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
+
         $this->callOnWrappedObject('__invoke', [
             [
                 'employee' => [
@@ -64,7 +75,8 @@ final class FieldCopyValueMapperSpec extends ObjectBehavior
                     'street' => 'Main Street, 42',
                     'city' => 'Oblivion'
                 ]
-            ]
+            ],
+            new PropertyPath('[person][firstName]'),
         ])->shouldReturn([
             'address' => [
                 'street' => 'Main Street, 42',
@@ -78,8 +90,10 @@ final class FieldCopyValueMapperSpec extends ObjectBehavior
 
     function it_is_mapping_flat_data_as_compiled()
     {
-        $this->beConstructedWith('[firstName]', '[first_name]');
-        $this->compile()->shouldExecuteCompiledTransformation(
+        $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["first_name"]'));
+
+        $this->compile((new PropertyPathBuilder(new PropertyPath('[firstName]'), new Node\Expr\Variable('output')))->getNode())
+            ->shouldExecuteCompiledTransformation(
             [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
@@ -93,8 +107,10 @@ final class FieldCopyValueMapperSpec extends ObjectBehavior
 
     function it_is_mapping_complex_data_as_compiled()
     {
-        $this->beConstructedWith('[person][firstName]', '[employee][first_name]');
-        $this->compile()->shouldExecuteCompiledTransformation(
+        $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
+
+        $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
+            ->shouldExecuteCompiledTransformation(
             [
                 'employee' => [
                     'first_name' => 'John',
@@ -112,8 +128,10 @@ final class FieldCopyValueMapperSpec extends ObjectBehavior
 
     function it_does_keep_preexisting_data_as_compiled()
     {
-        $this->beConstructedWith('[person][firstName]', '[employee][first_name]');
-        $this->compile()->shouldExecuteCompiledTransformation(
+        $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
+
+        $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
+            ->shouldExecuteCompiledTransformation(
             [
                 'employee' => [
                     'first_name' => 'John',

@@ -2,7 +2,9 @@
 
 namespace Kiboko\Component\ETL\FastMap\Contracts;
 
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
+
 interface ObjectInitializerInterface
 {
-    public function __invoke($input, $output): object;
+    public function __invoke($input, $output, PropertyPathInterface $propertyPath);
 }

@@ -2,23 +2,27 @@
 
 namespace Kiboko\Component\ETL\FastMap\Compiler;
 
+use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
+use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
+
 final class StandardCompilationContext implements CompilationContextInterface
 {
+    /** @var PropertyPathInterface */
+    private $propertyPath;
     /** @var string|null */
     private $path;
-    /**@var string|null */
-    private $namespace;
-    /** @var string|null */
-    private $className;
+    /** @var ClassMetadataInterface|null */
+    private $class;
 
-    public function __construct(?string $path = null, ?string $namespace = null, ?string $className = null)
+    public function __construct(PropertyPathInterface $propertyPath, ?string $path = null, ?ClassMetadataInterface $class = null)
     {
+        $this->propertyPath = $propertyPath;
         $this->path = $path;
-        $this->namespace = $namespace;
-        $this->className = $className;
+        $this->class = $class;
     }
 
-    public static function build(string $cachePath, string $fqcn): self
+    public static function build(PropertyPathInterface $propertyPath, string $cachePath, string $fqcn): self
     {
         if ($fqcn !== null) {
             if (false !== ($index = strrpos($fqcn, '\\'))) {
@@ -32,24 +36,34 @@ final class StandardCompilationContext implements CompilationContextInterface
         }
 
         return new self(
+            $propertyPath,
             $fileName ?? null,
-            $namespace ?? null,
-            $className ?? null
+            !isset($className) ? null : new ClassReferenceMetadata($className, $namespace ?? null)
         );
     }
 
-    public function path(): ?string
+    public function getPropertyPath(): PropertyPathInterface
+    {
+        return $this->propertyPath;
+    }
+
+    public function getFilePath(): ?string
     {
         return $this->path;
     }
 
-    public function namespace(): ?string
+    public function getClass(): ?ClassMetadataInterface
     {
-        return $this->namespace;
+        return $this->class;
     }
 
-    public function className(): ?string
+    public function getNamespace(): ?string
     {
-        return $this->className;
+        return $this->class !== null ? $this->class->getNamespace() : null;
+    }
+
+    public function getClassName(): ?string
+    {
+        return $this->class !== null ? $this->class->getName() : null;
     }
 }

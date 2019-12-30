@@ -3,7 +3,10 @@
 namespace Kiboko\Component\ETL\FastMap;
 
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\SimpleObjectInitializerBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts\CompilableObjectInitializerInterface;
+use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
+use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use PhpParser\Node;
 use PhpParser\ParserFactory;
 use Symfony\Component\ExpressionLanguage\Expression;
@@ -11,13 +14,12 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class SimpleObjectInitializer implements CompilableObjectInitializerInterface
 {
-    /** @var string */
-    private $className;
-    /** @var string */
-    private $outputField;
+    /** @var ClassMetadataInterface */
+    private $class;
     /** @var ExpressionLanguage */
     private $interpreter;
     /** @var Expression[] */
@@ -26,25 +28,28 @@ final class SimpleObjectInitializer implements CompilableObjectInitializerInterf
     private $accessor;
 
     public function __construct(
-        string $className,
-        string $outputField,
+        ClassMetadataInterface $class,
         ExpressionLanguage $interpreter,
         Expression ...$expressions
     ) {
-        $this->className = $className;
-        $this->outputField = $outputField;
+        $this->class = $class;
         $this->interpreter = $interpreter;
         $this->expressions = $expressions;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
-    public function __invoke($input, $output): object
+    public function __invoke($input, $output, PropertyPathInterface $propertyPath)
     {
-        $this->accessor->setValue(
-            $output,
-            $this->outputField,
-            new $this->className(...$this->walkFields($input, $output))
-        );
+        $className = (string) $this->class;
+        if ($propertyPath->getLength() >= 1) {
+            $this->accessor->setValue(
+                $output,
+                $propertyPath,
+                new $className(...$this->walkFields($input, $output))
+            );
+        } else {
+            $output = new $className(...$this->walkFields($input, $output));
+        }
 
         return $output;
     }
@@ -59,41 +64,18 @@ final class SimpleObjectInitializer implements CompilableObjectInitializerInterf
         }
     }
 
-    private function compileExpression(Expression $expression): iterable
-    {
-        $compiledExpression = (new ParserFactory())
-            ->create(ParserFactory::PREFER_PHP7)
-            ->parse('<?php ' . $this->interpreter->compile($expression, ['input', 'output']) . ';');
-
-        yield from (function(Node\Stmt\Expression ...$expressions) {
-            foreach ($expressions as $expression) {
-                yield $expression->expr;
-            }
-        })(...$compiledExpression);
-    }
-
     /**
      * @return Node[]
      */
-    public function compile(): array
+    public function compile(Node\Expr $outputNode): array
     {
-        $argumentsNodes = [];
-        foreach ($this->expressions as $expression) {
-            array_push($argumentsNodes, ...$this->compileExpression($expression));
-        }
-
-        return array_merge(
-            [
-                new Node\Expr\Assign(
-                    strlen($this->outputField) !== 0 ?
-                        (new PropertyPathBuilder(new PropertyPath($this->outputField), new Node\Expr\Variable('output')))->getNode() :
-                        new Node\Expr\Variable('output'),
-                    new Node\Expr\New_(
-                        new Node\Name\FullyQualified($this->className),
-                        $argumentsNodes
-                    )
-                ),
-            ]
-        );
+        return [
+            (new SimpleObjectInitializerBuilder(
+                $this->class,
+                $outputNode,
+                $this->interpreter,
+                ...$this->expressions
+            ))->getNode()
+        ];
     }
 }

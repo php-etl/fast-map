@@ -1,6 +1,6 @@
 {
     "name": "php-etl/fast-map",
-    "description": "This library implements the Extract-Transform-Load pattern asynchronously in PHP with the help of iterators and generators",
+    "description": "This library implements a compiled data mapping library",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -32,7 +32,7 @@
         "mybuilder/phpunit-accelerator": "dev-master",
         "phpstan/phpstan": "^0.12.0@dev",
         "infection/infection": "dev-master",
-        "drupol/phpspec-code-coverage": "^4.0@dev"
+        "friends-of-phpspec/phpspec-code-coverage": "^4.0@dev"
     },
     "autoload": {
         "psr-4": {
