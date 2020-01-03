@@ -12,4 +12,4 @@ Documentation
 Mapping Configuration Files
 ---
 
-See https://github.com/php-etl/rdf
+See https://github.com/php-etl/fast-map-config
