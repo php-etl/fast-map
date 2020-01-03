@@ -8,7 +8,7 @@ use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
-class CompositeInitialisationPreconditionBuilder implements Builder
+final class CompositeInitialisationPreconditionBuilder implements Builder
 {
     /** @var TypeMetadataInterface */
     private $metadata;

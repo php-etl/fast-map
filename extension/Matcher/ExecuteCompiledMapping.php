@@ -1,0 +1,84 @@
+<?php declare(strict_types=1);
+
+namespace KibokoPhpSpecExtension\Matcher;
+
+use PhpParser\Builder;
+use PhpParser\Node;
+use PhpParser\PrettyPrinter\Standard;
+use PhpSpec\Exception\Example\FailureException;
+use PhpSpec\Exception\Example\NotEqualException;
+use PhpSpec\Formatter\Presenter\Value\ValuePresenter;
+use PhpSpec\Matcher\BasicMatcher;
+
+final class ExecuteCompiledMapping extends BasicMatcher
+{
+    use ASTExecutionAwareTrait;
+
+    /** @var ValuePresenter */
+    private $presenter;
+
+    public function __construct(ValuePresenter $presenter)
+    {
+        $this->presenter = $presenter;
+    }
+
+    public function supports(string $name, $subject, array $arguments): bool
+    {
+        return $name == 'executeCompiledMapping' && count($arguments) == 3;
+    }
+
+    /**
+     * @param Node[] $subject
+     */
+    protected function matches($subject, array $arguments): bool
+    {
+        list($input, $output, $expected) = $arguments;
+
+        try {
+            return $this->executeStatements($subject, $input, $output) == $expected;
+        } catch (\Throwable $exception) {
+            throw new FailureException(sprintf(
+                'Did not expect an exception of type %s, during execution of code: %s.',
+                $this->presenter->presentException($exception),
+                $this->presenter->presentValue((new Standard())->prettyPrint($subject))
+            ));
+        }
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $subject
+     * @param array  $arguments
+     *
+     * @return NotEqualException
+     */
+    protected function getFailureException(string $name, $subject, array $arguments): FailureException
+    {
+        list($input, $output, $expected) = $arguments;
+
+        return new NotEqualException(sprintf(
+            'Expected %s, built from %s, but got %s.',
+            $this->presenter->presentValue($expected),
+            $this->presenter->presentValue($input),
+            $this->presenter->presentValue($output)
+        ), $expected, $output);
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $subject
+     * @param array  $arguments
+     *
+     * @return FailureException
+     */
+    protected function getNegativeFailureException(string $name, $subject, array $arguments): FailureException
+    {
+        list($input, $output, $expected) = $arguments;
+
+        return new FailureException(sprintf(
+            'Did not expect %s, built from %s, but got one.',
+            $this->presenter->presentValue($output),
+            $this->presenter->presentValue($expected)
+        ));
+    }
+}

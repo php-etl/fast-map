@@ -2,8 +2,8 @@
 
 namespace Kiboko\Component\ETL\FastMap\Mapping;
 
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\RequiredValuePreconditionBuilder;
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\ScopedCodeBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
 use PhpParser\Node;
@@ -74,17 +74,20 @@ final class MultipleRelation implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        $inputPath = new PropertyPath($this->inputExpression);
-
-        return array_merge(
-            [
-                (new RequiredValuePreconditionBuilder($inputPath, new Node\Expr\Variable('input'))),
-                new Node\Stmt\Foreach_(
-                    (new PropertyPathBuilder($inputPath, new Node\Expr\Variable('input')))->getNode(),
-                    new Node\Expr\Variable('item'),
-                    $this->child->compile($outputNode)
-                )
-            ]
-        );
+        return [
+            new Node\Stmt\Foreach_(
+                (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->inputExpression))->getNode(),
+                new Node\Expr\Variable('item'),
+                [
+                    'stmts' => [
+                        (new ScopedCodeBuilder(
+                            new Node\Expr\Variable('input'),
+                            new Node\Expr\Variable('item'),
+                            $this->child->compile($outputNode)
+                        ))->getNode(),
+                    ],
+                ]
+            )
+        ];
     }
 }

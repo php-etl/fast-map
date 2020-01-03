@@ -54,11 +54,11 @@ final class ObjectMapper implements
     private function compileMappers(Node\Expr $outputNode): iterable
     {
         foreach ($this->properties as $mapper) {
-            if (!$mapper instanceof Contracts\CompilableMapperInterface) {
+            if (!$mapper instanceof Contracts\CompilableInterface) {
                 throw new \RuntimeException(strtr(
                     'Expected a %expected%, but got an object of type %actual%.',
                     [
-                        '%expected%' => Contracts\CompilableMapperInterface::class,
+                        '%expected%' => Contracts\CompilableInterface::class,
                         '%actual%' => get_class($mapper),
                     ]
                 ));

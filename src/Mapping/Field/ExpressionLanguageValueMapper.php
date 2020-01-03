@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\ETL\FastMap\Mapping\Field;
 
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use PhpParser\Node;
 use PhpParser\ParserFactory;
@@ -47,16 +48,10 @@ final class ExpressionLanguageValueMapper implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        $expression = $this->interpreter->parse($this->expression, ['input', 'output']);
-
-        $inputNodes = (new ParserFactory())
-            ->create(ParserFactory::PREFER_PHP7, null)
-            ->parse('<?php ' . $this->interpreter->compile($expression) . ';');
-
         return [
             new Node\Expr\Assign(
                 $outputNode,
-                $inputNodes[0]->expr
+                (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->expression))->getNode(),
             ),
         ];
     }

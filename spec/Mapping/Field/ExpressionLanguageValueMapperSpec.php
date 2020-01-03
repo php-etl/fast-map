@@ -93,7 +93,7 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["first_name"]'));
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[firstName]'), new Node\Expr\Variable('output')))->getNode())
-            ->shouldExecuteCompiledTransformation(
+            ->shouldExecuteCompiledMapping(
             [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
@@ -110,7 +110,7 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
-            ->shouldExecuteCompiledTransformation(
+            ->shouldExecuteCompiledMapping(
             [
                 'employee' => [
                     'first_name' => 'John',
@@ -131,7 +131,7 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
-            ->shouldExecuteCompiledTransformation(
+            ->shouldExecuteCompiledMapping(
             [
                 'employee' => [
                     'first_name' => 'John',

@@ -7,7 +7,7 @@ use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-class PropertyPathBuilder implements Builder
+final class PropertyPathBuilder implements Builder
 {
     /** @var PropertyPath */
     private $propertyPath;

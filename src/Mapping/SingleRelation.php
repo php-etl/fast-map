@@ -3,7 +3,6 @@
 namespace Kiboko\Component\ETL\FastMap\Mapping;
 
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\RequiredValuePreconditionBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
 use PhpParser\Node;
@@ -62,10 +61,10 @@ final class SingleRelation implements
             $this->accessor->setValue(
                 $output,
                 $this->outputPath,
-                ($this->child)($input, new EmptyPropertyPath())
+                ($this->child)($input, $output, new EmptyPropertyPath())
             );
         } else {
-            $output = ($this->child)($input, new EmptyPropertyPath());
+            $output = ($this->child)($input, $output, new EmptyPropertyPath());
         }
 
         return $output;
@@ -73,14 +72,12 @@ final class SingleRelation implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        $inputPath = new PropertyPath($this->inputExpression);
-
         return array_merge(
             [
-                (new RequiredValuePreconditionBuilder($inputPath, new Node\Expr\Variable('input'))),
+//                (new RequiredValuePreconditionBuilder($inputPath, new Node\Expr\Variable('input'))),
                 new Node\Expr\Assign(
                     new Node\Expr\Variable('item'),
-                    (new PropertyPathBuilder($inputPath, new Node\Expr\Variable('input')))->getNode()
+                    (new PropertyPathBuilder($this->outputPath, new Node\Expr\Variable('input')))->getNode()
                 ),
                 $this->child->compile($outputNode)
             ]

@@ -2,8 +2,12 @@
 
 namespace Kiboko\Component\ETL\FastMap\Mapping;
 
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\ScopedCodeBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
+use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -11,7 +15,8 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ListField implements
-    Contracts\FieldScopingInterface
+    Contracts\FieldScopingInterface,
+    Contracts\CompilableInterface
 {
     /** @var PropertyPathInterface */
     private $outputPath;
@@ -65,5 +70,24 @@ final class ListField implements
         );
 
         return $output;
+    }
+
+    public function compile(Node\Expr $outputNode): array
+    {
+        return [
+            new Node\Stmt\Foreach_(
+                (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->inputExpression))->getNode(),
+                new Node\Expr\Variable('item'),
+                [
+                    'stmts' => [
+                        (new ScopedCodeBuilder(
+                            new Node\Expr\Variable('item'),
+                            (new PropertyPathBuilder($this->path))->getNode(),
+                            $this->child->compile($outputNode)
+                        ))->getNode(),
+                    ]
+                ]
+            ),
+        ];
     }
 }

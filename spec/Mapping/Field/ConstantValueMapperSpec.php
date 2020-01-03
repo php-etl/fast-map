@@ -87,7 +87,7 @@ final class ConstantValueMapperSpec extends ObjectBehavior
         $this->beConstructedWith('James');
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[firstName]'), new Node\Expr\Variable('output')))->getNode())
-            ->shouldExecuteCompiledTransformation(
+            ->shouldExecuteCompiledMapping(
             [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
@@ -104,7 +104,7 @@ final class ConstantValueMapperSpec extends ObjectBehavior
         $this->beConstructedWith('James');
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
-            ->shouldExecuteCompiledTransformation(
+            ->shouldExecuteCompiledMapping(
             [
                 'employee' => [
                     'first_name' => 'John',
@@ -125,7 +125,7 @@ final class ConstantValueMapperSpec extends ObjectBehavior
         $this->beConstructedWith('James');
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
-            ->shouldExecuteCompiledTransformation(
+            ->shouldExecuteCompiledMapping(
             [
                 'employee' => [
                     'first_name' => 'John',

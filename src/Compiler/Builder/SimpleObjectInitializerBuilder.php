@@ -36,7 +36,10 @@ final class SimpleObjectInitializerBuilder implements Builder
     {
         $argumentsNodes = [];
         foreach ($this->expressions as $expression) {
-            array_push($argumentsNodes, ...$this->compileExpression($expression));
+            array_push(
+                $argumentsNodes,
+                (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $expression))->getNode()
+            );
         }
 
         return new Node\Expr\Assign(
@@ -46,18 +49,5 @@ final class SimpleObjectInitializerBuilder implements Builder
                 $argumentsNodes
             )
         );
-    }
-
-    private function compileExpression(Expression $expression): iterable
-    {
-        $compiledExpression = (new ParserFactory())
-            ->create(ParserFactory::PREFER_PHP7)
-            ->parse('<?php ' . $this->interpreter->compile($expression, ['input', 'output']) . ';');
-
-        yield from (function(Node\Stmt\Expression ...$expressions) {
-            foreach ($expressions as $expression) {
-                yield $expression->expr;
-            }
-        })(...$compiledExpression);
     }
 }
