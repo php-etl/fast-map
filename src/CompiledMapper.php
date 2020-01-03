@@ -5,8 +5,9 @@ namespace Kiboko\Component\ETL\FastMap;
 use Kiboko\Component\ETL\FastMap\Compiler\CompilationContextInterface;
 use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-class CompiledMapper implements MapperInterface
+final class CompiledMapper implements MapperInterface
 {
     /** @var Compiler */
     private $compiler;
@@ -27,7 +28,7 @@ class CompiledMapper implements MapperInterface
         $this->mappers = $mappers;
     }
 
-    public function __invoke($input, $output): array
+    public function __invoke($input, $output, PropertyPathInterface $outputPath)
     {
         if ($this->compiledMapper === null) {
             $this->compiledMapper = $this->compiler->compile(
@@ -36,6 +37,6 @@ class CompiledMapper implements MapperInterface
             );
         }
 
-        return ($this->compiledMapper)($input, $output);
+        return ($this->compiledMapper)($input, $output, $outputPath);
     }
 }

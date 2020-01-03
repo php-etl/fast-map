@@ -6,7 +6,7 @@ use PhpParser\Builder;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
-class ArrayInitialisationPreconditionBuilder implements Builder
+final class ArrayInitialisationPreconditionBuilder implements Builder
 {
     /** @var PropertyPath */
     private $propertyPath;

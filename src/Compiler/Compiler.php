@@ -2,11 +2,11 @@
 
 namespace Kiboko\Component\ETL\FastMap\Compiler;
 
-use Doctrine\Inflector\Inflector;
-use Doctrine\Inflector\Rules\English\InflectorFactory;
+use Doctrine\Common\Inflector\Inflector;
 use Kiboko\Component\ETL\FastMap\Compiler\Strategy\Spaghetti;
 use Kiboko\Component\ETL\FastMap\Compiler\Strategy\StrategyInterface;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use PhpParser\PrettyPrinter;
 
 class Compiler
@@ -19,7 +19,7 @@ class Compiler
     public function __construct(?StrategyInterface $strategy = null)
     {
         $this->strategy = $strategy ?? new Spaghetti();
-        $this->inflector = (new InflectorFactory())();
+        $this->inflector = new Inflector();
     }
 
     private function randomIdentifier(): string
@@ -36,28 +36,28 @@ class Compiler
         CompilationContextInterface $context,
         MapperInterface ...$mappers
     ) {
-        $namespace = $context->namespace() ?? 'Kiboko\\__Mapper__\\';
-        $className = $context->className() ?? $this->randomClassName('Mapper');
+        $namespace = $context->getNamespace() ?? 'Kiboko\\__Mapper__';
+        $className = $context->getClassName() ?? $this->randomClassName('Mapper');
 
-        if ($context->path() !== null && file_exists($context->path())) {
-            include $context->path();
-        }
-
-        $fqcn = $namespace . $className;
+        $fqcn = (string) ($class = ($context->getClass() ?? new ClassReferenceMetadata($className, $namespace)));
         if (class_exists($fqcn, true)) {
             return new $fqcn();
         }
 
+        if ($context->getFilePath() !== null && file_exists($context->getFilePath())) {
+            include $context->getFilePath();
+        }
+
         $tree = $this->strategy->buildTree(
-            $namespace,
-            $className,
+            $context->getPropertyPath(),
+            $class,
             ...$mappers
         );
 
         $prettyPrinter = new PrettyPrinter\Standard();
-        if ($context->path() !== null && is_writable(dirname($context->path()))) {
-            file_put_contents($context->path(), $prettyPrinter->prettyPrintFile($tree));
-            include $context->path();
+        if ($context->getFilePath() !== null && is_writable(dirname($context->getFilePath()))) {
+            file_put_contents($context->getFilePath(), $prettyPrinter->prettyPrintFile($tree));
+            include $context->getFilePath();
         } else {
             include 'data://text/plain;base64,' . base64_encode($prettyPrinter->prettyPrintFile($tree));
         }

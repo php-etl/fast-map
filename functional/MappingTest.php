@@ -5,7 +5,6 @@ namespace functional\Kiboko\Component\ETL\FastMap;
 use Kiboko\Component\ETL\Metadata\ArgumentListMetadata;
 use Kiboko\Component\ETL\Metadata\FieldMetadata;
 use Kiboko\Component\ETL\Metadata\FieldGuesser;
-use Kiboko\Component\ETL\Metadata\ArgumentMetadata;
 use Kiboko\Component\ETL\Metadata\ClassMetadataBuilder;
 use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
@@ -20,6 +19,7 @@ use Kiboko\Component\ETL\Metadata\TypeGuesser\CompositeTypeGuesser;
 use Kiboko\Component\ETL\Metadata\TypeGuesser\Docblock\DocblockTypeGuesser;
 use Kiboko\Component\ETL\Metadata\TypeGuesser\Native\Php74TypeGuesser;
 use Kiboko\Component\ETL\Metadata\UnaryRelationMetadata;
+use Kiboko\Component\ETL\Metadata\UnionTypeMetadata;
 use Kiboko\Component\ETL\Metadata\VariadicArgumentMetadata;
 use Phpactor\Docblock\DocblockFactory;
 use PhpParser\ParserFactory;
@@ -30,7 +30,7 @@ final class MappingTest extends TestCase
     public function dataProvider()
     {
         yield [
-            (new ClassTypeMetadata('CustomerDTO', 'functional\Kiboko\Component\ETL\FastMap'))
+            (new ClassTypeMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'))
                 ->addProperties(
                     new PropertyMetadata(
                         'firstName',
@@ -42,11 +42,11 @@ final class MappingTest extends TestCase
                     ),
                     new PropertyMetadata(
                         'addresses',
-                        new ListTypeMetadata(new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap'))
+                        new ListTypeMetadata(new ClassReferenceMetadata('Address', namespace\DTO::class))
                     ),
                     new PropertyMetadata(
                         'mainAddress',
-                        new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                        new ClassReferenceMetadata('Address', namespace\DTO::class)
                     )
                 )
                 ->addMethods(
@@ -55,7 +55,7 @@ final class MappingTest extends TestCase
                         new ArgumentListMetadata(
                             new VariadicArgumentMetadata(
                                 'addresses',
-                                new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                                new ClassReferenceMetadata('Address', namespace\DTO::class)
                             )
                         )
                     ),
@@ -64,7 +64,7 @@ final class MappingTest extends TestCase
                         new ArgumentListMetadata(
                             new VariadicArgumentMetadata(
                                 'addresses',
-                                new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                                new ClassReferenceMetadata('Address', namespace\DTO::class)
                             )
                         )
                     ),
@@ -73,16 +73,18 @@ final class MappingTest extends TestCase
                         new ArgumentListMetadata(
                             new VariadicArgumentMetadata(
                                 'addresses',
-                                new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                                new ClassReferenceMetadata('Address', namespace\DTO::class)
                             )
                         )
                     ),
                     new MethodMetadata(
                         'getAddresses',
                         new ArgumentListMetadata(),
-                        new ScalarTypeMetadata('iterable'),
-                        new ListTypeMetadata(
-                            new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                        new UnionTypeMetadata(
+                            new ScalarTypeMetadata('iterable'),
+                            new ListTypeMetadata(
+                                new ClassReferenceMetadata('Address', namespace\DTO::class)
+                            )
                         )
                     )
                 )
@@ -99,7 +101,7 @@ final class MappingTest extends TestCase
                 ->addRelations(
                     new UnaryRelationMetadata(
                         'mainAddress',
-                        new ClassReferenceMetadata('AddressDTO', 'functional\Kiboko\Component\ETL\FastMap')
+                        new ClassReferenceMetadata('Address', namespace\DTO::class)
                     )
                 )
         ];
@@ -132,49 +134,6 @@ final class MappingTest extends TestCase
             )
         );
 
-        $this->assertEquals($expected, $factory->buildFromFQCN(CustomerDTO::class));
+        $this->assertEquals($expected, $factory->buildFromFQCN(DTO\Customer::class));
     }
-}
-
-final class CustomerDTO
-{
-    public string $firstName;
-    public string $lastName;
-    public AddressDTO $mainAddress;
-    /** @var AddressDTO[] */
-    private array $addresses;
-
-    public function setAddresses(AddressDTO ...$addresses)
-    {
-        $this->addresses = $addresses;
-    }
-
-    public function addAddress(AddressDTO ...$addresses)
-    {
-        $this->addresses = array_merge(
-            $this->addresses,
-            $addresses
-        );
-    }
-
-    public function removeAddress(AddressDTO ...$addresses)
-    {
-        $this->addresses = array_diff(
-            $this->addresses,
-            $addresses
-        );
-    }
-
-    /** @return AddressDTO[] */
-    public function getAddresses(): iterable
-    {
-        return $this->addresses;
-    }
-}
-
-final class AddressDTO
-{
-    public string $name;
-    public string $street;
-    public string $city;
 }

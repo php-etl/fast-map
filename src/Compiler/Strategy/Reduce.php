@@ -2,11 +2,13 @@
 
 namespace Kiboko\Component\ETL\FastMap\Compiler\Strategy;
 
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts\CompilableMapperInterface;
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface;
+use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
-use Prophecy\Argument;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class Reduce implements StrategyInterface
 {
@@ -20,7 +22,7 @@ final class Reduce implements StrategyInterface
         return $prefix . $this->randomIdentifier();
     }
 
-    public function buildTree(string $namespace, string $className, CompilableMapperInterface ...$mappers): array
+    public function buildTree(PropertyPathInterface $outputPath, ClassMetadataInterface $class, CompilableMapperInterface ...$mappers): array
     {
         $factory = new BuilderFactory();
 
@@ -37,19 +39,25 @@ final class Reduce implements StrategyInterface
                     new Node\Expr\Variable('output'),
                 ]
             );
-            $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
+            $methods[] = $this->wrapMapping(
+                $methodName,
+                $factory,
+                $mapper->compile(
+                    (new PropertyPathBuilder($outputPath, new Node\Expr\Variable('output')))->getNode()
+                )
+            );
         }
 
         return [
-            $factory->namespace(rtrim($namespace, '\\'))
-//                ->addStmt($factory->use(MapperInterface::class))
-                ->addStmt($factory->class($className)
-                    ->implement(new Node\Name\FullyQualified(MapperInterface::class))
+            $factory->namespace((string) $class->getNamespace())
+//                ->addStmt($factory->use(CompiledMapperInterface::class))
+                ->addStmt($factory->class((string) $class->getName())
+                    ->implement(new Node\Name\FullyQualified(CompiledMapperInterface::class))
                     ->makeFinal()
                     ->addStmt($factory->method('__invoke')
                         ->makePublic()
                         ->addParam($factory->param('input'))
-                        ->addParam($factory->param('output'))
+                        ->addParam($factory->param('output')->setDefault(null))
                         ->addStmt(new Node\Stmt\Return_(
                             new Node\Expr\FuncCall(
                                 new Node\Name('array_reduce'),

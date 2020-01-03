@@ -202,7 +202,7 @@ Escaped mutants:
      }
      public function getNode() : Node
      {
--        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
+-        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
 +        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), []);
      }
  }
@@ -216,7 +216,7 @@ Escaped mutants:
      }
      public function getNode() : Node
      {
--        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
+-        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
 +        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => []]);
      }
  }
@@ -230,8 +230,8 @@ Escaped mutants:
      }
      public function getNode() : Node
      {
--        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
-+        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name(\RuntimeException::class), []))]]);
+-        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
++        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), []))]]);
      }
  }
 
@@ -244,8 +244,8 @@ Escaped mutants:
      }
      public function getNode() : Node
      {
--        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
-+        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', []))]))]]);
+-        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
++        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', []))]))]]);
      }
  }
 
@@ -258,8 +258,8 @@ Escaped mutants:
      }
      public function getNode() : Node
      {
--        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
-+        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' > $this->propertyPath]))]))]]);
+-        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' => $this->propertyPath]))]))]]);
++        return new Node\Stmt\If_(new Node\Expr\BooleanNot(new Node\Expr\Isset_([(new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()])), ['stmts' => [new Node\Stmt\Throw_(new Node\Expr\New_(new Node\Name\FullyQualified(\RuntimeException::class), [new Node\Scalar\String_(strtr('Could not evaluate path %path%', ['%path%' > $this->propertyPath]))]))]]);
      }
  }
 
@@ -773,7 +773,22 @@ Not Covered mutants:
  }
 
 
-15) /var/www/html/src/Compiler/Builder/PropertyPathBuilder.php:31    [M] DecrementInteger
+15) /var/www/html/src/Compiler/Builder/PropertyPathBuilder.php:31    [M] Plus
+
+--- Original
++++ New
+@@ @@
+         $pathNode = $this->pathNode;
+         $iterator = $this->propertyPath->getIterator();
+         if ($this->limit < 0) {
+-            $iterator = new \LimitIterator($iterator, 0, iterator_count($iterator) + $this->limit);
++            $iterator = new \LimitIterator($iterator, 0, iterator_count($iterator) - $this->limit);
+         } else {
+             if ($this->limit !== null) {
+                 $iterator = new \LimitIterator($iterator, 0, $this->limit);
+
+
+16) /var/www/html/src/Compiler/Builder/PropertyPathBuilder.php:31    [M] DecrementInteger
 
 --- Original
 +++ New
@@ -788,7 +803,7 @@ Not Covered mutants:
                  $iterator = new \LimitIterator($iterator, 0, $this->limit);
 
 
-16) /var/www/html/src/Compiler/Builder/PropertyPathBuilder.php:31    [M] OneZeroInteger
+17) /var/www/html/src/Compiler/Builder/PropertyPathBuilder.php:31    [M] OneZeroInteger
 
 --- Original
 +++ New
@@ -798,21 +813,6 @@ Not Covered mutants:
          if ($this->limit < 0) {
 -            $iterator = new \LimitIterator($iterator, 0, iterator_count($iterator) + $this->limit);
 +            $iterator = new \LimitIterator($iterator, 1, iterator_count($iterator) + $this->limit);
-         } else {
-             if ($this->limit !== null) {
-                 $iterator = new \LimitIterator($iterator, 0, $this->limit);
-
-
-17) /var/www/html/src/Compiler/Builder/PropertyPathBuilder.php:31    [M] Plus
-
---- Original
-+++ New
-@@ @@
-         $pathNode = $this->pathNode;
-         $iterator = $this->propertyPath->getIterator();
-         if ($this->limit < 0) {
--            $iterator = new \LimitIterator($iterator, 0, iterator_count($iterator) + $this->limit);
-+            $iterator = new \LimitIterator($iterator, 0, iterator_count($iterator) - $this->limit);
          } else {
              if ($this->limit !== null) {
                  $iterator = new \LimitIterator($iterator, 0, $this->limit);
@@ -848,7 +848,22 @@ Not Covered mutants:
          foreach ($iterator as $index => $child) {
 
 
-20) /var/www/html/src/Compiler/Compiler.php:25    [M] DecrementInteger
+20) /var/www/html/src/Compiler/Compiler.php:20    [M] Coalesce
+
+--- Original
++++ New
+@@ @@
+     private $strategy;
+     public function __construct(?StrategyInterface $strategy = null)
+     {
+-        $this->strategy = $strategy ?? new Spaghetti();
++        $this->strategy = new Spaghetti();
+         $this->inflector = (new InflectorFactory())();
+     }
+     private function randomIdentifier() : string
+
+
+21) /var/www/html/src/Compiler/Compiler.php:26    [M] DecrementInteger
 
 --- Original
 +++ New
@@ -863,7 +878,7 @@ Not Covered mutants:
      {
 
 
-21) /var/www/html/src/Compiler/Compiler.php:25    [M] IncrementInteger
+22) /var/www/html/src/Compiler/Compiler.php:26    [M] IncrementInteger
 
 --- Original
 +++ New
@@ -878,13 +893,13 @@ Not Covered mutants:
      {
 
 
-22) /var/www/html/src/Compiler/Compiler.php:38    [M] PublicVisibility
+23) /var/www/html/src/Compiler/Compiler.php:34    [M] PublicVisibility
 
 --- Original
 +++ New
 @@ @@
      {
-         return $prefix . $this->randomIdentifier();
+         return $this->inflector->classify($prefix . $this->randomIdentifier());
      }
 -    public function compile(CompilationContext $context)
 +    protected function compile(CompilationContext $context)
@@ -893,7 +908,7 @@ Not Covered mutants:
          $className = $context->className ?? $this->randomClassName('Mapper');
 
 
-23) /var/www/html/src/Compiler/Compiler.php:40    [M] Coalesce
+24) /var/www/html/src/Compiler/Compiler.php:36    [M] Coalesce
 
 --- Original
 +++ New
@@ -908,7 +923,7 @@ Not Covered mutants:
              include $context->path;
 
 
-24) /var/www/html/src/Compiler/Compiler.php:41    [M] Coalesce
+25) /var/www/html/src/Compiler/Compiler.php:37    [M] Coalesce
 
 --- Original
 +++ New
@@ -923,27 +938,12 @@ Not Covered mutants:
          }
 
 
-25) /var/www/html/src/Compiler/Compiler.php:60    [M] NotIdentical
+26) /var/www/html/src/Compiler/Compiler.php:56    [M] LogicalAnd
 
 --- Original
 +++ New
 @@ @@
-         $tree = $this->buildTree($namespace, $className, ...$context->mappers);
-         $prettyPrinter = new PrettyPrinter\Standard();
-         echo $prettyPrinter->prettyPrintFile($tree);
--        if ($context->path !== null && is_writable(dirname($context->path))) {
-+        if ($context->path === null && is_writable(dirname($context->path))) {
-             file_put_contents($context->path, $prettyPrinter->prettyPrintFile($tree));
-             include $context->path;
-         } else {
-
-
-26) /var/www/html/src/Compiler/Compiler.php:60    [M] LogicalAnd
-
---- Original
-+++ New
-@@ @@
-         $tree = $this->buildTree($namespace, $className, ...$context->mappers);
+         $tree = $this->strategy->buildTree($namespace, $className, ...$context->mappers);
          $prettyPrinter = new PrettyPrinter\Standard();
          echo $prettyPrinter->prettyPrintFile($tree);
 -        if ($context->path !== null && is_writable(dirname($context->path))) {
@@ -953,7 +953,22 @@ Not Covered mutants:
          } else {
 
 
-27) /var/www/html/src/Compiler/Compiler.php:61    [M] FunctionCallRemoval
+27) /var/www/html/src/Compiler/Compiler.php:56    [M] NotIdentical
+
+--- Original
++++ New
+@@ @@
+         $tree = $this->strategy->buildTree($namespace, $className, ...$context->mappers);
+         $prettyPrinter = new PrettyPrinter\Standard();
+         echo $prettyPrinter->prettyPrintFile($tree);
+-        if ($context->path !== null && is_writable(dirname($context->path))) {
++        if ($context->path === null && is_writable(dirname($context->path))) {
+             file_put_contents($context->path, $prettyPrinter->prettyPrintFile($tree));
+             include $context->path;
+         } else {
+
+
+28) /var/www/html/src/Compiler/Compiler.php:57    [M] FunctionCallRemoval
 
 --- Original
 +++ New
@@ -968,58 +983,43 @@ Not Covered mutants:
              include 'data://text/plain;base64,' . base64_encode($prettyPrinter->prettyPrintFile($tree));
 
 
-28) /var/www/html/src/Compiler/Compiler.php:70    [M] PublicVisibility
+29) /var/www/html/src/Compiler/Strategy/Reduce.php:15    [M] DecrementInteger
 
 --- Original
 +++ New
 @@ @@
-         }
-         return new $fqcn();
+ {
+     private function randomIdentifier() : string
+     {
+-        return hash('sha256', random_bytes(1024));
++        return hash('sha256', random_bytes(1023));
      }
--    public function buildTree(string $namespace, string $className, CompilableMapperInterface ...$mappers) : array
-+    protected function buildTree(string $namespace, string $className, CompilableMapperInterface ...$mappers) : array
+     private function randomMethodName(string $prefix) : string
      {
-         $factory = new BuilderFactory();
-         $calls = [new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])];
 
 
-29) /var/www/html/src/Compiler/Compiler.php:74    [M] ArrayItemRemoval
+30) /var/www/html/src/Compiler/Strategy/Reduce.php:15    [M] IncrementInteger
 
 --- Original
 +++ New
 @@ @@
-     public function buildTree(string $namespace, string $className, CompilableMapperInterface ...$mappers) : array
+ {
+     private function randomIdentifier() : string
      {
-         $factory = new BuilderFactory();
--        $calls = [new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])];
-+        $calls = [];
-         $methods = [];
-         foreach ($mappers as $mapper) {
-             $methodName = $this->randomMethodName('map_');
-
-
-30) /var/www/html/src/Compiler/Compiler.php:75    [M] ArrayItemRemoval
-
---- Original
-+++ New
-@@ @@
-     public function buildTree(string $namespace, string $className, CompilableMapperInterface ...$mappers) : array
+-        return hash('sha256', random_bytes(1024));
++        return hash('sha256', random_bytes(1025));
+     }
+     private function randomMethodName(string $prefix) : string
      {
-         $factory = new BuilderFactory();
--        $calls = [new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])];
-+        $calls = [new Node\Expr\Array_([], [])];
-         $methods = [];
-         foreach ($mappers as $mapper) {
-             $methodName = $this->randomMethodName('map_');
 
 
-31) /var/www/html/src/Compiler/Compiler.php:80    [M] Foreach_
+31) /var/www/html/src/Compiler/Strategy/Reduce.php:29    [M] Foreach_
 
 --- Original
 +++ New
 @@ @@
          $factory = new BuilderFactory();
-         $calls = [new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])];
+         $calls = [];
          $methods = [];
 -        foreach ($mappers as $mapper) {
 +        foreach (array() as $mapper) {
@@ -1028,7 +1028,7 @@ Not Covered mutants:
              $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
 
 
-32) /var/www/html/src/Compiler/Compiler.php:86    [M] ArrayItemRemoval
+32) /var/www/html/src/Compiler/Strategy/Reduce.php:35    [M] ArrayItemRemoval
 
 --- Original
 +++ New
@@ -1040,10 +1040,10 @@ Not Covered mutants:
 +            $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('output')]);
              $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
          }
-         return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), $calls))))->addStmts($methods))->getNode()];
+         return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
 
 
-33) /var/www/html/src/Compiler/Compiler.php:94    [M] ArrayItemRemoval
+33) /var/www/html/src/Compiler/Strategy/Reduce.php:43    [M] ArrayItemRemoval
 
 --- Original
 +++ New
@@ -1051,14 +1051,119 @@ Not Covered mutants:
              $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('input'), new Node\Expr\Variable('output')]);
              $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
          }
--        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), $calls))))->addStmts($methods))->getNode()];
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
 +        return [];
      }
      private function wrapMapping(string $methodName, BuilderFactory $factory, array $statements)
      {
 
 
-34) /var/www/html/src/Compiler/Compiler.php:124    [M] UnwrapArrayMerge
+34) /var/www/html/src/Compiler/Strategy/Reduce.php:56    [M] ArrayItemRemoval
+
+--- Original
++++ New
+@@ @@
+             $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('input'), new Node\Expr\Variable('output')]);
+             $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
+         }
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
++        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
+     }
+     private function wrapMapping(string $methodName, BuilderFactory $factory, array $statements)
+     {
+
+
+35) /var/www/html/src/Compiler/Strategy/Reduce.php:57    [M] ArrayItemRemoval
+
+--- Original
++++ New
+@@ @@
+             $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('input'), new Node\Expr\Variable('output')]);
+             $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
+         }
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
++        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, []), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
+     }
+     private function wrapMapping(string $methodName, BuilderFactory $factory, array $statements)
+     {
+
+
+36) /var/www/html/src/Compiler/Strategy/Reduce.php:60    [M] ArrayItemRemoval
+
+--- Original
++++ New
+@@ @@
+             $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('input'), new Node\Expr\Variable('output')]);
+             $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
+         }
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
++        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
+     }
+     private function wrapMapping(string $methodName, BuilderFactory $factory, array $statements)
+     {
+
+
+37) /var/www/html/src/Compiler/Strategy/Reduce.php:61    [M] ArrayItemRemoval
+
+--- Original
++++ New
+@@ @@
+             $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('input'), new Node\Expr\Variable('output')]);
+             $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
+         }
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
++        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
+     }
+     private function wrapMapping(string $methodName, BuilderFactory $factory, array $statements)
+     {
+
+
+38) /var/www/html/src/Compiler/Strategy/Reduce.php:65    [M] ArrayItemRemoval
+
+--- Original
++++ New
+@@ @@
+             $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('input'), new Node\Expr\Variable('output')]);
+             $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
+         }
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
++        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => []]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
+     }
+     private function wrapMapping(string $methodName, BuilderFactory $factory, array $statements)
+     {
+
+
+39) /var/www/html/src/Compiler/Strategy/Reduce.php:69    [M] ArrayItemRemoval
+
+--- Original
++++ New
+@@ @@
+             $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('input'), new Node\Expr\Variable('output')]);
+             $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
+         }
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
++        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
+     }
+     private function wrapMapping(string $methodName, BuilderFactory $factory, array $statements)
+     {
+
+
+40) /var/www/html/src/Compiler/Strategy/Reduce.php:77    [M] ArrayItemRemoval
+
+--- Original
++++ New
+@@ @@
+             $calls[] = new Node\Expr\MethodCall(new Node\Expr\Variable('this'), $methodName, [new Node\Expr\Variable('input'), new Node\Expr\Variable('output')]);
+             $methods[] = $this->wrapMapping($methodName, $factory, $mapper->compile());
+         }
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], ['kind' => Node\Expr\Array_::KIND_SHORT])]))))->addStmts($methods))->getNode()];
++        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmt(new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_reduce'), [new Node\Expr\Array_($calls, ['kind' => Node\Expr\Array_::KIND_SHORT]), new Node\Expr\Closure(['params' => [new Node\Param(new Node\Expr\Variable('current')), new Node\Param(new Node\Expr\Variable('initial'))], 'stmts' => [new Node\Stmt\Return_(new Node\Expr\FuncCall(new Node\Name('array_merge'), [new Node\Expr\Variable('initial'), new Node\Expr\Variable('current')]))]]), new Node\Expr\Array_([], [])]))))->addStmts($methods))->getNode()];
+     }
+     private function wrapMapping(string $methodName, BuilderFactory $factory, array $statements)
+     {
+
+
+41) /var/www/html/src/Compiler/Strategy/Reduce.php:97    [M] UnwrapArrayMerge
 
 --- Original
 +++ New
@@ -1072,7 +1177,7 @@ Not Covered mutants:
  }
 
 
-35) /var/www/html/src/Compiler/Compiler.php:124    [M] UnwrapArrayMerge
+42) /var/www/html/src/Compiler/Strategy/Reduce.php:97    [M] UnwrapArrayMerge
 
 --- Original
 +++ New
@@ -1086,7 +1191,7 @@ Not Covered mutants:
  }
 
 
-36) /var/www/html/src/Compiler/Compiler.php:126    [M] ArrayItemRemoval
+43) /var/www/html/src/Compiler/Strategy/Reduce.php:99    [M] ArrayItemRemoval
 
 --- Original
 +++ New
@@ -1100,7 +1205,66 @@ Not Covered mutants:
  }
 
 
-37) /var/www/html/src/FieldCopyValueMapper.php:70    [M] NewObject
+44) /var/www/html/src/Compiler/Strategy/Spaghetti.php:17    [M] Foreach_
+
+--- Original
++++ New
+@@ @@
+     {
+         $factory = new BuilderFactory();
+         $stmts = [];
+-        foreach ($mappers as $mapper) {
++        foreach (array() as $mapper) {
+             $stmts = array_merge($stmts, $mapper->compile());
+         }
+         return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmts($stmts)->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))))->getNode()];
+     }
+
+45) /var/www/html/src/Compiler/Strategy/Spaghetti.php:18    [M] UnwrapArrayMerge
+
+--- Original
++++ New
+@@ @@
+         $factory = new BuilderFactory();
+         $stmts = [];
+         foreach ($mappers as $mapper) {
+-            $stmts = array_merge($stmts, $mapper->compile());
++            $stmts = $stmts;
+         }
+         return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmts($stmts)->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))))->getNode()];
+     }
+ }
+
+46) /var/www/html/src/Compiler/Strategy/Spaghetti.php:18    [M] UnwrapArrayMerge
+
+--- Original
++++ New
+@@ @@
+         $factory = new BuilderFactory();
+         $stmts = [];
+         foreach ($mappers as $mapper) {
+-            $stmts = array_merge($stmts, $mapper->compile());
++            $stmts = $mapper->compile();
+         }
+         return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmts($stmts)->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))))->getNode()];
+     }
+ }
+
+47) /var/www/html/src/Compiler/Strategy/Spaghetti.php:21    [M] ArrayItemRemoval
+
+--- Original
++++ New
+@@ @@
+         foreach ($mappers as $mapper) {
+             $stmts = array_merge($stmts, $mapper->compile());
+         }
+-        return [$factory->namespace(rtrim($namespace, '\\'))->addStmt($factory->class($className)->implement(new Node\Name\FullyQualified(MapperInterface::class))->makeFinal()->addStmt($factory->method('__invoke')->makePublic()->addParam($factory->param('input'))->addParam($factory->param('output'))->addStmts($stmts)->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))))->getNode()];
++        return [];
+     }
+ }
+
+
+48) /var/www/html/src/FieldCopyValueMapper.php:70    [M] NewObject
 
 --- Original
 +++ New
@@ -1115,7 +1279,7 @@ Not Covered mutants:
              throw new \RuntimeException('Object initialization is not implemented yet.');
          }, iterator_to_array(new \LimitIterator($iterator, 0, iterator_count($iterator) - 1))) : [], [new Node\Expr\Assign((new PropertyPathBuilder($outputPath, new Node\Expr\Variable('output')))->getNode(), (new PropertyPathBuilder($inputPath, new Node\Expr\Variable('input')))->getNode())]);
 
-38) /var/www/html/src/FieldCopyValueMapper.php:73    [M] Throw_
+49) /var/www/html/src/FieldCopyValueMapper.php:73    [M] Throw_
 
 --- Original
 +++ New
@@ -1130,7 +1294,7 @@ Not Covered mutants:
  }
 
 
-39) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:15    [M] Foreach_
+50) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:15    [M] Foreach_
 
 --- Original
 +++ New
@@ -1145,7 +1309,7 @@ Not Covered mutants:
                  continue;
 
 
-40) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:17    [M] LessThanOrEqualToNegotiation
+51) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:17    [M] LessThanOrEqualToNegotiation
 
 --- Original
 +++ New
@@ -1160,7 +1324,7 @@ Not Covered mutants:
              (yield new MultipleRelationDefinition($property->name, ...$types));
 
 
-41) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:17    [M] LessThanOrEqualTo
+52) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:17    [M] LessThanOrEqualTo
 
 --- Original
 +++ New
@@ -1175,7 +1339,7 @@ Not Covered mutants:
              (yield new MultipleRelationDefinition($property->name, ...$types));
 
 
-42) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:18    [M] Continue_
+53) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:18    [M] Continue_
 
 --- Original
 +++ New
@@ -1190,7 +1354,7 @@ Not Covered mutants:
          }
 
 
-43) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:30    [M] Foreach_
+54) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:30    [M] Foreach_
 
 --- Original
 +++ New
@@ -1205,22 +1369,7 @@ Not Covered mutants:
              }
 
 
-44) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:31    [M] LogicalAnd
-
---- Original
-+++ New
-@@ @@
-     private function filterTypes(TypeMetadataInterface ...$types) : \Generator
-     {
-         foreach ($types as $type) {
--            if (!$type instanceof ListTypeMetadata && !$type instanceof CollectionTypeMetadata) {
-+            if (!$type instanceof ListTypeMetadata || !$type instanceof CollectionTypeMetadata) {
-                 continue;
-             }
-             (yield $type);
-
-
-45) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:31    [M] LogicalNot
+55) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:31    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1235,7 +1384,22 @@ Not Covered mutants:
              (yield $type);
 
 
-46) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:32    [M] LogicalNot
+56) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:31    [M] LogicalAnd
+
+--- Original
++++ New
+@@ @@
+     private function filterTypes(TypeMetadataInterface ...$types) : \Generator
+     {
+         foreach ($types as $type) {
+-            if (!$type instanceof ListTypeMetadata && !$type instanceof CollectionTypeMetadata) {
++            if (!$type instanceof ListTypeMetadata || !$type instanceof CollectionTypeMetadata) {
+                 continue;
+             }
+             (yield $type);
+
+
+57) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:32    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1250,7 +1414,7 @@ Not Covered mutants:
              (yield $type);
 
 
-47) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:34    [M] Continue_
+58) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyMultipleRelationGuesser.php:34    [M] Continue_
 
 --- Original
 +++ New
@@ -1265,7 +1429,7 @@ Not Covered mutants:
          }
      }
 
-48) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:14    [M] Foreach_
+59) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:14    [M] Foreach_
 
 --- Original
 +++ New
@@ -1280,22 +1444,7 @@ Not Covered mutants:
                  continue;
 
 
-49) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:16    [M] LessThanOrEqualToNegotiation
-
---- Original
-+++ New
-@@ @@
-     {
-         foreach ($class->properties as $property) {
-             $types = iterator_to_array($this->filterTypes(...$property->types));
--            if (count($types) <= 0) {
-+            if (count($types) > 0) {
-                 continue;
-             }
-             (yield new UnaryRelationDefinition($property->name, ...$types));
-
-
-50) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:16    [M] LessThanOrEqualTo
+60) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:16    [M] LessThanOrEqualTo
 
 --- Original
 +++ New
@@ -1310,7 +1459,22 @@ Not Covered mutants:
              (yield new UnaryRelationDefinition($property->name, ...$types));
 
 
-51) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:17    [M] Continue_
+61) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:16    [M] LessThanOrEqualToNegotiation
+
+--- Original
++++ New
+@@ @@
+     {
+         foreach ($class->properties as $property) {
+             $types = iterator_to_array($this->filterTypes(...$property->types));
+-            if (count($types) <= 0) {
++            if (count($types) > 0) {
+                 continue;
+             }
+             (yield new UnaryRelationDefinition($property->name, ...$types));
+
+
+62) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:17    [M] Continue_
 
 --- Original
 +++ New
@@ -1325,7 +1489,7 @@ Not Covered mutants:
          }
 
 
-52) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:29    [M] Foreach_
+63) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:29    [M] Foreach_
 
 --- Original
 +++ New
@@ -1340,7 +1504,7 @@ Not Covered mutants:
              }
 
 
-53) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:30    [M] LogicalNot
+64) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:30    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1355,7 +1519,7 @@ Not Covered mutants:
              (yield $type);
 
 
-54) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:31    [M] Continue_
+65) /var/www/html/src/MappingDefinition/Guesser/PublicPropertyUnaryRelationGuesser.php:31    [M] Continue_
 
 --- Original
 +++ New
@@ -1370,7 +1534,7 @@ Not Covered mutants:
          }
      }
 
-55) /var/www/html/src/MappingDefinition/Guesser/RelationDefinitionGuesserChain.php:19    [M] Foreach_
+66) /var/www/html/src/MappingDefinition/Guesser/RelationDefinitionGuesserChain.php:19    [M] Foreach_
 
 --- Original
 +++ New
@@ -1385,7 +1549,7 @@ Not Covered mutants:
      }
  }
 
-56) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:20    [M] Coalesce
+67) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:20    [M] Coalesce
 
 --- Original
 +++ New
@@ -1400,7 +1564,7 @@ Not Covered mutants:
      {
 
 
-57) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:25    [M] Identical
+68) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:25    [M] Identical
 
 --- Original
 +++ New
@@ -1415,7 +1579,7 @@ Not Covered mutants:
      {
 
 
-58) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:32    [M] Foreach_
+69) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:32    [M] Foreach_
 
 --- Original
 +++ New
@@ -1430,37 +1594,7 @@ Not Covered mutants:
                  if (!$this->isSingular($fieldName)) {
 
 
-59) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:33    [M] LogicalAnd
-
---- Original
-+++ New
-@@ @@
-         $methodCandidates = [];
-         /** @var MethodMetadata $method */
-         foreach ($class->methods as $method) {
--            if (preg_match('/is(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && Type::isOneOf(new ScalarTypeMetadata('bool'), $method->returnTypes) && count($method->argumentList->arguments) === 0) {
-+            if (preg_match('/is(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && Type::isOneOf(new ScalarTypeMetadata('bool'), $method->returnTypes) || count($method->argumentList->arguments) === 0) {
-                 $fieldName = $this->inflector->camelize($matches['fieldName']);
-                 if (!$this->isSingular($fieldName)) {
-                     continue;
-
-
-60) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:33    [M] LogicalAnd
-
---- Original
-+++ New
-@@ @@
-         $methodCandidates = [];
-         /** @var MethodMetadata $method */
-         foreach ($class->methods as $method) {
--            if (preg_match('/is(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && Type::isOneOf(new ScalarTypeMetadata('bool'), $method->returnTypes) && count($method->argumentList->arguments) === 0) {
-+            if ((preg_match('/is(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) || Type::isOneOf(new ScalarTypeMetadata('bool'), $method->returnTypes)) && count($method->argumentList->arguments) === 0) {
-                 $fieldName = $this->inflector->camelize($matches['fieldName']);
-                 if (!$this->isSingular($fieldName)) {
-                     continue;
-
-
-61) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:33    [M] PregMatchMatches
+70) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:33    [M] PregMatchMatches
 
 --- Original
 +++ New
@@ -1475,7 +1609,37 @@ Not Covered mutants:
                      continue;
 
 
-62) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:35    [M] Identical
+71) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:33    [M] LogicalAnd
+
+--- Original
++++ New
+@@ @@
+         $methodCandidates = [];
+         /** @var MethodMetadata $method */
+         foreach ($class->methods as $method) {
+-            if (preg_match('/is(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && Type::isOneOf(new ScalarTypeMetadata('bool'), $method->returnTypes) && count($method->argumentList->arguments) === 0) {
++            if (preg_match('/is(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && Type::isOneOf(new ScalarTypeMetadata('bool'), $method->returnTypes) || count($method->argumentList->arguments) === 0) {
+                 $fieldName = $this->inflector->camelize($matches['fieldName']);
+                 if (!$this->isSingular($fieldName)) {
+                     continue;
+
+
+72) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:33    [M] LogicalAnd
+
+--- Original
++++ New
+@@ @@
+         $methodCandidates = [];
+         /** @var MethodMetadata $method */
+         foreach ($class->methods as $method) {
+-            if (preg_match('/is(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && Type::isOneOf(new ScalarTypeMetadata('bool'), $method->returnTypes) && count($method->argumentList->arguments) === 0) {
++            if ((preg_match('/is(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) || Type::isOneOf(new ScalarTypeMetadata('bool'), $method->returnTypes)) && count($method->argumentList->arguments) === 0) {
+                 $fieldName = $this->inflector->camelize($matches['fieldName']);
+                 if (!$this->isSingular($fieldName)) {
+                     continue;
+
+
+73) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:35    [M] Identical
 
 --- Original
 +++ New
@@ -1490,7 +1654,7 @@ Not Covered mutants:
                      continue;
 
 
-63) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:35    [M] OneZeroInteger
+74) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:35    [M] OneZeroInteger
 
 --- Original
 +++ New
@@ -1505,7 +1669,7 @@ Not Covered mutants:
                      continue;
 
 
-64) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:38    [M] LogicalNot
+75) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:38    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1520,7 +1684,7 @@ Not Covered mutants:
                  if (!isset($methodCandidates[$fieldName])) {
 
 
-65) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:39    [M] Continue_
+76) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:39    [M] Continue_
 
 --- Original
 +++ New
@@ -1535,7 +1699,7 @@ Not Covered mutants:
                      $methodCandidates[$fieldName] = [];
 
 
-66) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:41    [M] LogicalNot
+77) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:41    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1550,7 +1714,7 @@ Not Covered mutants:
                  $methodCandidates[$fieldName]['is'] = $method;
 
 
-67) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:46    [M] PregMatchMatches
+78) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:46    [M] PregMatchMatches
 
 --- Original
 +++ New
@@ -1565,7 +1729,7 @@ Not Covered mutants:
                      if (!$this->isSingular($fieldName)) {
 
 
-68) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:46    [M] LogicalAnd
+79) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:46    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -1580,37 +1744,7 @@ Not Covered mutants:
                      if (!$this->isSingular($fieldName)) {
 
 
-69) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:47    [M] Identical
-
---- Original
-+++ New
-@@ @@
-                 }
-                 $methodCandidates[$fieldName]['is'] = $method;
-             } else {
--                if (preg_match('/(?<action>set)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 1) {
-+                if (preg_match('/(?<action>set)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) !== 1) {
-                     $action = $matches['action'];
-                     $fieldName = $this->inflector->camelize($matches['fieldName']);
-                     if (!$this->isSingular($fieldName)) {
-
-
-70) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:47    [M] OneZeroInteger
-
---- Original
-+++ New
-@@ @@
-                 }
-                 $methodCandidates[$fieldName]['is'] = $method;
-             } else {
--                if (preg_match('/(?<action>set)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 1) {
-+                if (preg_match('/(?<action>set)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 0) {
-                     $action = $matches['action'];
-                     $fieldName = $this->inflector->camelize($matches['fieldName']);
-                     if (!$this->isSingular($fieldName)) {
-
-
-71) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:47    [M] IncrementInteger
+80) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:47    [M] IncrementInteger
 
 --- Original
 +++ New
@@ -1625,7 +1759,37 @@ Not Covered mutants:
                      if (!$this->isSingular($fieldName)) {
 
 
-72) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:51    [M] LogicalNot
+81) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:47    [M] OneZeroInteger
+
+--- Original
++++ New
+@@ @@
+                 }
+                 $methodCandidates[$fieldName]['is'] = $method;
+             } else {
+-                if (preg_match('/(?<action>set)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 1) {
++                if (preg_match('/(?<action>set)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 0) {
+                     $action = $matches['action'];
+                     $fieldName = $this->inflector->camelize($matches['fieldName']);
+                     if (!$this->isSingular($fieldName)) {
+
+
+82) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:47    [M] Identical
+
+--- Original
++++ New
+@@ @@
+                 }
+                 $methodCandidates[$fieldName]['is'] = $method;
+             } else {
+-                if (preg_match('/(?<action>set)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 1) {
++                if (preg_match('/(?<action>set)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) !== 1) {
+                     $action = $matches['action'];
+                     $fieldName = $this->inflector->camelize($matches['fieldName']);
+                     if (!$this->isSingular($fieldName)) {
+
+
+83) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:51    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1640,7 +1804,7 @@ Not Covered mutants:
                      if (!isset($methodCandidates[$fieldName])) {
 
 
-73) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:52    [M] Continue_
+84) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:52    [M] Continue_
 
 --- Original
 +++ New
@@ -1655,7 +1819,7 @@ Not Covered mutants:
                          $methodCandidates[$fieldName] = [];
 
 
-74) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:54    [M] LogicalNot
+85) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:54    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1670,7 +1834,7 @@ Not Covered mutants:
                      $methodCandidates[$fieldName][$action] = $method;
 
 
-75) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:59    [M] LogicalAnd
+86) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:59    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -1685,7 +1849,7 @@ Not Covered mutants:
                          if (!$this->isSingular($fieldName)) {
 
 
-76) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:59    [M] PregMatchMatches
+87) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:59    [M] PregMatchMatches
 
 --- Original
 +++ New
@@ -1700,22 +1864,7 @@ Not Covered mutants:
                          if (!$this->isSingular($fieldName)) {
 
 
-77) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:60    [M] Identical
-
---- Original
-+++ New
-@@ @@
-                     }
-                     $methodCandidates[$fieldName][$action] = $method;
-                 } else {
--                    if (preg_match('/(?<action>unset|remove|get|has)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 0) {
-+                    if (preg_match('/(?<action>unset|remove|get|has)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) !== 0) {
-                         $action = $matches['action'];
-                         $fieldName = $this->inflector->camelize($matches['fieldName']);
-                         if (!$this->isSingular($fieldName)) {
-
-
-78) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:60    [M] OneZeroInteger
+88) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:60    [M] OneZeroInteger
 
 --- Original
 +++ New
@@ -1730,7 +1879,22 @@ Not Covered mutants:
                          if (!$this->isSingular($fieldName)) {
 
 
-79) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:64    [M] LogicalNot
+89) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:60    [M] Identical
+
+--- Original
++++ New
+@@ @@
+                     }
+                     $methodCandidates[$fieldName][$action] = $method;
+                 } else {
+-                    if (preg_match('/(?<action>unset|remove|get|has)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 0) {
++                    if (preg_match('/(?<action>unset|remove|get|has)(?<fieldName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) !== 0) {
+                         $action = $matches['action'];
+                         $fieldName = $this->inflector->camelize($matches['fieldName']);
+                         if (!$this->isSingular($fieldName)) {
+
+
+90) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:64    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1745,7 +1909,7 @@ Not Covered mutants:
                          if (!isset($methodCandidates[$fieldName])) {
 
 
-80) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:65    [M] Continue_
+91) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:65    [M] Continue_
 
 --- Original
 +++ New
@@ -1760,7 +1924,7 @@ Not Covered mutants:
                              $methodCandidates[$fieldName] = [];
 
 
-81) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:67    [M] LogicalNot
+92) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:67    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1775,7 +1939,7 @@ Not Covered mutants:
                          $methodCandidates[$fieldName][$action] = $method;
 
 
-82) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:75    [M] Foreach_
+93) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:75    [M] Foreach_
 
 --- Original
 +++ New
@@ -1790,7 +1954,7 @@ Not Covered mutants:
              /** @var MethodMetadata $mutator */
 
 
-83) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:77    [M] Coalesce
+94) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:77    [M] Coalesce
 
 --- Original
 +++ New
@@ -1805,7 +1969,7 @@ Not Covered mutants:
              if (!isset($accessor) && !isset($mutator)) {
 
 
-84) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:77    [M] Coalesce
+95) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:77    [M] Coalesce
 
 --- Original
 +++ New
@@ -1820,7 +1984,7 @@ Not Covered mutants:
              if (!isset($accessor) && !isset($mutator)) {
 
 
-85) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:79    [M] Coalesce
+96) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:79    [M] Coalesce
 
 --- Original
 +++ New
@@ -1835,22 +1999,7 @@ Not Covered mutants:
              }
 
 
-86) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:81    [M] LogicalNot
-
---- Original
-+++ New
-@@ @@
-             $accessor = $actions['get'] ?? $actions['is'] ?? null;
-             /** @var MethodMetadata $mutator */
-             $mutator = $actions['set'] ?? null;
--            if (!isset($accessor) && !isset($mutator)) {
-+            if (isset($accessor) && !isset($mutator)) {
-                 continue;
-             }
-             (yield new VirtualFieldDefinition($fieldName, $accessor, $mutator, $actions['has'] ?? null, $actions['unset'] ?? $actions['remove'] ?? null));
-
-
-87) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:81    [M] LogicalNot
+97) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:81    [M] LogicalNot
 
 --- Original
 +++ New
@@ -1865,7 +2014,7 @@ Not Covered mutants:
              (yield new VirtualFieldDefinition($fieldName, $accessor, $mutator, $actions['has'] ?? null, $actions['unset'] ?? $actions['remove'] ?? null));
 
 
-88) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:81    [M] LogicalAnd
+98) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:81    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -1880,7 +2029,22 @@ Not Covered mutants:
              (yield new VirtualFieldDefinition($fieldName, $accessor, $mutator, $actions['has'] ?? null, $actions['unset'] ?? $actions['remove'] ?? null));
 
 
-89) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:82    [M] Continue_
+99) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:81    [M] LogicalNot
+
+--- Original
++++ New
+@@ @@
+             $accessor = $actions['get'] ?? $actions['is'] ?? null;
+             /** @var MethodMetadata $mutator */
+             $mutator = $actions['set'] ?? null;
+-            if (!isset($accessor) && !isset($mutator)) {
++            if (isset($accessor) && !isset($mutator)) {
+                 continue;
+             }
+             (yield new VirtualFieldDefinition($fieldName, $accessor, $mutator, $actions['has'] ?? null, $actions['unset'] ?? $actions['remove'] ?? null));
+
+
+100) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:82    [M] Continue_
 
 --- Original
 +++ New
@@ -1895,7 +2059,7 @@ Not Covered mutants:
          }
      }
 
-90) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:89    [M] Coalesce
+101) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:89    [M] Coalesce
 
 --- Original
 +++ New
@@ -1910,7 +2074,7 @@ Not Covered mutants:
  }
 
 
-91) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:90    [M] Coalesce
+102) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:90    [M] Coalesce
 
 --- Original
 +++ New
@@ -1925,7 +2089,7 @@ Not Covered mutants:
  }
 
 
-92) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:90    [M] Coalesce
+103) /var/www/html/src/MappingDefinition/Guesser/VirtualFieldGuesser.php:90    [M] Coalesce
 
 --- Original
 +++ New
@@ -1940,7 +2104,7 @@ Not Covered mutants:
  }
 
 
-93) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:26    [M] Identical
+104) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:26    [M] Identical
 
 --- Original
 +++ New
@@ -1955,7 +2119,7 @@ Not Covered mutants:
      {
 
 
-94) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:31    [M] Identical
+105) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:31    [M] Identical
 
 --- Original
 +++ New
@@ -1970,7 +2134,7 @@ Not Covered mutants:
      {
 
 
-95) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:38    [M] Foreach_
+106) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:38    [M] Foreach_
 
 --- Original
 +++ New
@@ -1985,22 +2149,7 @@ Not Covered mutants:
                  $relationName = $this->inflector->camelize($matches['relationName']);
 
 
-96) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:39    [M] PregMatchMatches
-
---- Original
-+++ New
-@@ @@
-         $methodCandidates = [];
-         /** @var MethodMetadata $method */
-         foreach ($class->methods as $method) {
--            if (preg_match('/(?<action>set|remove|add|has)(?<relationName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 1) {
-+            if ((int) ($matches = array()) && count($method->argumentList->arguments) === 1) {
-                 $action = $matches['action'];
-                 $relationName = $this->inflector->camelize($matches['relationName']);
-                 if (!isset($methodCandidates[$relationName])) {
-
-
-97) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:39    [M] LogicalAnd
+107) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:39    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -2015,7 +2164,22 @@ Not Covered mutants:
                  if (!isset($methodCandidates[$relationName])) {
 
 
-98) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:40    [M] OneZeroInteger
+108) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:39    [M] PregMatchMatches
+
+--- Original
++++ New
+@@ @@
+         $methodCandidates = [];
+         /** @var MethodMetadata $method */
+         foreach ($class->methods as $method) {
+-            if (preg_match('/(?<action>set|remove|add|has)(?<relationName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 1) {
++            if ((int) ($matches = array()) && count($method->argumentList->arguments) === 1) {
+                 $action = $matches['action'];
+                 $relationName = $this->inflector->camelize($matches['relationName']);
+                 if (!isset($methodCandidates[$relationName])) {
+
+
+109) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:40    [M] OneZeroInteger
 
 --- Original
 +++ New
@@ -2030,22 +2194,7 @@ Not Covered mutants:
                  if (!isset($methodCandidates[$relationName])) {
 
 
-99) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:40    [M] IncrementInteger
-
---- Original
-+++ New
-@@ @@
-         $methodCandidates = [];
-         /** @var MethodMetadata $method */
-         foreach ($class->methods as $method) {
--            if (preg_match('/(?<action>set|remove|add|has)(?<relationName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 1) {
-+            if (preg_match('/(?<action>set|remove|add|has)(?<relationName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 2) {
-                 $action = $matches['action'];
-                 $relationName = $this->inflector->camelize($matches['relationName']);
-                 if (!isset($methodCandidates[$relationName])) {
-
-
-100) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:40    [M] Identical
+110) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:40    [M] Identical
 
 --- Original
 +++ New
@@ -2060,7 +2209,22 @@ Not Covered mutants:
                  if (!isset($methodCandidates[$relationName])) {
 
 
-101) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:44    [M] LogicalNot
+111) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:40    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+         $methodCandidates = [];
+         /** @var MethodMetadata $method */
+         foreach ($class->methods as $method) {
+-            if (preg_match('/(?<action>set|remove|add|has)(?<relationName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 1) {
++            if (preg_match('/(?<action>set|remove|add|has)(?<relationName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && count($method->argumentList->arguments) === 2) {
+                 $action = $matches['action'];
+                 $relationName = $this->inflector->camelize($matches['relationName']);
+                 if (!isset($methodCandidates[$relationName])) {
+
+
+112) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:44    [M] LogicalNot
 
 --- Original
 +++ New
@@ -2075,7 +2239,7 @@ Not Covered mutants:
                  $methodCandidates[$relationName][$action] = $method;
 
 
-102) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:49    [M] PregMatchMatches
+113) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:49    [M] PregMatchMatches
 
 --- Original
 +++ New
@@ -2090,7 +2254,7 @@ Not Covered mutants:
                      if (!isset($methodCandidates[$relationName])) {
 
 
-103) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:49    [M] LogicalAnd
+114) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:49    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -2105,7 +2269,7 @@ Not Covered mutants:
                      if (!isset($methodCandidates[$relationName])) {
 
 
-104) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:50    [M] OneZeroInteger
+115) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:50    [M] OneZeroInteger
 
 --- Original
 +++ New
@@ -2120,7 +2284,7 @@ Not Covered mutants:
                      if (!isset($methodCandidates[$relationName])) {
 
 
-105) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:50    [M] Identical
+116) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:50    [M] Identical
 
 --- Original
 +++ New
@@ -2135,7 +2299,7 @@ Not Covered mutants:
                      if (!isset($methodCandidates[$relationName])) {
 
 
-106) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:54    [M] LogicalNot
+117) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:54    [M] LogicalNot
 
 --- Original
 +++ New
@@ -2150,22 +2314,7 @@ Not Covered mutants:
                      $methodCandidates[$relationName][$action] = $method;
 
 
-107) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:59    [M] PregMatchMatches
-
---- Original
-+++ New
-@@ @@
-                     }
-                     $methodCandidates[$relationName][$action] = $method;
-                 } else {
--                    if (preg_match('/count(?<relationName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && Type::isOneOf(new ScalarTypeMetadata('integer'), $method->returnTypes) && count($method->argumentList->arguments) === 0) {
-+                    if ((int) ($matches = array()) && Type::isOneOf(new ScalarTypeMetadata('integer'), $method->returnTypes) && count($method->argumentList->arguments) === 0) {
-                         $relationName = $this->inflector->camelize($matches['relationName']);
-                         if (!isset($methodCandidates[$relationName])) {
-                             $methodCandidates[$relationName] = [];
-
-
-108) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:59    [M] LogicalAnd
+118) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:59    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -2180,7 +2329,22 @@ Not Covered mutants:
                              $methodCandidates[$relationName] = [];
 
 
-109) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:59    [M] LogicalAnd
+119) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:59    [M] PregMatchMatches
+
+--- Original
++++ New
+@@ @@
+                     }
+                     $methodCandidates[$relationName][$action] = $method;
+                 } else {
+-                    if (preg_match('/count(?<relationName>[a-zA-Z_][a-zA-Z0-9_]*)/', $method->name, $matches) && Type::isOneOf(new ScalarTypeMetadata('integer'), $method->returnTypes) && count($method->argumentList->arguments) === 0) {
++                    if ((int) ($matches = array()) && Type::isOneOf(new ScalarTypeMetadata('integer'), $method->returnTypes) && count($method->argumentList->arguments) === 0) {
+                         $relationName = $this->inflector->camelize($matches['relationName']);
+                         if (!isset($methodCandidates[$relationName])) {
+                             $methodCandidates[$relationName] = [];
+
+
+120) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:59    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -2195,7 +2359,7 @@ Not Covered mutants:
                              $methodCandidates[$relationName] = [];
 
 
-110) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:61    [M] OneZeroInteger
+121) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:61    [M] OneZeroInteger
 
 --- Original
 +++ New
@@ -2210,7 +2374,7 @@ Not Covered mutants:
                              $methodCandidates[$relationName] = [];
 
 
-111) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:61    [M] Identical
+122) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:61    [M] Identical
 
 --- Original
 +++ New
@@ -2225,7 +2389,7 @@ Not Covered mutants:
                              $methodCandidates[$relationName] = [];
 
 
-112) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:64    [M] LogicalNot
+123) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:64    [M] LogicalNot
 
 --- Original
 +++ New
@@ -2240,7 +2404,7 @@ Not Covered mutants:
                          $methodCandidates[$relationName]['count'] = $method;
 
 
-113) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:69    [M] PregMatchMatches
+124) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:69    [M] PregMatchMatches
 
 --- Original
 +++ New
@@ -2255,7 +2419,7 @@ Not Covered mutants:
                                  $methodCandidates[$relationName] = [];
 
 
-114) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:69    [M] LogicalAnd
+125) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:69    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -2270,7 +2434,7 @@ Not Covered mutants:
                                  $methodCandidates[$relationName] = [];
 
 
-115) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:69    [M] LogicalAnd
+126) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:69    [M] LogicalAnd
 
 --- Original
 +++ New
@@ -2285,7 +2449,7 @@ Not Covered mutants:
                                  $methodCandidates[$relationName] = [];
 
 
-116) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:71    [M] OneZeroInteger
+127) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:71    [M] OneZeroInteger
 
 --- Original
 +++ New
@@ -2300,7 +2464,7 @@ Not Covered mutants:
                                  $methodCandidates[$relationName] = [];
 
 
-117) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:71    [M] Identical
+128) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:71    [M] Identical
 
 --- Original
 +++ New
@@ -2315,7 +2479,7 @@ Not Covered mutants:
                                  $methodCandidates[$relationName] = [];
 
 
-118) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:74    [M] LogicalNot
+129) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:74    [M] LogicalNot
 
 --- Original
 +++ New
@@ -2330,7 +2494,7 @@ Not Covered mutants:
                              $methodCandidates[$relationName]['walk'] = $method;
 
 
-119) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:82    [M] Foreach_
+130) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:82    [M] Foreach_
 
 --- Original
 +++ New
@@ -2345,7 +2509,7 @@ Not Covered mutants:
              }
 
 
-120) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:86    [M] Coalesce
+131) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:86    [M] Coalesce
 
 --- Original
 +++ New
@@ -2360,7 +2524,7 @@ Not Covered mutants:
                  (yield new VirtualUnaryRelationDefinition($relationName, $actions['get'] ?? $actions['is'] ?? null, $actions['set'] ?? null, $actions['has'] ?? null, $actions['unset'] ?? null));
 
 
-121) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:87    [M] Coalesce
+132) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:87    [M] Coalesce
 
 --- Original
 +++ New
@@ -2375,7 +2539,7 @@ Not Covered mutants:
                  (yield new VirtualUnaryRelationDefinition($relationName, $actions['get'] ?? $actions['is'] ?? null, $actions['set'] ?? null, $actions['has'] ?? null, $actions['unset'] ?? null));
 
 
-122) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:88    [M] Coalesce
+133) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:88    [M] Coalesce
 
 --- Original
 +++ New
@@ -2390,7 +2554,7 @@ Not Covered mutants:
                  (yield new VirtualUnaryRelationDefinition($relationName, $actions['get'] ?? $actions['is'] ?? null, $actions['set'] ?? null, $actions['has'] ?? null, $actions['unset'] ?? null));
 
 
-123) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:89    [M] Coalesce
+134) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:89    [M] Coalesce
 
 --- Original
 +++ New
@@ -2405,7 +2569,7 @@ Not Covered mutants:
                  (yield new VirtualUnaryRelationDefinition($relationName, $actions['get'] ?? $actions['is'] ?? null, $actions['set'] ?? null, $actions['has'] ?? null, $actions['unset'] ?? null));
 
 
-124) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:90    [M] Coalesce
+135) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:90    [M] Coalesce
 
 --- Original
 +++ New
@@ -2420,7 +2584,7 @@ Not Covered mutants:
                  (yield new VirtualUnaryRelationDefinition($relationName, $actions['get'] ?? $actions['is'] ?? null, $actions['set'] ?? null, $actions['has'] ?? null, $actions['unset'] ?? null));
 
 
-125) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:91    [M] Coalesce
+136) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:91    [M] Coalesce
 
 --- Original
 +++ New
@@ -2435,7 +2599,7 @@ Not Covered mutants:
                  (yield new VirtualUnaryRelationDefinition($relationName, $actions['get'] ?? $actions['is'] ?? null, $actions['set'] ?? null, $actions['has'] ?? null, $actions['unset'] ?? null));
 
 
-126) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:97    [M] Coalesce
+137) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:97    [M] Coalesce
 
 --- Original
 +++ New
@@ -2450,7 +2614,7 @@ Not Covered mutants:
      }
  }
 
-127) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:97    [M] Coalesce
+138) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:97    [M] Coalesce
 
 --- Original
 +++ New
@@ -2465,7 +2629,7 @@ Not Covered mutants:
      }
  }
 
-128) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:98    [M] Coalesce
+139) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:98    [M] Coalesce
 
 --- Original
 +++ New
@@ -2480,7 +2644,7 @@ Not Covered mutants:
      }
  }
 
-129) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:99    [M] Coalesce
+140) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:99    [M] Coalesce
 
 --- Original
 +++ New
@@ -2495,7 +2659,7 @@ Not Covered mutants:
      }
  }
 
-130) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:100    [M] Coalesce
+141) /var/www/html/src/MappingDefinition/Guesser/VirtualRelationGuesser.php:100    [M] Coalesce
 
 --- Original
 +++ New
@@ -2510,7 +2674,7 @@ Not Covered mutants:
      }
  }
 
-131) /var/www/html/src/MappingDefinition/MappedClassType.php:24    [M] PublicVisibility
+142) /var/www/html/src/MappingDefinition/MappedClassType.php:24    [M] PublicVisibility
 
 --- Original
 +++ New
@@ -2525,7 +2689,7 @@ Not Covered mutants:
              $this->fields[$field->name] = $field;
 
 
-132) /var/www/html/src/MappingDefinition/MappedClassType.php:26    [M] Foreach_
+143) /var/www/html/src/MappingDefinition/MappedClassType.php:26    [M] Foreach_
 
 --- Original
 +++ New
@@ -2540,7 +2704,7 @@ Not Covered mutants:
          return $this;
 
 
-133) /var/www/html/src/MappingDefinition/MappedClassType.php:33    [M] PublicVisibility
+144) /var/www/html/src/MappingDefinition/MappedClassType.php:33    [M] PublicVisibility
 
 --- Original
 +++ New
@@ -2555,7 +2719,7 @@ Not Covered mutants:
              $this->relations[$relation->name] = $relation;
 
 
-134) /var/www/html/src/MappingDefinition/MappedClassType.php:35    [M] Foreach_
+145) /var/www/html/src/MappingDefinition/MappedClassType.php:35    [M] Foreach_
 
 --- Original
 +++ New
@@ -2570,7 +2734,7 @@ Not Covered mutants:
          return $this;
 
 
-135) /var/www/html/src/MappingDefinition/MappedClassType.php:44    [M] CastString
+146) /var/www/html/src/MappingDefinition/MappedClassType.php:44    [M] CastString
 
 --- Original
 +++ New
@@ -2584,7 +2748,7 @@ Not Covered mutants:
  }
 
 
-136) /var/www/html/src/MappingDefinition/MappingIterator.php:68    [M] NewObject
+147) /var/www/html/src/MappingDefinition/MappingIterator.php:68    [M] NewObject
 
 --- Original
 +++ New
@@ -2599,7 +2763,7 @@ Not Covered mutants:
  }
 
 
-137) /var/www/html/src/ObjectCompositeMapper.php:18    [M] Foreach_
+148) /var/www/html/src/ObjectCompositeMapper.php:18    [M] Foreach_
 
 --- Original
 +++ New

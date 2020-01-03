@@ -7,7 +7,7 @@ use PhpParser\Builder;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
-class ObjectInitialisationPreconditionBuilder implements Builder
+final class ObjectInitialisationPreconditionBuilder implements Builder
 {
     /** @var PropertyPath */
     private $propertyPath;
@@ -35,7 +35,7 @@ class ObjectInitialisationPreconditionBuilder implements Builder
                         new Node\Expr\Assign(
                             $this->pathNode,
                             new Node\Expr\New_(
-                                new Node\Name($this->metadata->name)
+                                new Node\Name($this->metadata->getName())
                             )
                         )
                     )
