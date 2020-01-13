@@ -79,8 +79,8 @@ final class SingleRelation implements
                     new Node\Expr\Variable('item'),
                     (new PropertyPathBuilder($this->outputPath, new Node\Expr\Variable('input')))->getNode()
                 ),
-                $this->child->compile($outputNode)
-            ]
+            ],
+            $this->child->compile($outputNode)
         );
     }
 }
