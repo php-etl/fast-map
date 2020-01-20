@@ -51,7 +51,7 @@ final class ExpressionLanguageValueMapper implements
         return [
             new Node\Expr\Assign(
                 $outputNode,
-                (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->expression))->getNode(),
+                (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->expression))->getNode()
             ),
         ];
     }
