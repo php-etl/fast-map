@@ -42,6 +42,25 @@ final class ArrayMapper implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        // TODO: Implement compile() method.
+        return array_merge(
+            ...$this->compileMappers($outputNode)
+        );
+    }
+
+    private function compileMappers(Node\Expr $outputNode): iterable
+    {
+        foreach ($this->fields as $mapper) {
+            if (!$mapper instanceof Contracts\CompilableInterface) {
+                throw new \RuntimeException(strtr(
+                    'Expected a %expected%, but got an object of type %actual%.',
+                    [
+                        '%expected%' => Contracts\CompilableInterface::class,
+                        '%actual%' => get_class($mapper),
+                    ]
+                ));
+            }
+
+            yield $mapper->compile($outputNode);
+        }
     }
 }
