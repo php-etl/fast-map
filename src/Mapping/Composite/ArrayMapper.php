@@ -3,6 +3,7 @@
 namespace Kiboko\Component\ETL\FastMap\Mapping\Composite;
 
 use Kiboko\Component\ETL\FastMap\Contracts;
+use \Kiboko\Component\ETL\FastMap\Contracts\CompilableInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
@@ -42,6 +43,13 @@ final class ArrayMapper implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        // TODO: Implement compile() method.
+        $output = [];
+        foreach ($this->fields as $field) {
+            if ($field instanceof CompilableInterface) {
+                $output = array_merge($output, $field->compile($outputNode));
+            }
+        }
+
+        return $output;
     }
 }
