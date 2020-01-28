@@ -40,9 +40,6 @@ class Compiler
         $className = $context->getClassName() ?? $this->randomClassName('Mapper');
 
         $fqcn = (string) ($class = ($context->getClass() ?? new ClassReferenceMetadata($className, $namespace)));
-        if (class_exists($fqcn, true)) {
-            return new $fqcn();
-        }
 
         if ($context->getFilePath() !== null && file_exists($context->getFilePath())) {
             include $context->getFilePath();
