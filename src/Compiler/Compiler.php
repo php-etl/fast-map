@@ -41,10 +41,6 @@ class Compiler
 
         $fqcn = (string) ($class = ($context->getClass() ?? new ClassReferenceMetadata($className, $namespace)));
 
-        if ($context->getFilePath() !== null && file_exists($context->getFilePath())) {
-            include_once $context->getFilePath();
-        }
-
         $tree = $this->strategy->buildTree(
             $context->getPropertyPath(),
             $class,
@@ -54,7 +50,9 @@ class Compiler
         $prettyPrinter = new PrettyPrinter\Standard();
         if ($context->getFilePath() !== null && is_writable(dirname($context->getFilePath()))) {
             file_put_contents($context->getFilePath(), $prettyPrinter->prettyPrintFile($tree));
-            include_once $context->getFilePath();
+            if (!class_exists($fqcn)) {
+                include_once $context->getFilePath();
+            }
         } else {
             include_once 'data://text/plain;base64,' . base64_encode($prettyPrinter->prettyPrintFile($tree));
         }
