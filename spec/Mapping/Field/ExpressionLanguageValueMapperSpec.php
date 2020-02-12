@@ -88,6 +88,67 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         ]);
     }
 
+    function it_is_mapping_complex_data_with_additional_variables()
+    {
+        $this->beConstructedWith(
+            new ExpressionLanguage(),
+            new Expression('input["employee"]["first_name"] ~" - "~ lorem'),
+            [
+                'lorem' => 'Lorem ipsum dolor sit amet consecutir',
+            ]
+        );
+
+        $this->callOnWrappedObject('__invoke', [
+            [
+                'employee' => [
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                ]
+            ],
+            [],
+            new PropertyPath('[person][firstName]'),
+        ])->shouldReturn([
+            'person' => [
+                'firstName' => 'John - Lorem ipsum dolor sit amet consecutir',
+            ]
+        ]);
+    }
+
+    function it_does_keep_preexisting_data_with_additional_variables()
+    {
+        $this->beConstructedWith(
+            new ExpressionLanguage(),
+            new Expression('input["employee"]["first_name"] ~" - "~ lorem'),
+            [
+                'lorem' => 'Lorem ipsum dolor sit amet consecutir',
+            ]
+        );
+
+        $this->callOnWrappedObject('__invoke', [
+            [
+                'employee' => [
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                ]
+            ],
+            [
+                'address' => [
+                    'street' => 'Main Street, 42',
+                    'city' => 'Oblivion'
+                ]
+            ],
+            new PropertyPath('[person][firstName]'),
+        ])->shouldReturn([
+            'address' => [
+                'street' => 'Main Street, 42',
+                'city' => 'Oblivion'
+            ],
+            'person' => [
+                'firstName' => 'John - Lorem ipsum dolor sit amet consecutir',
+            ],
+        ]);
+    }
+
     function it_is_mapping_flat_data_as_compiled()
     {
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["first_name"]'));
@@ -151,6 +212,69 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
                 ],
                 'person' => [
                     'firstName' => 'John',
+                ],
+            ]
+        );
+    }
+
+    function it_is_mapping_complex_data_with_additional_variables_as_compiled()
+    {
+        $this->beConstructedWith(
+            new ExpressionLanguage(),
+            new Expression('input["employee"]["first_name"] ~" - "~ lorem'),
+            [
+                'lorem' => 'Lorem ipsum dolor sit amet consecutir',
+            ]
+        );
+
+        $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
+            ->shouldExecuteCompiledMapping(
+            [
+                'employee' => [
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                ]
+            ],
+            [],
+            [
+                'person' => [
+                    'firstName' => 'John - Lorem ipsum dolor sit amet consecutir',
+                ]
+            ]
+        );
+    }
+
+    function it_does_keep_preexisting_with_additional_variables_data_as_compiled()
+    {
+        $this->beConstructedWith(
+            new ExpressionLanguage(),
+            new Expression('input["employee"]["first_name"] ~" - "~ lorem'),
+            [
+                'lorem' => 'Lorem ipsum dolor sit amet consecutir',
+            ]
+        );
+
+        $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
+            ->shouldExecuteCompiledMapping(
+            [
+                'employee' => [
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                ]
+            ],
+            [
+                'address' => [
+                    'street' => 'Main Street, 42',
+                    'city' => 'Oblivion'
+                ]
+            ],
+            [
+                'address' => [
+                    'street' => 'Main Street, 42',
+                    'city' => 'Oblivion'
+                ],
+                'person' => [
+                    'firstName' => 'John - Lorem ipsum dolor sit amet consecutir',
                 ],
             ]
         );

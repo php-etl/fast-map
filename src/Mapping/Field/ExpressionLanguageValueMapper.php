@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\ETL\FastMap\Mapping\Field;
 
+use Kiboko\Component\ETL\FastMap\Compiler\Builder\ConstantValueBuilder;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use PhpParser\Node;
@@ -20,15 +21,19 @@ final class ExpressionLanguageValueMapper implements
     private $interpreter;
     /** @var Expression */
     private $expression;
+    /** @var array<string, mixed> */
+    private $variables;
     /** @var PropertyAccessor */
     private $accessor;
 
     public function __construct(
         ExpressionLanguage $interpreter,
-        Expression $expression
+        Expression $expression,
+        array $variables = []
     ) {
         $this->interpreter = $interpreter;
         $this->expression = $expression;
+        $this->variables = $variables;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -37,10 +42,10 @@ final class ExpressionLanguageValueMapper implements
         $this->accessor->setValue(
             $output,
             $outputPath,
-            $this->interpreter->evaluate($this->expression, [
+            $this->interpreter->evaluate($this->expression, array_merge($this->variables, [
                 'input' => $input,
                 'output' => $output,
-            ])
+            ]))
         );
 
         return $output;
@@ -48,11 +53,19 @@ final class ExpressionLanguageValueMapper implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        return [
-            new Node\Expr\Assign(
-                $outputNode,
-                (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->expression))->getNode()
-            ),
-        ];
+        return array_merge(
+            array_map(function($variable, $value) {
+                return new Node\Expr\Assign(
+                    new Node\Expr\Variable($variable),
+                    (new ConstantValueBuilder($value))->getNode()
+                );
+            }, array_keys($this->variables), $this->variables),
+            [
+                new Node\Expr\Assign(
+                    $outputNode,
+                    (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->expression, array_keys($this->variables)))->getNode()
+                ),
+            ]
+        );
     }
 }
