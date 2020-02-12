@@ -37,7 +37,7 @@ services:
     command: [ "sleep", "31536000" ]
 
   sh74:
-    image: kiboko/php:7.4-cli
+    image: kiboko/php:7.4-cli-blackfire
     user: docker:docker
     volumes:
       - ./.docker/php@7.4/cli/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro

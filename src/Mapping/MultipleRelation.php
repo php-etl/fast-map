@@ -80,11 +80,13 @@ final class MultipleRelation implements
                 new Node\Expr\Variable('item'),
                 [
                     'stmts' => [
-                        (new ScopedCodeBuilder(
-                            new Node\Expr\Variable('input'),
-                            new Node\Expr\Variable('item'),
-                            $this->child->compile($outputNode)
-                        ))->getNode(),
+                        new Node\Stmt\Expression(
+                            (new ScopedCodeBuilder(
+                                new  Node\Expr\Variable('input'),
+                                new Node\Expr\Variable('item'),
+                                $this->child->compile($outputNode)
+                            ))->getNode()
+                        ),
                     ],
                 ]
             )

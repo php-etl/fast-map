@@ -6,7 +6,6 @@ use Kiboko\Component\ETL\FastMap\Compiler\Builder\ConstantValueBuilder;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use PhpParser\Node;
-use PhpParser\ParserFactory;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;

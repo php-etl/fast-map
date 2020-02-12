@@ -17,7 +17,7 @@ final class ExpressionLanguageToPhpParserBuilder implements Builder
     /** @var array<string> */
     private $variables;
 
-    public function __construct(ExpressionLanguage $interpreter, Expression $expression, array $variables)
+    public function __construct(ExpressionLanguage $interpreter, Expression $expression, array $variables = [])
     {
         $this->interpreter = $interpreter;
         $this->expression = $expression;

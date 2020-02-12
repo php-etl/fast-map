@@ -13,7 +13,6 @@ extensions:
     whitelist:
       - src
   Kiboko\Component\ETL\PHPSpecExtension\FastMap\FastMapExtension:
-  Kiboko\Component\ETL\PHPSpecExtension\DataProvider\DataProviderExtension:
 formatter.name: pretty
 stop_on_failure: false
 suites:
