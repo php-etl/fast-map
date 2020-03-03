@@ -82,7 +82,7 @@ final class ListField implements
                     'stmts' => [
                         (new ScopedCodeBuilder(
                             new Node\Expr\Variable('item'),
-                            (new PropertyPathBuilder($this->path))->getNode(),
+                            (new PropertyPathBuilder($this->outputPath, $outputNode))->getNode(),
                             $this->child->compile($outputNode)
                         ))->getNode(),
                     ]
