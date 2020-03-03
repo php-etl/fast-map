@@ -29,9 +29,7 @@ final class ScopedCodeBuilder implements Builder
                     new Node\Param(new Node\Expr\Variable('input')),
                     new Node\Param(new Node\Expr\Variable('output')),
                 ],
-                'stmts' => [
-                    new Node\Stmt\Return_(new Node\Expr\Variable('output'))
-                ]
+                'stmts' => $this->stmts
             ]),
             [
                 $this->input,
