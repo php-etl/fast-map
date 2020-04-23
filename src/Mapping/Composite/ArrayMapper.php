@@ -3,6 +3,7 @@
 namespace Kiboko\Component\ETL\FastMap\Mapping\Composite;
 
 use Kiboko\Component\ETL\FastMap\Contracts;
+use \Kiboko\Component\ETL\FastMap\Contracts\CompilableInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;

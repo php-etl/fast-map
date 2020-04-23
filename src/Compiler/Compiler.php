@@ -40,13 +40,6 @@ class Compiler
         $className = $context->getClassName() ?? $this->randomClassName('Mapper');
 
         $fqcn = (string) ($class = ($context->getClass() ?? new ClassReferenceMetadata($className, $namespace)));
-        if (class_exists($fqcn, true)) {
-            return new $fqcn();
-        }
-
-        if ($context->getFilePath() !== null && file_exists($context->getFilePath())) {
-            include $context->getFilePath();
-        }
 
         $tree = $this->strategy->buildTree(
             $context->getPropertyPath(),
@@ -57,9 +50,11 @@ class Compiler
         $prettyPrinter = new PrettyPrinter\Standard();
         if ($context->getFilePath() !== null && is_writable(dirname($context->getFilePath()))) {
             file_put_contents($context->getFilePath(), $prettyPrinter->prettyPrintFile($tree));
-            include $context->getFilePath();
+            if (!class_exists($fqcn)) {
+                include_once $context->getFilePath();
+            }
         } else {
-            include 'data://text/plain;base64,' . base64_encode($prettyPrinter->prettyPrintFile($tree));
+            include_once 'data://text/plain;base64,' . base64_encode($prettyPrinter->prettyPrintFile($tree));
         }
 
         return new $fqcn();
