@@ -3,6 +3,8 @@
 namespace Kiboko\Component\ETL\FastMap\Mapping\Composite;
 
 use Kiboko\Component\ETL\FastMap\Contracts;
+use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
@@ -20,17 +22,25 @@ final class ArrayMapper implements
     public function __construct(Contracts\FieldScopingInterface ...$fields)
     {
         $this->fields = $fields;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
     {
         foreach ($this->fields as $field) {
             if ($outputPath->getLength() >= 1) {
+                try {
+                    $initialValue = $this->accessor->getValue($output, $outputPath);
+                } catch (NoSuchIndexException|NoSuchPropertyException $exception) {
+                    $initialValue = [];
+                }
+
                 $this->accessor->setValue(
                     $output,
                     $outputPath,
-                    $field($input, $output)
+                    $field($input, $initialValue)
                 );
             } else {
                 $output = $field($input, $output);

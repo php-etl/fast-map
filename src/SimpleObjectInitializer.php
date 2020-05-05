@@ -35,7 +35,9 @@ final class SimpleObjectInitializer implements CompilableObjectInitializerInterf
         $this->class = $class;
         $this->interpreter = $interpreter;
         $this->expressions = $expressions;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output, PropertyPathInterface $propertyPath)

@@ -40,7 +40,9 @@ final class RepeatedField implements
         $this->inputExpression = $inputExpression;
         $this->child = $child;
         $this->minimumCount = $minimumCount;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output)

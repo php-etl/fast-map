@@ -9,16 +9,17 @@ use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
 use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class MultipleRelation implements
     Contracts\FieldScopingInterface,
     Contracts\CompilableInterface
 {
-    /** @var PropertyPath */
+    /** @var PropertyPathInterface */
     private $outputPath;
     /** @var ExpressionLanguage */
     private $interpreter;
@@ -39,7 +40,9 @@ final class MultipleRelation implements
         $this->interpreter = $interpreter;
         $this->inputExpression = $inputExpression;
         $this->child = $child;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output)
@@ -58,7 +61,11 @@ final class MultipleRelation implements
             ));
         }
 
-        $collection = $this->accessor->getValue($output, $this->outputPath) ?? [];
+        try {
+            $collection = $this->accessor->getValue($output, $this->outputPath);
+        } catch (NoSuchIndexException|NoSuchPropertyException $exception) {
+            $collection = [];
+        }
         foreach ($input as $item) {
             $collection[] = ($this->child)($item, null, new EmptyPropertyPath());
         }
@@ -82,7 +89,7 @@ final class MultipleRelation implements
                     'stmts' => [
                         new Node\Stmt\Expression(
                             (new ScopedCodeBuilder(
-                                new  Node\Expr\Variable('input'),
+                                new Node\Expr\Variable('input'),
                                 new Node\Expr\Variable('item'),
                                 $this->child->compile($outputNode)
                             ))->getNode()

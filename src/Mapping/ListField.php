@@ -10,6 +10,8 @@ use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
 use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
@@ -39,7 +41,9 @@ final class ListField implements
         $this->interpreter = $interpreter;
         $this->inputExpression = $inputExpression;
         $this->child = $child;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output)
@@ -58,16 +62,20 @@ final class ListField implements
             ));
         }
 
-        $collection = $this->accessor->getValue($output, $this->outputPath) ?? [];
+        try {
+            $collection = $this->accessor->getValue($output, $this->outputPath);
+        } catch (NoSuchIndexException|NoSuchPropertyException $exception) {
+            $collection = [];
+        }
         foreach ($input as $item) {
             $collection[] = ($this->child)($item, [], new EmptyPropertyPath());
         }
 
-        $this->accessor->setValue(
-            $output,
-            $this->outputPath,
-            $collection
-        );
+        if ($this->outputPath->getLength()) {
+            $this->accessor->setValue($output, $this->outputPath, $collection);
+        } else {
+            $output = $collection;
+        }
 
         return $output;
     }

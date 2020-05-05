@@ -24,6 +24,8 @@ final class ListFieldSpec extends ObjectBehavior
         );
 
         $this->shouldHaveType(Mapping\ListField::class);
+        $this->shouldHaveType(Contracts\FieldScopingInterface::class);
+        $this->shouldHaveType(Contracts\CompilableInterface::class);
     }
 
     function it_is_mapping_data()

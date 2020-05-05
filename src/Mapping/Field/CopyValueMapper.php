@@ -6,6 +6,8 @@ use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\RequiredValuePreconditionBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use PhpParser\Node;
+use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
@@ -23,16 +25,20 @@ final class CopyValueMapper implements
     public function __construct(PropertyPathInterface $inputPaths)
     {
         $this->inputPaths = $inputPaths;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
     {
-        $this->accessor->setValue(
-            $output,
-            $outputPath,
-            $this->accessor->getValue($input, $this->inputPaths) ?? null
-        );
+        try {
+            $initialValue = $this->accessor->getValue($input, $this->inputPaths);
+        } catch (NoSuchIndexException|NoSuchPropertyException $exception) {
+            $initialValue = null;
+        }
+
+        $this->accessor->setValue($output, $outputPath, $initialValue);
 
         return $output;
     }

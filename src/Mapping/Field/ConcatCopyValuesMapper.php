@@ -7,6 +7,8 @@ use Kiboko\Component\ETL\FastMap\Compiler\Builder\RequiredValuePreconditionBuild
 use Kiboko\Component\ETL\FastMap\Contracts;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
+use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
@@ -27,7 +29,9 @@ final class ConcatCopyValuesMapper implements
     {
         $this->glue = $glue;
         $this->inputPaths = $inputPaths;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
@@ -44,7 +48,11 @@ final class ConcatCopyValuesMapper implements
     private function walkFields(array $input): \Generator
     {
         foreach ($this->inputPaths as $field) {
-            yield $this->accessor->getValue($input, $field) ?? null;
+            try {
+                yield $this->accessor->getValue($input, $field);
+            } catch (NoSuchIndexException|NoSuchPropertyException $exception) {
+                yield null;
+            }
         }
     }
 

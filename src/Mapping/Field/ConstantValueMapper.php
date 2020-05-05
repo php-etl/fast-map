@@ -20,7 +20,9 @@ final class ConstantValueMapper implements
     public function __construct($value)
     {
         $this->value = $value;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)

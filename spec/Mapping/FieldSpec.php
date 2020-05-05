@@ -2,7 +2,7 @@
 
 namespace spec\Kiboko\Component\ETL\FastMap\Mapping;
 
-use Kiboko\Component\ETL\FastMap\Contracts\FieldMapperInterface;
+use Kiboko\Component\ETL\FastMap\Contracts;
 use Kiboko\Component\ETL\FastMap\Mapping\Field;
 use PhpParser\Node\Expr\Variable;
 use PhpSpec\ObjectBehavior;
@@ -11,7 +11,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class FieldSpec extends ObjectBehavior
 {
-    function it_is_initializable(FieldMapperInterface $inner)
+    function it_is_initializable(Contracts\FieldMapperInterface $inner)
     {
         $this->beConstructedWith(
             new PropertyPath('[customers]'),
@@ -19,6 +19,8 @@ final class FieldSpec extends ObjectBehavior
         );
 
         $this->shouldHaveType(Field::class);
+        $this->shouldHaveType(Contracts\FieldScopingInterface::class);
+        $this->shouldHaveType(Contracts\CompilableInterface::class);
     }
 
     function it_is_mapping_data()
@@ -46,27 +48,6 @@ final class FieldSpec extends ObjectBehavior
                     'email' => 'john@example.com',
                     'name' => 'John Doe',
                 ],
-            ]
-        );
-    }
-
-    function it_is_failing_on_invalid_data()
-    {
-        $this->beConstructedWith(
-            new PropertyPath('[customer][username]'),
-            new Field\CopyValueMapper(
-                new PropertyPath('[user][username]')
-            )
-        );
-
-        $this->shouldThrow(
-            new NoSuchIndexException('Cannot read index "username" from object of type "stdClass" because it doesn\'t implement \ArrayAccess.')
-        )
-            ->during('__invoke', [
-                [
-                    'user' => new \StdClass,
-                ],
-                []
             ]
         );
     }
@@ -99,26 +80,5 @@ final class FieldSpec extends ObjectBehavior
                     ],
                 ]
             );
-    }
-
-    function it_is_failing_on_invalid_data_while_compiled()
-    {
-        $this->beConstructedWith(
-            new PropertyPath('[customer][username]'),
-            new Field\CopyValueMapper(
-                new PropertyPath('[user][username]')
-            )
-        );
-
-        $this->shouldThrowWhenExecuteCompiledMapping(
-            new NoSuchIndexException('Cannot read index "username" from object of type "stdClass" because it doesn\'t implement \ArrayAccess.')
-        )
-            ->during('__invoke', [
-                [
-                    'user' => new \StdClass,
-                ],
-                []
-            ]
-        );
     }
 }

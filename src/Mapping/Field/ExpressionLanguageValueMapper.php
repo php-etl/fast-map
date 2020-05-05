@@ -33,7 +33,9 @@ final class ExpressionLanguageValueMapper implements
         $this->interpreter = $interpreter;
         $this->expression = $expression;
         $this->variables = $variables;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)

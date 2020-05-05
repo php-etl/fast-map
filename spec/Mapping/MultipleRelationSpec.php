@@ -3,7 +3,7 @@
 namespace spec\Kiboko\Component\ETL\FastMap\Mapping;
 
 use functional\Kiboko\Component\ETL\FastMap\DTO\Customer;
-use Kiboko\Component\ETL\FastMap\Contracts\ObjectMapperInterface;
+use Kiboko\Component\ETL\FastMap\Contracts;
 use Kiboko\Component\ETL\FastMap\Mapping;
 use Kiboko\Component\ETL\FastMap\Mapping\Field;
 use Kiboko\Component\ETL\FastMap\SimpleObjectInitializer;
@@ -16,7 +16,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class MultipleRelationSpec extends ObjectBehavior
 {
-    function it_is_initializable(ObjectMapperInterface $inner)
+    function it_is_initializable(Contracts\ObjectMapperInterface $inner)
     {
         $this->beConstructedWith(
             new PropertyPath('[customers]'),
@@ -26,6 +26,8 @@ final class MultipleRelationSpec extends ObjectBehavior
         );
 
         $this->shouldHaveType(Mapping\MultipleRelation::class);
+        $this->shouldHaveType(Contracts\FieldScopingInterface::class);
+        $this->shouldHaveType(Contracts\CompilableInterface::class);
     }
 
     function it_is_mapping_data()

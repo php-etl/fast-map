@@ -21,11 +21,13 @@ services:
     volumes:
       - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
       - ./:/var/www/html
+      - $HOME/.composer/:/opt/docker/.composer/
     restart: "no"
     command: [ "sleep", "31536000" ]
     environment:
       - BLACKFIRE_CLIENT_ID
       - BLACKFIRE_CLIENT_TOKEN
+      - COMPOSER_GITHUB_TOKEN
 
   sh72-xdebug:
     image: kiboko/php:7.2-cli-xdebug
@@ -33,8 +35,11 @@ services:
     volumes:
       - ./.docker/php@7.2/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
       - ./:/var/www/html
+      - $HOME/.composer/:/opt/docker/.composer/
     restart: "no"
     command: [ "sleep", "31536000" ]
+    environment:
+      - COMPOSER_GITHUB_TOKEN
 
   sh74:
     image: kiboko/php:7.4-cli-blackfire
@@ -42,11 +47,13 @@ services:
     volumes:
       - ./.docker/php@7.4/cli/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
       - ./:/var/www/html
+      - $HOME/.composer/:/opt/docker/.composer/
     restart: "no"
     command: [ "sleep", "31536000" ]
     environment:
       - BLACKFIRE_CLIENT_ID
       - BLACKFIRE_CLIENT_TOKEN
+      - COMPOSER_GITHUB_TOKEN
 
   sh74-xdebug:
     image: kiboko/php:7.4-cli-xdebug
@@ -54,5 +61,8 @@ services:
     volumes:
       - ./.docker/php@7.4/cli-xdebug/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
       - ./:/var/www/html
+      - $HOME/.composer/:/opt/docker/.composer/
     restart: "no"
     command: [ "sleep", "31536000" ]
+    environment:
+      - COMPOSER_GITHUB_TOKEN

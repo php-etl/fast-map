@@ -192,10 +192,12 @@ final class ArrayMapperSpec extends ObjectBehavior
                 ],
             ],
             [
-                'company' => [
-                    'address' => [
-                        'street' => 'Main Street, 42',
-                        'city' => 'Oblivion'
+                'additional' => [
+                    'company' => [
+                        'address' => [
+                            'street' => 'Main Street, 42',
+                            'city' => 'Oblivion'
+                        ],
                     ],
                 ],
             ],

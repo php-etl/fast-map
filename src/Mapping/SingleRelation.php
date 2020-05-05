@@ -38,7 +38,9 @@ final class SingleRelation implements
         $this->interpreter = $interpreter;
         $this->inputExpression = $inputExpression;
         $this->child = $child;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output)

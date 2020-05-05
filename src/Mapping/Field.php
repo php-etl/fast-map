@@ -14,28 +14,30 @@ final class Field implements
     Contracts\CompilableInterface
 {
     /** @var PropertyPathInterface */
-    private $outputField;
+    private $outputPath;
     /** @var Contracts\MapperInterface */
     private $child;
     /** @var PropertyAccessor */
     private $accessor;
 
     public function __construct(
-        PropertyPathInterface $outputField,
+        PropertyPathInterface $outputPath,
         Contracts\FieldMapperInterface $child
     ) {
-        $this->outputField = $outputField;
+        $this->outputPath = $outputPath;
         $this->child = $child;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->enableExceptionOnInvalidIndex()
+            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output)
     {
-        return ($this->child)($input, $output, $this->path);
+        return ($this->child)($input, $output, $this->outputPath);
     }
 
     public function compile(Node\Expr $outputNode): array
     {
-        return $this->child->compile((new PropertyPathBuilder($this->path, $outputNode))->getNode());
+        return $this->child->compile((new PropertyPathBuilder($this->outputPath, $outputNode))->getNode());
     }
 }
