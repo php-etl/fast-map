@@ -22,16 +22,16 @@ final class ConstantValueBuilder implements Builder
 
     private function asNode($value)
     {
-        if (is_string($this->value)) {
+        if (is_string($value)) {
             return new Node\Scalar\String_($value);
         }
-        if (is_integer($this->value)) {
+        if (is_integer($value)) {
             return new Node\Scalar\LNumber($value);
         }
-        if (is_double($this->value)) {
+        if (is_double($value)) {
             return new Node\Scalar\DNumber($value);
         }
-        if (is_array($this->value)) {
+        if (is_array($value)) {
             return new Node\Expr\Array_(iterator_to_array($this->asArrayItemNodes($value)));
         }
 

@@ -3,12 +3,10 @@
 namespace Kiboko\Component\ETL\FastMap\Mapping;
 
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\RequiredValuePreconditionBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class Field implements
@@ -16,17 +14,17 @@ final class Field implements
     Contracts\CompilableInterface
 {
     /** @var PropertyPathInterface */
-    private $path;
+    private $outputField;
     /** @var Contracts\MapperInterface */
     private $child;
     /** @var PropertyAccessor */
     private $accessor;
 
     public function __construct(
-        PropertyPathInterface $path,
+        PropertyPathInterface $outputField,
         Contracts\FieldMapperInterface $child
     ) {
-        $this->path = $path;
+        $this->outputField = $outputField;
         $this->child = $child;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

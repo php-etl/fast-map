@@ -34,16 +34,16 @@ final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterfa
 
     public function getElement($index)
     {
-        throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
+        throw new OutOfBoundsException(sprintf('The index %d is not within the property path', $index));
     }
 
     public function isProperty($index)
     {
-        throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
+        throw new OutOfBoundsException(sprintf('The index %d is not within the property path', $index));
     }
 
     public function isIndex($index)
     {
-        throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
+        throw new OutOfBoundsException(sprintf('The index %d is not within the property path', $index));
     }
 }

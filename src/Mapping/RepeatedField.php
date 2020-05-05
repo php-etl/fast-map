@@ -2,9 +2,7 @@
 
 namespace Kiboko\Component\ETL\FastMap\Mapping;
 
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\ScopedCodeBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts;
 use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
 use PhpParser\Node;
@@ -12,33 +10,36 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ListField implements
+final class RepeatedField implements
     Contracts\FieldScopingInterface,
     Contracts\CompilableInterface
 {
-    /** @var PropertyPathInterface */
-    private $outputPath;
     /** @var ExpressionLanguage */
     private $interpreter;
     /** @var Expression */
+    private $outputExpression;
+    /** @var Expression */
     private $inputExpression;
-    /** @var Contracts\ArrayMapperInterface */
+    /** @var Contracts\FieldMapperInterface */
     private $child;
     /** @var PropertyAccessor */
     private $accessor;
+    /** @var int */
+    private $minimumCount;
 
     public function __construct(
-        PropertyPathInterface $outputPath,
         ExpressionLanguage $interpreter,
+        Expression $outputExpression,
         Expression $inputExpression,
-        Contracts\ArrayMapperInterface $child
+        Contracts\FieldMapperInterface $child,
+        int $minimumCount = 1
     ) {
-        $this->outputPath = $outputPath;
         $this->interpreter = $interpreter;
+        $this->outputExpression = $outputExpression;
         $this->inputExpression = $inputExpression;
         $this->child = $child;
+        $this->minimumCount = $minimumCount;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -58,36 +59,35 @@ final class ListField implements
             ));
         }
 
-        $collection = $this->accessor->getValue($output, $this->outputPath) ?? [];
-        foreach ($input as $item) {
-            $collection[] = ($this->child)($item, [], new EmptyPropertyPath());
-        }
+        $collection = new \MultipleIterator(\MultipleIterator::MIT_NEED_ANY);
+        $collection->attachIterator((function(iterable $iterable){
+            yield from $iterable;
+        })($input));
+        $collection->attachIterator((function () {
+            for ($count = 0; $this->minimumCount > $count; ++$count) {
+                yield;
+            }
+        })());
 
-        $this->accessor->setValue(
-            $output,
-            $this->outputPath,
-            $collection
-        );
+        foreach ($collection as $index => list($item, $unused)) {
+            $outputPath = $this->interpreter->evaluate($this->outputExpression, [
+                'input' => $input,
+                'output' => $output,
+                'loop' => (function(int $index){
+                    $loop = new \stdClass();
+                    $loop->index = $index;
+                    return $loop;
+                })($index),
+            ]);
+
+            $this->accessor->setValue($output, $outputPath, ($this->child)($item, [], new EmptyPropertyPath()));
+        }
 
         return $output;
     }
 
     public function compile(Node\Expr $outputNode): array
     {
-        return [
-            new Node\Stmt\Foreach_(
-                (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->inputExpression))->getNode(),
-                new Node\Expr\Variable('item'),
-                [
-                    'stmts' => [
-                        (new ScopedCodeBuilder(
-                            new Node\Expr\Variable('item'),
-                            (new PropertyPathBuilder($this->path))->getNode(),
-                            $this->child->compile($outputNode)
-                        ))->getNode(),
-                    ]
-                ]
-            ),
-        ];
+        return $this->child->compile((new PropertyPathBuilder($this->path, $outputNode))->getNode());
     }
 }
