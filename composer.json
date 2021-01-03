@@ -15,24 +15,23 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
         "nikic/php-parser": "^4.2",
-        "symfony/property-access": "^3.4",
-        "symfony/expression-language": "^3.4",
-        "symfony/cache": "^3.4",
-        "doctrine/inflector": "^1.3",
-        "php-etl/contracts": "^1.0@dev",
-        "php-etl/metadata": "^1.0@dev",
-        "php-etl/phpspec-extension": "^1.0@dev"
+        "symfony/property-access": "^3.4 || ^4.4 || ^5.0",
+        "symfony/expression-language": "^3.4 || ^4.4 || ^5.0",
+        "symfony/cache": "^3.4 || ^4.4 || ^5.0",
+        "doctrine/inflector": "^1.3"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.1",
         "phpunit/phpunit": "^7.0",
         "johnkary/phpunit-speedtrap": "^3.1@dev",
         "mybuilder/phpunit-accelerator": "dev-master",
         "phpstan/phpstan": "^0.12.0@dev",
         "infection/infection": "dev-master",
-        "friends-of-phpspec/phpspec-code-coverage": "^4.0@dev"
+        "fzaninotto/faker": "^1.9@dev",
+        "friends-of-phpspec/phpspec-code-coverage": "^4.3",
+        "phpspec/phpspec": "^6.0",
+        "php-etl/phpspec-extension": "^1.0@dev"
     },
     "autoload": {
         "psr-4": {
@@ -43,7 +42,8 @@
         "psr-4": {
             "spec\\Kiboko\\Component\\ETL\\FastMap\\": "spec/",
             "unit\\Kiboko\\Component\\ETL\\FastMap\\": "unit/",
-            "functional\\Kiboko\\Component\\ETL\\FastMap\\": "functional/"
+            "functional\\Kiboko\\Component\\ETL\\FastMap\\": "functional/",
+            "performance\\Kiboko\\Component\\ETL\\FastMap\\": "performance/"
         }
     },
     "extra": {

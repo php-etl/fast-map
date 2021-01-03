@@ -3,11 +3,7 @@
 namespace spec\Kiboko\Component\ETL\FastMap\Compiler;
 
 use Kiboko\Component\ETL\FastMap\Compiler\CompilationContextInterface;
-use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
 use Kiboko\Component\ETL\FastMap\Compiler\StandardCompilationContext;
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
@@ -31,7 +27,7 @@ final class StandardCompilationContextSpec extends ObjectBehavior
     function it_is_containing_context(
         PropertyPathInterface $propertyPath
     ) {
-        $this->beConstructedWith($propertyPath, __DIR__ . '/Baz.php', new ClassReferenceMetadata('Baz', 'Foo\\Bar'));
+        $this->beConstructedWith($propertyPath, __DIR__ . '/Baz.php', 'Foo\\Bar\\Baz');
         $this->shouldHaveType(StandardCompilationContext::class);
         $this->shouldHaveType(CompilationContextInterface::class);
 
@@ -39,7 +35,7 @@ final class StandardCompilationContextSpec extends ObjectBehavior
         $this->getFilePath()->shouldReturn(__DIR__ . '/Baz.php');
         $this->getNamespace()->shouldReturn('Foo\\Bar');
         $this->getClassName()->shouldReturn('Baz');
-        $this->getClass()->shouldReturnAnInstanceOf(ClassMetadataInterface::class);
+        $this->getClass()->shouldBeString();
     }
 
     function it_is_extracting_context(
@@ -53,7 +49,7 @@ final class StandardCompilationContextSpec extends ObjectBehavior
         $this->getFilePath()->shouldReturn(__DIR__ . '/Baz.php');
         $this->getNamespace()->shouldReturn('Foo\\Bar');
         $this->getClassName()->shouldReturn('Baz');
-        $this->getClass()->shouldReturnAnInstanceOf(ClassMetadataInterface::class);
+        $this->getClass()->shouldBeString();
     }
 
     function it_is_extracting_context_from_root_class(
@@ -67,6 +63,6 @@ final class StandardCompilationContextSpec extends ObjectBehavior
         $this->getFilePath()->shouldReturn(__DIR__ . '/Baz.php');
         $this->getNamespace()->shouldReturn(null);
         $this->getClassName()->shouldReturn('Baz');
-        $this->getClass()->shouldReturnAnInstanceOf(ClassMetadataInterface::class);
+        $this->getClass()->shouldBeString();
     }
 }

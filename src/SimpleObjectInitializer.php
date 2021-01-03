@@ -2,33 +2,25 @@
 
 namespace Kiboko\Component\ETL\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\SimpleObjectInitializerBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts\CompilableObjectInitializerInterface;
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use PhpParser\Node;
-use PhpParser\ParserFactory;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyPath;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class SimpleObjectInitializer implements CompilableObjectInitializerInterface
 {
-    /** @var ClassMetadataInterface */
-    private $class;
-    /** @var ExpressionLanguage */
-    private $interpreter;
+    private string $class;
+    private ExpressionLanguage $interpreter;
     /** @var Expression[] */
-    private $expressions;
-    /** @var PropertyAccessor */
-    private $accessor;
+    private iterable $expressions;
+    private PropertyAccessorInterface $accessor;
 
     public function __construct(
-        ClassMetadataInterface $class,
+        string $class,
         ExpressionLanguage $interpreter,
         Expression ...$expressions
     ) {

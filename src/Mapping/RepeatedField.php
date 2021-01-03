@@ -10,79 +10,53 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class RepeatedField implements
     Contracts\FieldScopingInterface,
     Contracts\CompilableInterface
 {
-    /** @var ExpressionLanguage */
-    private $interpreter;
-    /** @var Expression */
-    private $outputExpression;
-    /** @var Expression */
-    private $inputExpression;
-    /** @var Contracts\FieldMapperInterface */
-    private $child;
-    /** @var PropertyAccessor */
-    private $accessor;
-    /** @var int */
-    private $minimumCount;
+    private ExpressionLanguage $interpreter;
+    private Expression $outputExpression;
+    private Expression $inputExpression;
+    private int $repetition;
+    private Contracts\MapperInterface $child;
 
     public function __construct(
         ExpressionLanguage $interpreter,
         Expression $outputExpression,
         Expression $inputExpression,
-        Contracts\FieldMapperInterface $child,
-        int $minimumCount = 1
+        int $repetition,
+        Contracts\MapperInterface $child
     ) {
         $this->interpreter = $interpreter;
         $this->outputExpression = $outputExpression;
         $this->inputExpression = $inputExpression;
+        $this->repetition = $repetition;
         $this->child = $child;
-        $this->minimumCount = $minimumCount;
-        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
-            ->enableExceptionOnInvalidIndex()
-            ->getPropertyAccessor();
     }
 
     public function __invoke($input, $output)
     {
-        $input = $this->interpreter->evaluate($this->inputExpression, [
-            'input' => $input,
-            'output' => $output,
-        ]);
+        for ($index = 0; $index < $this->repetition; ++$index) {
+            $loop = (function($index){
+                $loop = new \stdClass();
+                $loop->index = $index;
+                return $loop;
+            })($index);
 
-        if (!is_iterable($input)) {
-            throw new \InvalidArgumentException(strtr(
-                'The data at path %path% in first argument should be iterable.',
-                [
-                    '%path%' => $this->inputExpression,
-                ]
-            ));
-        }
-
-        $collection = new \MultipleIterator(\MultipleIterator::MIT_NEED_ANY);
-        $collection->attachIterator((function(iterable $iterable){
-            yield from $iterable;
-        })($input));
-        $collection->attachIterator((function () {
-            for ($count = 0; $this->minimumCount > $count; ++$count) {
-                yield;
-            }
-        })());
-
-        foreach ($collection as $index => list($item, $unused)) {
-            $outputPath = $this->interpreter->evaluate($this->outputExpression, [
+            $value = $this->interpreter->evaluate($this->inputExpression, [
                 'input' => $input,
                 'output' => $output,
-                'loop' => (function(int $index){
-                    $loop = new \stdClass();
-                    $loop->index = $index;
-                    return $loop;
-                })($index),
+                'loop' => $loop,
             ]);
 
-            $this->accessor->setValue($output, $outputPath, ($this->child)($item, [], new EmptyPropertyPath()));
+            $this->interpreter->evaluate(sprintf('%s = value', $this->outputExpression), [
+                'input' => $input,
+                'output' => &$output,
+                'loop' => $loop,
+                'value' => $value,
+            ]);
         }
 
         return $output;

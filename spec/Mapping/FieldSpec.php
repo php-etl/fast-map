@@ -3,10 +3,9 @@
 namespace spec\Kiboko\Component\ETL\FastMap\Mapping;
 
 use Kiboko\Component\ETL\FastMap\Contracts;
-use Kiboko\Component\ETL\FastMap\Mapping\Field;
+use Kiboko\Component\ETL\FastMap\Mapping;
 use PhpParser\Node\Expr\Variable;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class FieldSpec extends ObjectBehavior
@@ -18,7 +17,7 @@ final class FieldSpec extends ObjectBehavior
             $inner
         );
 
-        $this->shouldHaveType(Field::class);
+        $this->shouldHaveType(Mapping\Field::class);
         $this->shouldHaveType(Contracts\FieldScopingInterface::class);
         $this->shouldHaveType(Contracts\CompilableInterface::class);
     }
@@ -27,7 +26,7 @@ final class FieldSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][name]'),
-            new Field\CopyValueMapper(
+            new Mapping\Field\CopyValueMapper(
                 new PropertyPath('[user][username]')
             )
         );
@@ -56,7 +55,7 @@ final class FieldSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][name]'),
-            new Field\CopyValueMapper(
+            new Mapping\Field\CopyValueMapper(
                 new PropertyPath('[user][username]')
             )
         );

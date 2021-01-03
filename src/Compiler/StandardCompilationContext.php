@@ -2,20 +2,15 @@
 
 namespace Kiboko\Component\ETL\FastMap\Compiler;
 
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class StandardCompilationContext implements CompilationContextInterface
 {
-    /** @var PropertyPathInterface */
-    private $propertyPath;
-    /** @var string|null */
-    private $path;
-    /** @var ClassMetadataInterface|null */
-    private $class;
+    private PropertyPathInterface $propertyPath;
+    private ?string $path;
+    private ?string $class;
 
-    public function __construct(PropertyPathInterface $propertyPath, ?string $path = null, ?ClassMetadataInterface $class = null)
+    public function __construct(PropertyPathInterface $propertyPath, ?string $path = null, ?string $class = null)
     {
         $this->propertyPath = $propertyPath;
         $this->path = $path;
@@ -38,7 +33,7 @@ final class StandardCompilationContext implements CompilationContextInterface
         return new self(
             $propertyPath,
             $fileName ?? null,
-            !isset($className) ? null : new ClassReferenceMetadata($className, $namespace ?? null)
+            !isset($className) ? null : (!isset($namespace) ? $className : sprintf('%s\\%s', $namespace, $className))
         );
     }
 
@@ -52,18 +47,28 @@ final class StandardCompilationContext implements CompilationContextInterface
         return $this->path;
     }
 
-    public function getClass(): ?ClassMetadataInterface
+    public function getClass(): ?string
     {
         return $this->class;
     }
 
     public function getNamespace(): ?string
     {
-        return $this->class !== null ? $this->class->getNamespace() : null;
+        if ($this->class === null) {
+            return null;
+        }
+
+        $index = strrpos($this->class, '\\');
+        return $index !== false ? substr($this->class, 0, $index) : null;
     }
 
     public function getClassName(): ?string
     {
-        return $this->class !== null ? $this->class->getName() : null;
+        if ($this->class === null) {
+            return null;
+        }
+
+        $index = strrpos($this->class, '\\');
+        return $index !== false ? substr($this->class, $index + 1) : $this->class;
     }
 }

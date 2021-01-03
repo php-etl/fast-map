@@ -8,7 +8,6 @@ use Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface;
 use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
 use Kiboko\Component\ETL\FastMap\Mapping\Composite\ObjectMapper;
 use Kiboko\Component\ETL\FastMap\SimpleObjectInitializer;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -64,7 +63,7 @@ final class ObjectMapperTest extends TestCase
     ) {
         $staticMapper = new ObjectMapper(
             new SimpleObjectInitializer(
-                new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                 $interpreter,
                 ...$expression
             )
@@ -94,7 +93,7 @@ final class ObjectMapperTest extends TestCase
             ),
             new ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                     $interpreter,
                     ...$expression
                 )
@@ -125,7 +124,7 @@ final class ObjectMapperTest extends TestCase
             ),
             new ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                     $interpreter,
                     ...$expression
                 )

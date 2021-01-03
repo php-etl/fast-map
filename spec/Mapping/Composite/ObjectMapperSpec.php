@@ -3,12 +3,9 @@
 namespace spec\Kiboko\Component\ETL\FastMap\Mapping\Composite;
 
 use functional\Kiboko\Component\ETL\FastMap as test;
-use Kiboko\Component\ETL\FastMap\Compiler;
-use Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface;
 use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
 use Kiboko\Component\ETL\FastMap\Mapping\Composite\ObjectMapper;
 use Kiboko\Component\ETL\FastMap\SimpleObjectInitializer;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use PhpParser\Node\Expr\Variable;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\ExpressionLanguage\Expression;
@@ -20,7 +17,7 @@ final class ObjectMapperSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             new SimpleObjectInitializer(
-                new ClassReferenceMetadata('Customer'),
+                'Customer',
                 new ExpressionLanguage()
             )
         );
@@ -32,7 +29,7 @@ final class ObjectMapperSpec extends ObjectBehavior
         $interpreter = new ExpressionLanguage();
         $this->beConstructedWith(
             new SimpleObjectInitializer(
-                new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                 $interpreter,
                 new Expression('input["employee"]["first_name"]'),
                 new Expression('input["employee"]["last_name"]')
@@ -59,7 +56,7 @@ final class ObjectMapperSpec extends ObjectBehavior
 
         $this->beConstructedWith(
             new SimpleObjectInitializer(
-                new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                 $interpreter,
                 new Expression('input["employee"]["first_name"]'),
                 new Expression('input["employee"]["last_name"]')

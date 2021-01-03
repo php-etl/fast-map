@@ -5,14 +5,13 @@ namespace Kiboko\Component\ETL\FastMap\Compiler\Strategy;
 use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\ETL\FastMap\Contracts\CompilableMapperInterface;
 use Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface;
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class Spaghetti implements StrategyInterface
 {
-    public function buildTree(PropertyPathInterface $outputPath, ClassMetadataInterface $class, CompilableMapperInterface ...$mappers): array
+    public function buildTree(PropertyPathInterface $outputPath, string $class, CompilableMapperInterface ...$mappers): array
     {
         $factory = new BuilderFactory();
 

@@ -2,16 +2,14 @@
 
 namespace Kiboko\Component\ETL\FastMap\Compiler\Builder;
 
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
 use PhpParser\Builder;
 use PhpParser\Node;
-use PhpParser\ParserFactory;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class SimpleObjectInitializerBuilder implements Builder
 {
-    /** @var ClassMetadataInterface */
+    /** @var string */
     private $class;
     /** @var Node\Expr */
     private $outputNode;
@@ -21,7 +19,7 @@ final class SimpleObjectInitializerBuilder implements Builder
     private $expressions;
 
     public function __construct(
-        ClassMetadataInterface $class,
+        string $class,
         Node\Expr $outputNode,
         ExpressionLanguage $interpreter,
         Expression ...$expressions

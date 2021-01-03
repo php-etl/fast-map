@@ -7,7 +7,6 @@ use Kiboko\Component\ETL\FastMap\Contracts;
 use Kiboko\Component\ETL\FastMap\Mapping;
 use Kiboko\Component\ETL\FastMap\Mapping\Field;
 use Kiboko\Component\ETL\FastMap\SimpleObjectInitializer;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use PhpParser\Node\Expr\Variable;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\ExpressionLanguage\Expression;
@@ -40,7 +39,7 @@ final class MultipleRelationSpec extends ObjectBehavior
             new Expression('input["users"]'),
             new Mapping\Composite\ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                     $interpreter
                 ),
                 new Field(
@@ -111,7 +110,7 @@ final class MultipleRelationSpec extends ObjectBehavior
             new Expression('input["users"]'),
             new Mapping\Composite\ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                     $interpreter
                 ),
                 new Field(
@@ -152,7 +151,7 @@ final class MultipleRelationSpec extends ObjectBehavior
             new Expression('input["users"]'),
             new Mapping\Composite\ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                     $interpreter
                 ),
                 new Field(
@@ -224,7 +223,7 @@ final class MultipleRelationSpec extends ObjectBehavior
             new Expression('input["users"]'),
             new Mapping\Composite\ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    'functional\\Kiboko\\Component\\ETL\\FastMap\\DTO\\Customer',
                     $interpreter
                 ),
                 new Field(

@@ -2,19 +2,16 @@
 
 namespace Kiboko\Component\ETL\FastMap\Compiler;
 
-use Doctrine\Common\Inflector\Inflector as DoctrineInflector;
+use Doctrine\Inflector\Inflector as DoctrineInflector;
 use Kiboko\Component\ETL\FastMap\Compiler\Strategy\Spaghetti;
 use Kiboko\Component\ETL\FastMap\Compiler\Strategy\StrategyInterface;
 use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
 use PhpParser\PrettyPrinter;
 
 class Compiler
 {
-    /** @var DoctrineInflector */
-    private $inflector;
-    /** @var StrategyInterface */
-    private $strategy;
+    private DoctrineInflector $inflector;
+    private StrategyInterface $strategy;
 
     public function __construct(?StrategyInterface $strategy = null)
     {
@@ -24,7 +21,7 @@ class Compiler
 
     private function randomIdentifier(): string
     {
-        return hash('sha256', random_bytes(1024));
+        return hash('sha256', \random_bytes(1024));
     }
 
     private function randomClassName(string $prefix): string
@@ -39,7 +36,7 @@ class Compiler
         $namespace = $context->getNamespace() ?? 'Kiboko\\__Mapper__';
         $className = $context->getClassName() ?? $this->randomClassName('Mapper');
 
-        $fqcn = (string) ($class = ($context->getClass() ?? new ClassReferenceMetadata($className, $namespace)));
+        $fqcn = (string) ($class = ($context->getClass() ?? sprintf('%s\\%s', $namespace, $className)));
         if (class_exists($fqcn, true)) {
             return new $fqcn();
         }

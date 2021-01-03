@@ -38,7 +38,11 @@ final class CopyValueMapper implements
             $initialValue = null;
         }
 
-        $this->accessor->setValue($output, $outputPath, $initialValue);
+        if ($outputPath->getLength() >= 1) {
+            $this->accessor->setValue($output, $outputPath, $initialValue);
+        } else {
+            $output = $initialValue;
+        }
 
         return $output;
     }

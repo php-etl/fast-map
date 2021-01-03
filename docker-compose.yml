@@ -66,3 +66,15 @@ services:
     command: [ "sleep", "31536000" ]
     environment:
       - COMPOSER_GITHUB_TOKEN
+
+  sh80:
+    image: kiboko/php:8.0-dev-cli
+    user: docker:docker
+    volumes:
+      - ./.docker/php@8.0/cli/config/security.ini:/usr/local/etc/php/conf.d/security.ini:ro
+      - ./:/var/www/html
+      - $HOME/.composer/:/opt/docker/.composer/
+    restart: "no"
+    command: [ "sleep", "31536000" ]
+    environment:
+      - COMPOSER_GITHUB_TOKEN
