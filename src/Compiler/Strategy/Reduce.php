@@ -51,10 +51,12 @@ final class Reduce implements StrategyInterface
         return [
             $factory->namespace((string) $class->getNamespace())
 //                ->addStmt($factory->use(CompiledMapperInterface::class))
-                ->addStmt($factory->class((string) $class->getName())
+                ->addStmt(
+                    $factory->class((string) $class->getName())
                     ->implement(new Node\Name\FullyQualified(CompiledMapperInterface::class))
                     ->makeFinal()
-                    ->addStmt($factory->method('__invoke')
+                    ->addStmt(
+                        $factory->method('__invoke')
                         ->makePublic()
                         ->addParam($factory->param('input'))
                         ->addParam($factory->param('output')->setDefault(null))

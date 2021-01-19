@@ -30,7 +30,7 @@ final class PropertyPathBuilder implements Builder
         $iterator = $this->propertyPath->getIterator();
         if ($this->limit < 0) {
             $iterator = new \LimitIterator($iterator, 0, iterator_count($iterator) + $this->limit);
-        } else if ($this->limit !== null) {
+        } elseif ($this->limit !== null) {
             $iterator = new \LimitIterator($iterator, 0, $this->limit);
         }
 
@@ -40,7 +40,7 @@ final class PropertyPathBuilder implements Builder
                     $pathNode,
                     new Node\Scalar\String_($child)
                 );
-            } else if ($this->propertyPath->isProperty($index)) {
+            } elseif ($this->propertyPath->isProperty($index)) {
                 $pathNode = new Node\Expr\PropertyFetch(
                     $pathNode,
                     new Node\Name($child)

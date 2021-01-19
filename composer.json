@@ -48,8 +48,6 @@
         "johnkary/phpunit-speedtrap": "*",
         "mybuilder/phpunit-accelerator": "*",
         "phpunit/php-invoker": "*",
-        "phpstan/phpstan": "^0.12",
-        "infection/infection": "^0.20",
         "php-etl/phpspec-extension": "^0.2@dev"
     }
 }

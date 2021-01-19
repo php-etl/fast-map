@@ -54,14 +54,14 @@ final class ConcatCopyValuesMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         $inputPaths = array_map(
-            function(string $path) {
+            function (string $path) {
                 return new PropertyPath($path);
             },
             $this->inputPaths
         );
 
         $nodes = array_map(
-            function(PropertyPath $path) {
+            function (PropertyPath $path) {
                 return (new RequiredValuePreconditionBuilder($path, new Node\Expr\Variable('input')))->getNode();
             },
             $inputPaths

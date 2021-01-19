@@ -53,7 +53,7 @@ final class ExpressionLanguageValueMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         return array_merge(
-            array_map(function($variable, $value) {
+            array_map(function ($variable, $value) {
                 return new Node\Expr\Assign(
                     new Node\Expr\Variable($variable),
                     (new ConstantValueBuilder($value))->getNode()
