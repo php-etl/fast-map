@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d059c061303799f73621f3b7c5c548ef",
+    "content-hash": "e1ce5014ca4d52d385a8eaa2ba3c66d8",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -158,12 +158,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/bucket-contracts.git",
-                "reference": "87f958c4cdce33d6af2f395244cbc7b895223512"
+                "reference": "c2d2df6eaca0f391ec275cd797b2e7cfa5c24fc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/bucket-contracts/zipball/87f958c4cdce33d6af2f395244cbc7b895223512",
-                "reference": "87f958c4cdce33d6af2f395244cbc7b895223512",
+                "url": "https://api.github.com/repos/php-etl/bucket-contracts/zipball/c2d2df6eaca0f391ec275cd797b2e7cfa5c24fc5",
+                "reference": "c2d2df6eaca0f391ec275cd797b2e7cfa5c24fc5",
                 "shasum": ""
             },
             "require": {
@@ -203,7 +203,7 @@
                 "issues": "https://github.com/php-etl/bucket-contracts/issues",
                 "source": "https://github.com/php-etl/bucket-contracts/tree/master"
             },
-            "time": "2020-12-10T22:18:53+00:00"
+            "time": "2021-01-11T13:21:08+00:00"
         },
         {
             "name": "php-etl/configurator-contracts",
@@ -211,21 +211,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/configurator-contracts.git",
-                "reference": "c7c99da13f71de92c78254b29604314a548f14c0"
+                "reference": "2f5d50993e81b23e3ae138cc2fc51aad6b145c97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/configurator-contracts/zipball/c7c99da13f71de92c78254b29604314a548f14c0",
-                "reference": "c7c99da13f71de92c78254b29604314a548f14c0",
+                "url": "https://api.github.com/repos/php-etl/configurator-contracts/zipball/2f5d50993e81b23e3ae138cc2fc51aad6b145c97",
+                "reference": "2f5d50993e81b23e3ae138cc2fc51aad6b145c97",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.9@dev",
                 "php": "^8.0",
                 "symfony/config": "^5.2"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^0.12.0@dev"
             },
             "default-branch": true,
             "type": "library",
@@ -258,7 +255,7 @@
                 "issues": "https://github.com/php-etl/configurator-contracts/issues",
                 "source": "https://github.com/php-etl/configurator-contracts/tree/master"
             },
-            "time": "2020-12-16T18:24:09+00:00"
+            "time": "2021-01-19T10:23:49+00:00"
         },
         {
             "name": "php-etl/contracts",
@@ -379,12 +376,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/pipeline-contracts.git",
-                "reference": "18be461a56191ba3896e86889246ceeac262f221"
+                "reference": "1158ab48bbcbafb1140a1b533f0dab6c8e37623a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/pipeline-contracts/zipball/18be461a56191ba3896e86889246ceeac262f221",
-                "reference": "18be461a56191ba3896e86889246ceeac262f221",
+                "url": "https://api.github.com/repos/php-etl/pipeline-contracts/zipball/1158ab48bbcbafb1140a1b533f0dab6c8e37623a",
+                "reference": "1158ab48bbcbafb1140a1b533f0dab6c8e37623a",
                 "shasum": ""
             },
             "require": {
@@ -403,7 +400,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Kiboko\\Contract\\FastMap\\": "src/"
+                    "Kiboko\\Contract\\Pipeline\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -425,7 +422,7 @@
                 "issues": "https://github.com/php-etl/pipeline-contracts/issues",
                 "source": "https://github.com/php-etl/pipeline-contracts/tree/master"
             },
-            "time": "2020-12-10T22:29:12+00:00"
+            "time": "2021-01-11T14:04:51+00:00"
         },
         {
             "name": "phpactor/docblock",
@@ -808,12 +805,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "03489242dd8ea87ba90b7fd0648f70514e4ed760"
+                "reference": "deef1331cfcda4e85ed155e7833de7bf7ec36ea1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/03489242dd8ea87ba90b7fd0648f70514e4ed760",
-                "reference": "03489242dd8ea87ba90b7fd0648f70514e4ed760",
+                "url": "https://api.github.com/repos/symfony/config/zipball/deef1331cfcda4e85ed155e7833de7bf7ec36ea1",
+                "reference": "deef1331cfcda4e85ed155e7833de7bf7ec36ea1",
                 "shasum": ""
             },
             "require": {
@@ -860,7 +857,7 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony Config Component",
+            "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
             "support": {
                 "source": "https://github.com/symfony/config/tree/5.x"
@@ -879,7 +876,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-01T09:26:45+00:00"
+            "time": "2021-01-14T15:42:36+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1021,12 +1018,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "bd2e4c6ac7806a04897169172c75af000388aca6"
+                "reference": "4ff1d2e04790e021941a9bcbed5aca383f8250da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/bd2e4c6ac7806a04897169172c75af000388aca6",
-                "reference": "bd2e4c6ac7806a04897169172c75af000388aca6",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/4ff1d2e04790e021941a9bcbed5aca383f8250da",
+                "reference": "4ff1d2e04790e021941a9bcbed5aca383f8250da",
                 "shasum": ""
             },
             "require": {
@@ -1057,7 +1054,7 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony Filesystem Component",
+            "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
                 "source": "https://github.com/symfony/filesystem/tree/5.x"
@@ -1076,7 +1073,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-01T09:25:51+00:00"
+            "time": "2021-01-11T09:50:50+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -4934,8 +4931,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "nikic/php-parser": 20,
-        "php-etl/contracts": 20,
         "php-etl/metadata": 20,
+        "php-etl/contracts": 20,
         "php-etl/phpspec-extension": 20
     },
     "prefer-stable": false,

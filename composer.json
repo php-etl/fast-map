@@ -21,8 +21,8 @@
         "symfony/expression-language": "^5.2",
         "symfony/cache": "^5.4",
         "doctrine/inflector": "^2.0",
-        "php-etl/contracts": "^0.1@dev",
-        "php-etl/metadata": "^0.2@dev"
+        "php-etl/metadata": "^0.2@dev",
+        "php-etl/contracts": "^0.1.x-dev"
     },
     "autoload": {
         "psr-4": {
