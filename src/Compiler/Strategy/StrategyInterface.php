@@ -1,9 +1,9 @@
 <?php
 
-namespace Kiboko\Component\ETL\FastMap\Compiler\Strategy;
+namespace Kiboko\Component\FastMap\Compiler\Strategy;
 
-use Kiboko\Component\ETL\FastMap\Contracts\CompilableMapperInterface;
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
+use Kiboko\Component\FastMap\Contracts\CompilableMapperInterface;
+use Kiboko\Component\Metadata\ClassMetadataInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 interface StrategyInterface

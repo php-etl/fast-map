@@ -1,8 +1,8 @@
 <?php
 
-namespace Kiboko\Component\ETL\FastMap\Compiler;
+namespace Kiboko\Component\FastMap\Compiler;
 
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
+use Kiboko\Component\Metadata\ClassMetadataInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 interface CompilationContextInterface

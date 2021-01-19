@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\Compiler\Builder;
+namespace Kiboko\Component\FastMap\Compiler\Builder;
 
-use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
+use Kiboko\Component\Metadata\ClassTypeMetadata;
 use PhpParser\Builder;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;

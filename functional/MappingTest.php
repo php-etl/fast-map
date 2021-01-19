@@ -1,26 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\ETL\FastMap;
+namespace functional\Kiboko\Component\FastMap;
 
-use Kiboko\Component\ETL\Metadata\ArgumentListMetadata;
-use Kiboko\Component\ETL\Metadata\FieldMetadata;
-use Kiboko\Component\ETL\Metadata\FieldGuesser;
-use Kiboko\Component\ETL\Metadata\ClassMetadataBuilder;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
-use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
-use Kiboko\Component\ETL\Metadata\ListTypeMetadata;
-use Kiboko\Component\ETL\Metadata\MethodGuesser\ReflectionMethodGuesser;
-use Kiboko\Component\ETL\Metadata\MethodMetadata;
-use Kiboko\Component\ETL\Metadata\PropertyGuesser\ReflectionPropertyGuesser;
-use Kiboko\Component\ETL\Metadata\PropertyMetadata;
-use Kiboko\Component\ETL\Metadata\RelationGuesser;
-use Kiboko\Component\ETL\Metadata\ScalarTypeMetadata;
-use Kiboko\Component\ETL\Metadata\TypeGuesser\CompositeTypeGuesser;
-use Kiboko\Component\ETL\Metadata\TypeGuesser\Docblock\DocblockTypeGuesser;
-use Kiboko\Component\ETL\Metadata\TypeGuesser\Native\Php74TypeGuesser;
-use Kiboko\Component\ETL\Metadata\UnaryRelationMetadata;
-use Kiboko\Component\ETL\Metadata\UnionTypeMetadata;
-use Kiboko\Component\ETL\Metadata\VariadicArgumentMetadata;
+use Kiboko\Component\Metadata\ArgumentListMetadata;
+use Kiboko\Component\Metadata\FieldMetadata;
+use Kiboko\Component\Metadata\FieldGuesser;
+use Kiboko\Component\Metadata\ClassMetadataBuilder;
+use Kiboko\Component\Metadata\ClassReferenceMetadata;
+use Kiboko\Component\Metadata\ClassTypeMetadata;
+use Kiboko\Component\Metadata\ListTypeMetadata;
+use Kiboko\Component\Metadata\MethodGuesser\ReflectionMethodGuesser;
+use Kiboko\Component\Metadata\MethodMetadata;
+use Kiboko\Component\Metadata\PropertyGuesser\ReflectionPropertyGuesser;
+use Kiboko\Component\Metadata\PropertyMetadata;
+use Kiboko\Component\Metadata\RelationGuesser;
+use Kiboko\Component\Metadata\ScalarTypeMetadata;
+use Kiboko\Component\Metadata\TypeGuesser\CompositeTypeGuesser;
+use Kiboko\Component\Metadata\TypeGuesser\Docblock\DocblockTypeGuesser;
+use Kiboko\Component\Metadata\TypeGuesser\Native\Php74TypeGuesser;
+use Kiboko\Component\Metadata\UnaryRelationMetadata;
+use Kiboko\Component\Metadata\UnionTypeMetadata;
+use Kiboko\Component\Metadata\VariadicArgumentMetadata;
 use Phpactor\Docblock\DocblockFactory;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +30,7 @@ final class MappingTest extends TestCase
     public function dataProvider()
     {
         yield [
-            (new ClassTypeMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'))
+            (new ClassTypeMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'))
                 ->addProperties(
                     new PropertyMetadata(
                         'firstName',

@@ -181,7 +181,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Kiboko\\Contract\\ETL\\Bucket\\": "src/"
+                    "Kiboko\\Contract\\Bucket\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -236,7 +236,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Kiboko\\Contract\\ETL\\Configurator\\": "src/"
+                    "Kiboko\\Contract\\Configurator\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -314,12 +314,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/metadata.git",
-                "reference": "5d575f4c20ac2fa5ac56e11d65f8924cad2ec2a6"
+                "reference": "cdf71e78fac30d029a58519b4af4ea5c193a3bad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/metadata/zipball/5d575f4c20ac2fa5ac56e11d65f8924cad2ec2a6",
-                "reference": "5d575f4c20ac2fa5ac56e11d65f8924cad2ec2a6",
+                "url": "https://api.github.com/repos/php-etl/metadata/zipball/cdf71e78fac30d029a58519b4af4ea5c193a3bad",
+                "reference": "cdf71e78fac30d029a58519b4af4ea5c193a3bad",
                 "shasum": ""
             },
             "require": {
@@ -349,7 +349,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Kiboko\\Component\\ETL\\Metadata\\": "src/"
+                    "Kiboko\\Component\\Metadata\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -371,7 +371,7 @@
                 "issues": "https://github.com/php-etl/metadata/issues",
                 "source": "https://github.com/php-etl/metadata/tree/master"
             },
-            "time": "2021-01-03T21:33:11+00:00"
+            "time": "2021-01-18T16:15:58+00:00"
         },
         {
             "name": "php-etl/pipeline-contracts",
@@ -403,7 +403,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Kiboko\\Contract\\ETL\\Pipeline\\": "src/"
+                    "Kiboko\\Contract\\FastMap\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",

@@ -7,12 +7,12 @@ marked as compilable that can combine into a new native mapper and execute it.
 ```php
 <?php
 
-use Kiboko\Component\ETL\FastMap\CompiledMapper;
-use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
-use Kiboko\Component\ETL\FastMap\Compiler\StandardCompilationContext;
-use Kiboko\Component\ETL\FastMap\Mapping\Composite;
-use Kiboko\Component\ETL\FastMap\Mapping\Field;
-use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Component\FastMap\CompiledMapper;
+use Kiboko\Component\FastMap\Compiler\Compiler;
+use Kiboko\Component\FastMap\Compiler\StandardCompilationContext;
+use Kiboko\Component\FastMap\Mapping\Composite;
+use Kiboko\Component\FastMap\Mapping\Field;
+use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 $input = [

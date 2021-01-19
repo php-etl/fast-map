@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\ETL\FastMap\DTO;
+namespace functional\Kiboko\Component\FastMap\DTO;
 
 final class Address
 {

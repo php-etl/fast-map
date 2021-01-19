@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\ETL\FastMap\Mapper\Composite;
+namespace functional\Kiboko\Component\FastMap\Mapper\Composite;
 
-use functional\Kiboko\Component\ETL\FastMap as test;
-use Kiboko\Component\ETL\FastMap\Compiler;
-use Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface;
-use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
-use Kiboko\Component\ETL\FastMap\Mapping\Composite\ObjectMapper;
-use Kiboko\Component\ETL\FastMap\SimpleObjectInitializer;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
+use functional\Kiboko\Component\FastMap as test;
+use Kiboko\Component\FastMap\Compiler;
+use Kiboko\Component\FastMap\Contracts\CompiledMapperInterface;
+use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Component\FastMap\Mapping\Composite\ObjectMapper;
+use Kiboko\Component\FastMap\SimpleObjectInitializer;
+use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -64,7 +64,7 @@ final class ObjectMapperTest extends TestCase
     ) {
         $staticMapper = new ObjectMapper(
             new SimpleObjectInitializer(
-                new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
                 $interpreter,
                 ...$expression
             )
@@ -94,7 +94,7 @@ final class ObjectMapperTest extends TestCase
             ),
             new ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
                     $interpreter,
                     ...$expression
                 )
@@ -125,7 +125,7 @@ final class ObjectMapperTest extends TestCase
             ),
             new ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
                     $interpreter,
                     ...$expression
                 )

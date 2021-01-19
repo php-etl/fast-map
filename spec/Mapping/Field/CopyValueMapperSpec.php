@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap\Mapping\Field;
+namespace spec\Kiboko\Component\FastMap\Mapping\Field;
 
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\ETL\FastMap\Contracts\CompilableMapperInterface;
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\FastMap\Mapping\Field\CopyValueMapper;
+use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
+use Kiboko\Component\FastMap\Contracts\CompilableMapperInterface;
+use Kiboko\Component\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\FastMap\Mapping\Field\CopyValueMapper;
 use PhpParser\Node;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPath;

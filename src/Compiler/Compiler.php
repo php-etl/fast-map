@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\Compiler;
+namespace Kiboko\Component\FastMap\Compiler;
 
 use Doctrine\Common\Inflector\Inflector as DoctrineInflector;
-use Kiboko\Component\ETL\FastMap\Compiler\Strategy\Spaghetti;
-use Kiboko\Component\ETL\FastMap\Compiler\Strategy\StrategyInterface;
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
+use Kiboko\Component\FastMap\Compiler\Strategy\Spaghetti;
+use Kiboko\Component\FastMap\Compiler\Strategy\StrategyInterface;
+use Kiboko\Component\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use PhpParser\PrettyPrinter;
 
 class Compiler

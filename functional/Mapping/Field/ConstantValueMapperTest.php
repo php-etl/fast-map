@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\ETL\FastMap\Mapping\Field;
+namespace functional\Kiboko\Component\FastMap\Mapping\Field;
 
-use Kiboko\Component\ETL\FastMap\Compiler;
-use Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface;
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\FastMap\Mapping\Field\ConstantValueMapper;
+use Kiboko\Component\FastMap\Compiler;
+use Kiboko\Component\FastMap\Contracts\CompiledMapperInterface;
+use Kiboko\Component\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\FastMap\Mapping\Field\ConstantValueMapper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;

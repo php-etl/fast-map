@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\Compiler\Builder;
+namespace Kiboko\Component\FastMap\Compiler\Builder;
 
-use Kiboko\Component\ETL\Metadata\TypeMetadataInterface;
+use Kiboko\Component\Metadata\TypeMetadataInterface;
 use PhpParser\Builder;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
@@ -39,19 +39,19 @@ final class CompositeInitialisationPreconditionBuilder implements Builder
                     $pathNode,
                     is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Scalar\String_($item)
                 );
-                
+
                 continue;
             }
-            
+
             if ($iterator->isProperty()) {
                 $pathNode = new Node\Expr\PropertyFetch(
                     $pathNode,
                     is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Name($item)
                 );
-                
+
                 continue;
             }
-            
+
             throw new \RuntimeException('Path spec should be either an array dimension access or an object property access.');
         }
 

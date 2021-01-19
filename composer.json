@@ -26,14 +26,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Kiboko\\Component\\ETL\\FastMap\\": "src/"
+            "Kiboko\\Component\\FastMap\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Kiboko\\Component\\ETL\\FastMap\\": "spec/",
-            "unit\\Kiboko\\Component\\ETL\\FastMap\\": "unit/",
-            "functional\\Kiboko\\Component\\ETL\\FastMap\\": "functional/"
+            "spec\\Kiboko\\Component\\FastMap\\": "spec/",
+            "unit\\Kiboko\\Component\\FastMap\\": "unit/",
+            "functional\\Kiboko\\Component\\FastMap\\": "functional/"
         }
     },
     "extra": {

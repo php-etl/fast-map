@@ -21,8 +21,8 @@ Then, the factory can be used to generate your mapping definition.
 
 ```php
 <?php
-use Kiboko\Component\ETL\FastMap\MappingIteration;
-use Kiboko\Component\ETL\Metadata;
+use Kiboko\Component\FastMap\MappingIteration;
+use Kiboko\Component\Metadata;
 
 /** @var Metadata\ClassTypeMetadata $metadata */
 $metadata = (new Metadata\ClassMetadataBuilder())->buildFromFQCN('Lorem\\Ipsum\\Dolor');

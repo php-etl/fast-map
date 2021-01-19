@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\MappingIteration;
+namespace Kiboko\Component\FastMap\MappingIteration;
 
-use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
-use Kiboko\Component\ETL\Metadata\FieldMetadataInterface;
-use Kiboko\Component\ETL\Metadata\RelationMetadataInterface;
+use Kiboko\Component\Metadata\ClassTypeMetadata;
+use Kiboko\Component\Metadata\FieldMetadataInterface;
+use Kiboko\Component\Metadata\RelationMetadataInterface;
 
 final class ClassMappingIterator implements \RecursiveIterator
 {

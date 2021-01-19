@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap\Mapping;
+namespace spec\Kiboko\Component\FastMap\Mapping;
 
-use functional\Kiboko\Component\ETL\FastMap\DTO\Customer;
-use Kiboko\Component\ETL\FastMap\Contracts\ObjectMapperInterface;
-use Kiboko\Component\ETL\FastMap\Mapping;
-use Kiboko\Component\ETL\FastMap\Mapping\Field;
-use Kiboko\Component\ETL\FastMap\SimpleObjectInitializer;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
+use functional\Kiboko\Component\FastMap\DTO\Customer;
+use Kiboko\Component\FastMap\Contracts\ObjectMapperInterface;
+use Kiboko\Component\FastMap\Mapping;
+use Kiboko\Component\FastMap\Mapping\Field;
+use Kiboko\Component\FastMap\SimpleObjectInitializer;
+use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use PhpParser\Node\Expr\Variable;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\ExpressionLanguage\Expression;
@@ -38,7 +38,7 @@ final class MultipleRelationSpec extends ObjectBehavior
             new Expression('input["users"]'),
             new Mapping\Composite\ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
                     $interpreter
                 ),
                 new Field(
@@ -109,7 +109,7 @@ final class MultipleRelationSpec extends ObjectBehavior
             new Expression('input["users"]'),
             new Mapping\Composite\ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
                     $interpreter
                 ),
                 new Field(
@@ -150,7 +150,7 @@ final class MultipleRelationSpec extends ObjectBehavior
             new Expression('input["users"]'),
             new Mapping\Composite\ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
                     $interpreter
                 ),
                 new Field(
@@ -222,7 +222,7 @@ final class MultipleRelationSpec extends ObjectBehavior
             new Expression('input["users"]'),
             new Mapping\Composite\ObjectMapper(
                 new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\ETL\FastMap\DTO'),
+                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
                     $interpreter
                 ),
                 new Field(

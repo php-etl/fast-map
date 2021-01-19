@@ -2,7 +2,7 @@
 
 namespace KibokoPhpSpecExtension\Matcher;
 
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\FastMap\Contracts\MapperInterface;
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\Formatter\Presenter\Value\ValuePresenter;

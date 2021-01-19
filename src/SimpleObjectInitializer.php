@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap;
+namespace Kiboko\Component\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\SimpleObjectInitializerBuilder;
-use Kiboko\Component\ETL\FastMap\Contracts\CompilableObjectInitializerInterface;
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
+use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
+use Kiboko\Component\FastMap\Compiler\Builder\SimpleObjectInitializerBuilder;
+use Kiboko\Component\FastMap\Contracts\CompilableObjectInitializerInterface;
+use Kiboko\Component\Metadata\ClassMetadataInterface;
+use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use PhpParser\Node;
 use PhpParser\ParserFactory;
 use Symfony\Component\ExpressionLanguage\Expression;

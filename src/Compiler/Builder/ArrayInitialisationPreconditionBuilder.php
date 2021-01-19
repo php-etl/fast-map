@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\Compiler\Builder;
+namespace Kiboko\Component\FastMap\Compiler\Builder;
 
 use PhpParser\Builder;
 use PhpParser\Node;

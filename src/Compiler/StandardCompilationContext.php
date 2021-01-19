@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\Compiler;
+namespace Kiboko\Component\FastMap\Compiler;
 
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
+use Kiboko\Component\Metadata\ClassMetadataInterface;
+use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class StandardCompilationContext implements CompilationContextInterface

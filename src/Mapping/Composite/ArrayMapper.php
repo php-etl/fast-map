@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\Mapping\Composite;
+namespace Kiboko\Component\FastMap\Mapping\Composite;
 
-use Kiboko\Component\ETL\FastMap\Contracts;
-use \Kiboko\Component\ETL\FastMap\Contracts\CompilableInterface;
+use Kiboko\Component\FastMap\Contracts;
+use \Kiboko\Component\FastMap\Contracts\CompilableInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;

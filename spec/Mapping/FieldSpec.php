@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap\Mapping;
+namespace spec\Kiboko\Component\FastMap\Mapping;
 
-use Kiboko\Component\ETL\FastMap\Contracts\FieldMapperInterface;
-use Kiboko\Component\ETL\FastMap\Mapping\Field;
+use Kiboko\Component\FastMap\Contracts\FieldMapperInterface;
+use Kiboko\Component\FastMap\Mapping\Field;
 use PhpParser\Node\Expr\Variable;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;

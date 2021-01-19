@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\ETL\FastMap;
+namespace functional\Kiboko\Component\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler;
-use Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface;
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\FastMap\Mapping\Field\ExpressionLanguageValueMapper;
+use Kiboko\Component\FastMap\Compiler;
+use Kiboko\Component\FastMap\Contracts\CompiledMapperInterface;
+use Kiboko\Component\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\FastMap\Mapping\Field\ExpressionLanguageValueMapper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;

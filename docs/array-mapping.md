@@ -10,7 +10,7 @@ This mapper will use `symfony/property-access` syntax to copy-paste values from 
 ```php
 <?php
 
-use Kiboko\Component\ETL\FastMap\Mapping\Field\CopyValueMapper;
+use Kiboko\Component\FastMap\Mapping\Field\CopyValueMapper;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 $input = [
@@ -35,7 +35,7 @@ This mapper will use `symfony/property-access` syntax to set values to the outpu
 ```php
 <?php
 
-use Kiboko\Component\ETL\FastMap\Mapping\Field\ConstantValueMapper;
+use Kiboko\Component\FastMap\Mapping\Field\ConstantValueMapper;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 $input = [];
@@ -54,7 +54,7 @@ This mapper will use `symfony/property-access` syntax to copy-paste values from 
 ```php
 <?php
 
-use Kiboko\Component\ETL\FastMap\Mapping\Field\ConcatCopyValuesMapper;
+use Kiboko\Component\FastMap\Mapping\Field\ConcatCopyValuesMapper;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 $input = [
@@ -86,7 +86,7 @@ This mapper will use `symfony/property-access` syntax to copy-paste values from 
 ```php
 <?php
 
-use Kiboko\Component\ETL\FastMap\Mapping\Field\ExpressionLanguageValueMapper;
+use Kiboko\Component\FastMap\Mapping\Field\ExpressionLanguageValueMapper;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyPath;

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap\Mapping;
+namespace spec\Kiboko\Component\FastMap\Mapping;
 
-use Kiboko\Component\ETL\FastMap\Contracts;
-use Kiboko\Component\ETL\FastMap\Mapping;
-use Kiboko\Component\ETL\FastMap\Mapping\Field;
+use Kiboko\Component\FastMap\Contracts;
+use Kiboko\Component\FastMap\Mapping;
+use Kiboko\Component\FastMap\Mapping\Field;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;

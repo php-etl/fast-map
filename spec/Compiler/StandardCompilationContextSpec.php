@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap\Compiler;
+namespace spec\Kiboko\Component\FastMap\Compiler;
 
-use Kiboko\Component\ETL\FastMap\Compiler\CompilationContextInterface;
-use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
-use Kiboko\Component\ETL\FastMap\Compiler\StandardCompilationContext;
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\ETL\Metadata\ClassMetadataInterface;
-use Kiboko\Component\ETL\Metadata\ClassReferenceMetadata;
+use Kiboko\Component\FastMap\Compiler\CompilationContextInterface;
+use Kiboko\Component\FastMap\Compiler\Compiler;
+use Kiboko\Component\FastMap\Compiler\StandardCompilationContext;
+use Kiboko\Component\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\Metadata\ClassMetadataInterface;
+use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 

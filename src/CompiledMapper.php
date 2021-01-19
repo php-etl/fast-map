@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap;
+namespace Kiboko\Component\FastMap;
 
-use Kiboko\Component\ETL\FastMap\Compiler\CompilationContextInterface;
-use Kiboko\Component\ETL\FastMap\Compiler\Compiler;
-use Kiboko\Component\ETL\FastMap\Contracts\MapperInterface;
+use Kiboko\Component\FastMap\Compiler\CompilationContextInterface;
+use Kiboko\Component\FastMap\Compiler\Compiler;
+use Kiboko\Component\FastMap\Contracts\MapperInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class CompiledMapper implements MapperInterface

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap\Mapping\Composite;
+namespace spec\Kiboko\Component\FastMap\Mapping\Composite;
 
-use Kiboko\Component\ETL\FastMap\Mapping\Composite\ArrayMapper;
-use Kiboko\Component\ETL\FastMap\Mapping\Field;
-use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Component\FastMap\Mapping\Composite\ArrayMapper;
+use Kiboko\Component\FastMap\Mapping\Field;
+use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPath;
 

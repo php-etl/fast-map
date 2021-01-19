@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\Mapping;
+namespace Kiboko\Component\FastMap\Mapping;
 
-use Kiboko\Component\ETL\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\ETL\FastMap\Contracts;
-use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
+use Kiboko\Component\FastMap\Contracts;
+use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
 use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;

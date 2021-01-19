@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace spec\Kiboko\Component\ETL\FastMap\MappingIteration;
+namespace spec\Kiboko\Component\FastMap\MappingIteration;
 
-use Kiboko\Component\ETL\FastMap\MappingIteration\MappingIterator;
-use Kiboko\Component\ETL\Metadata\CompositeTypeMetadataInterface;
+use Kiboko\Component\FastMap\MappingIteration\MappingIterator;
+use Kiboko\Component\Metadata\CompositeTypeMetadataInterface;
 use PhpSpec\ObjectBehavior;
 
 final class MappingIteratorSpec extends ObjectBehavior

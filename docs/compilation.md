@@ -12,11 +12,11 @@ Considering you have the following script:
 ```php
 <?php
 
-use Kiboko\Component\ETL\FastMap\Compiler;
-use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
-use Kiboko\Component\ETL\FastMap\Mapping\Composite;
-use Kiboko\Component\ETL\FastMap\Mapping\Field;
-use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
+use Kiboko\Component\FastMap\Compiler;
+use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Component\FastMap\Mapping\Composite;
+use Kiboko\Component\FastMap\Mapping\Field;
+use Kiboko\Component\Metadata\ClassTypeMetadata;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 $compiler = new Compiler\Strategy\Spaghetti();
@@ -51,7 +51,7 @@ Will result in the generation of the following class:
 
 namespace Foo\Component;
 
-final class BarMapper implements \Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface
+final class BarMapper implements \Kiboko\Component\FastMap\Contracts\CompiledMapperInterface
 {
     public function __invoke($input, $output = null)
     {
@@ -94,11 +94,11 @@ Considering you have the following script:
 ```php
 <?php
 
-use Kiboko\Component\ETL\FastMap\Compiler;
-use Kiboko\Component\ETL\FastMap\PropertyAccess\EmptyPropertyPath;
-use Kiboko\Component\ETL\FastMap\Mapping\Composite;
-use Kiboko\Component\ETL\FastMap\Mapping\Field;
-use Kiboko\Component\ETL\Metadata\ClassTypeMetadata;
+use Kiboko\Component\FastMap\Compiler;
+use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Component\FastMap\Mapping\Composite;
+use Kiboko\Component\FastMap\Mapping\Field;
+use Kiboko\Component\Metadata\ClassTypeMetadata;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 $compiler = new Compiler\Strategy\Reduce();
@@ -133,7 +133,7 @@ Will result in the generation of the following class:
 
 namespace Foo\Component;
 
-final class FooMapper implements \Kiboko\Component\ETL\FastMap\Contracts\CompiledMapperInterface
+final class FooMapper implements \Kiboko\Component\FastMap\Contracts\CompiledMapperInterface
 {
     public function __invoke($input, $output = null)
     {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\FastMap\PropertyAccess;
+namespace Kiboko\Component\FastMap\PropertyAccess;
 
 use Symfony\Component\PropertyAccess\Exception\OutOfBoundsException;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
