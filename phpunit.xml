@@ -26,10 +26,6 @@
         verbose="true">
 
     <testsuites>
-        <testsuite name="unit">
-            <directory>unit/</directory>
-            <exclude>vendor/</exclude>
-        </testsuite>
         <testsuite name="functional">
             <directory>functional/</directory>
             <exclude>vendor/</exclude>
@@ -49,6 +45,5 @@
                 </array>
             </arguments>
         </listener>
-        <listener class="MyBuilder\PhpunitAccelerator\TestListener"/>
     </listeners>
 </phpunit>

@@ -2,7 +2,9 @@
 
 namespace Kiboko\Component\FastMap\Compiler;
 
-use Doctrine\Common\Inflector\Inflector as DoctrineInflector;
+use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
+use Doctrine\Inflector\Language;
 use Kiboko\Component\FastMap\Compiler\Strategy\Spaghetti;
 use Kiboko\Component\FastMap\Compiler\Strategy\StrategyInterface;
 use Kiboko\Component\FastMap\Contracts\MapperInterface;
@@ -11,7 +13,7 @@ use PhpParser\PrettyPrinter;
 
 class Compiler
 {
-    /** @var DoctrineInflector */
+    /** @var Inflector */
     private $inflector;
     /** @var StrategyInterface */
     private $strategy;
@@ -19,7 +21,7 @@ class Compiler
     public function __construct(?StrategyInterface $strategy = null)
     {
         $this->strategy = $strategy ?? new Spaghetti();
-        $this->inflector = new DoctrineInflector();
+        $this->inflector = InflectorFactory::createForLanguage(Language::ENGLISH)->build();
     }
 
     private function randomIdentifier(): string
