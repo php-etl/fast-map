@@ -43,9 +43,12 @@ final class CopyValueMapper implements
 
         return [
             (new RequiredValuePreconditionBuilder($inputPath, new Node\Expr\Variable('input')))->getNode(),
-            new Node\Expr\Assign(
-                $outputNode,
-                (new PropertyPathBuilder($inputPath, new Node\Expr\Variable('input')))->getNode()
+
+            new Node\Stmt\Expression(
+                new Node\Expr\Assign(
+                    $outputNode,
+                    (new PropertyPathBuilder($inputPath, new Node\Expr\Variable('input')))->getNode()
+                ),
             ),
         ];
     }

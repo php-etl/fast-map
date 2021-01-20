@@ -87,10 +87,12 @@ final class ConcatCopyValuesMapper implements
         return array_merge(
             $nodes,
             [
-                new Node\Expr\Assign(
-                    $outputNode,
-                    $factory->concat(...$values)
-                )
+                new Node\Stmt\Expression(
+                    new Node\Expr\Assign(
+                        $outputNode,
+                        $factory->concat(...$values)
+                    ),
+                ),
             ]
         );
     }

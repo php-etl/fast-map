@@ -37,9 +37,11 @@ final class ConstantValueMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         return [
-            new Node\Expr\Assign(
-                $outputNode,
-                new Node\Scalar\String_($this->value)
+            new Node\Stmt\Expression(
+                new Node\Expr\Assign(
+                    $outputNode,
+                    new Node\Scalar\String_($this->value)
+                ),
             ),
         ];
     }
