@@ -43,6 +43,7 @@ final class ArrayMapper implements
 
     public function compile(Node\Expr $outputNode): array
     {
+        $mappers = array_merge(...$this->compileMappers($outputNode));
         return array_merge(
             [
                 new Node\Stmt\Expression(
@@ -55,7 +56,12 @@ final class ArrayMapper implements
                     ),
                 ),
             ],
-            ...$this->compileMappers($outputNode)
+            $mappers,
+            [
+                new Node\Stmt\Return_(
+                    expr: new Node\Expr\Variable('output')
+                )
+            ],
         );
     }
 
