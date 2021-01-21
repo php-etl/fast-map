@@ -45,9 +45,14 @@ final class ArrayMapper implements
     {
         return array_merge(
             [
-                new Node\Expr\BinaryOp\Coalesce(
-                    left: $outputNode,
-                    right: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
+                new Node\Stmt\Expression(
+                    expr: new Node\Expr\Assign(
+                        var: $outputNode,
+                        expr: new Node\Expr\BinaryOp\Coalesce(
+                            left: $outputNode,
+                            right: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
+                        ),
+                    ),
                 ),
             ],
             ...$this->compileMappers($outputNode)
