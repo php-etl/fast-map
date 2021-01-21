@@ -44,6 +44,7 @@ final class ArrayMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         return array_merge(
+            new Node\Expr\BinaryOp\Coalesce($outputNode, new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])),
             ...$this->compileMappers($outputNode)
         );
     }
