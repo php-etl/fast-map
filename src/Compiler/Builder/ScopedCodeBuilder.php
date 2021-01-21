@@ -31,10 +31,16 @@ final class ScopedCodeBuilder implements Builder
                     ),
                     new Node\Param(
                         var: new Node\Expr\Variable('output'),
-                        byRef: true,
                     ),
                 ],
-                'stmts' => $this->stmts
+                'stmts' => array_merge(
+                    $this->stmts,
+                    [
+                        new Node\Stmt\Return_(
+                            expr: new Node\Expr\Variable('output')
+                        )
+                    ],
+                ),
             ]),
             [
                 $this->input,
