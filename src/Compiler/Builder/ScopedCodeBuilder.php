@@ -21,13 +21,18 @@ final class ScopedCodeBuilder implements Builder
         $this->stmts = $stmts;
     }
 
-    public function getNode(): Node
+    public function getNode(): Node\Expr
     {
         return new Node\Expr\FuncCall(
             new Node\Expr\Closure([
                 'params' => [
-                    new Node\Param(new Node\Expr\Variable('input')),
-                    new Node\Param(new Node\Expr\Variable('output')),
+                    new Node\Param(
+                        var: new Node\Expr\Variable('input'),
+                    ),
+                    new Node\Param(
+                        var: new Node\Expr\Variable('output'),
+                        byRef: true,
+                    ),
                 ],
                 'stmts' => $this->stmts
             ]),

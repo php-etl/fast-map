@@ -23,7 +23,7 @@ final class PropertyPathBuilder implements Builder
         $this->limit = $limit;
     }
 
-    public function getNode(): Node
+    public function getNode(): Node\Expr
     {
         $pathNode = $this->pathNode;
 

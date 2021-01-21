@@ -80,13 +80,15 @@ final class ListField implements
                 new Node\Expr\Variable('item'),
                 [
                     'stmts' => [
-                        (new ScopedCodeBuilder(
-                            new Node\Expr\Variable('item'),
-                            (new PropertyPathBuilder($this->outputPath, $outputNode))->getNode(),
-                            $this->child->compile($outputNode)
-                        ))->getNode(),
-                    ]
-                ]
+                        new Node\Stmt\Expression(
+                            (new ScopedCodeBuilder(
+                                new Node\Expr\Variable('item'),
+                                (new PropertyPathBuilder($this->outputPath, $outputNode))->getNode(),
+                                $this->child->compile($outputNode),
+                            ))->getNode(),
+                        ),
+                    ],
+                ],
             ),
         ];
     }

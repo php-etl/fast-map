@@ -24,7 +24,7 @@ final class ExpressionLanguageToPhpParserBuilder implements Builder
         $this->variables = $variables;
     }
 
-    public function getNode(): Node
+    public function getNode(): Node\Expr
     {
         $expression = $this->interpreter->parse($this->expression, array_merge($this->variables, ['input', 'output']));
 
