@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\FastMap\Mapper\Composite;
+namespace functional\Kiboko\Component\FastMap\Mapping\Composite;
 
 use functional\Kiboko\Component\FastMap as test;
 use Kiboko\Component\FastMap\Compiler;
@@ -84,37 +84,6 @@ final class ObjectMapperTest extends TestCase
         Expression ...$expression
     ) {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
-
-        /** @var CompiledMapperInterface $compiledMapper */
-        $compiledMapper = $compiler->compile(
-            new Compiler\StandardCompilationContext(
-                $outputField,
-                null,
-                null
-            ),
-            new ObjectMapper(
-                new SimpleObjectInitializer(
-                    new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
-                    $interpreter,
-                    ...$expression
-                )
-            )
-        );
-
-        $this->assertEquals($expected, $compiledMapper($input, []));
-    }
-
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithReduceStrategy(
-        $expected,
-        $input,
-        ExpressionLanguage $interpreter,
-        PropertyPathInterface $outputField,
-        Expression ...$expression
-    ) {
-        $compiler = new Compiler\Compiler(new Compiler\Strategy\Reduce());
 
         /** @var CompiledMapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(

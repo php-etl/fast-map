@@ -12,7 +12,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ListFieldSpec extends ObjectBehavior
 {
-    function it_is_initializable(Contracts\ArrayMapperInterface $inner)
+    public function it_is_initializable(Contracts\ArrayMapperInterface $inner)
     {
         $interpreter = new ExpressionLanguage();
 
@@ -26,7 +26,7 @@ final class ListFieldSpec extends ObjectBehavior
         $this->shouldHaveType(Mapping\ListField::class);
     }
 
-    function it_is_mapping_data()
+    public function it_is_mapping_data()
     {
         $interpreter = new ExpressionLanguage();
 
@@ -97,7 +97,7 @@ final class ListFieldSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_failing_on_invalid_data()
+    public function it_is_failing_on_invalid_data()
     {
         $interpreter = new ExpressionLanguage();
 
@@ -125,7 +125,9 @@ final class ListFieldSpec extends ObjectBehavior
         $this->shouldThrow(
             new \InvalidArgumentException('The data at path input["users"] in first argument should be iterable.')
         )
-            ->during('__invoke', [
+            ->during(
+                '__invoke',
+                [
                     [
                         'users' => new \StdClass,
                     ],

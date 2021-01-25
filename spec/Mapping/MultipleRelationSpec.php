@@ -16,7 +16,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class MultipleRelationSpec extends ObjectBehavior
 {
-    function it_is_initializable(ObjectMapperInterface $inner)
+    public function it_is_initializable(ObjectMapperInterface $inner)
     {
         $this->beConstructedWith(
             new PropertyPath('[customers]'),
@@ -28,7 +28,7 @@ final class MultipleRelationSpec extends ObjectBehavior
         $this->shouldHaveType(Mapping\MultipleRelation::class);
     }
 
-    function it_is_mapping_data()
+    public function it_is_mapping_data()
     {
         $interpreter = new ExpressionLanguage();
 
@@ -99,7 +99,7 @@ final class MultipleRelationSpec extends ObjectBehavior
         );
     }
 
-    function it_is_failing_on_invalid_data()
+    public function it_is_failing_on_invalid_data()
     {
         $interpreter = new ExpressionLanguage();
 
@@ -131,16 +131,18 @@ final class MultipleRelationSpec extends ObjectBehavior
         $this->shouldThrow(
             new \InvalidArgumentException('The data at path input["users"] in first argument should be iterable.')
         )
-            ->during('__invoke', [
+            ->during(
+                '__invoke',
+                [
                 [
                     'users' => new \StdClass,
                 ],
                 []
             ]
-        );
+            );
     }
 
-    function it_is_mapping_data_as_compiled()
+    public function it_is_mapping_data_as_compiled()
     {
         $interpreter = new ExpressionLanguage();
 
@@ -177,7 +179,7 @@ final class MultipleRelationSpec extends ObjectBehavior
 
         $this->compile(new Variable('output'))
             ->shouldExecuteCompiledMapping(
-            [
+                [
                 'users' => [
                     [
                         'email' => 'john@example.com',
@@ -199,20 +201,20 @@ final class MultipleRelationSpec extends ObjectBehavior
                     ],
                 ],
             ],
-            [
+                [
                 'customers' => [],
             ],
-            [
+                [
                 'customers' => [
                     (new Customer('John', 'Doe'))->setEmail('john@example.com'),
                     (new Customer('Robert', 'Burton'))->setEmail('robert@example.com'),
                     (new Customer('Jane', 'Gee'))->setEmail('jane@example.com'),
                 ],
             ]
-        );
+            );
     }
 
-    function it_is_failing_on_invalid_data_while_compiled()
+    public function it_is_failing_on_invalid_data_while_compiled()
     {
         $interpreter = new ExpressionLanguage();
 
@@ -244,12 +246,14 @@ final class MultipleRelationSpec extends ObjectBehavior
         $this->shouldThrowWhenExecuteCompiledMapping(
             new \InvalidArgumentException('The data at path input["users"] in first argument should be iterable.')
         )
-            ->during('__invoke', [
+            ->during(
+                '__invoke',
+                [
                 [
                     'users' => new \StdClass,
                 ],
                 []
             ]
-        );
+            );
     }
 }

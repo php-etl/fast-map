@@ -11,7 +11,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class FieldSpec extends ObjectBehavior
 {
-    function it_is_initializable(FieldMapperInterface $inner)
+    public function it_is_initializable(FieldMapperInterface $inner)
     {
         $this->beConstructedWith(
             new PropertyPath('[customers]'),
@@ -21,7 +21,7 @@ final class FieldSpec extends ObjectBehavior
         $this->shouldHaveType(Field::class);
     }
 
-    function it_is_mapping_data()
+    public function it_is_mapping_data()
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][name]'),
@@ -50,7 +50,7 @@ final class FieldSpec extends ObjectBehavior
         );
     }
 
-    function it_is_failing_on_invalid_data()
+    public function it_is_failing_on_invalid_data()
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][username]'),
@@ -62,16 +62,18 @@ final class FieldSpec extends ObjectBehavior
         $this->shouldThrow(
             new NoSuchIndexException('Cannot read index "username" from object of type "stdClass" because it doesn\'t implement \ArrayAccess.')
         )
-            ->during('__invoke', [
+            ->during(
+                '__invoke',
+                [
                 [
                     'user' => new \StdClass,
                 ],
                 []
             ]
-        );
+            );
     }
 
-    function it_is_mapping_data_as_compiled()
+    public function it_is_mapping_data_as_compiled()
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][name]'),
@@ -101,7 +103,7 @@ final class FieldSpec extends ObjectBehavior
             );
     }
 
-    function it_is_failing_on_invalid_data_while_compiled()
+    public function it_is_failing_on_invalid_data_while_compiled()
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][username]'),
@@ -113,12 +115,14 @@ final class FieldSpec extends ObjectBehavior
         $this->shouldThrowWhenExecuteCompiledMapping(
             new NoSuchIndexException('Cannot read index "username" from object of type "stdClass" because it doesn\'t implement \ArrayAccess.')
         )
-            ->during('__invoke', [
+            ->during(
+                '__invoke',
+                [
                 [
                     'user' => new \StdClass,
                 ],
                 []
             ]
-        );
+            );
     }
 }

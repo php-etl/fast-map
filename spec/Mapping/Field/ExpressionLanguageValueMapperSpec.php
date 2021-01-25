@@ -14,7 +14,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["ipsum"]'));
 
@@ -23,7 +23,7 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         $this->shouldHaveType(CompilableMapperInterface::class);
     }
 
-    function it_is_mapping_flat_data()
+    public function it_is_mapping_flat_data()
     {
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["first_name"]'));
 
@@ -39,7 +39,7 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_mapping_complex_data()
+    public function it_is_mapping_complex_data()
     {
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
 
@@ -59,7 +59,7 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         ]);
     }
 
-    function it_does_keep_preexisting_data()
+    public function it_does_keep_preexisting_data()
     {
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
 
@@ -88,7 +88,7 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_mapping_complex_data_with_additional_variables()
+    public function it_is_mapping_complex_data_with_additional_variables()
     {
         $this->beConstructedWith(
             new ExpressionLanguage(),
@@ -114,7 +114,7 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         ]);
     }
 
-    function it_does_keep_preexisting_data_with_additional_variables()
+    public function it_does_keep_preexisting_data_with_additional_variables()
     {
         $this->beConstructedWith(
             new ExpressionLanguage(),
@@ -149,63 +149,63 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_mapping_flat_data_as_compiled()
+    public function it_is_mapping_flat_data_as_compiled()
     {
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["first_name"]'));
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[firstName]'), new Node\Expr\Variable('output')))->getNode())
             ->shouldExecuteCompiledMapping(
-            [
+                [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
             ],
-            [],
-            [
+                [],
+                [
                 'firstName' => 'John',
             ]
-        );
+            );
     }
 
-    function it_is_mapping_complex_data_as_compiled()
+    public function it_is_mapping_complex_data_as_compiled()
     {
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
             ->shouldExecuteCompiledMapping(
-            [
+                [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
                 ]
             ],
-            [],
-            [
+                [],
+                [
                 'person' => [
                     'firstName' => 'John',
                 ]
             ]
-        );
+            );
     }
 
-    function it_does_keep_preexisting_data_as_compiled()
+    public function it_does_keep_preexisting_data_as_compiled()
     {
         $this->beConstructedWith(new ExpressionLanguage(), new Expression('input["employee"]["first_name"]'));
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
             ->shouldExecuteCompiledMapping(
-            [
+                [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
                 ]
             ],
-            [
+                [
                 'address' => [
                     'street' => 'Main Street, 42',
                     'city' => 'Oblivion'
                 ]
             ],
-            [
+                [
                 'address' => [
                     'street' => 'Main Street, 42',
                     'city' => 'Oblivion'
@@ -214,10 +214,10 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
                     'firstName' => 'John',
                 ],
             ]
-        );
+            );
     }
 
-    function it_is_mapping_complex_data_with_additional_variables_as_compiled()
+    public function it_is_mapping_complex_data_with_additional_variables_as_compiled()
     {
         $this->beConstructedWith(
             new ExpressionLanguage(),
@@ -229,22 +229,22 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
             ->shouldExecuteCompiledMapping(
-            [
+                [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
                 ]
             ],
-            [],
-            [
+                [],
+                [
                 'person' => [
                     'firstName' => 'John - Lorem ipsum dolor sit amet consecutir',
                 ]
             ]
-        );
+            );
     }
 
-    function it_does_keep_preexisting_with_additional_variables_data_as_compiled()
+    public function it_does_keep_preexisting_with_additional_variables_data_as_compiled()
     {
         $this->beConstructedWith(
             new ExpressionLanguage(),
@@ -256,19 +256,19 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
 
         $this->compile((new PropertyPathBuilder(new PropertyPath('[person][firstName]'), new Node\Expr\Variable('output')))->getNode())
             ->shouldExecuteCompiledMapping(
-            [
+                [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
                 ]
             ],
-            [
+                [
                 'address' => [
                     'street' => 'Main Street, 42',
                     'city' => 'Oblivion'
                 ]
             ],
-            [
+                [
                 'address' => [
                     'street' => 'Main Street, 42',
                     'city' => 'Oblivion'
@@ -277,6 +277,6 @@ final class ExpressionLanguageValueMapperSpec extends ObjectBehavior
                     'firstName' => 'John - Lorem ipsum dolor sit amet consecutir',
                 ],
             ]
-        );
+            );
     }
 }

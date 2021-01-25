@@ -74,7 +74,7 @@ final class CopyValueMapperTest extends TestCase
             ],
             [
                 'employees' => [
-                    (function(): \stdClass {
+                    (function (): \stdClass {
                         $object = new \stdClass;
                         $object->first_name = 'John';
                         $object->last_name = 'Doe';
@@ -112,30 +112,6 @@ final class CopyValueMapperTest extends TestCase
         PropertyPathInterface $inputField
     ) {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
-
-        /** @var CompiledMapperInterface $compiledMapper */
-        $compiledMapper = $compiler->compile(
-            new Compiler\StandardCompilationContext(
-                $outputField,
-                null,
-                null
-            ),
-            new CopyValueMapper($inputField)
-        );
-
-        $this->assertEquals($expected, $compiledMapper($input, []));
-    }
-
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithReduceStrategy(
-        $expected,
-        $input,
-        PropertyPathInterface $outputField,
-        PropertyPathInterface $inputField
-    ) {
-        $compiler = new Compiler\Compiler(new Compiler\Strategy\Reduce());
 
         /** @var CompiledMapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(

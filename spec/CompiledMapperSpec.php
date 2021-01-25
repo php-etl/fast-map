@@ -12,7 +12,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class CompiledMapperSpec extends ObjectBehavior
 {
-    function it_is_initializable(
+    public function it_is_initializable(
         Compiler $compiler,
         MapperInterface $mapper
     ) {
@@ -22,7 +22,7 @@ final class CompiledMapperSpec extends ObjectBehavior
         $this->shouldHaveType(CompiledMapper::class);
     }
 
-    function it_is_compilable(
+    public function it_is_compilable(
         PropertyPathInterface $propertyPath,
         Compiler $compiler,
         MapperInterface $mapper

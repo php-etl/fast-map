@@ -32,7 +32,7 @@ jobs:
                     php_version: 8.0
 
             -   name: Run tests & generate Coverage
-                run: vendor/bin/phpunit functional --coverage-html var/coverage --whitelist=src
+                run: bin/phpunit functional --coverage-html var/coverage --whitelist=src
 
             -   name: Store coverage files
                 uses: actions/upload-artifact@v2
@@ -94,3 +94,14 @@ jobs:
                 uses: actions/upload-artifact@v2
                 with:
                     path: infection.log
+
+    phpspec:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: php-actions/composer@v5
+                with:
+                    args: --prefer-dist
+                    php_version: 8.0
+            -   name: PHP Spec
+                run: bin/phpspec run spec

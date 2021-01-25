@@ -10,12 +10,12 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ArrayMapperSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(ArrayMapper::class);
     }
 
-    function it_is_mapping_flat_data()
+    public function it_is_mapping_flat_data()
     {
         $this->beConstructedWith(
             new Field(
@@ -37,7 +37,7 @@ final class ArrayMapperSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_mapping_complex_data()
+    public function it_is_mapping_complex_data()
     {
         $this->beConstructedWith(
             new Field(
@@ -75,7 +75,7 @@ final class ArrayMapperSpec extends ObjectBehavior
         ]);
     }
 
-    function it_does_keep_preexisting_data()
+    public function it_does_keep_preexisting_data()
     {
         $this->beConstructedWith(
             new Field(

@@ -74,7 +74,7 @@ final class ConstantValueMapperTest extends TestCase
             ],
             [
                 'employees' => [
-                    (function(): \stdClass {
+                    (function (): \stdClass {
                         $object = new \stdClass;
                         $object->first_name = 'John';
                         $object->last_name = 'Doe';
@@ -112,30 +112,6 @@ final class ConstantValueMapperTest extends TestCase
         string $constantValue
     ) {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
-
-        /** @var CompiledMapperInterface $compiledMapper */
-        $compiledMapper = $compiler->compile(
-            new Compiler\StandardCompilationContext(
-                $outputField,
-                null,
-                null
-            ),
-            new ConstantValueMapper($constantValue)
-        );
-
-        $this->assertEquals($expected, $compiledMapper($input, []));
-    }
-
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithReduceStrategy(
-        $expected,
-        $input,
-        PropertyPathInterface $outputField,
-        string $constantValue
-    ) {
-        $compiler = new Compiler\Compiler(new Compiler\Strategy\Reduce());
 
         /** @var CompiledMapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(

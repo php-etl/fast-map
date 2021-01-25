@@ -22,7 +22,8 @@
         "symfony/cache": "^5.4",
         "doctrine/inflector": "^2.0",
         "php-etl/metadata": "^0.2@dev",
-        "php-etl/contracts": "^0.1.x-dev"
+        "php-etl/contracts": "^0.1.x-dev",
+        "adlawson/vfs": "dev-develop"
     },
     "autoload": {
         "psr-4": {
@@ -36,6 +37,9 @@
             "functional\\Kiboko\\Component\\FastMap\\": "functional/"
         }
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.2.x-dev"
@@ -47,7 +51,6 @@
         "phpspec/phpspec": "^7.0",
         "johnkary/phpunit-speedtrap": "*",
         "mybuilder/phpunit-accelerator": "*",
-        "phpunit/php-invoker": "*",
-        "php-etl/phpspec-extension": "^0.2@dev"
+        "phpunit/php-invoker": "*"
     }
 }

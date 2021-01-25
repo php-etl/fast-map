@@ -13,7 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class StandardCompilationContextSpec extends ObjectBehavior
 {
-    function it_is_initializable(
+    public function it_is_initializable(
         PropertyPathInterface $propertyPath
     ) {
         $this->beConstructedWith($propertyPath);
@@ -28,7 +28,7 @@ final class StandardCompilationContextSpec extends ObjectBehavior
         $this->getClass()->shouldReturn(null);
     }
 
-    function it_is_containing_context(
+    public function it_is_containing_context(
         PropertyPathInterface $propertyPath
     ) {
         $this->beConstructedWith($propertyPath, __DIR__ . '/Baz.php', new ClassReferenceMetadata('Baz', 'Foo\\Bar'));
@@ -42,7 +42,7 @@ final class StandardCompilationContextSpec extends ObjectBehavior
         $this->getClass()->shouldReturnAnInstanceOf(ClassMetadataInterface::class);
     }
 
-    function it_is_extracting_context(
+    public function it_is_extracting_context(
         PropertyPathInterface $propertyPath
     ) {
         $this->beConstructedThrough('build', [$propertyPath, __DIR__, 'Foo\\Bar\\Baz']);
@@ -56,7 +56,7 @@ final class StandardCompilationContextSpec extends ObjectBehavior
         $this->getClass()->shouldReturnAnInstanceOf(ClassMetadataInterface::class);
     }
 
-    function it_is_extracting_context_from_root_class(
+    public function it_is_extracting_context_from_root_class(
         PropertyPathInterface $propertyPath
     ) {
         $this->beConstructedThrough('build', [$propertyPath, __DIR__, 'Baz']);

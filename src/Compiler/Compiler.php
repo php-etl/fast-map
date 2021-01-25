@@ -10,13 +10,12 @@ use Kiboko\Component\FastMap\Compiler\Strategy\StrategyInterface;
 use Kiboko\Component\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use PhpParser\PrettyPrinter;
+use Vfs\FileSystem;
 
 class Compiler
 {
-    /** @var Inflector */
-    private $inflector;
-    /** @var StrategyInterface */
-    private $strategy;
+    private Inflector $inflector;
+    private StrategyInterface $strategy;
 
     public function __construct(?StrategyInterface $strategy = null)
     {
@@ -56,7 +55,14 @@ class Compiler
                 include_once $context->getFilePath();
             }
         } else {
-            include_once 'data://text/plain;base64,' . base64_encode($prettyPrinter->prettyPrintFile($tree));
+            if (!in_array('vfs', stream_get_wrappers())) {
+                $fs = FileSystem::factory('vfs');
+                $fs->mount();
+            }
+
+            $filename =  'vfs://' . hash('sha512', random_bytes(512)) . '.php';
+            file_put_contents($filename, $prettyPrinter->prettyPrintFile($tree));
+            include_once $filename;
         }
 
         return new $fqcn();

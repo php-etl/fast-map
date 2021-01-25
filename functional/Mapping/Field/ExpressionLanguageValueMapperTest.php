@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\FastMap;
+namespace functional\Kiboko\Component\FastMap\Mapping\Field;
 
 use Kiboko\Component\FastMap\Compiler;
 use Kiboko\Component\FastMap\Contracts\CompiledMapperInterface;
@@ -96,7 +96,7 @@ final class ExpressionLanguageValueMapperTest extends TestCase
             ],
             [
                 'employees' => [
-                    (function(): \stdClass {
+                    (function (): \stdClass {
                         $object = new \stdClass;
                         $object->first_name = 'John';
                         $object->last_name = 'Doe';
@@ -154,31 +154,6 @@ final class ExpressionLanguageValueMapperTest extends TestCase
         ExpressionLanguage $interpreter
     ) {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
-
-        /** @var CompiledMapperInterface $compiledMapper */
-        $compiledMapper = $compiler->compile(
-            new Compiler\StandardCompilationContext(
-                $outputField,
-                null,
-                null
-            ),
-            new ExpressionLanguageValueMapper($interpreter, $expression)
-        );
-
-        $this->assertEquals($expected, $compiledMapper($input, []));
-    }
-
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithReduceStrategy(
-        $expected,
-        $input,
-        PropertyPathInterface $outputField,
-        Expression $expression,
-        ExpressionLanguage $interpreter
-    ) {
-        $compiler = new Compiler\Compiler(new Compiler\Strategy\Reduce());
 
         /** @var CompiledMapperInterface $compiledMapper */
         $compiledMapper = $compiler->compile(
