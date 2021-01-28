@@ -49,10 +49,7 @@ final class ArrayMapper implements
                 new Node\Stmt\Expression(
                     expr: new Node\Expr\Assign(
                         var: $outputNode,
-                        expr: new Node\Expr\BinaryOp\Coalesce(
-                            left: $outputNode,
-                            right: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
-                        ),
+                        expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
                     ),
                 ),
             ],

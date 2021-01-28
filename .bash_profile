@@ -1,5 +1,0 @@
-alias composer='docker-compose exec sh composer'
-alias infection='docker-compose exec sh-xdebug vendor/bin/infection'
-alias phpspec='docker-compose exec sh-xdebug vendor/bin/phpspec'
-alias phpstan='docker-compose exec sh vendor/bin/phpstan'
-alias phpunit='docker-compose exec sh-xdebug vendor/bin/phpunit'

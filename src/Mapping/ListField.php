@@ -75,6 +75,12 @@ final class ListField implements
     public function compile(Node\Expr $outputNode): array
     {
         return [
+            new Node\Stmt\Expression(
+                expr: new Node\Expr\Assign(
+                    var: (new PropertyPathBuilder($this->outputPath, $outputNode))->getNode(),
+                    expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
+                ),
+            ),
             new Node\Stmt\Foreach_(
                 (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->inputExpression))->getNode(),
                 new Node\Expr\Variable('item'),

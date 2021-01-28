@@ -24,20 +24,22 @@ final class ScopedCodeBuilder implements Builder
     public function getNode(): Node\Expr
     {
         return new Node\Expr\FuncCall(
-            new Node\Expr\Closure([
-                'params' => [
-                    new Node\Param(
-                        var: new Node\Expr\Variable('input'),
-                    ),
-                    new Node\Param(
-                        var: new Node\Expr\Variable('output'),
-                    ),
-                ],
-                'stmts' => $this->stmts,
-            ]),
+            new Node\Name('array_push'),
             [
-                $this->input,
                 $this->output,
+                new Node\Expr\FuncCall(
+                    new Node\Expr\Closure([
+                        'params' => [
+                            new Node\Param(
+                                var: new Node\Expr\Variable('input'),
+                            )
+                        ],
+                        'stmts' => $this->stmts,
+                    ]),
+                    [
+                        $this->input,
+                    ]
+                )
             ]
         );
     }
