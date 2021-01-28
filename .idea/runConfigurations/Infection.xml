@@ -1,6 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Infection" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/vendor/infection/infection/bin/infection" scriptParameters="--threads=4 --test-framework=phpspec">
-    <CommandLine workingDirectory="$PROJECT_DIR$" />
-    <method v="2" />
-  </configuration>
-</component>
