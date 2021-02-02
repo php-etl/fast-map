@@ -21,7 +21,6 @@
          beStrictAboutCoversAnnotation="true"
          enforceTimeLimit="false"
          verbose="true">
-  <coverage/>
   <testsuites>
     <testsuite name="functional">
       <directory>functional/</directory>

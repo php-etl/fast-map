@@ -12,7 +12,7 @@ extensions:
       - vendor
     whitelist:
       - src
-  Kiboko\Component\ETL\PHPSpecExtension\FastMap\FastMapExtension:
+  Kiboko\Component\PHPSpecExtension\FastMap\FastMapExtension:
 formatter.name: pretty
 stop_on_failure: false
 suites:
