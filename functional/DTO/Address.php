@@ -4,9 +4,9 @@ namespace functional\Kiboko\Component\FastMap\DTO;
 
 final class Address
 {
-    public string $name;
-    public string $street;
-    public string $city;
+    public ?string $name;
+    public ?string $street;
+    public ?string $city;
 
     public static function build(?string $name = null, ?string $street = null, ?string $city = null)
     {

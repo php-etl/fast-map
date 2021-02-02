@@ -9,18 +9,11 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ObjectInitialisationPreconditionBuilder implements Builder
 {
-    /** @var PropertyPath */
-    private $propertyPath;
-    /** @var Node\Expr */
-    private $pathNode;
-    /** @var ClassTypeMetadata */
-    private $metadata;
-
-    public function __construct(PropertyPath $propertyPath, Node\Expr $pathNode, ClassTypeMetadata $metadata)
-    {
-        $this->propertyPath = $propertyPath;
-        $this->pathNode = $pathNode;
-        $this->metadata = $metadata;
+    public function __construct(
+        private PropertyPath $propertyPath,
+        private Node\Expr $pathNode,
+        private ClassTypeMetadata $metadata
+    ) {
     }
 
     public function getNode(): Node

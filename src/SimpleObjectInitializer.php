@@ -2,38 +2,27 @@
 
 namespace Kiboko\Component\FastMap;
 
-use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\SimpleObjectInitializerBuilder;
 use Kiboko\Component\FastMap\Contracts\CompilableObjectInitializerInterface;
-use Kiboko\Component\Metadata\ClassMetadataInterface;
-use Kiboko\Component\Metadata\ClassReferenceMetadata;
+use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use PhpParser\Node;
-use PhpParser\ParserFactory;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class SimpleObjectInitializer implements CompilableObjectInitializerInterface
 {
-    /** @var ClassMetadataInterface */
-    private $class;
-    /** @var ExpressionLanguage */
-    private $interpreter;
     /** @var Expression[] */
-    private $expressions;
-    /** @var PropertyAccessor */
-    private $accessor;
+    private iterable $expressions;
+    private PropertyAccessor $accessor;
 
     public function __construct(
-        ClassMetadataInterface $class,
-        ExpressionLanguage $interpreter,
+        private ClassMetadataInterface $class,
+        private ExpressionLanguage $interpreter,
         Expression ...$expressions
     ) {
-        $this->class = $class;
-        $this->interpreter = $interpreter;
         $this->expressions = $expressions;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

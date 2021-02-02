@@ -18,27 +18,14 @@ final class ListField implements
     Contracts\FieldScopingInterface,
     Contracts\CompilableInterface
 {
-    /** @var PropertyPathInterface */
-    private $outputPath;
-    /** @var ExpressionLanguage */
-    private $interpreter;
-    /** @var Expression */
-    private $inputExpression;
-    /** @var Contracts\ArrayMapperInterface */
-    private $child;
-    /** @var PropertyAccessor */
-    private $accessor;
+    private PropertyAccessor $accessor;
 
     public function __construct(
-        PropertyPathInterface $outputField,
-        ExpressionLanguage $interpreter,
-        Expression $inputExpression,
-        Contracts\ArrayMapperInterface $child
+        private PropertyPathInterface $outputPath,
+        private ExpressionLanguage $interpreter,
+        private Expression $inputExpression,
+        private Contracts\ArrayMapperInterface $child
     ) {
-        $this->outputPath = $outputField;
-        $this->interpreter = $interpreter;
-        $this->inputExpression = $inputExpression;
-        $this->child = $child;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 

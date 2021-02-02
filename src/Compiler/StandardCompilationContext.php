@@ -2,24 +2,17 @@
 
 namespace Kiboko\Component\FastMap\Compiler;
 
-use Kiboko\Component\Metadata\ClassMetadataInterface;
+use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class StandardCompilationContext implements CompilationContextInterface
 {
-    /** @var PropertyPathInterface */
-    private $propertyPath;
-    /** @var string|null */
-    private $path;
-    /** @var ClassMetadataInterface|null */
-    private $class;
-
-    public function __construct(PropertyPathInterface $propertyPath, ?string $path = null, ?ClassMetadataInterface $class = null)
-    {
-        $this->propertyPath = $propertyPath;
-        $this->path = $path;
-        $this->class = $class;
+    public function __construct(
+        private PropertyPathInterface $propertyPath,
+        private ?string $path = null,
+        private ?ClassMetadataInterface $class = null
+    ) {
     }
 
     public static function build(PropertyPathInterface $propertyPath, string $cachePath, string $fqcn): self

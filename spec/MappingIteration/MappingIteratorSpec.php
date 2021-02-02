@@ -3,7 +3,7 @@
 namespace spec\Kiboko\Component\FastMap\MappingIteration;
 
 use Kiboko\Component\FastMap\MappingIteration\MappingIterator;
-use Kiboko\Component\Metadata\CompositeTypeMetadataInterface;
+use Kiboko\Contract\Metadata\CompositeTypeMetadataInterface;
 use PhpSpec\ObjectBehavior;
 
 final class MappingIteratorSpec extends ObjectBehavior

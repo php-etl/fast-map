@@ -8,15 +8,10 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ArrayInitialisationPreconditionBuilder implements Builder
 {
-    /** @var PropertyPath */
-    private $propertyPath;
-    /** @var Node\Expr */
-    private $pathNode;
-
-    public function __construct(PropertyPath $propertyPath, Node\Expr $pathNode)
-    {
-        $this->propertyPath = $propertyPath;
-        $this->pathNode = $pathNode;
+    public function __construct(
+        private PropertyPath $propertyPath,
+        private Node\Expr $pathNode
+    ) {
     }
 
     public function getNode(): Node

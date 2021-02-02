@@ -5,7 +5,7 @@ namespace Kiboko\Component\FastMap\Compiler\Strategy;
 use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\FastMap\Contracts\CompilableMapperInterface;
 use Kiboko\Component\FastMap\Contracts\CompiledMapperInterface;
-use Kiboko\Component\Metadata\ClassMetadataInterface;
+use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;

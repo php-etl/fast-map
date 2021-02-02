@@ -15,14 +15,10 @@ final class CopyValueMapper implements
     Contracts\FieldMapperInterface,
     Contracts\CompilableMapperInterface
 {
-    /** @var PropertyPathInterface */
-    private $inputPaths;
-    /** @var PropertyAccessor */
-    private $accessor;
+    private PropertyAccessor $accessor;
 
-    public function __construct(PropertyPathInterface $inputPaths)
+    public function __construct(private PropertyPathInterface $inputPaths)
     {
-        $this->inputPaths = $inputPaths;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 

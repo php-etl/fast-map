@@ -26,12 +26,12 @@ final class Customer
         return $this;
     }
 
-    public function setAddresses(Address ...$addresses)
+    public function setAddresses(Address ...$addresses): void
     {
         $this->addresses = $addresses;
     }
 
-    public function addAddress(Address ...$addresses)
+    public function addAddress(Address ...$addresses): void
     {
         $this->addresses = array_merge(
             $this->addresses,
@@ -39,7 +39,7 @@ final class Customer
         );
     }
 
-    public function removeAddress(Address ...$addresses)
+    public function removeAddress(Address ...$addresses): void
     {
         $this->addresses = array_diff(
             $this->addresses,

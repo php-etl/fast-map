@@ -3,11 +3,9 @@
 namespace spec\Kiboko\Component\FastMap\Compiler;
 
 use Kiboko\Component\FastMap\Compiler\CompilationContextInterface;
-use Kiboko\Component\FastMap\Compiler\Compiler;
 use Kiboko\Component\FastMap\Compiler\StandardCompilationContext;
-use Kiboko\Component\FastMap\Contracts\MapperInterface;
-use Kiboko\Component\Metadata\ClassMetadataInterface;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
+use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 

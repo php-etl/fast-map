@@ -4,23 +4,15 @@ namespace Kiboko\Component\FastMap\Compiler\Builder;
 
 use PhpParser\Builder;
 use PhpParser\Node;
-use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class PropertyPathBuilder implements Builder
 {
-    /** @var PropertyPath */
-    private $propertyPath;
-    /** @var Node\Expr */
-    private $pathNode;
-    /** @var int|null */
-    private $limit;
-
-    public function __construct(PropertyPathInterface $propertyPath, Node\Expr $pathNode, ?int $limit = null)
-    {
-        $this->propertyPath = $propertyPath;
-        $this->pathNode = $pathNode;
-        $this->limit = $limit;
+    public function __construct(
+        private PropertyPathInterface $propertyPath,
+        private Node\Expr $pathNode,
+        private ?int $limit
+    ) {
     }
 
     public function getNode(): Node\Expr

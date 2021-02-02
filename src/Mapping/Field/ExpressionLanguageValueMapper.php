@@ -16,22 +16,15 @@ final class ExpressionLanguageValueMapper implements
     Contracts\FieldMapperInterface,
     Contracts\CompilableMapperInterface
 {
-    /** @var ExpressionLanguage */
-    private $interpreter;
-    /** @var Expression */
-    private $expression;
     /** @var array<string, mixed> */
-    private $variables;
-    /** @var PropertyAccessor */
-    private $accessor;
+    private array $variables;
+    private PropertyAccessor $accessor;
 
     public function __construct(
-        ExpressionLanguage $interpreter,
-        Expression $expression,
+        private ExpressionLanguage $interpreter,
+        private Expression $expression,
         array $variables = []
     ) {
-        $this->interpreter = $interpreter;
-        $this->expression = $expression;
         $this->variables = $variables;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

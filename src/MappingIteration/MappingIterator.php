@@ -3,23 +3,18 @@
 namespace Kiboko\Component\FastMap\MappingIteration;
 
 use Kiboko\Component\Metadata\ClassTypeMetadata;
-use Kiboko\Component\Metadata\CompositeTypeMetadataInterface;
-use Kiboko\Component\Metadata\FieldMetadataInterface;
-use Kiboko\Component\Metadata\RelationMetadataInterface;
+use Kiboko\Contract\Metadata\CompositeTypeMetadataInterface;
+use Kiboko\Contract\Metadata\FieldMetadataInterface;
+use Kiboko\Contract\Metadata\RelationMetadataInterface;
 
 final class MappingIterator implements \RecursiveIterator
 {
-    /** @var CompositeTypeMetadataInterface  */
-    private $metadata;
-    /** @var \RecursiveIterator  */
-    private $inner;
+    private \RecursiveIterator $inner;
 
-    public function __construct(CompositeTypeMetadataInterface $metadata)
+    public function __construct(private CompositeTypeMetadataInterface $metadata)
     {
-        $this->metadata = $metadata;
-
-        if ($metadata instanceof ClassTypeMetadata) {
-            $this->inner = new ClassMappingIterator($metadata);
+        if ($this->metadata instanceof ClassTypeMetadata) {
+            $this->inner = new ClassMappingIterator($this->metadata);
         } else {
             $this->inner = new \RecursiveArrayIterator([]);
         }
@@ -40,7 +35,7 @@ final class MappingIterator implements \RecursiveIterator
         return $this->inner->key();
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return $this->inner->valid();
     }
@@ -57,7 +52,7 @@ final class MappingIterator implements \RecursiveIterator
         return $current instanceof RelationMetadataInterface;
     }
 
-    public function getChildren()
+    public function getChildren(): MappingIterator
     {
         return new self($this->inner->current());
     }

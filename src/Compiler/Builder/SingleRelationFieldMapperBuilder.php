@@ -9,8 +9,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class SingleRelationFieldMapperBuilder implements Builder
 {
-    /** @var Expression */
-    private $inputField;
+    private Expression $inputField;
 
     public function getNode(): Node
     {

@@ -3,7 +3,7 @@
 namespace spec\Kiboko\Component\FastMap\MappingIteration;
 
 use Kiboko\Component\FastMap\MappingIteration\PathMappingIterator;
-use Kiboko\Component\Metadata\TypeMetadataInterface;
+use Kiboko\Contract\Metadata\TypeMetadataInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathIterator;

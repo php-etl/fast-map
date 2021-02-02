@@ -2,20 +2,13 @@
 
 namespace Kiboko\Component\FastMap\MappingIteration;
 
-use Kiboko\Component\Metadata\TypeMetadataInterface;
+use Kiboko\Contract\Metadata\TypeMetadataInterface;
 use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
 final class PathMappingIterator implements \Iterator
 {
-    /** @var PropertyPathIteratorInterface */
-    private $inner;
-    /** @var TypeMetadataInterface */
-    private $metadata;
-
-    public function __construct(PropertyPathIteratorInterface $inner, TypeMetadataInterface $metadata)
+    public function __construct(private PropertyPathIteratorInterface $inner, private TypeMetadataInterface $metadata)
     {
-        $this->inner = $inner;
-        $this->metadata = $metadata;
     }
 
     public function current()
@@ -33,7 +26,7 @@ final class PathMappingIterator implements \Iterator
         return $this->inner->key();
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return $this->inner->valid();
     }

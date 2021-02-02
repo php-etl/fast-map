@@ -10,34 +10,20 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class SingleRelation implements
     Contracts\FieldScopingInterface,
     Contracts\CompilableInterface
 {
-    /** @var PropertyPath */
-    private $outputPath;
-    /** @var ExpressionLanguage */
-    private $interpreter;
-    /** @var Expression */
-    private $inputExpression;
-    /** @var Contracts\ObjectMapperInterface */
-    private $child;
-    /** @var PropertyAccessor */
-    private $accessor;
+    private PropertyAccessor $accessor;
 
     public function __construct(
-        PropertyPathInterface $outputPath,
-        ExpressionLanguage $interpreter,
-        Expression $inputExpression,
-        Contracts\ObjectMapperInterface $child
+        private PropertyPathInterface $outputPath,
+        private ExpressionLanguage $interpreter,
+        private Expression $inputExpression,
+        private Contracts\ObjectMapperInterface $child
     ) {
-        $this->outputPath = $outputPath;
-        $this->interpreter = $interpreter;
-        $this->inputExpression = $inputExpression;
-        $this->child = $child;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 

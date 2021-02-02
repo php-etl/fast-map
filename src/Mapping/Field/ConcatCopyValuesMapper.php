@@ -16,16 +16,12 @@ final class ConcatCopyValuesMapper implements
     Contracts\FieldMapperInterface,
     Contracts\CompilableMapperInterface
 {
-    /** @var string */
-    private $glue;
     /** @var string[] */
-    private $inputPaths;
-    /** @var PropertyAccessor */
-    private $accessor;
+    private iterable $inputPaths;
+    private PropertyAccessor $accessor;
 
-    public function __construct(string $glue, PropertyPathInterface ...$inputPaths)
+    public function __construct(private string $glue, PropertyPathInterface ...$inputPaths)
     {
-        $this->glue = $glue;
         $this->inputPaths = $inputPaths;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

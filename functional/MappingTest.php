@@ -3,24 +3,28 @@
 namespace functional\Kiboko\Component\FastMap;
 
 use Kiboko\Component\Metadata\ArgumentListMetadata;
-use Kiboko\Component\Metadata\FieldMetadata;
-use Kiboko\Component\Metadata\FieldGuesser;
+use Kiboko\Component\Metadata\ArgumentMetadata;
 use Kiboko\Component\Metadata\ClassMetadataBuilder;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use Kiboko\Component\Metadata\ClassTypeMetadata;
+use Kiboko\Component\Metadata\FieldGuesser;
+use Kiboko\Component\Metadata\FieldMetadata;
 use Kiboko\Component\Metadata\ListTypeMetadata;
 use Kiboko\Component\Metadata\MethodGuesser\ReflectionMethodGuesser;
 use Kiboko\Component\Metadata\MethodMetadata;
+use Kiboko\Component\Metadata\NullTypeMetadata;
 use Kiboko\Component\Metadata\PropertyGuesser\ReflectionPropertyGuesser;
 use Kiboko\Component\Metadata\PropertyMetadata;
 use Kiboko\Component\Metadata\RelationGuesser;
 use Kiboko\Component\Metadata\ScalarTypeMetadata;
 use Kiboko\Component\Metadata\TypeGuesser\CompositeTypeGuesser;
 use Kiboko\Component\Metadata\TypeGuesser\Docblock\DocblockTypeGuesser;
-use Kiboko\Component\Metadata\TypeGuesser\Native\Php74TypeGuesser;
-use Kiboko\Component\Metadata\UnaryRelationMetadata;
+use Kiboko\Component\Metadata\TypeGuesser\Native\NativeTypeGuesser;
 use Kiboko\Component\Metadata\UnionTypeMetadata;
 use Kiboko\Component\Metadata\VariadicArgumentMetadata;
+use Kiboko\Component\Metadata\VirtualFieldMetadata;
+use Kiboko\Component\Metadata\VirtualMultipleRelationMetadata;
+use Kiboko\Component\Metadata\VirtualUnaryRelationMetadata;
 use Phpactor\Docblock\DocblockFactory;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
@@ -34,19 +38,31 @@ final class MappingTest extends TestCase
                 ->addProperties(
                     new PropertyMetadata(
                         'firstName',
-                        new ScalarTypeMetadata('string')
+                        new UnionTypeMetadata(
+                            new ScalarTypeMetadata('string'),
+                            new NullTypeMetadata(),
+                        )
                     ),
                     new PropertyMetadata(
                         'lastName',
-                        new ScalarTypeMetadata('string')
+                        new UnionTypeMetadata(
+                            new ScalarTypeMetadata('string'),
+                            new NullTypeMetadata(),
+                        )
                     ),
                     new PropertyMetadata(
-                        'addresses',
-                        new ListTypeMetadata(new ClassReferenceMetadata('Address', namespace\DTO::class))
+                        'email',
+                        new UnionTypeMetadata(
+                            new ScalarTypeMetadata('string'),
+                            new NullTypeMetadata(),
+                        )
                     ),
                     new PropertyMetadata(
                         'mainAddress',
-                        new ClassReferenceMetadata('Address', namespace\DTO::class)
+                        new UnionTypeMetadata(
+                            new ClassReferenceMetadata('Address', namespace\DTO::class),
+                            new NullTypeMetadata(),
+                        )
                     )
                 )
                 ->addMethods(
@@ -86,6 +102,19 @@ final class MappingTest extends TestCase
                                 new ClassReferenceMetadata('Address', namespace\DTO::class)
                             )
                         )
+                    ),
+                    new MethodMetadata(
+                        'setEmail',
+                        new ArgumentListMetadata(
+                            new ArgumentMetadata(
+                                'email',
+                                new ScalarTypeMetadata('string')
+                            )
+                        ),
+                        returnType: new ClassReferenceMetadata(
+                            'Customer',
+                            'functional\Kiboko\Component\FastMap\DTO'
+                        )
                     )
                 )
                 ->addFields(
@@ -96,13 +125,60 @@ final class MappingTest extends TestCase
                     new FieldMetadata(
                         'lastName',
                         new ScalarTypeMetadata('string')
-                    )
+                    ),
+                    new VirtualFieldMetadata(
+                        'email',
+                        new ScalarTypeMetadata('string'),
+                        mutator: new MethodMetadata(
+                            'setEmail',
+                            new ArgumentListMetadata(
+                                new ArgumentMetadata(
+                                    'email',
+                                    new ScalarTypeMetadata('string')
+                                )
+                            )
+                        )
+                    ),
                 )
                 ->addRelations(
-                    new UnaryRelationMetadata(
-                        'mainAddress',
+                    new VirtualMultipleRelationMetadata(
+                        'addresses',
+                        new ClassReferenceMetadata('Address', namespace\DTO::class),
+                        mutator: new MethodMetadata(
+                            'setAddresses',
+                            new ArgumentListMetadata(
+                                new VariadicArgumentMetadata(
+                                    'addresses',
+                                    new ClassReferenceMetadata('Address', namespace\DTO::class)
+                                )
+                            ),
+                            returnType: new ClassReferenceMetadata(
+                                'Customer',
+                                'functional\Kiboko\Component\FastMap\DTO'
+                            )
+                        )
+                    ),
+                    new VirtualUnaryRelationMetadata(
+                        'address',
                         new ClassReferenceMetadata('Address', namespace\DTO::class)
-                    )
+                    ),
+                    new VirtualUnaryRelationMetadata(
+                        'email',
+                        new ScalarTypeMetadata('string'),
+                        mutator: new MethodMetadata(
+                            'setEmail',
+                            new ArgumentListMetadata(
+                                new ArgumentMetadata(
+                                    'email',
+                                    new ScalarTypeMetadata('string')
+                                )
+                            ),
+                            new ClassReferenceMetadata(
+                                'Customer',
+                                namespace\DTO::class,
+                            )
+                        )
+                    ),
                 )
         ];
     }
@@ -113,7 +189,7 @@ final class MappingTest extends TestCase
     public function testMapping(ClassTypeMetadata $expected)
     {
         $typeGuesser = new CompositeTypeGuesser(
-            new Php74TypeGuesser(),
+            new NativeTypeGuesser(),
             new DocblockTypeGuesser(
                 (new ParserFactory())->create(ParserFactory::PREFER_PHP7),
                 new DocblockFactory()

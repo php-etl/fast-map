@@ -7,15 +7,11 @@ use PhpParser\Node;
 
 final class ConstantValueBuilder implements Builder
 {
-    /** @var mixed */
-    private $value;
-
-    public function __construct($value)
+    public function __construct(private mixed $value)
     {
-        $this->value = $value;
     }
 
-    public function getNode(): \PhpParser\Node
+    public function getNode(): Node
     {
         return $this->asNode($this->value);
     }

@@ -7,17 +7,14 @@ use PhpParser\Node;
 
 final class ScopedCodeBuilder implements Builder
 {
-    /** @var Node\Expr */
-    private $input;
-    /** @var Node\Expr */
-    private $output;
     /** @var Node\Stmt[] */
-    private $stmts;
+    private array $stmts;
 
-    public function __construct(Node\Expr $input, Node\Expr $output, array $stmts)
-    {
-        $this->input = $input;
-        $this->output = $output;
+    public function __construct(
+        private Node\Expr $input,
+        private Node\Expr $output,
+        array $stmts
+    ) {
         $this->stmts = $stmts;
     }
 

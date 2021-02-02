@@ -12,14 +12,10 @@ final class ConstantValueMapper implements
     Contracts\FieldMapperInterface,
     Contracts\CompilableMapperInterface
 {
-    /** @var mixed */
-    private $value;
-    /** @var PropertyAccessor */
-    private $accessor;
+    private PropertyAccessor $accessor;
 
-    public function __construct($value)
+    public function __construct(private mixed $value)
     {
-        $this->value = $value;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 

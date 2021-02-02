@@ -10,16 +10,13 @@ final class ObjectMapper implements
     Contracts\ObjectMapperInterface,
     Contracts\CompilableMapperInterface
 {
-    /** @var Contracts\ObjectInitializerInterface */
-    private $initializer;
     /** @var Contracts\FieldScopingInterface[] */
-    private $properties;
+    private array $properties;
 
     public function __construct(
-        Contracts\ObjectInitializerInterface $initializer,
+        private Contracts\ObjectInitializerInterface $initializer,
         Contracts\FieldScopingInterface ...$properties
     ) {
-        $this->initializer = $initializer;
         $this->properties = $properties;
     }
 

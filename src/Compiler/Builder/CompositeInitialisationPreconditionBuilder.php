@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
-use Kiboko\Component\Metadata\TypeMetadataInterface;
+use Kiboko\Contract\Metadata\TypeMetadataInterface;
 use PhpParser\Builder;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
@@ -10,21 +10,11 @@ use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
 final class CompositeInitialisationPreconditionBuilder implements Builder
 {
-    /** @var TypeMetadataInterface */
-    private $metadata;
-    /** @var PropertyPath */
-    private $propertyPath;
-    /** @var Node\Expr */
-    private $pathNode;
-
     public function __construct(
-        TypeMetadataInterface $metadata,
-        PropertyPath $propertyPath,
-        Node\Expr $pathNode
+        private TypeMetadataInterface $metadata,
+        private PropertyPath $propertyPath,
+        private Node\Expr $pathNode
     ) {
-        $this->metadata = $metadata;
-        $this->propertyPath = $propertyPath;
-        $this->pathNode = $pathNode;
     }
 
     public function getNode(): Node
