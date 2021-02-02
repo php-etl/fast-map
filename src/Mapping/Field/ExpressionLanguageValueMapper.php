@@ -4,7 +4,7 @@ namespace Kiboko\Component\FastMap\Mapping\Field;
 
 use Kiboko\Component\FastMap\Compiler\Builder\ConstantValueBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
-use Kiboko\Component\FastMap\Contracts;
+use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -13,8 +13,8 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ExpressionLanguageValueMapper implements
-    Contracts\FieldMapperInterface,
-    Contracts\CompilableMapperInterface
+    Mapping\FieldMapperInterface,
+    Mapping\CompilableMapperInterface
 {
     /** @var array<string, mixed> */
     private array $variables;

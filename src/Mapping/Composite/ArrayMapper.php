@@ -2,21 +2,21 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
-use Kiboko\Component\FastMap\Contracts;
+use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ArrayMapper implements
-    Contracts\ArrayMapperInterface,
-    Contracts\CompilableMapperInterface
+    Mapping\ArrayMapperInterface,
+    Mapping\CompilableMapperInterface
 {
-    /** @var Contracts\FieldScopingInterface[] */
-    private $fields;
+    /** @var Mapping\FieldScopingInterface[] */
+    private array $fields;
     private PropertyAccessor $accessor;
 
-    public function __construct(Contracts\FieldScopingInterface ...$fields)
+    public function __construct(Mapping\FieldScopingInterface ...$fields)
     {
         $this->fields = $fields;
         $this->accessor = PropertyAccess::createPropertyAccessor();
@@ -63,11 +63,11 @@ final class ArrayMapper implements
     private function compileMappers(Node\Expr $outputNode): iterable
     {
         foreach ($this->fields as $mapper) {
-            if (!$mapper instanceof Contracts\CompilableInterface) {
+            if (!$mapper instanceof Mapping\CompilableInterface) {
                 throw new \RuntimeException(strtr(
                     'Expected a %expected%, but got an object of type %actual%.',
                     [
-                        '%expected%' => Contracts\CompilableInterface::class,
+                        '%expected%' => Mapping\CompilableInterface::class,
                         '%actual%' => get_class($mapper),
                     ]
                 ));

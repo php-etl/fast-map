@@ -2,8 +2,9 @@
 
 namespace Kiboko\Component\FastMap\Compiler;
 
-use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
+use Kiboko\Contract\Mapping\Compiler\CompilationContextInterface;
+use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class StandardCompilationContext implements CompilationContextInterface

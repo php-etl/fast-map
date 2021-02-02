@@ -2,9 +2,9 @@
 
 namespace spec\Kiboko\Component\FastMap\Mapping;
 
-use Kiboko\Component\FastMap\Contracts;
 use Kiboko\Component\FastMap\Mapping;
 use Kiboko\Component\FastMap\Mapping\Field;
+use Kiboko\Contract\Mapping\ArrayMapperInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -12,7 +12,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ListFieldSpec extends ObjectBehavior
 {
-    public function it_is_initializable(Contracts\ArrayMapperInterface $inner)
+    public function it_is_initializable(ArrayMapperInterface $inner)
     {
         $interpreter = new ExpressionLanguage();
 

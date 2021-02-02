@@ -4,11 +4,11 @@ namespace functional\Kiboko\Component\FastMap\Mapping\Composite;
 
 use functional\Kiboko\Component\FastMap as test;
 use Kiboko\Component\FastMap\Compiler;
-use Kiboko\Component\FastMap\Contracts\CompiledMapperInterface;
 use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
 use Kiboko\Component\FastMap\Mapping\Composite\ObjectMapper;
 use Kiboko\Component\FastMap\SimpleObjectInitializer;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
+use Kiboko\Contract\Mapping\CompiledMapperInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;

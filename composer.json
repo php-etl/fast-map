@@ -23,7 +23,8 @@
         "doctrine/inflector": "^2.0",
         "php-etl/metadata": "^0.2@dev",
         "php-etl/contracts": "^0.1.x-dev",
-        "adlawson/vfs": "dev-develop"
+        "adlawson/vfs": "dev-develop",
+        "php-etl/mapping-contracts": "0.1.x-dev"
     },
     "autoload": {
         "psr-4": {

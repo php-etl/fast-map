@@ -2,29 +2,22 @@
 
 namespace Kiboko\Component\FastMap;
 
-use Kiboko\Component\FastMap\Compiler\CompilationContextInterface;
 use Kiboko\Component\FastMap\Compiler\Compiler;
-use Kiboko\Component\FastMap\Contracts\MapperInterface;
+use Kiboko\Contract\Mapping\Compiler\CompilationContextInterface;
+use Kiboko\Contract\Mapping\MapperInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class CompiledMapper implements MapperInterface
 {
-    /** @var Compiler */
-    private $compiler;
-    /** @var CompilationContextInterface */
-    private $compilationContext;
     /** @var iterable<MapperInterface> */
-    private $mappers;
-    /** @var MapperInterface */
-    private $compiledMapper;
+    private iterable $mappers;
+    private MapperInterface $compiledMapper;
 
     public function __construct(
-        Compiler $compiler,
-        CompilationContextInterface $context,
+        private Compiler $compiler,
+        private CompilationContextInterface $compilationContext,
         MapperInterface... $mappers
     ) {
-        $this->compiler = $compiler;
-        $this->compilationContext = $context;
         $this->mappers = $mappers;
     }
 

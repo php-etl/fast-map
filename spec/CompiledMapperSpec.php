@@ -5,8 +5,8 @@ namespace spec\Kiboko\Component\FastMap;
 use Kiboko\Component\FastMap\CompiledMapper;
 use Kiboko\Component\FastMap\Compiler\Compiler;
 use Kiboko\Component\FastMap\Compiler\StandardCompilationContext;
-use Kiboko\Component\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Contract\Mapping\MapperInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 

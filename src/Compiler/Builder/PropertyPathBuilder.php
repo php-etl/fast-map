@@ -11,7 +11,7 @@ final class PropertyPathBuilder implements Builder
     public function __construct(
         private PropertyPathInterface $propertyPath,
         private Node\Expr $pathNode,
-        private ?int $limit
+        private ?int $limit = 0
     ) {
     }
 

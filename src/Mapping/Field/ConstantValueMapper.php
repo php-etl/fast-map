@@ -2,15 +2,15 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Field;
 
-use Kiboko\Component\FastMap\Contracts;
+use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ConstantValueMapper implements
-    Contracts\FieldMapperInterface,
-    Contracts\CompilableMapperInterface
+    Mapping\FieldMapperInterface,
+    Mapping\CompilableMapperInterface
 {
     private PropertyAccessor $accessor;
 

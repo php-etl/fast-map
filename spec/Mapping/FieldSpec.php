@@ -2,8 +2,8 @@
 
 namespace spec\Kiboko\Component\FastMap\Mapping;
 
-use Kiboko\Component\FastMap\Contracts\FieldMapperInterface;
 use Kiboko\Component\FastMap\Mapping\Field;
+use Kiboko\Contract\Mapping\FieldMapperInterface;
 use PhpParser\Node\Expr\Variable;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;

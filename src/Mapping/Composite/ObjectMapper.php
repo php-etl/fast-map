@@ -2,20 +2,20 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
-use Kiboko\Component\FastMap\Contracts;
+use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ObjectMapper implements
-    Contracts\ObjectMapperInterface,
-    Contracts\CompilableMapperInterface
+    Mapping\ObjectMapperInterface,
+    Mapping\CompilableMapperInterface
 {
-    /** @var Contracts\FieldScopingInterface[] */
+    /** @var Mapping\FieldScopingInterface[] */
     private array $properties;
 
     public function __construct(
-        private Contracts\ObjectInitializerInterface $initializer,
-        Contracts\FieldScopingInterface ...$properties
+        private Mapping\ObjectInitializerInterface $initializer,
+        Mapping\FieldScopingInterface ...$properties
     ) {
         $this->properties = $properties;
     }
@@ -32,11 +32,11 @@ final class ObjectMapper implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        if (!$this->initializer instanceof Contracts\CompilableObjectInitializerInterface) {
+        if (!$this->initializer instanceof Mapping\CompilableObjectInitializerInterface) {
             throw new \RuntimeException(strtr(
                 'Expected a %expected%, but got an object of type %actual%.',
                 [
-                    '%expected%' => Contracts\CompilableObjectInitializerInterface::class,
+                    '%expected%' => Mapping\CompilableObjectInitializerInterface::class,
                     '%actual%' => get_class($this->initializer),
                 ]
             ));
@@ -51,11 +51,11 @@ final class ObjectMapper implements
     private function compileMappers(Node\Expr $outputNode): iterable
     {
         foreach ($this->properties as $mapper) {
-            if (!$mapper instanceof Contracts\CompilableInterface) {
+            if (!$mapper instanceof Mapping\CompilableInterface) {
                 throw new \RuntimeException(strtr(
                     'Expected a %expected%, but got an object of type %actual%.',
                     [
-                        '%expected%' => Contracts\CompilableInterface::class,
+                        '%expected%' => Mapping\CompilableInterface::class,
                         '%actual%' => get_class($mapper),
                     ]
                 ));

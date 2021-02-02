@@ -3,21 +3,21 @@
 namespace Kiboko\Component\FastMap\Mapping;
 
 use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\FastMap\Contracts;
+use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class Field implements
-    Contracts\FieldScopingInterface,
-    Contracts\CompilableInterface
+    Mapping\FieldScopingInterface,
+    Mapping\CompilableInterface
 {
     private PropertyAccessor $accessor;
 
     public function __construct(
         private PropertyPathInterface $path,
-        private Contracts\FieldMapperInterface $child
+        private Mapping\FieldMapperInterface $child
     ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

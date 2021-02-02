@@ -4,8 +4,8 @@ namespace Kiboko\Component\FastMap\Mapping;
 
 use Kiboko\Component\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\ScopedCodeBuilder;
-use Kiboko\Component\FastMap\Contracts;
 use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -14,8 +14,8 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class MultipleRelation implements
-    Contracts\FieldScopingInterface,
-    Contracts\CompilableInterface
+    Mapping\FieldScopingInterface,
+    Mapping\CompilableInterface
 {
     private PropertyAccessor $accessor;
 
@@ -23,7 +23,7 @@ final class MultipleRelation implements
         private PropertyPathInterface $outputPath,
         private ExpressionLanguage $interpreter,
         private Expression $inputExpression,
-        private Contracts\ObjectMapperInterface $child
+        private Mapping\ObjectMapperInterface $child
     ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

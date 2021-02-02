@@ -3,9 +3,9 @@
 namespace spec\Kiboko\Component\FastMap\Mapping\Field;
 
 use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\FastMap\Contracts\CompilableMapperInterface;
-use Kiboko\Component\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\FastMap\Mapping\Field\CopyValueMapper;
+use Kiboko\Contract\Mapping\CompilableMapperInterface;
+use Kiboko\Contract\Mapping\MapperInterface;
 use PhpParser\Node;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\PropertyAccess\PropertyPath;

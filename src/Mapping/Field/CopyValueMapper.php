@@ -4,7 +4,7 @@ namespace Kiboko\Component\FastMap\Mapping\Field;
 
 use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\RequiredValuePreconditionBuilder;
-use Kiboko\Component\FastMap\Contracts;
+use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -12,8 +12,8 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class CopyValueMapper implements
-    Contracts\FieldMapperInterface,
-    Contracts\CompilableMapperInterface
+    Mapping\FieldMapperInterface,
+    Mapping\CompilableMapperInterface
 {
     private PropertyAccessor $accessor;
 

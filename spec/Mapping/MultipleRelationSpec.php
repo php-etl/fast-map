@@ -3,11 +3,11 @@
 namespace spec\Kiboko\Component\FastMap\Mapping;
 
 use functional\Kiboko\Component\FastMap\DTO\Customer;
-use Kiboko\Component\FastMap\Contracts\ObjectMapperInterface;
 use Kiboko\Component\FastMap\Mapping;
 use Kiboko\Component\FastMap\Mapping\Field;
 use Kiboko\Component\FastMap\SimpleObjectInitializer;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
+use Kiboko\Contract\Mapping\ObjectMapperInterface;
 use PhpParser\Node\Expr\Variable;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\ExpressionLanguage\Expression;

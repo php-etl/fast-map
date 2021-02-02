@@ -3,9 +3,9 @@
 namespace functional\Kiboko\Component\FastMap\Mapping\Field;
 
 use Kiboko\Component\FastMap\Compiler;
-use Kiboko\Component\FastMap\Contracts\CompiledMapperInterface;
-use Kiboko\Component\FastMap\Contracts\MapperInterface;
 use Kiboko\Component\FastMap\Mapping\Field\ExpressionLanguageValueMapper;
+use Kiboko\Contract\Mapping\CompiledMapperInterface;
+use Kiboko\Contract\Mapping\MapperInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;

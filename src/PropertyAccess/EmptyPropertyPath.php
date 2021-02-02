@@ -7,12 +7,12 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterface
 {
-    public function __toString()
+    public function __toString(): string
     {
         return '';
     }
 
-    public function getLength()
+    public function getLength(): int
     {
         return 0;
     }
@@ -27,7 +27,7 @@ final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterfa
         return new \EmptyIterator();
     }
 
-    public function getElements()
+    public function getElements(): array
     {
         return [];
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0b4094245ec431ee58ef107b7f63bed",
+    "content-hash": "bf4c85ae1612996847d9e11fddbadfe3",
     "packages": [
         {
             "name": "adlawson/vfs",
@@ -367,17 +367,70 @@
             "time": "2021-01-27T21:29:44+00:00"
         },
         {
+            "name": "php-etl/mapping-contracts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/mapping-contracts.git",
+                "reference": "e7fdddf8373f658caf939c9e1766d09c9c5835dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/mapping-contracts/zipball/e7fdddf8373f658caf939c9e1766d09c9c5835dd",
+                "reference": "e7fdddf8373f658caf939c9e1766d09c9c5835dd",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.10",
+                "php": "^8.0",
+                "php-etl/metadata-contracts": "0.1.x-dev",
+                "symfony/property-access": "5.x-dev"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Contract\\Mapping\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiboko SAS",
+                    "homepage": "http://kiboko.fr"
+                },
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "Interfaces for FastMap",
+            "support": {
+                "issues": "https://github.com/php-etl/mapping-contracts/issues",
+                "source": "https://github.com/php-etl/mapping-contracts/tree/master"
+            },
+            "time": "2021-02-02T14:12:14+00:00"
+        },
+        {
             "name": "php-etl/metadata",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/metadata.git",
-                "reference": "849be4aa1b05b8166fa5ee1e0d47278138438be9"
+                "reference": "38213337003e05daf4fe0f06e380b168bcac1810"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/metadata/zipball/849be4aa1b05b8166fa5ee1e0d47278138438be9",
-                "reference": "849be4aa1b05b8166fa5ee1e0d47278138438be9",
+                "url": "https://api.github.com/repos/php-etl/metadata/zipball/38213337003e05daf4fe0f06e380b168bcac1810",
+                "reference": "38213337003e05daf4fe0f06e380b168bcac1810",
                 "shasum": ""
             },
             "require": {
@@ -388,8 +441,10 @@
                 "phpactor/docblock": "^0.3.0@dev"
             },
             "require-dev": {
+                "friends-of-phpspec/phpspec-code-coverage": "^6.0",
                 "johnkary/phpunit-speedtrap": "*",
                 "mybuilder/phpunit-accelerator": "*",
+                "php-etl/phpspec-extension": "0.2.x-dev",
                 "phpspec/phpspec": "^7.0",
                 "phpunit/phpunit": "^9.0"
             },
@@ -424,7 +479,7 @@
                 "issues": "https://github.com/php-etl/metadata/issues",
                 "source": "https://github.com/php-etl/metadata/tree/master"
             },
-            "time": "2021-02-02T10:35:03+00:00"
+            "time": "2021-02-02T13:37:07+00:00"
         },
         {
             "name": "php-etl/metadata-contracts",
@@ -5052,6 +5107,7 @@
         "php-etl/metadata": 20,
         "php-etl/contracts": 20,
         "adlawson/vfs": 20,
+        "php-etl/mapping-contracts": 20,
         "php-etl/phpspec-extension": 20
     },
     "prefer-stable": false,

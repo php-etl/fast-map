@@ -3,8 +3,9 @@
 namespace Kiboko\Component\FastMap\Compiler\Strategy;
 
 use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
-use Kiboko\Component\FastMap\Contracts\CompilableMapperInterface;
-use Kiboko\Component\FastMap\Contracts\CompiledMapperInterface;
+use Kiboko\Contract\Mapping\CompilableMapperInterface;
+use Kiboko\Contract\Mapping\CompiledMapperInterface;
+use Kiboko\Contract\Mapping\Compiler\Strategy\StrategyInterface;
 use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;

@@ -3,7 +3,7 @@
 namespace Kiboko\Component\FastMap;
 
 use Kiboko\Component\FastMap\Compiler\Builder\SimpleObjectInitializerBuilder;
-use Kiboko\Component\FastMap\Contracts\CompilableObjectInitializerInterface;
+use Kiboko\Contract\Mapping\CompilableObjectInitializerInterface;
 use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
