@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8bbca98fab8ff6ad782c0031c32c6ad",
+    "content-hash": "c0b4094245ec431ee58ef107b7f63bed",
     "packages": [
         {
             "name": "adlawson/vfs",
@@ -2445,6 +2445,67 @@
             "time": "2020-12-13T23:18:30+00:00"
         },
         {
+            "name": "php-etl/phpspec-extension",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/phpspec-extension.git",
+                "reference": "ce575f9ea6c6c6ef739d4fbdc1a9c272554c5b91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/phpspec-extension/zipball/ce575f9ea6c6c6ef739d4fbdc1a9c272554c5b91",
+                "reference": "ce575f9ea6c6c6ef739d4fbdc1a9c272554c5b91",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/inflector": "^2.0",
+                "friends-of-phpspec/phpspec-code-coverage": "^6.0",
+                "nikic/php-parser": "^4.9@dev",
+                "php": "^8.0",
+                "php-etl/metadata": "0.2.x-dev",
+                "phpspec/phpspec": "^7.0",
+                "symfony/cache": "^5.2",
+                "symfony/expression-language": "^5.2",
+                "symfony/inflector": "^5.2",
+                "symfony/property-access": "^5.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Component\\PHPSpecExtension\\FastMap\\": "src/FastMap/",
+                    "Kiboko\\Component\\PHPSpecExtension\\Metadata\\": "src/Metadata/",
+                    "Kiboko\\Component\\PHPSpecExtension\\DataProvider\\": "src/DataProvider/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiboko SAS",
+                    "homepage": "http://kiboko.fr"
+                },
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "Extension for testing FastMap and ETL components with PHPSpec testing framework",
+            "support": {
+                "issues": "https://github.com/php-etl/phpspec-extension/issues",
+                "source": "https://github.com/php-etl/phpspec-extension/tree/master"
+            },
+            "time": "2021-02-02T10:59:39+00:00"
+        },
+        {
             "name": "phpdocumentor/reflection-common",
             "version": "dev-master",
             "source": {
@@ -4584,6 +4645,78 @@
             "time": "2021-01-28T22:06:19+00:00"
         },
         {
+            "name": "symfony/inflector",
+            "version": "5.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/inflector.git",
+                "reference": "4c285002228d0e27480e5eee871f4e3f0a05a4eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/inflector/zipball/4c285002228d0e27480e5eee871f4e3f0a05a4eb",
+                "reference": "4c285002228d0e27480e5eee871f4e3f0a05a4eb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/string": "~5.1.10|^5.2.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Inflector\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Converts words between their singular and plural forms (English only)",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "inflection",
+                "pluralize",
+                "singularize",
+                "string",
+                "symfony",
+                "words"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/inflector/tree/v5.2.2"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-10T16:29:19+00:00"
+        },
+        {
             "name": "symfony/polyfill-php73",
             "version": "dev-main",
             "source": {
@@ -4918,7 +5051,8 @@
         "nikic/php-parser": 20,
         "php-etl/metadata": 20,
         "php-etl/contracts": 20,
-        "adlawson/vfs": 20
+        "adlawson/vfs": 20,
+        "php-etl/phpspec-extension": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -51,6 +51,7 @@
         "phpspec/phpspec": "^7.0",
         "johnkary/phpunit-speedtrap": "*",
         "mybuilder/phpunit-accelerator": "*",
-        "phpunit/php-invoker": "*"
+        "phpunit/php-invoker": "*",
+        "php-etl/phpspec-extension": "0.2.x-dev"
     }
 }
