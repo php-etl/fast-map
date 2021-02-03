@@ -26,18 +26,22 @@ final class PropertyPathBuilder implements Builder
             $iterator = new \LimitIterator($iterator, 0, $this->limit);
         }
 
-        foreach ($iterator as $index => $child) {
-            if ($this->propertyPath->isIndex($index)) {
-                $pathNode = new Node\Expr\ArrayDimFetch(
-                    $pathNode,
-                    new Node\Scalar\String_($child)
-                );
-            } elseif ($this->propertyPath->isProperty($index)) {
-                $pathNode = new Node\Expr\PropertyFetch(
-                    $pathNode,
-                    new Node\Name($child)
-                );
+        try {
+            foreach ($iterator as $index => $child) {
+                if ($this->propertyPath->isIndex($index)) {
+                    $pathNode = new Node\Expr\ArrayDimFetch(
+                        $pathNode,
+                        new Node\Scalar\String_($child)
+                    );
+                } elseif ($this->propertyPath->isProperty($index)) {
+                    $pathNode = new Node\Expr\PropertyFetch(
+                        $pathNode,
+                        new Node\Name($child)
+                    );
+                }
             }
+        } catch (\OutOfBoundsException) {
+            // Case when the iterator is empty
         }
 
         return $pathNode;
