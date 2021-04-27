@@ -8,7 +8,8 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ObjectMapper implements
     Mapping\ObjectMapperInterface,
-    Mapping\CompilableMapperInterface
+    Mapping\CompilableMapperInterface,
+    Mapping\FieldMapperInterface
 {
     /** @var Mapping\FieldScopingInterface[] */
     private array $properties;

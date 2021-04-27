@@ -10,7 +10,8 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ArrayMapper implements
     Mapping\ArrayMapperInterface,
-    Mapping\CompilableMapperInterface
+    Mapping\CompilableMapperInterface,
+    Mapping\FieldMapperInterface
 {
     /** @var Mapping\FieldScopingInterface[] */
     private array $fields;
