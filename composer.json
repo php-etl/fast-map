@@ -21,10 +21,19 @@
         "symfony/expression-language": "^5.2",
         "symfony/cache": "^5.4",
         "doctrine/inflector": "^2.0",
-        "php-etl/metadata": "^0.2@dev",
-        "php-etl/contracts": "^0.1.x-dev",
-        "adlawson/vfs": "dev-develop",
-        "php-etl/mapping-contracts": "0.1.x-dev"
+        "php-etl/metadata": "^0.2.0",
+        "php-etl/mapping-contracts": "^0.1.0",
+        "php-etl/metadata-contracts": "^0.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "friends-of-phpspec/phpspec-code-coverage": "*",
+        "phpspec/phpspec": "^7.0",
+        "johnkary/phpunit-speedtrap": "*",
+        "mybuilder/phpunit-accelerator": "*",
+        "phpunit/php-invoker": "*",
+        "php-etl/phpspec-extension": "*",
+        "adlawson/vfs": "dev-develop"
     },
     "autoload": {
         "psr-4": {
@@ -45,14 +54,5 @@
         "branch-alias": {
             "dev-master": "0.2.x-dev"
         }
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.0",
-        "friends-of-phpspec/phpspec-code-coverage": "^6.0",
-        "phpspec/phpspec": "^7.0",
-        "johnkary/phpunit-speedtrap": "*",
-        "mybuilder/phpunit-accelerator": "*",
-        "phpunit/php-invoker": "*",
-        "php-etl/phpspec-extension": "0.2.x-dev"
     }
 }

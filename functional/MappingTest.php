@@ -7,6 +7,7 @@ use Kiboko\Component\Metadata\ArgumentMetadata;
 use Kiboko\Component\Metadata\ClassMetadataBuilder;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use Kiboko\Component\Metadata\ClassTypeMetadata;
+use Kiboko\Component\Metadata\CollectionTypeMetadata;
 use Kiboko\Component\Metadata\FieldGuesser;
 use Kiboko\Component\Metadata\FieldMetadata;
 use Kiboko\Component\Metadata\ListTypeMetadata;
@@ -143,7 +144,10 @@ final class MappingTest extends TestCase
                 ->addRelations(
                     new VirtualMultipleRelationMetadata(
                         'addresses',
-                        new ClassReferenceMetadata('Address', namespace\DTO::class),
+                        new CollectionTypeMetadata(
+                            new ClassReferenceMetadata('Address', namespace\DTO::class),
+                            new ClassReferenceMetadata('Address', namespace\DTO::class),
+                        ),
                         mutator: new MethodMetadata(
                             'setAddresses',
                             new ArgumentListMetadata(
@@ -161,23 +165,6 @@ final class MappingTest extends TestCase
                     new VirtualUnaryRelationMetadata(
                         'address',
                         new ClassReferenceMetadata('Address', namespace\DTO::class)
-                    ),
-                    new VirtualUnaryRelationMetadata(
-                        'email',
-                        new ScalarTypeMetadata('string'),
-                        mutator: new MethodMetadata(
-                            'setEmail',
-                            new ArgumentListMetadata(
-                                new ArgumentMetadata(
-                                    'email',
-                                    new ScalarTypeMetadata('string')
-                                )
-                            ),
-                            new ClassReferenceMetadata(
-                                'Customer',
-                                namespace\DTO::class,
-                            )
-                        )
                     ),
                 )
         ];
