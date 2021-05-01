@@ -29,10 +29,17 @@ final class PropertyPathBuilder implements Builder
         try {
             foreach ($iterator as $index => $child) {
                 if ($this->propertyPath->isIndex($index)) {
-                    $pathNode = new Node\Expr\ArrayDimFetch(
-                        $pathNode,
-                        new Node\Scalar\String_($child)
-                    );
+                    if (is_int($child)) {
+                        $pathNode = new Node\Expr\ArrayDimFetch(
+                            $pathNode,
+                            new Node\Scalar\LNumber($child)
+                        );
+                    } else {
+                        $pathNode = new Node\Expr\ArrayDimFetch(
+                            $pathNode,
+                            new Node\Scalar\String_($child)
+                        );
+                    }
                 } elseif ($this->propertyPath->isProperty($index)) {
                     $pathNode = new Node\Expr\PropertyFetch(
                         $pathNode,

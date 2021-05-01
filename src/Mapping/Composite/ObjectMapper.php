@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
+use Kiboko\Component\FastMap\Compiler\Builder\IsolatedCodeBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
@@ -43,10 +44,16 @@ final class ObjectMapper implements
             ));
         }
 
-        return array_merge(
-            $this->initializer->compile($outputNode),
-            ...$this->compileMappers($outputNode)
-        );
+        return return [
+            (new IsolatedCodeBuilder(
+                $outputNode,
+                new Node\Expr\Variable('output'),
+                array_merge(
+                    $this->initializer->compile($outputNode),
+                    ...$this->compileMappers($outputNode)
+                )
+            ))->getNode()
+        ];
     }
 
     private function compileMappers(Node\Expr $outputNode): iterable

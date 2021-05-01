@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
+use Kiboko\Component\FastMap\Compiler\Builder\IsolatedCodeBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -42,23 +43,32 @@ final class ArrayMapper implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        $mappers = array_merge(...$this->compileMappers($outputNode));
-        return array_merge(
-            [
-                new Node\Stmt\Expression(
-                    expr: new Node\Expr\Assign(
-                        var: $outputNode,
-                        expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
-                    ),
-                ),
-            ],
-            $mappers,
-            [
-                new Node\Stmt\Return_(
-                    expr: new Node\Expr\Variable('output')
-                )
-            ],
-        );
+        return [
+            new Node\Stmt\Expression(
+                (new IsolatedCodeBuilder(
+                    new Node\Expr\Variable('input'),
+                    $outputNode,
+                    array_merge(
+                        [
+                            new Node\Stmt\Expression(
+                                expr: new Node\Expr\Assign(
+                                    var: new Node\Expr\Variable('output'),
+                                    expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
+                                ),
+                            ),
+                        ],
+                        array_merge(
+                            ...$this->compileMappers(new Node\Expr\Variable('output'))
+                        ),
+                        [
+                            new Node\Stmt\Return_(
+                                expr: new Node\Expr\Variable('output')
+                            )
+                        ],
+                    )
+                ))->getNode(),
+            )
+        ];
     }
 
     private function compileMappers(Node\Expr $outputNode): iterable
