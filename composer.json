@@ -16,7 +16,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.0",
-        "nikic/php-parser": "^4.9@dev",
+        "nikic/php-parser": "^4.10",
         "symfony/property-access": "^5.2",
         "symfony/expression-language": "^5.2",
         "symfony/cache": "^5.4",
