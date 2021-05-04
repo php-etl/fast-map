@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\FastMap\Mapping;
+namespace Kiboko\Component\FastMap\Mapping\Composite;
 
-use Kiboko\Component\FastMap\Mapping\Composite\ArrayMapper;
-use Kiboko\Component\FastMap\Mapping\Composite\ObjectMapper;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use PhpParser\ParserFactory;
@@ -11,14 +9,15 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ConditionalMapper implements
+final class ObjectConditionalMapper implements
+    Mapping\ObjectMapperInterface,
     Mapping\CompilableMapperInterface,
     Mapping\FieldMapperInterface
 {
     public function __construct(
-        private ArrayMapper|ObjectMapper $decorated,
         private ExpressionLanguage $interpreter,
         private Expression $condition,
+        private ObjectMapper $decorated,
     ) {}
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)

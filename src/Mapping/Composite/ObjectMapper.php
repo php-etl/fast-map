@@ -44,7 +44,7 @@ final class ObjectMapper implements
             ));
         }
 
-        return return [
+        return [
             (new IsolatedCodeBuilder(
                 $outputNode,
                 new Node\Expr\Variable('output'),
