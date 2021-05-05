@@ -44,7 +44,7 @@ final class ObjectMapper implements
             ));
         }
 
-        return return [
+        return [
             (new IsolatedCodeBuilder(
                 $outputNode,
                 new Node\Expr\Variable('output'),
@@ -52,7 +52,8 @@ final class ObjectMapper implements
                     $this->initializer->compile($outputNode),
                     ...$this->compileMappers($outputNode)
                 )
-            ))->getNode()
+            ))->getNode(),
+            new Node\Stmt\Return_($outputNode),
         ];
     }
 
