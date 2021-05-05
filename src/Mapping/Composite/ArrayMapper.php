@@ -68,7 +68,6 @@ final class ArrayMapper implements
                     )
                 ))->getNode(),
             ),
-            new Node\Stmt\Return_($outputNode),
         ];
     }
 
