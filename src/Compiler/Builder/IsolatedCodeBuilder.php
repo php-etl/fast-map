@@ -9,13 +9,17 @@ final class IsolatedCodeBuilder implements Builder
 {
     /** @var Node\Stmt[] */
     private array $stmts;
+    /** @var Node\Expr[] */
+    private array $usedVariables;
 
     public function __construct(
         private Node\Expr $input,
         private Node\Expr $output,
-        array $stmts
+        array $stmts,
+        Node\Expr ...$usedVariables
     ) {
         $this->stmts = $stmts;
+        $this->usedVariables = $usedVariables;
     }
 
     public function getNode(): Node
@@ -30,6 +34,7 @@ final class IsolatedCodeBuilder implements Builder
                         )
                     ],
                     'stmts' => $this->stmts,
+                    'uses' => $this->usedVariables
                 ]),
                 [
                     $this->input,
