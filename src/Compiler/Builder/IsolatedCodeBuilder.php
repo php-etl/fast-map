@@ -37,7 +37,7 @@ final class IsolatedCodeBuilder implements Builder
                     'uses' => $this->usedVariables
                 ]),
                 [
-                    $this->input,
+                    new Node\Arg($this->input),
                 ],
             ),
         );

@@ -55,21 +55,13 @@ final class ExpressionLanguageValueMapper implements
 
     public function compile(Node\Expr $outputNode): array
     {
-        return array_merge(
-            array_map(function ($variable, $value) {
-                return new Node\Expr\Assign(
-                    new Node\Expr\Variable($variable),
-                    (new ConstantValueBuilder($value))->getNode()
-                );
-            }, array_keys($this->variables), $this->variables),
-            [
-                new Node\Stmt\Expression(
-                    new Node\Expr\Assign(
-                        $outputNode,
-                        (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->expression, array_keys($this->variables)))->getNode()
-                    ),
+        return [
+            new Node\Stmt\Expression(
+                new Node\Expr\Assign(
+                    $outputNode,
+                    (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->expression, array_keys($this->variables)))->getNode()
                 ),
-            ]
-        );
+            ),
+        ];
     }
 }
