@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Field;
 
+use Kiboko\Component\FastMap\Mapping\Composite\ArrayMapper;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -13,10 +14,13 @@ final class ConstantValueMapper implements
     Mapping\CompilableMapperInterface
 {
     private PropertyAccessor $accessor;
+    /** @var Node\Expr\Variable[] */
+    private iterable $contextVariables;
 
     public function __construct(private mixed $value)
     {
         $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
@@ -28,6 +32,13 @@ final class ConstantValueMapper implements
         );
 
         return $output;
+    }
+
+    public function addContextVariable(Node\Expr\Variable $variable): ConstantValueMapper
+    {
+        $this->contextVariables[] = $variable;
+
+        return $this;
     }
 
     public function compile(Node\Expr $outputNode): array

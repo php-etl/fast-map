@@ -17,11 +17,14 @@ final class ArrayMapper implements
     /** @var Mapping\FieldScopingInterface[] */
     private array $fields;
     private PropertyAccessor $accessor;
+    /** @var Node\Expr\Variable[] */
+    private iterable $contextVariables;
 
     public function __construct(Mapping\FieldScopingInterface ...$fields)
     {
         $this->fields = $fields;
         $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
@@ -39,6 +42,13 @@ final class ArrayMapper implements
         }
 
         return $output;
+    }
+
+    public function addContextVariable(Node\Expr\Variable $variable): ArrayMapper
+    {
+        $this->contextVariables[] = $variable;
+
+        return $this;
     }
 
     public function compile(Node\Expr $outputNode): array
@@ -65,7 +75,8 @@ final class ArrayMapper implements
                                 expr: new Node\Expr\Variable('output')
                             )
                         ],
-                    )
+                    ),
+                    ...$this->contextVariables,
                 ))->getNode(),
             ),
         ];

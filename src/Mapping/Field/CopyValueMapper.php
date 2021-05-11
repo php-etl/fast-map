@@ -16,10 +16,13 @@ final class CopyValueMapper implements
     Mapping\CompilableMapperInterface
 {
     private PropertyAccessor $accessor;
+    /** @var Node\Expr\Variable[] */
+    private iterable $contextVariables;
 
     public function __construct(private PropertyPathInterface $inputPaths)
     {
         $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
@@ -31,6 +34,13 @@ final class CopyValueMapper implements
         );
 
         return $output;
+    }
+
+    public function addContextVariable(Node\Expr\Variable $variable): CopyValueMapper
+    {
+        $this->contextVariables[] = $variable;
+
+        return $this;
     }
 
     public function compile(Node\Expr $outputNode): array

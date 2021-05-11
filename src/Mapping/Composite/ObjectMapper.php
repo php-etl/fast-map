@@ -14,12 +14,15 @@ final class ObjectMapper implements
 {
     /** @var Mapping\FieldScopingInterface[] */
     private array $properties;
+    /** @var Node\Expr\Variable[] */
+    private iterable $contextVariables;
 
     public function __construct(
         private Mapping\ObjectInitializerInterface $initializer,
         Mapping\FieldScopingInterface ...$properties
     ) {
         $this->properties = $properties;
+        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
@@ -30,6 +33,13 @@ final class ObjectMapper implements
         }
 
         return $output;
+    }
+
+    public function addContextVariable(Node\Expr\Variable $variable): ObjectMapper
+    {
+        $this->contextVariables[] = $variable;
+
+        return $this;
     }
 
     public function compile(Node\Expr $outputNode): array
@@ -51,7 +61,8 @@ final class ObjectMapper implements
                 array_merge(
                     $this->initializer->compile($outputNode),
                     ...$this->compileMappers($outputNode)
-                )
+                ),
+                ...$this->contextVariables,
             ))->getNode(),
             new Node\Stmt\Return_($outputNode),
         ];

@@ -19,6 +19,8 @@ final class ExpressionLanguageValueMapper implements
     /** @var array<string, mixed> */
     private array $variables;
     private PropertyAccessor $accessor;
+    /** @var Node\Expr\Variable[] */
+    private iterable $contextVariables;
 
     public function __construct(
         private ExpressionLanguage $interpreter,
@@ -27,6 +29,7 @@ final class ExpressionLanguageValueMapper implements
     ) {
         $this->variables = $variables;
         $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
@@ -41,6 +44,13 @@ final class ExpressionLanguageValueMapper implements
         );
 
         return $output;
+    }
+
+    public function addContextVariable(Node\Expr\Variable $variable): ExpressionLanguageValueMapper
+    {
+        $this->contextVariables[] = $variable;
+
+        return $this;
     }
 
     public function compile(Node\Expr $outputNode): array

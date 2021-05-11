@@ -4,6 +4,7 @@ namespace Kiboko\Component\FastMap\Mapping\Field;
 
 use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\RequiredValuePreconditionBuilder;
+use Kiboko\Component\FastMap\Mapping\Composite\ArrayMapper;
 use Kiboko\Contract\Mapping;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
@@ -19,11 +20,14 @@ final class ConcatCopyValuesMapper implements
     /** @var string[] */
     private iterable $inputPaths;
     private PropertyAccessor $accessor;
+    /** @var Node\Expr\Variable[] */
+    private iterable $contextVariables;
 
     public function __construct(private string $glue, PropertyPathInterface ...$inputPaths)
     {
         $this->inputPaths = $inputPaths;
         $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
@@ -42,6 +46,13 @@ final class ConcatCopyValuesMapper implements
         foreach ($this->inputPaths as $field) {
             yield $this->accessor->getValue($input, $field) ?? null;
         }
+    }
+
+    public function addContextVariable(Node\Expr\Variable $variable): ConcatCopyValuesMapper
+    {
+        $this->contextVariables[] = $variable;
+
+        return $this;
     }
 
     /**
