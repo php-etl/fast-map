@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
+use Kiboko\Component\FastMap\Compiler\Builder\IsolatedCodeAppendVariableBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\IsolatedCodeBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
@@ -55,7 +56,7 @@ final class ObjectAppendMapper implements
         }
 
         return [
-            (new IsolatedCodeBuilder(
+            (new IsolatedCodeAppendVariableBuilder(
                 $outputNode,
                 new Node\Expr\Variable('output'),
                 array_merge(
