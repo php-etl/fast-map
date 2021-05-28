@@ -54,29 +54,31 @@ final class ArrayMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         return [
-            (new IsolatedValueTransformationBuilder(
-                new Node\Expr\Variable('input'),
-                $outputNode,
-                array_merge(
-                    [
-                        new Node\Stmt\Expression(
-                            expr: new Node\Expr\Assign(
+            new Node\Stmt\Expression(
+                (new IsolatedValueTransformationBuilder(
+                    new Node\Expr\Variable('input'),
+                    $outputNode,
+                    array_merge(
+                        [
+                            new Node\Stmt\Expression(
+                                expr: new Node\Expr\Assign(
                                 var: new Node\Expr\Variable('output'),
                                 expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
                             ),
+                            ),
+                        ],
+                        array_merge(
+                            ...$this->compileMappers(new Node\Expr\Variable('output'))
                         ),
-                    ],
-                    array_merge(
-                        ...$this->compileMappers(new Node\Expr\Variable('output'))
+                        [
+                            new Node\Stmt\Return_(
+                                expr: new Node\Expr\Variable('output')
+                            )
+                        ],
                     ),
-                    [
-                        new Node\Stmt\Return_(
-                            expr: new Node\Expr\Variable('output')
-                        )
-                    ],
-                ),
-                ...$this->contextVariables,
-            ))->getNode(),
+                    ...$this->contextVariables,
+                ))->getNode()
+            ),
             new Node\Stmt\Return_(new Node\Expr\Variable('output'))
         ];
     }

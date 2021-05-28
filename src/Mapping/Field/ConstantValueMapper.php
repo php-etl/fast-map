@@ -50,7 +50,6 @@ final class ConstantValueMapper implements
                     new Node\Scalar\String_($this->value)
                 ),
             ),
-            new Node\Stmt\Return_(new Node\Expr\Variable('output'))
         ];
     }
 }
