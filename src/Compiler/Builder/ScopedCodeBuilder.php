@@ -34,7 +34,7 @@ final class ScopedCodeBuilder implements Builder
                         'stmts' => $this->stmts,
                     ]),
                     [
-                        $this->input,
+                        new Node\Arg($this->input),
                     ]
                 )
             ]

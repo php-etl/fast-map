@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c57f0c85e7005981d6f57721ae708330",
+    "content-hash": "e030229ca9e92c5dfe63ace85960b7cb",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -151,6 +151,59 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.5"
             },
             "time": "2021-05-03T19:11:20+00:00"
+        },
+        {
+            "name": "php-etl/configurator-contracts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/configurator-contracts.git",
+                "reference": "4f840f4f7e7f8dd0bab45d4f26e616d28820c483"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/configurator-contracts/zipball/4f840f4f7e7f8dd0bab45d4f26e616d28820c483",
+                "reference": "4f840f4f7e7f8dd0bab45d4f26e616d28820c483",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.10",
+                "php": "^8.0",
+                "php-etl/packaging-contracts": "^0.1.0",
+                "symfony/config": "^5.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Contract\\Configurator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiboko SAS",
+                    "homepage": "http://kiboko.fr"
+                },
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "This library describes contracts for defining configuration formats and building optimized code from it",
+            "support": {
+                "issues": "https://github.com/php-etl/configurator-contracts/issues",
+                "source": "https://github.com/php-etl/configurator-contracts/tree/master"
+            },
+            "time": "2021-05-07T11:22:52+00:00"
         },
         {
             "name": "php-etl/mapping-contracts",
@@ -316,6 +369,119 @@
                 "source": "https://github.com/php-etl/metadata-contracts/tree/master"
             },
             "time": "2021-02-04T13:29:20+00:00"
+        },
+        {
+            "name": "php-etl/packaging-contracts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/packaging-contracts.git",
+                "reference": "dafc1dd7cffc004442e9072172e88eb430b78185"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/packaging-contracts/zipball/dafc1dd7cffc004442e9072172e88eb430b78185",
+                "reference": "dafc1dd7cffc004442e9072172e88eb430b78185",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.10",
+                "php": "^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Contract\\Packaging\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiboko SAS",
+                    "homepage": "http://kiboko.fr"
+                },
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "This library aims at providing contracts for building TAR archives, using PHP resources and streams",
+            "support": {
+                "issues": "https://github.com/php-etl/packaging-contracts/issues",
+                "source": "https://github.com/php-etl/packaging-contracts/tree/master"
+            },
+            "time": "2021-05-07T11:10:40+00:00"
+        },
+        {
+            "name": "php-etl/satellite-toolbox",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/satellite-toolbox.git",
+                "reference": "e3491c93931cb228bb53bd88fcfab91bc76c6ff7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/e3491c93931cb228bb53bd88fcfab91bc76c6ff7",
+                "reference": "e3491c93931cb228bb53bd88fcfab91bc76c6ff7",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.10",
+                "php": "^8.0",
+                "php-etl/configurator-contracts": "^0.3.0",
+                "symfony/expression-language": "^5.2"
+            },
+            "require-dev": {
+                "johnkary/phpunit-speedtrap": "*",
+                "mybuilder/phpunit-accelerator": "*",
+                "phpunit/php-invoker": "*",
+                "phpunit/phpunit": "^9.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Component\\SatelliteToolbox\\": "src/"
+                },
+                "files": [
+                    "src/configuration.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiboko SAS",
+                    "homepage": "http://kiboko.fr"
+                },
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "This library aims at building and running lambda PHP functions",
+            "support": {
+                "issues": "https://github.com/php-etl/satellite-toolbox/issues",
+                "source": "https://github.com/php-etl/satellite-toolbox/tree/master"
+            },
+            "time": "2021-05-28T08:58:44+00:00"
         },
         {
             "name": "phpactor/docblock",
@@ -696,6 +862,86 @@
             "time": "2021-03-23T23:28:01+00:00"
         },
         {
+            "name": "symfony/config",
+            "version": "5.4.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/config.git",
+                "reference": "db7f82ee863ec4ebaed87fb2b036a76510259da9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/config/zipball/db7f82ee863ec4ebaed87fb2b036a76510259da9",
+                "reference": "db7f82ee863ec4ebaed87fb2b036a76510259da9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/filesystem": "^4.4|^5.0|^6.0",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-php80": "^1.15",
+                "symfony/polyfill-php81": "^1.22"
+            },
+            "conflict": {
+                "symfony/finder": "<4.4"
+            },
+            "require-dev": {
+                "symfony/event-dispatcher": "^4.4|^5.0|^6.0",
+                "symfony/finder": "^4.4|^5.0|^6.0",
+                "symfony/messenger": "^4.4|^5.0|^6.0",
+                "symfony/service-contracts": "^1.1|^2",
+                "symfony/yaml": "^4.4|^5.0|^6.0"
+            },
+            "suggest": {
+                "symfony/yaml": "To use the yaml reference dumper"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Config\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/config/tree/5.4"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-05-26T17:43:50+00:00"
+        },
+        {
             "name": "symfony/deprecation-contracts",
             "version": "dev-main",
             "source": {
@@ -827,6 +1073,68 @@
                 }
             ],
             "time": "2021-04-07T16:07:52+00:00"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "6.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "0e9cba463b12ec12d46e36524ae5a5e72d344125"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/0e9cba463b12ec12d46e36524ae5a5e72d344125",
+                "reference": "0e9cba463b12ec12d46e36524ae5a5e72d344125",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.2",
+                "symfony/polyfill-ctype": "~1.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides basic utilities for the filesystem",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/filesystem/tree/6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-05-26T17:48:49+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1239,6 +1547,86 @@
                 }
             ],
             "time": "2021-02-19T12:13:01+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php81",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php81.git",
+                "reference": "e66119f3de95efc359483f810c4c3e6436279436"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php81/zipball/e66119f3de95efc359483f810c4c3e6436279436",
+                "reference": "e66119f3de95efc359483f810c4c3e6436279436",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php81\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php81/tree/v1.23.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-05-21T13:25:03+00:00"
         },
         {
             "name": "symfony/property-access",

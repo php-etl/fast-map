@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
-use Kiboko\Component\FastMap\Compiler\Builder\IsolatedCodeBuilder;
+use Kiboko\Component\SatelliteToolbox\Builder\IsolatedValueTransformationBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
@@ -55,16 +55,16 @@ final class ObjectMapper implements
         }
 
         return [
-            (new IsolatedCodeBuilder(
+            (new IsolatedValueTransformationBuilder(
+                new Node\Expr\Variable('input'),
                 $outputNode,
-                new Node\Expr\Variable('output'),
                 array_merge(
                     $this->initializer->compile($outputNode),
                     ...$this->compileMappers($outputNode)
                 ),
                 ...$this->contextVariables,
             ))->getNode(),
-            new Node\Stmt\Return_($outputNode),
+            new Node\Stmt\Return_(new Node\Expr\Variable('output'))
         ];
     }
 

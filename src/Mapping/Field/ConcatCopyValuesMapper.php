@@ -100,6 +100,7 @@ final class ConcatCopyValuesMapper implements
                         $factory->concat(...$values)
                     ),
                 ),
+                new Node\Stmt\Return_(new Node\Expr\Variable('output'))
             ]
         );
     }

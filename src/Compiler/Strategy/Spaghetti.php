@@ -37,7 +37,6 @@ final class Spaghetti implements StrategyInterface
                         ->addParam($factory->param('input'))
                         ->addParam($factory->param('output')->setDefault(null))
                         ->addStmts($stmts)
-                        ->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))
                     )
                 )
                 ->getNode()

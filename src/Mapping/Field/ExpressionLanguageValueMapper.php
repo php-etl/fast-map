@@ -62,6 +62,7 @@ final class ExpressionLanguageValueMapper implements
                     (new ExpressionLanguageToPhpParserBuilder($this->interpreter, $this->expression, array_keys($this->variables)))->getNode()
                 ),
             ),
+            new Node\Stmt\Return_(new Node\Expr\Variable('output'))
         ];
     }
 }

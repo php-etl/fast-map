@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
-use Kiboko\Component\FastMap\Compiler\Builder\IsolatedCodeBuilder;
+use Kiboko\Component\SatelliteToolbox\Builder\IsolatedValueTransformationBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -54,31 +54,30 @@ final class ArrayMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         return [
-            new Node\Stmt\Expression(
-                (new IsolatedCodeBuilder(
-                    new Node\Expr\Variable('input'),
-                    $outputNode,
-                    array_merge(
-                        [
-                            new Node\Stmt\Expression(
-                                expr: new Node\Expr\Assign(
-                                    var: new Node\Expr\Variable('output'),
-                                    expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
-                                ),
+            (new IsolatedValueTransformationBuilder(
+                new Node\Expr\Variable('input'),
+                $outputNode,
+                array_merge(
+                    [
+                        new Node\Stmt\Expression(
+                            expr: new Node\Expr\Assign(
+                                var: new Node\Expr\Variable('output'),
+                                expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
                             ),
-                        ],
-                        array_merge(
-                            ...$this->compileMappers(new Node\Expr\Variable('output'))
                         ),
-                        [
-                            new Node\Stmt\Return_(
-                                expr: new Node\Expr\Variable('output')
-                            )
-                        ],
+                    ],
+                    array_merge(
+                        ...$this->compileMappers(new Node\Expr\Variable('output'))
                     ),
-                    ...$this->contextVariables,
-                ))->getNode(),
-            ),
+                    [
+                        new Node\Stmt\Return_(
+                            expr: new Node\Expr\Variable('output')
+                        )
+                    ],
+                ),
+                ...$this->contextVariables,
+            ))->getNode(),
+            new Node\Stmt\Return_(new Node\Expr\Variable('output'))
         ];
     }
 
