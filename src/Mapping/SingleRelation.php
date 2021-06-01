@@ -61,9 +61,11 @@ final class SingleRelation implements
         return array_merge(
             [
 //                (new RequiredValuePreconditionBuilder($inputPath, new Node\Expr\Variable('input'))),
-                new Node\Expr\Assign(
-                    new Node\Expr\Variable('item'),
-                    (new PropertyPathBuilder($this->outputPath, new Node\Expr\Variable('input')))->getNode()
+                new Node\Stmt\Expression(
+                    new Node\Expr\Assign(
+                        new Node\Expr\Variable('item'),
+                        (new PropertyPathBuilder($this->outputPath, new Node\Expr\Variable('input')))->getNode()
+                    )
                 ),
             ],
             $this->child->compile($outputNode)

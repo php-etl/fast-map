@@ -64,7 +64,6 @@ final class ObjectAppendMapper implements
                 ),
                 ...$this->contextVariables,
             ))->getNode(),
-            new Node\Stmt\Return_(new Node\Expr\Variable('output'))
         ];
     }
 

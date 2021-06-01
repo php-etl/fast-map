@@ -55,24 +55,21 @@ final class ArrayAppendMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         return [
-            new Node\Stmt\Expression(
-                (new IsolatedValueAppendingBuilder(
-                    new Node\Expr\Variable('input'),
-                    $outputNode,
+            (new IsolatedValueAppendingBuilder(
+                new Node\Expr\Variable('input'),
+                $outputNode,
+                array_merge(
                     array_merge(
-                        array_merge(
-                            ...$this->compileMappers(new Node\Expr\Variable('output'))
-                        ),
-                        [
-                            new Node\Stmt\Return_(
-                                expr: new Node\Expr\Variable('output')
-                            )
-                        ],
+                        ...$this->compileMappers(new Node\Expr\Variable('output'))
                     ),
-                    ...$this->contextVariables,
-                ))->getNode()
-            ),
-            new Node\Stmt\Return_(new Node\Expr\Variable('output'))
+                    [
+                        new Node\Stmt\Return_(
+                            expr: new Node\Expr\Variable('output')
+                        )
+                    ],
+                ),
+                ...$this->contextVariables,
+            ))->getNode()
         ];
     }
 

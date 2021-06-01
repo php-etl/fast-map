@@ -65,7 +65,6 @@ final class SimpleObjectInitializer implements CompilableObjectInitializerInterf
                 $this->interpreter,
                 ...$this->expressions
             ))->getNode(),
-            new Node\Stmt\Return_($outputNode)
         ];
     }
 }
