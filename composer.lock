@@ -427,12 +427,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/satellite-toolbox.git",
-                "reference": "e3491c93931cb228bb53bd88fcfab91bc76c6ff7"
+                "reference": "832d2244e6c31a6c76b65098ac41cb4fbee3feac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/e3491c93931cb228bb53bd88fcfab91bc76c6ff7",
-                "reference": "e3491c93931cb228bb53bd88fcfab91bc76c6ff7",
+                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/832d2244e6c31a6c76b65098ac41cb4fbee3feac",
+                "reference": "832d2244e6c31a6c76b65098ac41cb4fbee3feac",
                 "shasum": ""
             },
             "require": {
@@ -481,7 +481,7 @@
                 "issues": "https://github.com/php-etl/satellite-toolbox/issues",
                 "source": "https://github.com/php-etl/satellite-toolbox/tree/master"
             },
-            "time": "2021-05-28T08:58:44+00:00"
+            "time": "2021-06-01T15:07:51+00:00"
         },
         {
             "name": "phpactor/docblock",
