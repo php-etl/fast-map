@@ -56,14 +56,14 @@ final class ArrayMapper implements
         return [
             (new IsolatedValueTransformationBuilder(
                 new Node\Expr\Variable('input'),
-                $outputNode,
+                new Node\Expr\Variable('output'),
                 array_merge(
                     [
                         new Node\Stmt\Expression(
                             expr: new Node\Expr\Assign(
-                            var: new Node\Expr\Variable('output'),
-                            expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
-                        ),
+                                var: new Node\Expr\Variable('output'),
+                                expr: new Node\Expr\Array_(attributes: ['kind' => Node\Expr\Array_::KIND_SHORT])
+                            ),
                         ),
                     ],
                     array_merge(

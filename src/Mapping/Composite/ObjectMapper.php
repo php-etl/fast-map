@@ -57,10 +57,17 @@ final class ObjectMapper implements
         return [
             (new IsolatedValueTransformationBuilder(
                 new Node\Expr\Variable('input'),
-                $outputNode,
+                new Node\Expr\Variable('output'),
                 array_merge(
                     $this->initializer->compile($outputNode),
-                    ...$this->compileMappers($outputNode)
+                    array_merge(
+                        ...$this->compileMappers($outputNode),
+                    ),
+                    [
+                        new Node\Stmt\Return_(
+                            expr: new Node\Expr\Variable('output')
+                        )
+                    ],
                 ),
                 ...$this->contextVariables,
             ))->getNode()
