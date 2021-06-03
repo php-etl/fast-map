@@ -3,6 +3,7 @@
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
 use Kiboko\Component\FastMap\Compiler\Builder\IsolatedCodeAppendVariableBuilder;
+use Kiboko\Component\SatelliteToolbox\Builder\IsolatedValueAppendingBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -54,23 +55,21 @@ final class ArrayAppendMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         return [
-            new Node\Stmt\Expression(
-                (new IsolatedCodeAppendVariableBuilder(
-                    new Node\Expr\Variable('input'),
-                    $outputNode,
+            (new IsolatedValueAppendingBuilder(
+                new Node\Expr\Variable('input'),
+                new Node\Expr\Variable('output'),
+                array_merge(
                     array_merge(
-                        array_merge(
-                            ...$this->compileMappers(new Node\Expr\Variable('output'))
-                        ),
-                        [
-                            new Node\Stmt\Return_(
-                                expr: new Node\Expr\Variable('output')
-                            )
-                        ],
+                        ...$this->compileMappers(new Node\Expr\Variable('output'))
                     ),
-                    ...$this->contextVariables,
-                ))->getNode(),
-            ),
+                    [
+                        new Node\Stmt\Return_(
+                            expr: new Node\Expr\Variable('output')
+                        )
+                    ],
+                ),
+                ...$this->contextVariables,
+            ))->getNode()
         ];
     }
 

@@ -31,10 +31,13 @@ final class ScopedCodeBuilder implements Builder
                                 var: new Node\Expr\Variable('input'),
                             )
                         ],
-                        'stmts' => $this->stmts,
+                        'stmts' => [
+                            ...$this->stmts,
+                            new Node\Stmt\Return_(new Node\Expr\Variable('output'))
+                        ],
                     ]),
                     [
-                        $this->input,
+                        new Node\Arg($this->input),
                     ]
                 )
             ]

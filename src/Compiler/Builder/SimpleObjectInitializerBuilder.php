@@ -32,11 +32,13 @@ final class SimpleObjectInitializerBuilder implements Builder
             );
         }
 
-        return new Node\Expr\Assign(
-            $this->outputNode,
-            new Node\Expr\New_(
-                new Node\Name\FullyQualified((string) $this->class),
-                $argumentsNodes
+        return new Node\Stmt\Expression(
+            new Node\Expr\Assign(
+                $this->outputNode,
+                new Node\Expr\New_(
+                    new Node\Name\FullyQualified((string) $this->class),
+                    $argumentsNodes
+                )
             )
         );
     }

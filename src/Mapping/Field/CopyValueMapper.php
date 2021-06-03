@@ -55,7 +55,7 @@ final class CopyValueMapper implements
                     $outputNode,
                     (new PropertyPathBuilder($inputPath, new Node\Expr\Variable('input')))->getNode()
                 ),
-            ),
+            )
         ];
     }
 }
