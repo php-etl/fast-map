@@ -14,12 +14,13 @@
         }
     ],
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^8.0",
         "nikic/php-parser": "^4.10",
         "symfony/property-access": "^5.2",
         "symfony/expression-language": "^5.2",
-        "symfony/cache": "^5.4",
+        "symfony/cache": "^5.2",
         "doctrine/inflector": "^2.0",
         "php-etl/metadata": "^0.2.0",
         "php-etl/mapping-contracts": "^0.2.0",
