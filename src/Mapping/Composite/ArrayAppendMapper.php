@@ -57,7 +57,7 @@ final class ArrayAppendMapper implements
         return [
             (new IsolatedValueAppendingBuilder(
                 new Node\Expr\Variable('input'),
-                new Node\Expr\Variable('output'),
+                $outputNode,
                 array_merge(
                     array_merge(
                         ...$this->compileMappers(new Node\Expr\Variable('output'))

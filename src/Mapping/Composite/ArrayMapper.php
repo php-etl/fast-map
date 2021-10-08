@@ -56,7 +56,7 @@ final class ArrayMapper implements
         return [
             (new IsolatedValueTransformationBuilder(
                 new Node\Expr\Variable('input'),
-                new Node\Expr\Variable('output'),
+                $outputNode,
                 array_merge(
                     [
                         new Node\Stmt\Expression(
