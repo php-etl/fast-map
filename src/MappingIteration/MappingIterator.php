@@ -25,7 +25,7 @@ final class MappingIterator implements \RecursiveIterator
         return $this->inner->current();
     }
 
-    public function next()
+    public function next(): void
     {
         $this->inner->next();
     }
@@ -40,12 +40,12 @@ final class MappingIterator implements \RecursiveIterator
         return $this->inner->valid();
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->inner->rewind();
     }
 
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         /** @var FieldMetadataInterface|RelationMetadataInterface $current */
         $current = $this->inner->current();

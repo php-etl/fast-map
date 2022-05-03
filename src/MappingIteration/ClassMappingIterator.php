@@ -17,17 +17,17 @@ final class ClassMappingIterator implements \RecursiveIterator
         $this->inner->append(new \ArrayIterator($this->metadata->getRelations()));
     }
 
-    public function current()
+    public function current(): FieldMetadataInterface|RelationMetadataInterface
     {
         return $this->inner->current();
     }
 
-    public function next()
+    public function next(): void
     {
         $this->inner->next();
     }
 
-    public function key()
+    public function key(): mixed
     {
         return $this->inner->key();
     }
@@ -37,7 +37,7 @@ final class ClassMappingIterator implements \RecursiveIterator
         return $this->inner->valid();
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->inner->rewind();
     }
@@ -56,10 +56,10 @@ final class ClassMappingIterator implements \RecursiveIterator
         if (!$current instanceof RelationMetadataInterface) {
             throw new \RangeException('This item has no child.');
         }
-        if (count($current->getTypes()) > 1) {
+        if (count($current->getType()) > 1) {
             throw new \OutOfBoundsException('There is more than one type in the .');
         }
 
-        return new self($current->getTypes());
+        return new self($current->getType());
     }
 }

@@ -22,7 +22,7 @@ final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterfa
         return null;
     }
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \EmptyIterator();
     }
