@@ -67,6 +67,12 @@ final class ConstantValueMapper implements
             );
         }
 
+        if (is_null($value)) {
+            return new Node\Expr\ConstFetch(
+                name: new Node\Name(name: 'null'),
+            );
+        }
+
         if (is_int($value)) {
             return new Node\Scalar\LNumber(value: $value);
         }
