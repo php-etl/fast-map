@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping;
 
@@ -9,9 +11,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class Field implements
-    Mapping\FieldScopingInterface,
-    Mapping\CompilableInterface
+final class Field implements Mapping\FieldScopingInterface, Mapping\CompilableInterface
 {
     private PropertyAccessor $accessor;
 

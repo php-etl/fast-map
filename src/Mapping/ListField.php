@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping;
 
@@ -14,9 +16,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ListField implements
-    Mapping\FieldScopingInterface,
-    Mapping\CompilableInterface
+final class ListField implements Mapping\FieldScopingInterface, Mapping\CompilableInterface
 {
     private PropertyAccessor $accessor;
 
@@ -37,12 +37,7 @@ final class ListField implements
         ]);
 
         if (!is_iterable($input)) {
-            throw new \InvalidArgumentException(strtr(
-                'The data at path %path% in first argument should be iterable.',
-                [
-                    '%path%' => $this->inputExpression,
-                ]
-            ));
+            throw new \InvalidArgumentException(strtr('The data at path %path% in first argument should be iterable.', ['%path%' => $this->inputExpression]));
         }
 
         $collection = $this->accessor->getValue($output, $this->outputPath) ?? [];

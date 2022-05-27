@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
@@ -26,10 +28,10 @@ final class ArrayInitialisationPreconditionBuilder implements Builder
                         new Node\Expr\Assign(
                             $this->pathNode,
                             new Node\Expr\Array_([], [
-                                'kind' => Node\Expr\Array_::KIND_SHORT
+                                'kind' => Node\Expr\Array_::KIND_SHORT,
                             ])
                         )
-                    )
+                    ),
                 ],
             ]
         );

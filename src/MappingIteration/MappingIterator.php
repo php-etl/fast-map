@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\MappingIteration;
 
@@ -49,10 +51,11 @@ final class MappingIterator implements \RecursiveIterator
     {
         /** @var FieldMetadataInterface|RelationMetadataInterface $current */
         $current = $this->inner->current();
+
         return $current instanceof RelationMetadataInterface;
     }
 
-    public function getChildren(): MappingIterator
+    public function getChildren(): self
     {
         return new self($this->inner->current());
     }

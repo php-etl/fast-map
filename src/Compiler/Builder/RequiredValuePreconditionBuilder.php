@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
@@ -19,7 +21,7 @@ final class RequiredValuePreconditionBuilder implements Builder
         return new Node\Stmt\If_(
             new Node\Expr\BooleanNot(
                 new Node\Expr\Isset_([
-                    (new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode()
+                    (new PropertyPathBuilder($this->propertyPath, $this->pathNode))->getNode(),
                 ])
             ),
             [
@@ -36,7 +38,7 @@ final class RequiredValuePreconditionBuilder implements Builder
                             ),
                         ]),
                     ),
-                ]
+                ],
             ]
         );
     }

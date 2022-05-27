@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
@@ -29,17 +31,17 @@ final class ScopedCodeBuilder implements Builder
                         'params' => [
                             new Node\Param(
                                 var: new Node\Expr\Variable('input'),
-                            )
+                            ),
                         ],
                         'stmts' => [
                             ...$this->stmts,
-                            new Node\Stmt\Return_(new Node\Expr\Variable('output'))
+                            new Node\Stmt\Return_(new Node\Expr\Variable('output')),
                         ],
                     ]),
                     [
                         new Node\Arg($this->input),
                     ]
-                )
+                ),
             ]
         );
     }

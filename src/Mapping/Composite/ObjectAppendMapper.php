@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
@@ -7,10 +9,7 @@ use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ObjectAppendMapper implements
-    Mapping\ObjectMapperInterface,
-    Mapping\CompilableMapperInterface,
-    Mapping\FieldMapperInterface
+final class ObjectAppendMapper implements Mapping\ObjectMapperInterface, Mapping\CompilableMapperInterface, Mapping\FieldMapperInterface
 {
     /** @var Mapping\FieldScopingInterface[] */
     private array $properties;
@@ -35,7 +34,7 @@ final class ObjectAppendMapper implements
         return $output;
     }
 
-    public function addContextVariable(Node\Expr\Variable $variable): ObjectAppendMapper
+    public function addContextVariable(Node\Expr\Variable $variable): self
     {
         $this->contextVariables[] = $variable;
 
@@ -45,13 +44,7 @@ final class ObjectAppendMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         if (!$this->initializer instanceof Mapping\CompilableObjectInitializerInterface) {
-            throw new \RuntimeException(strtr(
-                'Expected a %expected%, but got an object of type %actual%.',
-                [
-                    '%expected%' => Mapping\CompilableObjectInitializerInterface::class,
-                    '%actual%' => get_class($this->initializer),
-                ]
-            ));
+            throw new \RuntimeException(strtr('Expected a %expected%, but got an object of type %actual%.', ['%expected%' => Mapping\CompilableObjectInitializerInterface::class, '%actual%' => \get_class($this->initializer)]));
         }
 
         return [
@@ -66,7 +59,7 @@ final class ObjectAppendMapper implements
                     [
                         new Node\Stmt\Return_(
                             expr: new Node\Expr\Variable('output')
-                        )
+                        ),
                     ],
                 ),
                 ...$this->contextVariables,
@@ -78,13 +71,7 @@ final class ObjectAppendMapper implements
     {
         foreach ($this->properties as $mapper) {
             if (!$mapper instanceof Mapping\CompilableInterface) {
-                throw new \RuntimeException(strtr(
-                    'Expected a %expected%, but got an object of type %actual%.',
-                    [
-                        '%expected%' => Mapping\CompilableInterface::class,
-                        '%actual%' => get_class($mapper),
-                    ]
-                ));
+                throw new \RuntimeException(strtr('Expected a %expected%, but got an object of type %actual%.', ['%expected%' => Mapping\CompilableInterface::class, '%actual%' => $mapper::class]));
             }
 
             yield $mapper->compile($outputNode);

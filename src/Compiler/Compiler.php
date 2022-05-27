@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler;
 
@@ -31,7 +33,7 @@ class Compiler
 
     private function randomClassName(string $prefix): string
     {
-        return $this->inflector->classify($prefix . $this->randomIdentifier());
+        return $this->inflector->classify($prefix.$this->randomIdentifier());
     }
 
     public function compile(
@@ -50,18 +52,18 @@ class Compiler
         );
 
         $prettyPrinter = new PrettyPrinter\Standard();
-        if ($context->getFilePath() !== null && is_writable(dirname($context->getFilePath()))) {
+        if (null !== $context->getFilePath() && is_writable(\dirname($context->getFilePath()))) {
             file_put_contents($context->getFilePath(), $prettyPrinter->prettyPrintFile($tree));
             if (!class_exists($fqcn)) {
                 include_once $context->getFilePath();
             }
         } else {
-            if (!in_array('vfs', stream_get_wrappers())) {
+            if (!\in_array('vfs', stream_get_wrappers())) {
                 $fs = FileSystem::factory('vfs');
                 $fs->mount();
             }
 
-            $filename =  'vfs://' . hash('sha512', random_bytes(512)) . '.php';
+            $filename = 'vfs://'.hash('sha512', random_bytes(512)).'.php';
             file_put_contents($filename, $prettyPrinter->prettyPrintFile($tree));
             include_once $filename;
         }

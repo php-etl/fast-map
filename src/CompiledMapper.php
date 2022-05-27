@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap;
 
@@ -16,14 +18,14 @@ final class CompiledMapper implements MapperInterface
     public function __construct(
         private Compiler $compiler,
         private CompilationContextInterface $compilationContext,
-        MapperInterface... $mappers
+        MapperInterface ...$mappers
     ) {
         $this->mappers = $mappers;
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
     {
-        if ($this->compiledMapper === null) {
+        if (null === $this->compiledMapper) {
             $this->compiledMapper = $this->compiler->compile(
                 $this->compilationContext,
                 ...$this->mappers

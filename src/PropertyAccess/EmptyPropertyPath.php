@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\PropertyAccess;
 
@@ -32,17 +34,17 @@ final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterfa
         return [];
     }
 
-    public function getElement($index)
+    public function getElement($index): void
     {
         throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
     }
 
-    public function isProperty($index)
+    public function isProperty($index): void
     {
         throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
     }
 
-    public function isIndex($index)
+    public function isIndex($index): void
     {
         throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
     }

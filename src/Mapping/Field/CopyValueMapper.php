@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping\Field;
 
@@ -11,9 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class CopyValueMapper implements
-    Mapping\FieldMapperInterface,
-    Mapping\CompilableMapperInterface
+final class CopyValueMapper implements Mapping\FieldMapperInterface, Mapping\CompilableMapperInterface
 {
     private PropertyAccessor $accessor;
     /** @var Node\Expr\Variable[] */
@@ -36,7 +36,7 @@ final class CopyValueMapper implements
         return $output;
     }
 
-    public function addContextVariable(Node\Expr\Variable $variable): CopyValueMapper
+    public function addContextVariable(Node\Expr\Variable $variable): self
     {
         $this->contextVariables[] = $variable;
 
@@ -55,7 +55,7 @@ final class CopyValueMapper implements
                     $outputNode,
                     (new PropertyPathBuilder($inputPath, new Node\Expr\Variable('input')))->getNode()
                 ),
-            )
+            ),
         ];
     }
 }
