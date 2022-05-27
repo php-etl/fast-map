@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\MappingIteration;
 
@@ -46,17 +48,18 @@ final class ClassMappingIterator implements \RecursiveIterator
     {
         /** @var FieldMetadataInterface|RelationMetadataInterface $current */
         $current = $this->inner->current();
+
         return $current instanceof RelationMetadataInterface;
     }
 
-    public function getChildren(): ClassMappingIterator
+    public function getChildren(): self
     {
         /** @var FieldMetadataInterface|RelationMetadataInterface $current */
         $current = $this->inner->current();
         if (!$current instanceof RelationMetadataInterface) {
             throw new \RangeException('This item has no child.');
         }
-        if (count($current->getType()) > 1) {
+        if (\count($current->getType()) > 1) {
             throw new \OutOfBoundsException('There is more than one type in the .');
         }
 

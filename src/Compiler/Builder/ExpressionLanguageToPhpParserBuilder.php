@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
@@ -27,7 +29,8 @@ final class ExpressionLanguageToPhpParserBuilder implements Builder
 
         $inputNodes = (new ParserFactory())
             ->create(ParserFactory::PREFER_PHP7, null)
-            ->parse('<?php ' . $this->interpreter->compile($expression, array_merge($this->variables, ['input', 'output'])) . ';');
+            ->parse('<?php '.$this->interpreter->compile($expression, array_merge($this->variables, ['input', 'output'])).';')
+        ;
 
         return $inputNodes[0]->expr;
     }

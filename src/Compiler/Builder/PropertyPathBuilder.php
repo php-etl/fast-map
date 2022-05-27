@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
@@ -22,14 +24,14 @@ final class PropertyPathBuilder implements Builder
         $iterator = $this->propertyPath->getIterator();
         if ($this->limit < 0) {
             $iterator = new \LimitIterator($iterator, 0, iterator_count($iterator) + $this->limit);
-        } elseif ($this->limit !== null) {
+        } elseif (null !== $this->limit) {
             $iterator = new \LimitIterator($iterator, 0, $this->limit);
         }
 
         try {
             foreach ($iterator as $index => $child) {
                 if ($this->propertyPath->isIndex($index)) {
-                    if (is_int($child)) {
+                    if (\is_int($child)) {
                         $pathNode = new Node\Expr\ArrayDimFetch(
                             $pathNode,
                             new Node\Scalar\LNumber($child)

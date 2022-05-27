@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping\Composite;
 
@@ -9,10 +11,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ArrayMapper implements
-    Mapping\ArrayMapperInterface,
-    Mapping\CompilableMapperInterface,
-    Mapping\FieldMapperInterface
+final class ArrayMapper implements Mapping\ArrayMapperInterface, Mapping\CompilableMapperInterface, Mapping\FieldMapperInterface
 {
     /** @var Mapping\FieldScopingInterface[] */
     private array $fields;
@@ -44,7 +43,7 @@ final class ArrayMapper implements
         return $output;
     }
 
-    public function addContextVariable(Node\Expr\Variable $variable): ArrayMapper
+    public function addContextVariable(Node\Expr\Variable $variable): self
     {
         $this->contextVariables[] = $variable;
 
@@ -72,11 +71,11 @@ final class ArrayMapper implements
                     [
                         new Node\Stmt\Return_(
                             expr: new Node\Expr\Variable('output')
-                        )
+                        ),
                     ],
                 ),
                 ...$this->contextVariables,
-            ))->getNode()
+            ))->getNode(),
         ];
     }
 
@@ -84,13 +83,7 @@ final class ArrayMapper implements
     {
         foreach ($this->fields as $mapper) {
             if (!$mapper instanceof Mapping\CompilableInterface) {
-                throw new \RuntimeException(strtr(
-                    'Expected a %expected%, but got an object of type %actual%.',
-                    [
-                        '%expected%' => Mapping\CompilableInterface::class,
-                        '%actual%' => get_class($mapper),
-                    ]
-                ));
+                throw new \RuntimeException(strtr('Expected a %expected%, but got an object of type %actual%.', ['%expected%' => Mapping\CompilableInterface::class, '%actual%' => $mapper::class]));
             }
 
             yield $mapper->compile($outputNode);

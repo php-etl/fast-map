@@ -7,7 +7,7 @@ jobs:
             -   uses: actions/checkout@v2
             -   name: Cs-Fixer
                 run: |
-                    wget -q https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
+                    wget -q https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
                     chmod a+x php-cs-fixer
                     PHP_CS_FIXER_IGNORE_ENV=true ./php-cs-fixer fix src --dry-run
 
@@ -17,7 +17,7 @@ jobs:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: '8.0'
+                    php-version: '8.1'
                     tools: composer:v2
                     coverage: pcov
             -   uses: actions/cache@v2
@@ -29,7 +29,7 @@ jobs:
             -   uses: php-actions/composer@v5
                 with:
                     args: --prefer-dist
-                    php_version: 8.0
+                    php_version: 8.1
 
             -   name: Run tests & generate Coverage
                 run: bin/phpunit functional --coverage-html var/coverage --whitelist=src
@@ -55,13 +55,14 @@ jobs:
             -   uses: php-actions/composer@v5
                 with:
                     args: --prefer-dist
-                    php_version: 8.0
+                    php_version: 8.1
 
             -   name: PHPStan
                 uses: php-actions/phpstan@v2
                 with:
                     path: src/
                     args: --level=${{ matrix.phpstan-level }}
+                    php_version: 8.1
 
     infection:
         runs-on: ubuntu-latest
@@ -69,7 +70,7 @@ jobs:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: '8.0'
+                    php-version: '8.1'
                     tools: composer:v2
                     coverage: pcov
             -   uses: actions/cache@v2
@@ -81,7 +82,7 @@ jobs:
             -   uses: php-actions/composer@v5
                 with:
                     args: --prefer-dist
-                    php_version: 8.0
+                    php_version: 8.1
 
             -   name: Infection
                 run: |
@@ -102,6 +103,6 @@ jobs:
             -   uses: php-actions/composer@v5
                 with:
                     args: --prefer-dist
-                    php_version: 8.0
+                    php_version: 8.1
             -   name: PHP Spec
                 run: bin/phpspec run spec

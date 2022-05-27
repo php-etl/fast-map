@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Strategy;
 
@@ -29,18 +31,18 @@ final class Spaghetti implements StrategyInterface
 //                ->addStmt($factory->use(CompiledMapperInterface::class))
                 ->addStmt(
                     $factory->class((string) $class->getName())
-                    ->implement(new Node\Name\FullyQualified(CompiledMapperInterface::class))
-                    ->makeFinal()
-                    ->addStmt(
+                        ->implement(new Node\Name\FullyQualified(CompiledMapperInterface::class))
+                        ->makeFinal()
+                        ->addStmt(
                         $factory->method('__invoke')
-                        ->makePublic()
-                        ->addParam($factory->param('input'))
-                        ->addParam($factory->param('output')->setDefault(null))
-                        ->addStmts($stmts)
-                        ->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))
+                            ->makePublic()
+                            ->addParam($factory->param('input'))
+                            ->addParam($factory->param('output')->setDefault(null))
+                            ->addStmts($stmts)
+                            ->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))
                     )
                 )
-                ->getNode()
+                ->getNode(),
         ];
     }
 }

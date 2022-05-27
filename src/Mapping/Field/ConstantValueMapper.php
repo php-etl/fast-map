@@ -1,17 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping\Field;
 
-use Kiboko\Component\FastMap\Mapping\Composite\ArrayMapper;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ConstantValueMapper implements
-    Mapping\FieldMapperInterface,
-    Mapping\CompilableMapperInterface
+final class ConstantValueMapper implements Mapping\FieldMapperInterface, Mapping\CompilableMapperInterface
 {
     private PropertyAccessor $accessor;
     /** @var Node\Expr\Variable[] */
@@ -34,7 +33,7 @@ final class ConstantValueMapper implements
         return $output;
     }
 
-    public function addContextVariable(Node\Expr\Variable $variable): ConstantValueMapper
+    public function addContextVariable(Node\Expr\Variable $variable): self
     {
         $this->contextVariables[] = $variable;
 
@@ -55,25 +54,25 @@ final class ConstantValueMapper implements
 
     public function compileValue(mixed $value): Node\Expr
     {
-        if ($value === true) {
+        if (true === $value) {
             return new Node\Expr\ConstFetch(
                 name: new Node\Name(name: 'true'),
             );
         }
 
-        if ($value === false) {
+        if (false === $value) {
             return new Node\Expr\ConstFetch(
                 name: new Node\Name(name: 'false'),
             );
         }
 
-        if (is_null($value)) {
+        if (null === $value) {
             return new Node\Expr\ConstFetch(
                 name: new Node\Name(name: 'null'),
             );
         }
 
-        if (is_int($value)) {
+        if (\is_int($value)) {
             return new Node\Scalar\LNumber(value: $value);
         }
 

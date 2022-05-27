@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
@@ -27,7 +29,7 @@ final class CompositeInitialisationPreconditionBuilder implements Builder
             if ($iterator->isIndex()) {
                 $pathNode = new Node\Expr\ArrayDimFetch(
                     $pathNode,
-                    is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Scalar\String_($item)
+                    \is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Scalar\String_($item)
                 );
 
                 continue;
@@ -36,7 +38,7 @@ final class CompositeInitialisationPreconditionBuilder implements Builder
             if ($iterator->isProperty()) {
                 $pathNode = new Node\Expr\PropertyFetch(
                     $pathNode,
-                    is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Name($item)
+                    \is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Name($item)
                 );
 
                 continue;
@@ -55,10 +57,10 @@ final class CompositeInitialisationPreconditionBuilder implements Builder
                         new Node\Expr\Assign(
                             $this->pathNode,
                             new Node\Expr\Array_([], [
-                                'kind' => Node\Expr\Array_::KIND_SHORT
+                                'kind' => Node\Expr\Array_::KIND_SHORT,
                             ])
                         )
-                    )
+                    ),
                 ],
             ]
         );
@@ -67,13 +69,13 @@ final class CompositeInitialisationPreconditionBuilder implements Builder
     private function propertyFetch(
         PropertyPathIteratorInterface $iterator,
         Node\Expr $pathNode
-    ) {
+    ): void {
         while ($iterator->valid() && $iterator->isProperty()) {
             $item = $iterator->current();
 
             $pathNode = new Node\Expr\PropertyFetch(
                 $pathNode,
-                is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Name($item)
+                \is_int($item) ? new Node\Scalar\LNumber($item) : new Node\Name($item)
             );
 
             $iterator->next();

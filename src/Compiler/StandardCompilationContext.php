@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler;
 
@@ -18,7 +20,7 @@ final class StandardCompilationContext implements CompilationContextInterface
 
     public static function build(PropertyPathInterface $propertyPath, string $cachePath, string $fqcn): self
     {
-        if ($fqcn !== null) {
+        if (null !== $fqcn) {
             if (false !== ($index = strrpos($fqcn, '\\'))) {
                 $namespace = substr($fqcn, 0, $index);
                 $className = substr($fqcn, $index + 1);
@@ -26,7 +28,7 @@ final class StandardCompilationContext implements CompilationContextInterface
                 $namespace = null;
                 $className = $fqcn;
             }
-            $fileName = $cachePath . '/' . $className . '.php';
+            $fileName = $cachePath.'/'.$className.'.php';
         }
 
         return new self(
@@ -53,11 +55,11 @@ final class StandardCompilationContext implements CompilationContextInterface
 
     public function getNamespace(): ?string
     {
-        return $this->class !== null ? $this->class->getNamespace() : null;
+        return null !== $this->class ? $this->class->getNamespace() : null;
     }
 
     public function getClassName(): ?string
     {
-        return $this->class !== null ? $this->class->getName() : null;
+        return null !== $this->class ? $this->class->getName() : null;
     }
 }

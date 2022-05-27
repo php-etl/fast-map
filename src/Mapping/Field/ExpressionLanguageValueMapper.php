@@ -1,8 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping\Field;
 
-use Kiboko\Component\FastMap\Compiler\Builder\ConstantValueBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
@@ -12,9 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ExpressionLanguageValueMapper implements
-    Mapping\FieldMapperInterface,
-    Mapping\CompilableMapperInterface
+final class ExpressionLanguageValueMapper implements Mapping\FieldMapperInterface, Mapping\CompilableMapperInterface
 {
     /** @var array<string, mixed> */
     private array $variables;
@@ -46,7 +45,7 @@ final class ExpressionLanguageValueMapper implements
         return $output;
     }
 
-    public function addContextVariable(Node\Expr\Variable $variable): ExpressionLanguageValueMapper
+    public function addContextVariable(Node\Expr\Variable $variable): self
     {
         $this->contextVariables[] = $variable;
 

@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping\Field;
 
 use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\RequiredValuePreconditionBuilder;
-use Kiboko\Component\FastMap\Mapping\Composite\ArrayMapper;
 use Kiboko\Contract\Mapping;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
@@ -13,9 +14,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ConcatCopyValuesMapper implements
-    Mapping\FieldMapperInterface,
-    Mapping\CompilableMapperInterface
+final class ConcatCopyValuesMapper implements Mapping\FieldMapperInterface, Mapping\CompilableMapperInterface
 {
     /** @var string[] */
     private iterable $inputPaths;
@@ -48,7 +47,7 @@ final class ConcatCopyValuesMapper implements
         }
     }
 
-    public function addContextVariable(Node\Expr\Variable $variable): ConcatCopyValuesMapper
+    public function addContextVariable(Node\Expr\Variable $variable): self
     {
         $this->contextVariables[] = $variable;
 
@@ -61,16 +60,12 @@ final class ConcatCopyValuesMapper implements
     public function compile(Node\Expr $outputNode): array
     {
         $inputPaths = array_map(
-            function (string $path) {
-                return new PropertyPath($path);
-            },
+            fn (string $path) => new PropertyPath($path),
             $this->inputPaths
         );
 
         $nodes = array_map(
-            function (PropertyPath $path) {
-                return (new RequiredValuePreconditionBuilder($path, new Node\Expr\Variable('input')))->getNode();
-            },
+            fn (PropertyPath $path) => (new RequiredValuePreconditionBuilder($path, new Node\Expr\Variable('input')))->getNode(),
             $inputPaths
         );
 
