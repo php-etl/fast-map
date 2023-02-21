@@ -8,7 +8,7 @@ use PhpParser\Builder;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class PropertyPathBuilder implements Builder
+final readonly class PropertyPathBuilder implements Builder
 {
     public function __construct(
         private PropertyPathInterface $propertyPath,

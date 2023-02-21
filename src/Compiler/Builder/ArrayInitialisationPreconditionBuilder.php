@@ -8,7 +8,7 @@ use PhpParser\Builder;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
-final class ArrayInitialisationPreconditionBuilder implements Builder
+final readonly class ArrayInitialisationPreconditionBuilder implements Builder
 {
     public function __construct(
         private PropertyPath $propertyPath,

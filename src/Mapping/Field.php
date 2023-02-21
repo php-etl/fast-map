@@ -11,7 +11,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class Field implements Mapping\FieldScopingInterface, Mapping\CompilableInterface
+final readonly class Field implements Mapping\FieldScopingInterface, Mapping\CompilableInterface
 {
     private PropertyAccessor $accessor;
 

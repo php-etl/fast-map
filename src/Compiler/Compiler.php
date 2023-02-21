@@ -17,12 +17,10 @@ use Vfs\FileSystem;
 
 class Compiler
 {
-    private Inflector $inflector;
-    private StrategyInterface $strategy;
+    private readonly Inflector $inflector;
 
-    public function __construct(?StrategyInterface $strategy = null)
+    public function __construct(private readonly StrategyInterface $strategy = new Spaghetti())
     {
-        $this->strategy = $strategy ?? new Spaghetti();
         $this->inflector = InflectorFactory::createForLanguage(Language::ENGLISH)->build();
     }
 

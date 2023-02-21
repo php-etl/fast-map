@@ -10,17 +10,13 @@ use PhpParser\ParserFactory;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-final class ExpressionLanguageToPhpParserBuilder implements Builder
+final readonly class ExpressionLanguageToPhpParserBuilder implements Builder
 {
-    /** @var array<string> */
-    private array $variables;
-
-    public function __construct(
-        private ExpressionLanguage $interpreter,
-        private Expression $expression,
-        array $variables = []
-    ) {
-        $this->variables = $variables;
+    /**
+     * @param string[] $variables
+     */
+    public function __construct(private ExpressionLanguage $interpreter, private Expression $expression, private array $variables = [])
+    {
     }
 
     public function getNode(): Node\Expr

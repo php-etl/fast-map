@@ -7,7 +7,7 @@ namespace Kiboko\Component\FastMap\Compiler\Builder;
 use PhpParser\Builder;
 use PhpParser\Node;
 
-final class ConstantValueBuilder implements Builder
+final readonly class ConstantValueBuilder implements Builder
 {
     public function __construct(private mixed $value)
     {
@@ -33,7 +33,7 @@ final class ConstantValueBuilder implements Builder
             return new Node\Expr\Array_(iterator_to_array($this->asArrayItemNodes($value)));
         }
 
-        throw new \RuntimeException(strtr('Could not handle static value of type %type%, only string, double, integer and array are supported.', ['%type%' => \is_object($value) ? $value::class : \gettype($value)]));
+        throw new \RuntimeException(strtr('Could not handle static value of type %type%, only string, double, integer and array are supported.', ['%type%' => get_debug_type($value)]));
     }
 
     private function asArrayItemNodes(array $value): \Iterator

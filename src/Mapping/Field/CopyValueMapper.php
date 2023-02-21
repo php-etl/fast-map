@@ -15,14 +15,13 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class CopyValueMapper implements Mapping\FieldMapperInterface, Mapping\CompilableMapperInterface
 {
-    private PropertyAccessor $accessor;
+    private readonly PropertyAccessor $accessor;
     /** @var Node\Expr\Variable[] */
-    private iterable $contextVariables;
+    private iterable $contextVariables = [];
 
-    public function __construct(private PropertyPathInterface $inputPaths)
+    public function __construct(private readonly PropertyPathInterface $inputPaths)
     {
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)

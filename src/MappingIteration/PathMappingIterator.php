@@ -7,7 +7,7 @@ namespace Kiboko\Component\FastMap\MappingIteration;
 use Kiboko\Contract\Metadata\TypeMetadataInterface;
 use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
-final class PathMappingIterator implements \Iterator
+final readonly class PathMappingIterator implements \Iterator
 {
     public function __construct(private PropertyPathIteratorInterface $inner, private TypeMetadataInterface $metadata)
     {

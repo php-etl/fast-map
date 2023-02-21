@@ -7,17 +7,13 @@ namespace Kiboko\Component\FastMap\Compiler\Builder;
 use PhpParser\Builder;
 use PhpParser\Node;
 
-final class ScopedCodeBuilder implements Builder
+final readonly class ScopedCodeBuilder implements Builder
 {
-    /** @var Node\Stmt[] */
-    private array $stmts;
-
-    public function __construct(
-        private Node\Expr $input,
-        private Node\Expr $output,
-        array $stmts
-    ) {
-        $this->stmts = $stmts;
+    /**
+     * @param \PhpParser\Node\Stmt[] $stmts
+     */
+    public function __construct(private Node\Expr $input, private Node\Expr $output, private array $stmts)
+    {
     }
 
     public function getNode(): Node\Expr

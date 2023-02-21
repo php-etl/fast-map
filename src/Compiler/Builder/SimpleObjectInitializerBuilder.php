@@ -13,12 +13,12 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 final class SimpleObjectInitializerBuilder implements Builder
 {
     /** @var Expression[] */
-    private array $expressions;
+    private readonly array $expressions;
 
     public function __construct(
-        private ClassMetadataInterface $class,
-        private Node\Expr $outputNode,
-        private ExpressionLanguage $interpreter,
+        private readonly ClassMetadataInterface $class,
+        private readonly Node\Expr $outputNode,
+        private readonly ExpressionLanguage $interpreter,
         Expression ...$expressions
     ) {
         $this->expressions = $expressions;

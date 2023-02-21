@@ -17,12 +17,12 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 final class SimpleObjectInitializer implements CompilableObjectInitializerInterface
 {
     /** @var Expression[] */
-    private iterable $expressions;
-    private PropertyAccessor $accessor;
+    private readonly iterable $expressions;
+    private readonly PropertyAccessor $accessor;
 
     public function __construct(
-        private ClassMetadataInterface $class,
-        private ExpressionLanguage $interpreter,
+        private readonly ClassMetadataInterface $class,
+        private readonly ExpressionLanguage $interpreter,
         Expression ...$expressions
     ) {
         $this->expressions = $expressions;

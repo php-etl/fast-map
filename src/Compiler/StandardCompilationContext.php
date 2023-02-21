@@ -9,7 +9,7 @@ use Kiboko\Contract\Mapping\Compiler\CompilationContextInterface;
 use Kiboko\Contract\Metadata\ClassMetadataInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class StandardCompilationContext implements CompilationContextInterface
+final readonly class StandardCompilationContext implements CompilationContextInterface
 {
     public function __construct(
         private PropertyPathInterface $propertyPath,

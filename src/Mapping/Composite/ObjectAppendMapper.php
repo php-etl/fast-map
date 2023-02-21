@@ -12,16 +12,15 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 final class ObjectAppendMapper implements Mapping\ObjectMapperInterface, Mapping\CompilableMapperInterface, Mapping\FieldMapperInterface
 {
     /** @var Mapping\FieldScopingInterface[] */
-    private array $properties;
+    private readonly array $properties;
     /** @var Node\Expr\Variable[] */
-    private iterable $contextVariables;
+    private iterable $contextVariables = [];
 
     public function __construct(
-        private Mapping\ObjectInitializerInterface $initializer,
+        private readonly Mapping\ObjectInitializerInterface $initializer,
         Mapping\FieldScopingInterface ...$properties
     ) {
         $this->properties = $properties;
-        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)
@@ -44,7 +43,7 @@ final class ObjectAppendMapper implements Mapping\ObjectMapperInterface, Mapping
     public function compile(Node\Expr $outputNode): array
     {
         if (!$this->initializer instanceof Mapping\CompilableObjectInitializerInterface) {
-            throw new \RuntimeException(strtr('Expected a %expected%, but got an object of type %actual%.', ['%expected%' => Mapping\CompilableObjectInitializerInterface::class, '%actual%' => \get_class($this->initializer)]));
+            throw new \RuntimeException(strtr('Expected a %expected%, but got an object of type %actual%.', ['%expected%' => Mapping\CompilableObjectInitializerInterface::class, '%actual%' => $this->initializer::class]));
         }
 
         return [

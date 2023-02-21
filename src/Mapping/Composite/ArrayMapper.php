@@ -14,16 +14,15 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 final class ArrayMapper implements Mapping\ArrayMapperInterface, Mapping\CompilableMapperInterface, Mapping\FieldMapperInterface
 {
     /** @var Mapping\FieldScopingInterface[] */
-    private array $fields;
-    private PropertyAccessor $accessor;
+    private readonly array $fields;
+    private readonly PropertyAccessor $accessor;
     /** @var Node\Expr\Variable[] */
-    private iterable $contextVariables;
+    private iterable $contextVariables = [];
 
     public function __construct(Mapping\FieldScopingInterface ...$fields)
     {
         $this->fields = $fields;
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)

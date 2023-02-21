@@ -13,7 +13,7 @@ final class MappingIterator implements \RecursiveIterator
 {
     private \RecursiveIterator $inner;
 
-    public function __construct(private CompositeTypeMetadataInterface $metadata)
+    public function __construct(private readonly CompositeTypeMetadataInterface $metadata)
     {
         if ($this->metadata instanceof ClassTypeMetadata) {
             $this->inner = new ClassMappingIterator($this->metadata);

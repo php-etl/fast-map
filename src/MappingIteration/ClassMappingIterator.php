@@ -8,7 +8,7 @@ use Kiboko\Component\Metadata\ClassTypeMetadata;
 use Kiboko\Contract\Metadata\FieldMetadataInterface;
 use Kiboko\Contract\Metadata\RelationMetadataInterface;
 
-final class ClassMappingIterator implements \RecursiveIterator
+final readonly class ClassMappingIterator implements \RecursiveIterator
 {
     private \Iterator $inner;
 
@@ -59,7 +59,7 @@ final class ClassMappingIterator implements \RecursiveIterator
         if (!$current instanceof RelationMetadataInterface) {
             throw new \RangeException('This item has no child.');
         }
-        if (\count($current->getType()) > 1) {
+        if ((is_countable($current->getType()) ? \count($current->getType()) : 0) > 1) {
             throw new \OutOfBoundsException('There is more than one type in the .');
         }
 

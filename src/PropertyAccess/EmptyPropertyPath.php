@@ -7,7 +7,7 @@ namespace Kiboko\Component\FastMap\PropertyAccess;
 use Symfony\Component\PropertyAccess\Exception\OutOfBoundsException;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterface
+final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterface, \Stringable
 {
     public function __toString(): string
     {
@@ -19,7 +19,7 @@ final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterfa
         return 0;
     }
 
-    public function getParent()
+    public function getParent(): ?PropertyPathInterface
     {
         return null;
     }
@@ -34,17 +34,17 @@ final class EmptyPropertyPath implements \IteratorAggregate, PropertyPathInterfa
         return [];
     }
 
-    public function getElement($index): void
+    public function getElement($index): string
     {
         throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
     }
 
-    public function isProperty($index): void
+    public function isProperty($index): bool
     {
         throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
     }
 
-    public function isIndex($index): void
+    public function isIndex($index): bool
     {
         throw new OutOfBoundsException(sprintf('The index %s is not within the property path', $index));
     }

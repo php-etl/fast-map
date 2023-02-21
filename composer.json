@@ -16,26 +16,27 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "nikic/php-parser": "^4.10",
         "symfony/property-access": "^5.2",
         "symfony/expression-language": "^5.2",
         "symfony/cache": "^5.2",
         "doctrine/inflector": "^2.0",
-        "php-etl/metadata": "^0.2.0",
-        "php-etl/mapping-contracts": "^0.2.0",
-        "php-etl/metadata-contracts": "^0.1.0",
-        "php-etl/satellite-toolbox": "^0.3.0"
+        "php-etl/metadata": "^0.3",
+        "php-etl/mapping-contracts": "^0.3",
+        "php-etl/metadata-contracts": "^0.2",
+        "php-etl/satellite-toolbox": "^0.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0",
+        "phpunit/phpunit": "^9.0||^10.0",
         "friends-of-phpspec/phpspec-code-coverage": "*",
         "phpspec/phpspec": "^7.0",
         "johnkary/phpunit-speedtrap": "*",
         "mybuilder/phpunit-accelerator": "*",
         "phpunit/php-invoker": "*",
         "php-etl/phpspec-extension": "*",
-        "adlawson/vfs": "dev-develop"
+        "adlawson/vfs": "dev-develop",
+        "rector/rector": "^0.15"
     },
     "autoload": {
         "psr-4": {
@@ -54,7 +55,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "0.3.x-dev"
+            "dev-main": "0.4.x-dev"
         }
     }
 }

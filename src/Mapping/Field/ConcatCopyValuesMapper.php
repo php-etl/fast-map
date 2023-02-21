@@ -17,16 +17,15 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 final class ConcatCopyValuesMapper implements Mapping\FieldMapperInterface, Mapping\CompilableMapperInterface
 {
     /** @var string[] */
-    private iterable $inputPaths;
-    private PropertyAccessor $accessor;
+    private readonly iterable $inputPaths;
+    private readonly PropertyAccessor $accessor;
     /** @var Node\Expr\Variable[] */
-    private iterable $contextVariables;
+    private iterable $contextVariables = [];
 
-    public function __construct(private string $glue, PropertyPathInterface ...$inputPaths)
+    public function __construct(private readonly string $glue, PropertyPathInterface ...$inputPaths)
     {
         $this->inputPaths = $inputPaths;
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)

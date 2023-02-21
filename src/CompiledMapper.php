@@ -12,12 +12,12 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 final class CompiledMapper implements MapperInterface
 {
     /** @var iterable<MapperInterface> */
-    private iterable $mappers;
+    private readonly iterable $mappers;
     private MapperInterface $compiledMapper;
 
     public function __construct(
-        private Compiler $compiler,
-        private CompilationContextInterface $compilationContext,
+        private readonly Compiler $compiler,
+        private readonly CompilationContextInterface $compilationContext,
         MapperInterface ...$mappers
     ) {
         $this->mappers = $mappers;

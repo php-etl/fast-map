@@ -15,20 +15,19 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ExpressionLanguageValueMapper implements Mapping\FieldMapperInterface, Mapping\CompilableMapperInterface
 {
-    /** @var array<string, mixed> */
-    private array $variables;
-    private PropertyAccessor $accessor;
+    private readonly PropertyAccessor $accessor;
     /** @var Node\Expr\Variable[] */
-    private iterable $contextVariables;
+    private iterable $contextVariables = [];
 
+    /**
+     * @param array<string, mixed> $variables
+     */
     public function __construct(
-        private ExpressionLanguage $interpreter,
-        private Expression $expression,
-        array $variables = []
+        private readonly ExpressionLanguage $interpreter,
+        private readonly Expression $expression,
+        private readonly array $variables = []
     ) {
-        $this->variables = $variables;
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->contextVariables = [];
     }
 
     public function __invoke($input, $output, PropertyPathInterface $outputPath)

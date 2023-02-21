@@ -16,13 +16,13 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class SingleRelation implements Mapping\FieldScopingInterface, Mapping\CompilableInterface
 {
-    private PropertyAccessor $accessor;
+    private readonly PropertyAccessor $accessor;
 
     public function __construct(
         private PropertyPathInterface $outputPath,
-        private ExpressionLanguage $interpreter,
-        private Expression $inputExpression,
-        private Mapping\ObjectMapperInterface $child
+        private readonly ExpressionLanguage $interpreter,
+        private readonly Expression $inputExpression,
+        private readonly Mapping\ObjectMapperInterface $child
     ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
