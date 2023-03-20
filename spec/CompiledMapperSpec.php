@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace spec\Kiboko\Component\FastMap;
 
@@ -15,7 +17,7 @@ final class CompiledMapperSpec extends ObjectBehavior
     public function it_is_initializable(
         Compiler $compiler,
         MapperInterface $mapper
-    ) {
+    ): void {
         $context = StandardCompilationContext::build(new EmptyPropertyPath(), __DIR__, 'Lorem\\Ipsum');
 
         $this->beConstructedWith($compiler, $context, $mapper);
@@ -26,14 +28,14 @@ final class CompiledMapperSpec extends ObjectBehavior
         PropertyPathInterface $propertyPath,
         Compiler $compiler,
         MapperInterface $mapper
-    ) {
+    ): void {
         $context = StandardCompilationContext::build(new EmptyPropertyPath(), __DIR__, 'Lorem\\Ipsum');
 
         $this->beConstructedWith($compiler, $context, $mapper);
 
         $compiler->compile($context, $mapper)
             ->shouldBeCalledOnce()
-            ->willReturn(new class implements MapperInterface {
+            ->willReturn(new class() implements MapperInterface {
                 public function __invoke($input, $output, PropertyPathInterface $propertyPath)
                 {
                     return array_merge($output, $input);
@@ -48,7 +50,7 @@ final class CompiledMapperSpec extends ObjectBehavior
             [
                 'last_name' => 'Doe',
             ],
-            new EmptyPropertyPath()
+            new EmptyPropertyPath(),
         ])->shouldReturn([
             'last_name' => 'Doe',
             'first_name' => 'John',

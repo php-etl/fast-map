@@ -1,44 +1,31 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace KibokoPhpSpecExtension\Matcher;
 
-use PhpSpec\Formatter\Presenter\Presenter;
-use PhpSpec\Formatter\Presenter\Value\ValuePresenter;
-use PhpSpec\Matcher\Matcher;
-use PhpSpec\Wrapper\Unwrapper;
-use PhpSpec\Wrapper\DelayedCall;
-use PhpSpec\Factory\ReflectionFactory;
-use PhpSpec\Exception\Example\MatcherException;
 use PhpSpec\Exception\Example\FailureException;
+use PhpSpec\Exception\Example\MatcherException;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\Exception\Fracture\MethodNotFoundException;
+use PhpSpec\Factory\ReflectionFactory;
+use PhpSpec\Formatter\Presenter\Value\ValuePresenter;
+use PhpSpec\Matcher\Matcher;
+use PhpSpec\Wrapper\DelayedCall;
+use PhpSpec\Wrapper\Unwrapper;
 
 final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
 {
     use ASTExecutionAwareTrait;
 
-    /** @var array */
-    private static $ignoredProperties = ['file', 'line', 'string', 'trace', 'previous'];
-    /** @var Unwrapper */
-    private $unwrapper;
-    /** @var ValuePresenter */
-    private $presenter;
-    /** @var ReflectionFactory */
-    private $factory;
+    private static array $ignoredProperties = ['file', 'line', 'string', 'trace', 'previous'];
 
-    public function __construct(Unwrapper $unwrapper, ValuePresenter $presenter, ?ReflectionFactory $factory)
+    public function __construct(private readonly Unwrapper $unwrapper, private readonly ValuePresenter $presenter, private readonly ?ReflectionFactory $factory)
     {
-        $this->unwrapper = $unwrapper;
-        $this->presenter = $presenter;
-        $this->factory   = $factory;
     }
 
     /**
-     * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
-     *
-     * @return bool
+     * @param mixed $subject
      */
     public function supports(string $name, $subject, array $arguments): bool
     {
@@ -46,43 +33,35 @@ final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
     }
 
     /**
-     * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
-     *
-     * @return DelayedCall
+     * @param mixed $subject
      */
     public function positiveMatch(string $name, $subject, array $arguments): DelayedCall
     {
-        return $this->getDelayedCall([$this, 'verifyPositive'], $subject, $arguments);
+        return $this->getDelayedCall($this->verifyPositive(...), $subject, $arguments);
     }
 
     /**
-     * @param string $name
-     * @param mixed  $subject
-     * @param array  $arguments
-     *
-     * @return DelayedCall
+     * @param mixed $subject
      */
     public function negativeMatch(string $name, $subject, array $arguments): DelayedCall
     {
-        return $this->getDelayedCall([$this, 'verifyNegative'], $subject, $arguments);
+        return $this->getDelayedCall($this->verifyNegative(...), $subject, $arguments);
     }
 
     /**
+     * @param mixed|null $exception
+     *
      * @throws \PhpSpec\Exception\Example\FailureException
      * @throws \PhpSpec\Exception\Example\NotEqualException
      */
-    public function verifyPositive($subject, array $arguments, $exception = null)
+    public function verifyPositive(mixed $subject, array $arguments, $exception = null): void
     {
-        list($input, $output) = $arguments;
+        [$input, $output] = $arguments;
         $exceptionThrown = null;
 
         try {
             $this->executeStatements($subject, $input, $output);
-        } catch (\Exception $e) {
-            $exceptionThrown = $e;
-        } catch (\Throwable $e) {
+        } catch (\Exception|\Throwable $e) {
             $exceptionThrown = $e;
         }
 
@@ -101,14 +80,7 @@ final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
                 $format = 'Expected exception of class %s, but got %s with the message: "%s"';
             }
 
-            throw new FailureException(
-                sprintf(
-                    $format,
-                    $this->presenter->presentValue($exception),
-                    $this->presenter->presentValue($exceptionThrown),
-                    $exceptionThrown->getMessage()
-                )
-            );
+            throw new FailureException(sprintf($format, $this->presenter->presentValue($exception), $this->presenter->presentValue($exceptionThrown), $exceptionThrown->getMessage()));
         }
 
         if (\is_object($exception)) {
@@ -123,46 +95,34 @@ final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
                 $actual = $property->getValue($exceptionThrown);
 
                 if (null !== $expected && $actual !== $expected) {
-                    throw new NotEqualException(
-                        sprintf(
-                            'Expected exception `%s` to be %s, but it is %s.',
-                            $property->getName(),
-                            $this->presenter->presentValue($expected),
-                            $this->presenter->presentValue($actual)
-                        ), $expected, $actual
-                    );
+                    throw new NotEqualException(sprintf('Expected exception `%s` to be %s, but it is %s.', $property->getName(), $this->presenter->presentValue($expected), $this->presenter->presentValue($actual)), $expected, $actual);
                 }
             }
         }
     }
 
     /**
+     * @param mixed|null $exception
+     *
      * @throws \PhpSpec\Exception\Example\FailureException
      */
-    public function verifyNegative($subject, array $arguments, $exception = null)
+    public function verifyNegative(mixed $subject, array $arguments, $exception = null): void
     {
-        list($input, $output) = $arguments;
+        [$input, $output] = $arguments;
         $exceptionThrown = null;
 
         try {
             $this->executeStatements($subject, $input, $output);
-        } catch (\Exception $e) {
-            $exceptionThrown = $e;
-        } catch (\Throwable $e) {
+        } catch (\Exception|\Throwable $e) {
             $exceptionThrown = $e;
         }
 
         if ($exceptionThrown && null === $exception) {
-            throw new FailureException(
-                sprintf(
-                    'Expected to not throw any exceptions, but got %s.',
-                    $this->presenter->presentValue($exceptionThrown)
-                )
-            );
+            throw new FailureException(sprintf('Expected to not throw any exceptions, but got %s.', $this->presenter->presentValue($exceptionThrown)));
         }
 
         if ($exceptionThrown && $exceptionThrown instanceof $exception) {
-            $invalidProperties = array();
+            $invalidProperties = [];
             if (\is_object($exception)) {
                 $exceptionRefl = $this->factory->create($exception);
                 foreach ($exceptionRefl->getProperties() as $property) {
@@ -187,37 +147,21 @@ final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
             $withProperties = '';
             if (\count($invalidProperties) > 0) {
                 $withProperties = sprintf(
-                    ' with'.PHP_EOL.'%s,'.PHP_EOL,
+                    ' with'.\PHP_EOL.'%s,'.\PHP_EOL,
                     implode(",\n", $invalidProperties)
                 );
             }
 
-            throw new FailureException(
-                sprintf(
-                    'Expected to not throw %s exception%s but got it.',
-                    $this->presenter->presentValue($exception),
-                    $withProperties
-                )
-            );
+            throw new FailureException(sprintf('Expected to not throw %s exception%s but got it.', $this->presenter->presentValue($exception), $withProperties));
         }
     }
 
-    /**
-     * @return int
-     */
     public function getPriority(): int
     {
         return 1;
     }
 
-    /**
-     * @param callable $check
-     * @param mixed    $subject
-     * @param array    $arguments
-     *
-     * @return DelayedCall
-     */
-    private function getDelayedCall(callable $check, $subject, array $arguments): DelayedCall
+    private function getDelayedCall(callable $check, mixed $subject, array $arguments): DelayedCall
     {
         $exception = $this->getException($arguments);
         $unwrapper = $this->unwrapper;
@@ -227,17 +171,12 @@ final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
                 $arguments = $unwrapper->unwrapAll($arguments);
 
                 $methodName = $arguments[0];
-                $arguments = $arguments[1] ?? array();
-                $callable = array($subject, $methodName);
+                $arguments = $arguments[1] ?? [];
+                $callable = [$subject, $methodName];
 
-                list($class, $methodName) = array($subject, $methodName);
+                [$class, $methodName] = [$subject, $methodName];
                 if (!method_exists($class, $methodName) && !method_exists($class, '__call')) {
-                    throw new MethodNotFoundException(
-                        sprintf('Method %s::%s not found.', \get_class($class), $methodName),
-                        $class,
-                        $methodName,
-                        $arguments
-                    );
+                    throw new MethodNotFoundException(sprintf('Method %s::%s not found.', $class::class, $methodName), $class, $methodName, $arguments);
                 }
 
                 return \call_user_func($check, $callable, $arguments, $exception);
@@ -246,12 +185,9 @@ final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
     }
 
     /**
-     * @param array $arguments
-     *
-     * @return null|string|\Throwable
      * @throws \PhpSpec\Exception\Example\MatcherException
      */
-    private function getException(array $arguments)
+    private function getException(array $arguments): string|\Throwable|null
     {
         if (0 === \count($arguments)) {
             return null;
@@ -267,13 +203,6 @@ final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
             }
         }
 
-        throw new MatcherException(
-            sprintf(
-                "Wrong argument provided in throw matcher.\n".
-                "Fully qualified classname or exception instance expected,\n".
-                "Got %s.",
-                $this->presenter->presentValue($arguments[0])
-            )
-        );
+        throw new MatcherException(sprintf("Wrong argument provided in throw matcher.\nFully qualified classname or exception instance expected,\n".'Got %s.', $this->presenter->presentValue($arguments[0])));
     }
 }

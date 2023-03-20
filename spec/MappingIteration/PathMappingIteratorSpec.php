@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace spec\Kiboko\Component\FastMap\MappingIteration;
 
@@ -11,13 +13,13 @@ use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
 final class PathMappingIteratorSpec extends ObjectBehavior
 {
-    public function it_is_initializable(PropertyPathIteratorInterface $inner, TypeMetadataInterface $metadata)
+    public function it_is_initializable(PropertyPathIteratorInterface $inner, TypeMetadataInterface $metadata): void
     {
         $this->beConstructedWith($inner, $metadata);
         $this->shouldHaveType(PathMappingIterator::class);
     }
 
-    public function it_is_iterable(TypeMetadataInterface $metadata)
+    public function it_is_iterable(TypeMetadataInterface $metadata): void
     {
         $this->beConstructedWith(
             new PropertyPathIterator(new PropertyPath('self[user][name]')),
@@ -27,7 +29,7 @@ final class PathMappingIteratorSpec extends ObjectBehavior
         $this->shouldIterateAs(new \ArrayIterator([
             'self',
             'user',
-            'name'
+            'name',
         ]));
     }
 }

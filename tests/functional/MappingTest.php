@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace functional\Kiboko\Component\FastMap;
 
@@ -28,9 +30,18 @@ use Phpactor\Docblock\DocblockFactory;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class MappingTest extends TestCase
 {
-    public function dataProvider()
+    public static function dataProvider()
     {
         yield [
             (new ClassTypeMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'))
@@ -115,36 +126,36 @@ final class MappingTest extends TestCase
                             'functional\Kiboko\Component\FastMap\DTO'
                         )
                     ),
-                     new MethodMetadata(
-                         '__construct',
-                         new ArgumentListMetadata(
-                             new ArgumentMetadata(
-                                 'firstName',
-                                 new UnionTypeMetadata(
-                                     new ScalarTypeMetadata('string'),
-                                     new NullTypeMetadata()
-                                 )
-                             ),
-                             new ArgumentMetadata(
-                                 'lastName',
-                                 new UnionTypeMetadata(
-                                     new ScalarTypeMetadata('string'),
-                                     new NullTypeMetadata()
-                                 )
-                             ),
-                             new ArgumentMetadata(
-                                 'mainAddress',
-                                 new UnionTypeMetadata(
-                                     new ClassReferenceMetadata(
-                                         'Address',
-                                         'functional\Kiboko\Component\FastMap\DTO'
-                                     ),
-                                     new NullTypeMetadata()
-                                 )
-                             )
-                         ),
-                         returnType: new MixedTypeMetadata()
-                     )
+                    new MethodMetadata(
+                        '__construct',
+                        new ArgumentListMetadata(
+                            new ArgumentMetadata(
+                                'firstName',
+                                new UnionTypeMetadata(
+                                    new ScalarTypeMetadata('string'),
+                                    new NullTypeMetadata()
+                                )
+                            ),
+                            new ArgumentMetadata(
+                                'lastName',
+                                new UnionTypeMetadata(
+                                    new ScalarTypeMetadata('string'),
+                                    new NullTypeMetadata()
+                                )
+                            ),
+                            new ArgumentMetadata(
+                                'mainAddress',
+                                new UnionTypeMetadata(
+                                    new ClassReferenceMetadata(
+                                        'Address',
+                                        'functional\Kiboko\Component\FastMap\DTO'
+                                    ),
+                                    new NullTypeMetadata()
+                                )
+                            )
+                        ),
+                        returnType: new MixedTypeMetadata()
+                    )
                 )
                 ->addFields(
                     new VirtualFieldMetadata(
@@ -161,8 +172,7 @@ final class MappingTest extends TestCase
                             returnType: new ClassReferenceMetadata(
                                 'Customer',
                                 'functional\Kiboko\Component\FastMap\DTO'
-                        ),
-
+                            ),
                         )
                     ),
                 )
@@ -181,14 +191,13 @@ final class MappingTest extends TestCase
                             returnType: new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO')
                         )
                     ),
-                )
+                ),
         ];
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
-    public function testMapping(ClassTypeMetadata $expected)
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function mapping(ClassTypeMetadata $expected): void
     {
         $typeGuesser = new CompositeTypeGuesser(
             new NativeTypeGuesser(),

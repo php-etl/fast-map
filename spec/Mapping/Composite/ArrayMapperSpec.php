@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace spec\Kiboko\Component\FastMap\Mapping\Composite;
 
@@ -10,12 +12,12 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ArrayMapperSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ArrayMapper::class);
     }
 
-    public function it_is_mapping_flat_data()
+    public function it_is_mapping_flat_data(): void
     {
         $this->beConstructedWith(
             new Field(
@@ -37,7 +39,7 @@ final class ArrayMapperSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_is_mapping_complex_data()
+    public function it_is_mapping_complex_data(): void
     {
         $this->beConstructedWith(
             new Field(
@@ -58,8 +60,8 @@ final class ArrayMapperSpec extends ObjectBehavior
                 'address' => [
                     'street' => 'Main Street, 42',
                     'postcode' => '12345',
-                    'city' => 'Oblivion'
-                ]
+                    'city' => 'Oblivion',
+                ],
             ],
             [],
             new EmptyPropertyPath(),
@@ -75,7 +77,7 @@ final class ArrayMapperSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_does_keep_preexisting_data()
+    public function it_does_keep_preexisting_data(): void
     {
         $this->beConstructedWith(
             new Field(
@@ -94,7 +96,7 @@ final class ArrayMapperSpec extends ObjectBehavior
                 'company' => [
                     'address' => [
                         'street' => 'Main Street, 42',
-                        'city' => 'Oblivion'
+                        'city' => 'Oblivion',
                     ],
                 ],
             ],
@@ -103,7 +105,7 @@ final class ArrayMapperSpec extends ObjectBehavior
             'company' => [
                 'address' => [
                     'street' => 'Main Street, 42',
-                    'city' => 'Oblivion'
+                    'city' => 'Oblivion',
                 ],
                 'person' => [
                     'firstName' => 'John',

@@ -1,126 +1,126 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace functional\Kiboko\Component\FastMap\Mapping\Field;
 
 use Kiboko\Component\FastMap\Compiler;
-use Kiboko\Component\FastMap\Mapping\Field\ConcatCopyValuesMapper;
+use Kiboko\Component\FastMap\Mapping\Field\CopyValueMapper;
 use Kiboko\Contract\Mapping\CompiledMapperInterface;
 use Kiboko\Contract\Mapping\MapperInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-final class ConcatCopyValuesMapperTest extends TestCase
+/**
+ * @internal
+ */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
+final class CopyValueMapperTest extends TestCase
 {
-    public function mappingDataProvider()
+    public static function mappingDataProvider()
     {
         yield [
             [
-                'person' => 'John Doe'
+                'person' => 'John',
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             new PropertyPath('[person]'),
-            ' ',
             new PropertyPath('[employee][first_name]'),
-            new PropertyPath('[employee][last_name]'),
         ];
 
         yield [
             [
                 'person' => [
-                    'name' => 'John Doe',
-                ]
+                    'firstName' => 'John',
+                ],
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
-            new PropertyPath('[person][name]'),
-            ' ',
+            new PropertyPath('[person][firstName]'),
             new PropertyPath('[employee][first_name]'),
-            new PropertyPath('[employee][last_name]'),
         ];
 
         yield [
             [
                 'persons' => [
                     [
-                        'name' => 'John Doe',
-                    ]
-                ]
+                        'firstName' => 'John',
+                    ],
+                ],
             ],
             [
                 'employees' => [
                     [
                         'first_name' => 'John',
                         'last_name' => 'Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
-            new PropertyPath('[persons][0][name]'),
-            ' ',
+            new PropertyPath('[persons][0][firstName]'),
             new PropertyPath('[employees][0][first_name]'),
-            new PropertyPath('[employees][0][last_name]'),
         ];
 
         yield [
             [
                 'persons' => [
                     [
-                        'name' => 'John Doe',
-                    ]
-                ]
+                        'firstName' => 'John',
+                    ],
+                ],
             ],
             [
                 'employees' => [
                     (function (): \stdClass {
-                        $object = new \stdClass;
+                        $object = new \stdClass();
                         $object->first_name = 'John';
                         $object->last_name = 'Doe';
+
                         return $object;
-                    })()
-                ]
+                    })(),
+                ],
             ],
-            new PropertyPath('[persons][0][name]'),
-            ' ',
+            new PropertyPath('[persons][0][firstName]'),
             new PropertyPath('[employees][0].first_name'),
-            new PropertyPath('[employees][0].last_name'),
         ];
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testDynamicResults(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function dynamicResults(
+        mixed $expected,
+        mixed $input,
         PropertyPathInterface $outputField,
-        string $glue,
-        PropertyPathInterface ...$inputFields
-    ) {
+        PropertyPathInterface $inputField
+    ): void {
         /** @var MapperInterface $compiledMapper */
-        $staticdMapper = new ConcatCopyValuesMapper($glue, ...$inputFields);
+        $staticMapper = new CopyValueMapper($inputField);
 
-        $this->assertEquals($expected, $staticdMapper($input, [], $outputField));
+        $this->assertEquals($expected, $staticMapper($input, [], $outputField));
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithSpaghettiStrategy(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function compilationResultsWithSpaghettiStrategy(
+        mixed $expected,
+        mixed $input,
         PropertyPathInterface $outputField,
-        string $glue,
-        PropertyPathInterface ...$inputFields
-    ) {
+        PropertyPathInterface $inputField
+    ): void {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
 
         /** @var CompiledMapperInterface $compiledMapper */
@@ -130,7 +130,7 @@ final class ConcatCopyValuesMapperTest extends TestCase
                 null,
                 null
             ),
-            new ConcatCopyValuesMapper($glue, ...$inputFields)
+            new CopyValueMapper($inputField)
         );
 
         $this->assertEquals($expected, $compiledMapper($input, []));

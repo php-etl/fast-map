@@ -20,6 +20,8 @@ final readonly class StandardCompilationContext implements CompilationContextInt
 
     public static function build(PropertyPathInterface $propertyPath, string $cachePath, string $fqcn): self
     {
+        $fileName = null;
+        $className = null;
         if (null !== $fqcn) {
             if (false !== ($index = strrpos($fqcn, '\\'))) {
                 $namespace = substr($fqcn, 0, $index);
@@ -33,8 +35,8 @@ final readonly class StandardCompilationContext implements CompilationContextInt
 
         return new self(
             $propertyPath,
-            $fileName ?? null,
-            !isset($className) ? null : new ClassReferenceMetadata($className, $namespace ?? null)
+            $fileName,
+            empty($className) ? null : new ClassReferenceMetadata($className, $namespace ?? null)
         );
     }
 

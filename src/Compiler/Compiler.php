@@ -13,7 +13,7 @@ use Kiboko\Contract\Mapping\Compiler\CompilationContextInterface;
 use Kiboko\Contract\Mapping\Compiler\Strategy\StrategyInterface;
 use Kiboko\Contract\Mapping\MapperInterface;
 use PhpParser\PrettyPrinter;
-use Vfs\FileSystem;
+use org\bovigo\vfs\vfsStream;
 
 class Compiler
 {
@@ -57,8 +57,7 @@ class Compiler
             }
         } else {
             if (!\in_array('vfs', stream_get_wrappers())) {
-                $fs = FileSystem::factory('vfs');
-                $fs->mount();
+                $fs = vfsStream::setup();
             }
 
             $filename = 'vfs://'.hash('sha512', random_bytes(512)).'.php';

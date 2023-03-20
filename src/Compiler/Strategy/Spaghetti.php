@@ -34,13 +34,13 @@ final class Spaghetti implements StrategyInterface
                         ->implement(new Node\Name\FullyQualified(CompiledMapperInterface::class))
                         ->makeFinal()
                         ->addStmt(
-                        $factory->method('__invoke')
-                            ->makePublic()
-                            ->addParam($factory->param('input'))
-                            ->addParam($factory->param('output')->setDefault(null))
-                            ->addStmts($stmts)
-                            ->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))
-                    )
+                            $factory->method('__invoke')
+                                ->makePublic()
+                                ->addParam($factory->param('input'))
+                                ->addParam($factory->param('output')->setDefault(null))
+                                ->addStmts($stmts)
+                                ->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('output')))
+                        )
                 )
                 ->getNode(),
         ];
