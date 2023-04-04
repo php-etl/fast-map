@@ -10,9 +10,9 @@ use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\Formatter\Presenter\Value\ValuePresenter;
 use PhpSpec\Matcher\BasicMatcher;
 
-final class ExecuteUncompiledMapping extends BasicMatcher
+final readonly class ExecuteUncompiledMapping extends BasicMatcher
 {
-    public function __construct(private readonly ValuePresenter $presenter)
+    public function __construct(private ValuePresenter $presenter)
     {
     }
 
@@ -32,11 +32,9 @@ final class ExecuteUncompiledMapping extends BasicMatcher
     }
 
     /**
-     * @param mixed $subject
-     *
      * @return NotEqualException
      */
-    protected function getFailureException(string $name, $subject, array $arguments): FailureException
+    protected function getFailureException(string $name, mixed $subject, array $arguments): FailureException
     {
         [$input, $output, $expected] = $arguments;
 
@@ -48,10 +46,7 @@ final class ExecuteUncompiledMapping extends BasicMatcher
         ), $expected, $output);
     }
 
-    /**
-     * @param mixed $subject
-     */
-    protected function getNegativeFailureException(string $name, $subject, array $arguments): FailureException
+    protected function getNegativeFailureException(string $name, mixed $subject, array $arguments): FailureException
     {
         [$input, $output, $expected] = $arguments;
 

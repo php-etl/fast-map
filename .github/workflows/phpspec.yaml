@@ -1,4 +1,4 @@
-name: Infection
+name: PhpSpec (dependencies conflict)
 on: push
 jobs:
     phpspec:

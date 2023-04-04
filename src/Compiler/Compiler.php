@@ -12,8 +12,8 @@ use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use Kiboko\Contract\Mapping\Compiler\CompilationContextInterface;
 use Kiboko\Contract\Mapping\Compiler\Strategy\StrategyInterface;
 use Kiboko\Contract\Mapping\MapperInterface;
-use PhpParser\PrettyPrinter;
 use org\bovigo\vfs\vfsStream;
+use PhpParser\PrettyPrinter;
 
 class Compiler
 {

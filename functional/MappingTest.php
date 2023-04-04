@@ -70,7 +70,7 @@ final class MappingTest extends TestCase
                     new PropertyMetadata(
                         'mainAddress',
                         new UnionTypeMetadata(
-                            new ClassReferenceMetadata('Address', namespace\DTO::class),
+                            new ClassReferenceMetadata('Address', namespace\DTO\Address::class),
                             new NullTypeMetadata(),
                         )
                     )
@@ -81,7 +81,7 @@ final class MappingTest extends TestCase
                         new ArgumentListMetadata(
                             new VariadicArgumentMetadata(
                                 'addresses',
-                                new ClassReferenceMetadata('Address', namespace\DTO::class)
+                                new ClassReferenceMetadata('Address', namespace\DTO\Address::class)
                             )
                         )
                     ),
@@ -90,7 +90,7 @@ final class MappingTest extends TestCase
                         new ArgumentListMetadata(
                             new VariadicArgumentMetadata(
                                 'addresses',
-                                new ClassReferenceMetadata('Address', namespace\DTO::class)
+                                new ClassReferenceMetadata('Address', namespace\DTO\Address::class)
                             )
                         )
                     ),
@@ -99,7 +99,7 @@ final class MappingTest extends TestCase
                         new ArgumentListMetadata(
                             new VariadicArgumentMetadata(
                                 'addresses',
-                                new ClassReferenceMetadata('Address', namespace\DTO::class)
+                                new ClassReferenceMetadata('Address', namespace\DTO\Address::class)
                             )
                         )
                     ),
@@ -109,7 +109,7 @@ final class MappingTest extends TestCase
                         new UnionTypeMetadata(
                             new ScalarTypeMetadata('iterable'),
                             new ListTypeMetadata(
-                                new ClassReferenceMetadata('Address', namespace\DTO::class)
+                                new ClassReferenceMetadata('Address', namespace\DTO\Address::class)
                             )
                         )
                     ),
@@ -179,7 +179,7 @@ final class MappingTest extends TestCase
                 ->addRelations(
                     new VirtualUnaryRelationMetadata(
                         'email',
-                        type: new ClassReferenceMetadata('Customer', namespace\DTO::class),
+                        type: new ClassReferenceMetadata('Customer', namespace\DTO\Customer::class),
                         mutator: new MethodMetadata(
                             'setEmail',
                             new ArgumentListMetadata(

@@ -24,26 +24,17 @@ final class ThrowWhenExecuteCompiledMappingMatcher implements Matcher
     {
     }
 
-    /**
-     * @param mixed $subject
-     */
-    public function supports(string $name, $subject, array $arguments): bool
+    public function supports(string $name, mixed $subject, array $arguments): bool
     {
         return 'throwWhenExecuteCompiledMapping' === $name;
     }
 
-    /**
-     * @param mixed $subject
-     */
-    public function positiveMatch(string $name, $subject, array $arguments): DelayedCall
+    public function positiveMatch(string $name, mixed $subject, array $arguments): DelayedCall
     {
         return $this->getDelayedCall($this->verifyPositive(...), $subject, $arguments);
     }
 
-    /**
-     * @param mixed $subject
-     */
-    public function negativeMatch(string $name, $subject, array $arguments): DelayedCall
+    public function negativeMatch(string $name, mixed $subject, array $arguments): DelayedCall
     {
         return $this->getDelayedCall($this->verifyNegative(...), $subject, $arguments);
     }

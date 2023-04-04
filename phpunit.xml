@@ -18,7 +18,7 @@
         requireCoverageMetadata="false">
   <testsuites>
     <testsuite name="Functional tests">
-      <directory>tests/functional/</directory>
+      <directory>functional/</directory>
     </testsuite>
   </testsuites>
   <coverage>
