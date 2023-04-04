@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace spec\Kiboko\Component\FastMap\Mapping;
 
@@ -12,7 +14,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ListFieldSpec extends ObjectBehavior
 {
-    public function it_is_initializable(ArrayMapperInterface $inner)
+    public function it_is_initializable(ArrayMapperInterface $inner): void
     {
         $interpreter = new ExpressionLanguage();
 
@@ -26,7 +28,7 @@ final class ListFieldSpec extends ObjectBehavior
         $this->shouldHaveType(Mapping\ListField::class);
     }
 
-    public function it_is_mapping_data()
+    public function it_is_mapping_data(): void
     {
         $interpreter = new ExpressionLanguage();
 
@@ -78,7 +80,7 @@ final class ListFieldSpec extends ObjectBehavior
             ],
             [
                 'customers' => [],
-            ]
+            ],
         ])->shouldReturn([
             'customers' => [
                 [
@@ -97,7 +99,7 @@ final class ListFieldSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_is_failing_on_invalid_data()
+    public function it_is_failing_on_invalid_data(): void
     {
         $interpreter = new ExpressionLanguage();
 
@@ -129,10 +131,11 @@ final class ListFieldSpec extends ObjectBehavior
                 '__invoke',
                 [
                     [
-                        'users' => new \StdClass,
+                        'users' => new \stdClass(),
                     ],
-                    []
+                    [],
                 ]
-            );
+            )
+        ;
     }
 }

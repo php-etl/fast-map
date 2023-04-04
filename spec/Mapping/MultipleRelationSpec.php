@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace spec\Kiboko\Component\FastMap\Mapping;
 
@@ -16,7 +18,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class MultipleRelationSpec extends ObjectBehavior
 {
-    public function it_is_initializable(ObjectMapperInterface $inner)
+    public function it_is_initializable(ObjectMapperInterface $inner): void
     {
         $this->beConstructedWith(
             new PropertyPath('[customers]'),
@@ -28,7 +30,7 @@ final class MultipleRelationSpec extends ObjectBehavior
         $this->shouldHaveType(Mapping\MultipleRelation::class);
     }
 
-    public function it_is_mapping_data()
+    public function it_is_mapping_data(): void
     {
         $interpreter = new ExpressionLanguage();
 
@@ -99,7 +101,7 @@ final class MultipleRelationSpec extends ObjectBehavior
         );
     }
 
-    public function it_is_failing_on_invalid_data()
+    public function it_is_failing_on_invalid_data(): void
     {
         $interpreter = new ExpressionLanguage();
 
@@ -134,15 +136,16 @@ final class MultipleRelationSpec extends ObjectBehavior
             ->during(
                 '__invoke',
                 [
-                [
-                    'users' => new \StdClass,
-                ],
-                []
-            ]
-            );
+                    [
+                        'users' => new \stdClass(),
+                    ],
+                    [],
+                ]
+            )
+        ;
     }
 
-    public function it_is_mapping_data_as_compiled()
+    public function it_is_mapping_data_as_compiled(): void
     {
         $interpreter = new ExpressionLanguage();
 
@@ -180,41 +183,42 @@ final class MultipleRelationSpec extends ObjectBehavior
         $this->compile(new Variable('output'))
             ->shouldExecuteCompiledMapping(
                 [
-                'users' => [
-                    [
-                        'email' => 'john@example.com',
-                        'first_name' => 'John',
-                        'last_name' => 'Doe',
-                        'username' => 'John Doe',
-                    ],
-                    [
-                        'email' => 'robert@example.com',
-                        'first_name' => 'Robert',
-                        'last_name' => 'Burton',
-                        'username' => 'Robert Burton',
-                    ],
-                    [
-                        'email' => 'jane@example.com',
-                        'first_name' => 'Jane',
-                        'last_name' => 'Gee',
-                        'username' => 'Jane Gee',
+                    'users' => [
+                        [
+                            'email' => 'john@example.com',
+                            'first_name' => 'John',
+                            'last_name' => 'Doe',
+                            'username' => 'John Doe',
+                        ],
+                        [
+                            'email' => 'robert@example.com',
+                            'first_name' => 'Robert',
+                            'last_name' => 'Burton',
+                            'username' => 'Robert Burton',
+                        ],
+                        [
+                            'email' => 'jane@example.com',
+                            'first_name' => 'Jane',
+                            'last_name' => 'Gee',
+                            'username' => 'Jane Gee',
+                        ],
                     ],
                 ],
-            ],
                 [
-                'customers' => [],
-            ],
-                [
-                'customers' => [
-                    (new Customer('John', 'Doe'))->setEmail('john@example.com'),
-                    (new Customer('Robert', 'Burton'))->setEmail('robert@example.com'),
-                    (new Customer('Jane', 'Gee'))->setEmail('jane@example.com'),
+                    'customers' => [],
                 ],
-            ]
-            );
+                [
+                    'customers' => [
+                        (new Customer('John', 'Doe'))->setEmail('john@example.com'),
+                        (new Customer('Robert', 'Burton'))->setEmail('robert@example.com'),
+                        (new Customer('Jane', 'Gee'))->setEmail('jane@example.com'),
+                    ],
+                ]
+            )
+        ;
     }
 
-    public function it_is_failing_on_invalid_data_while_compiled()
+    public function it_is_failing_on_invalid_data_while_compiled(): void
     {
         $interpreter = new ExpressionLanguage();
 
@@ -249,11 +253,12 @@ final class MultipleRelationSpec extends ObjectBehavior
             ->during(
                 '__invoke',
                 [
-                [
-                    'users' => new \StdClass,
-                ],
-                []
-            ]
-            );
+                    [
+                        'users' => new \stdClass(),
+                    ],
+                    [],
+                ]
+            )
+        ;
     }
 }

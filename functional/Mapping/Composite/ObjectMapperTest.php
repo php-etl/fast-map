@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace functional\Kiboko\Component\FastMap\Mapping\Composite;
 
 use functional\Kiboko\Component\FastMap as test;
 use Kiboko\Component\FastMap\Compiler;
-use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
 use Kiboko\Component\FastMap\Mapping\Composite\ObjectMapper;
+use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
 use Kiboko\Component\FastMap\SimpleObjectInitializer;
 use Kiboko\Component\Metadata\ClassReferenceMetadata;
 use Kiboko\Contract\Mapping\CompiledMapperInterface;
@@ -15,9 +17,18 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
+/**
+ * @internal
+ */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class ObjectMapperTest extends TestCase
 {
-    public function mappingDataProvider()
+    public static function mappingDataProvider()
     {
         $interpreter = new ExpressionLanguage();
 
@@ -27,7 +38,7 @@ final class ObjectMapperTest extends TestCase
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             $interpreter,
             new EmptyPropertyPath(),
@@ -43,7 +54,7 @@ final class ObjectMapperTest extends TestCase
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             $interpreter,
             new PropertyPath('[person]'),
@@ -52,16 +63,15 @@ final class ObjectMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testDynamicResults(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function dynamicResults(
+        mixed $expected,
+        mixed $input,
         ExpressionLanguage $interpreter,
         PropertyPathInterface $outputField,
         Expression ...$expression
-    ) {
+    ): void {
         $staticMapper = new ObjectMapper(
             new SimpleObjectInitializer(
                 new ClassReferenceMetadata('Customer', 'functional\Kiboko\Component\FastMap\DTO'),
@@ -73,16 +83,15 @@ final class ObjectMapperTest extends TestCase
         $this->assertEquals($expected, $staticMapper($input, [], $outputField));
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithSpaghettiStrategy(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function compilationResultsWithSpaghettiStrategy(
+        mixed $expected,
+        mixed $input,
         ExpressionLanguage $interpreter,
         PropertyPathInterface $outputField,
         Expression ...$expression
-    ) {
+    ): void {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
 
         /** @var CompiledMapperInterface $compiledMapper */

@@ -16,7 +16,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 final class ConcatCopyValuesMapper implements Mapping\FieldMapperInterface, Mapping\CompilableMapperInterface
 {
-    /** @var string[] */
+    /** @var array<int|string, PropertyPathInterface> */
     private readonly iterable $inputPaths;
     private readonly PropertyAccessor $accessor;
     /** @var Node\Expr\Variable[] */

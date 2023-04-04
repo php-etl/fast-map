@@ -1,14 +1,23 @@
 {
-    "timeout": 10,
+	"$schema": "https://raw.githubusercontent.com/infection/infection/0.26.18/resources/schema.json",
     "source": {
         "directories": [
             "src"
         ]
     },
+    "timeout": 10,
     "logs": {
-        "text": "infection.log"
+        "text": "infection.log",
+        "summary": "summary.log",
+        "json": "infection-log.json",
+        "perMutator": "per-mutator.md",
+        "github": true,
+    },
+    "phpUnit": {
+        "configDir": "."
     },
     "mutators": {
         "@default": true
-    }
+    },
+    "testFramework":"phpunit",
 }

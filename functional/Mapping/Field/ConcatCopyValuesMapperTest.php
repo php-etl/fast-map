@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace functional\Kiboko\Component\FastMap\Mapping\Field;
 
@@ -10,19 +12,28 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
+/**
+ * @internal
+ */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class ConcatCopyValuesMapperTest extends TestCase
 {
-    public function mappingDataProvider()
+    public static function mappingDataProvider()
     {
         yield [
             [
-                'person' => 'John Doe'
+                'person' => 'John Doe',
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             new PropertyPath('[person]'),
             ' ',
@@ -34,13 +45,13 @@ final class ConcatCopyValuesMapperTest extends TestCase
             [
                 'person' => [
                     'name' => 'John Doe',
-                ]
+                ],
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             new PropertyPath('[person][name]'),
             ' ',
@@ -53,16 +64,16 @@ final class ConcatCopyValuesMapperTest extends TestCase
                 'persons' => [
                     [
                         'name' => 'John Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             [
                 'employees' => [
                     [
                         'first_name' => 'John',
                         'last_name' => 'Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             new PropertyPath('[persons][0][name]'),
             ' ',
@@ -75,18 +86,19 @@ final class ConcatCopyValuesMapperTest extends TestCase
                 'persons' => [
                     [
                         'name' => 'John Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             [
                 'employees' => [
                     (function (): \stdClass {
-                        $object = new \stdClass;
+                        $object = new \stdClass();
                         $object->first_name = 'John';
                         $object->last_name = 'Doe';
+
                         return $object;
-                    })()
-                ]
+                    })(),
+                ],
             ],
             new PropertyPath('[persons][0][name]'),
             ' ',
@@ -95,32 +107,30 @@ final class ConcatCopyValuesMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testDynamicResults(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function dynamicResults(
+        mixed $expected,
+        mixed $input,
         PropertyPathInterface $outputField,
         string $glue,
         PropertyPathInterface ...$inputFields
-    ) {
+    ): void {
         /** @var MapperInterface $compiledMapper */
         $staticdMapper = new ConcatCopyValuesMapper($glue, ...$inputFields);
 
         $this->assertEquals($expected, $staticdMapper($input, [], $outputField));
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithSpaghettiStrategy(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function compilationResultsWithSpaghettiStrategy(
+        mixed $expected,
+        mixed $input,
         PropertyPathInterface $outputField,
         string $glue,
         PropertyPathInterface ...$inputFields
-    ) {
+    ): void {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
 
         /** @var CompiledMapperInterface $compiledMapper */

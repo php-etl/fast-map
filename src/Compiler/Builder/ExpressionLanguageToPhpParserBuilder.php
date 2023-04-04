@@ -28,6 +28,9 @@ final readonly class ExpressionLanguageToPhpParserBuilder implements Builder
             ->parse('<?php '.$this->interpreter->compile($expression, array_merge($this->variables, ['input', 'output'])).';')
         ;
 
+        /** @var Node\Expr $inputNodes */
+        $inputNodes = $inputNodes[0];
+
         return $inputNodes[0]->expr;
     }
 }

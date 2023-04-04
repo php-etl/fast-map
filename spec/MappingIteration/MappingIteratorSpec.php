@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace spec\Kiboko\Component\FastMap\MappingIteration;
 
@@ -8,7 +10,7 @@ use PhpSpec\ObjectBehavior;
 
 final class MappingIteratorSpec extends ObjectBehavior
 {
-    public function it_is_initializable(CompositeTypeMetadataInterface $metadata)
+    public function it_is_initializable(CompositeTypeMetadataInterface $metadata): void
     {
         $this->beConstructedWith($metadata);
         $this->shouldHaveType(MappingIterator::class);
@@ -16,19 +18,19 @@ final class MappingIteratorSpec extends ObjectBehavior
 
     public function it_is_iterable(
         CompositeTypeMetadataInterface $metadata
-    ) {
+    ): void {
         $objects = [];
 
-        $objects[] = new class {
+        $objects[] = new class() {
             public $lorem = 'ipsum';
         };
-        $objects[] = new class {
+        $objects[] = new class() {
             public $dolor = 'sit';
         };
-        $objects[] = new class {
+        $objects[] = new class() {
             public $amet = 'consecutir';
         };
-        $objects[] = new class {
+        $objects[] = new class() {
             public $sid = 'nolem';
         };
 

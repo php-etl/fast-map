@@ -1,22 +1,17 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace functional\Kiboko\Component\FastMap\DTO;
 
 final class Customer
 {
-    public ?string $firstName;
-    public ?string $lastName;
-    public ?string $email;
-    public ?Address $mainAddress;
+    public ?string $email = null;
     /** @var Address[] */
-    private array $addresses;
+    private array $addresses = [];
 
-    public function __construct(?string $firstName = null, ?string $lastName = null, ?Address $mainAddress = null)
+    public function __construct(public ?string $firstName = null, public ?string $lastName = null, public ?Address $mainAddress = null)
     {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->mainAddress = $mainAddress;
-        $this->addresses = [];
     }
 
     public function setEmail(string $email): self

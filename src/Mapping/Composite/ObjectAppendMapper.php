@@ -27,7 +27,7 @@ final class ObjectAppendMapper implements Mapping\ObjectMapperInterface, Mapping
     {
         $output = ($this->initializer)($input, $output, $outputPath);
         foreach ($this->properties as $property) {
-            $output = $property($input, $output, $outputPath);
+            $output = $property($input, $output);
         }
 
         return $output;

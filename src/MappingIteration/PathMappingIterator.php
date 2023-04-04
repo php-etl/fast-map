@@ -13,7 +13,7 @@ final readonly class PathMappingIterator implements \Iterator
     {
     }
 
-    public function current()
+    public function current(): mixed
     {
         return $this->inner->current();
     }
@@ -23,7 +23,7 @@ final readonly class PathMappingIterator implements \Iterator
         $this->inner->next();
     }
 
-    public function key()
+    public function key(): mixed
     {
         return $this->inner->key();
     }

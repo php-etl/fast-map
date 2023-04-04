@@ -22,7 +22,7 @@ final class MappingIterator implements \RecursiveIterator
         }
     }
 
-    public function current()
+    public function current(): mixed
     {
         return $this->inner->current();
     }
@@ -32,7 +32,7 @@ final class MappingIterator implements \RecursiveIterator
         $this->inner->next();
     }
 
-    public function key()
+    public function key(): mixed
     {
         return $this->inner->key();
     }

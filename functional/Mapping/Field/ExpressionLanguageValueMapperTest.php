@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace functional\Kiboko\Component\FastMap\Mapping\Field;
 
@@ -12,21 +14,30 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
+/**
+ * @internal
+ */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class ExpressionLanguageValueMapperTest extends TestCase
 {
-    public function mappingDataProvider()
+    public static function mappingDataProvider()
     {
         $interpreter = new ExpressionLanguage();
 
         yield [
             [
-                'person' => 'John'
+                'person' => 'John',
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             new PropertyPath('[person]'),
             new Expression('input["employee"]["first_name"]'),
@@ -35,13 +46,13 @@ final class ExpressionLanguageValueMapperTest extends TestCase
 
         yield [
             [
-                'person' => 'John Doe'
+                'person' => 'John Doe',
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             new PropertyPath('[person]'),
             new Expression('input["employee"]["first_name"]~" "~input["employee"]["last_name"]'),
@@ -52,13 +63,13 @@ final class ExpressionLanguageValueMapperTest extends TestCase
             [
                 'person' => [
                     'firstName' => 'John Doe',
-                ]
+                ],
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             new PropertyPath('[person][firstName]'),
             new Expression('input["employee"]["first_name"]~" "~input["employee"]["last_name"]'),
@@ -70,16 +81,16 @@ final class ExpressionLanguageValueMapperTest extends TestCase
                 'persons' => [
                     [
                         'firstName' => 'John Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             [
                 'employees' => [
                     [
                         'first_name' => 'John',
                         'last_name' => 'Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             new PropertyPath('[persons][0][firstName]'),
             new Expression('input["employees"][0]["first_name"]~" "~input["employees"][0]["last_name"]'),
@@ -91,18 +102,19 @@ final class ExpressionLanguageValueMapperTest extends TestCase
                 'persons' => [
                     [
                         'firstName' => 'John Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             [
                 'employees' => [
                     (function (): \stdClass {
-                        $object = new \stdClass;
+                        $object = new \stdClass();
                         $object->first_name = 'John';
                         $object->last_name = 'Doe';
+
                         return $object;
-                    })()
-                ]
+                    })(),
+                ],
             ],
             new PropertyPath('[persons][0][firstName]'),
             new Expression('input["employees"][0].first_name~" "~input["employees"][0].last_name'),
@@ -111,7 +123,7 @@ final class ExpressionLanguageValueMapperTest extends TestCase
 
         yield [
             [
-                'weight' => 2.2675736961451247
+                'weight' => 2.2675736961451247,
             ],
             [
                 'ean' => '1234567890128',
@@ -123,36 +135,34 @@ final class ExpressionLanguageValueMapperTest extends TestCase
             ],
             new PropertyPath('[weight]'),
             new Expression('input["weight"]["unit"] == "POUNDS" ? (input["weight"]["value"] / 2.205) : input["weight"]["value"]'),
-            $interpreter
+            $interpreter,
         ];
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testDynamicResults(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function dynamicResults(
+        mixed $expected,
+        mixed $input,
         PropertyPathInterface $outputField,
         Expression $expression,
         ExpressionLanguage $interpreter
-    ) {
+    ): void {
         /** @var MapperInterface $compiledMapper */
         $staticMapper = new ExpressionLanguageValueMapper($interpreter, $expression);
 
         $this->assertEquals($expected, $staticMapper($input, [], $outputField));
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithSpaghettiStrategy(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function compilationResultsWithSpaghettiStrategy(
+        mixed $expected,
+        mixed $input,
         PropertyPathInterface $outputField,
         Expression $expression,
         ExpressionLanguage $interpreter
-    ) {
+    ): void {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
 
         /** @var CompiledMapperInterface $compiledMapper */

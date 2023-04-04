@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace spec\Kiboko\Component\FastMap\Mapping;
 
@@ -11,7 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class FieldSpec extends ObjectBehavior
 {
-    public function it_is_initializable(FieldMapperInterface $inner)
+    public function it_is_initializable(FieldMapperInterface $inner): void
     {
         $this->beConstructedWith(
             new PropertyPath('[customers]'),
@@ -21,7 +23,7 @@ final class FieldSpec extends ObjectBehavior
         $this->shouldHaveType(Field::class);
     }
 
-    public function it_is_mapping_data()
+    public function it_is_mapping_data(): void
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][name]'),
@@ -50,7 +52,7 @@ final class FieldSpec extends ObjectBehavior
         );
     }
 
-    public function it_is_failing_on_invalid_data()
+    public function it_is_failing_on_invalid_data(): void
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][username]'),
@@ -65,15 +67,16 @@ final class FieldSpec extends ObjectBehavior
             ->during(
                 '__invoke',
                 [
-                [
-                    'user' => new \StdClass,
-                ],
-                []
-            ]
-            );
+                    [
+                        'user' => new \stdClass(),
+                    ],
+                    [],
+                ]
+            )
+        ;
     }
 
-    public function it_is_mapping_data_as_compiled()
+    public function it_is_mapping_data_as_compiled(): void
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][name]'),
@@ -100,10 +103,11 @@ final class FieldSpec extends ObjectBehavior
                         'name' => 'John Doe',
                     ],
                 ]
-            );
+            )
+        ;
     }
 
-    public function it_is_failing_on_invalid_data_while_compiled()
+    public function it_is_failing_on_invalid_data_while_compiled(): void
     {
         $this->beConstructedWith(
             new PropertyPath('[customer][username]'),
@@ -118,11 +122,12 @@ final class FieldSpec extends ObjectBehavior
             ->during(
                 '__invoke',
                 [
-                [
-                    'user' => new \StdClass,
-                ],
-                []
-            ]
-            );
+                    [
+                        'user' => new \stdClass(),
+                    ],
+                    [],
+                ]
+            )
+        ;
     }
 }

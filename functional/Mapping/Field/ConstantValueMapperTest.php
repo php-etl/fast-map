@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace functional\Kiboko\Component\FastMap\Mapping\Field;
 
@@ -10,19 +12,28 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
+/**
+ * @internal
+ */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class ConstantValueMapperTest extends TestCase
 {
-    public function mappingDataProvider()
+    public static function mappingDataProvider()
     {
         yield [
             [
-                'person' => 'John F. Doe'
+                'person' => 'John F. Doe',
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             new PropertyPath('[person]'),
             'John F. Doe',
@@ -32,13 +43,13 @@ final class ConstantValueMapperTest extends TestCase
             [
                 'person' => [
                     'name' => 'John F. Doe',
-                ]
+                ],
             ],
             [
                 'employee' => [
                     'first_name' => 'John',
                     'last_name' => 'Doe',
-                ]
+                ],
             ],
             new PropertyPath('[person][name]'),
             'John F. Doe',
@@ -49,16 +60,16 @@ final class ConstantValueMapperTest extends TestCase
                 'persons' => [
                     [
                         'name' => 'John F. Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             [
                 'employees' => [
                     [
                         'first_name' => 'John',
                         'last_name' => 'Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             new PropertyPath('[persons][0][name]'),
             'John F. Doe',
@@ -69,48 +80,47 @@ final class ConstantValueMapperTest extends TestCase
                 'persons' => [
                     [
                         'name' => 'John F. Doe',
-                    ]
-                ]
+                    ],
+                ],
             ],
             [
                 'employees' => [
                     (function (): \stdClass {
-                        $object = new \stdClass;
+                        $object = new \stdClass();
                         $object->first_name = 'John';
                         $object->last_name = 'Doe';
+
                         return $object;
-                    })()
-                ]
+                    })(),
+                ],
             ],
             new PropertyPath('[persons][0][name]'),
             'John F. Doe',
         ];
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testDynamicResults(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function dynamicResults(
+        mixed $expected,
+        mixed $input,
         PropertyPathInterface $outputField,
         string $constantValue
-    ) {
+    ): void {
         /** @var MapperInterface $compiledMapper */
         $staticdMapper = new ConstantValueMapper($constantValue);
 
         $this->assertEquals($expected, $staticdMapper($input, [], $outputField));
     }
 
-    /**
-     * @dataProvider mappingDataProvider
-     */
-    public function testCompilationResultsWithSpaghettiStrategy(
-        $expected,
-        $input,
+    #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function compilationResultsWithSpaghettiStrategy(
+        mixed $expected,
+        mixed $input,
         PropertyPathInterface $outputField,
         string $constantValue
-    ) {
+    ): void {
         $compiler = new Compiler\Compiler(new Compiler\Strategy\Spaghetti());
 
         /** @var CompiledMapperInterface $compiledMapper */
