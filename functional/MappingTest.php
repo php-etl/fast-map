@@ -30,15 +30,6 @@ use Phpactor\Docblock\DocblockFactory;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- */
-#[\PHPUnit\Framework\Attributes\CoversNothing]
-/**
- * @internal
- *
- * @coversNothing
- */
 final class MappingTest extends TestCase
 {
     public static function dataProvider()
@@ -196,8 +187,7 @@ final class MappingTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
-    #[\PHPUnit\Framework\Attributes\Test]
-    public function mapping(ClassTypeMetadata $expected): void
+    public function testMapping(ClassTypeMetadata $expected)
     {
         $typeGuesser = new CompositeTypeGuesser(
             new NativeTypeGuesser(),

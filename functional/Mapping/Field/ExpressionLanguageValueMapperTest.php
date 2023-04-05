@@ -14,15 +14,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-/**
- * @internal
- */
-#[\PHPUnit\Framework\Attributes\CoversNothing]
-/**
- * @internal
- *
- * @coversNothing
- */
 final class ExpressionLanguageValueMapperTest extends TestCase
 {
     public static function mappingDataProvider()
@@ -140,10 +131,9 @@ final class ExpressionLanguageValueMapperTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
-    #[\PHPUnit\Framework\Attributes\Test]
-    public function dynamicResults(
-        mixed $expected,
-        mixed $input,
+    public function testDynamicResults(
+        $expected,
+        $input,
         PropertyPathInterface $outputField,
         Expression $expression,
         ExpressionLanguage $interpreter
@@ -155,10 +145,9 @@ final class ExpressionLanguageValueMapperTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
-    #[\PHPUnit\Framework\Attributes\Test]
-    public function compilationResultsWithSpaghettiStrategy(
-        mixed $expected,
-        mixed $input,
+    public function testCompilationResultsWithSpaghettiStrategy(
+        $expected,
+        $input,
         PropertyPathInterface $outputField,
         Expression $expression,
         ExpressionLanguage $interpreter

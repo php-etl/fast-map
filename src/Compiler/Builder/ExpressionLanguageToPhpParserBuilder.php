@@ -29,8 +29,8 @@ final readonly class ExpressionLanguageToPhpParserBuilder implements Builder
         ;
 
         /** @var Node\Expr $inputNodes */
-        $inputNodes = $inputNodes[0];
+        $inputNode = $inputNodes[0];
 
-        return $inputNodes[0]->expr;
+        return $inputNode->expr;
     }
 }

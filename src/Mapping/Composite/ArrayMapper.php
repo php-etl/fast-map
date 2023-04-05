@@ -64,7 +64,7 @@ final class ArrayMapper implements Mapping\ArrayMapperInterface, Mapping\Compila
                             ),
                         ),
                     ],
-                    array_merge(
+                    (array) array_merge(
                         ...$this->compileMappers(new Node\Expr\Variable('output'))
                     ),
                     [
