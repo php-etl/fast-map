@@ -13,6 +13,7 @@ use Kiboko\Contract\Mapping\Compiler\CompilationContextInterface;
 use Kiboko\Contract\Mapping\Compiler\Strategy\StrategyInterface;
 use Kiboko\Contract\Mapping\MapperInterface;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamFile;
 use PhpParser\PrettyPrinter;
 
 class Compiler
@@ -56,13 +57,13 @@ class Compiler
                 include_once $context->getFilePath();
             }
         } else {
-            if (!\in_array('vfs', stream_get_wrappers())) {
-                $fs = vfsStream::setup();
-            }
+            $fs = vfsStream::setup();
 
-            $filename = 'vfs://'.hash('sha512', random_bytes(512)).'.php';
-            file_put_contents($filename, $prettyPrinter->prettyPrintFile($tree));
-            include_once $filename;
+            $filename = hash('sha512', random_bytes(512)).'.php';
+            $file = new vfsStreamFile($filename);
+            $file->setContent($prettyPrinter->prettyPrintFile($tree));
+            $fs->addChild($file);
+            include_once vfsStream::url('root/'.$filename);
         }
 
         return new $fqcn();

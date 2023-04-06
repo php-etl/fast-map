@@ -17,7 +17,7 @@ final readonly class Field implements Mapping\FieldScopingInterface, Mapping\Com
 
     public function __construct(
         private PropertyPathInterface $path,
-        private Mapping\FieldMapperInterface $child
+        private Mapping\CompilableMapperInterface&Mapping\FieldMapperInterface $child
     ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

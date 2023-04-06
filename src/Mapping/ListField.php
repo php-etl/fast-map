@@ -24,7 +24,7 @@ final class ListField implements Mapping\FieldScopingInterface, Mapping\Compilab
         private PropertyPathInterface $outputPath,
         private readonly ExpressionLanguage $interpreter,
         private readonly Expression $inputExpression,
-        private readonly Mapping\ArrayMapperInterface $child
+        private readonly Mapping\CompilableMapperInterface&Mapping\ArrayMapperInterface $child
     ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
