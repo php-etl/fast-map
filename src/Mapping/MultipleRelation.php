@@ -23,7 +23,7 @@ final class MultipleRelation implements Mapping\FieldScopingInterface, Mapping\C
         private PropertyPathInterface $outputPath,
         private readonly ExpressionLanguage $interpreter,
         private readonly Expression $inputExpression,
-        private readonly Mapping\ObjectMapperInterface $child
+        private readonly Mapping\CompilableMapperInterface $child
     ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

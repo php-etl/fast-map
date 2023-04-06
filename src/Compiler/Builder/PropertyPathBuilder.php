@@ -11,7 +11,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 final readonly class PropertyPathBuilder implements Builder
 {
     public function __construct(
-        private PropertyPathInterface $propertyPath,
+        private \IteratorAggregate&PropertyPathInterface $propertyPath,
         private Node\Expr $pathNode,
         private ?int $limit = null
     ) {

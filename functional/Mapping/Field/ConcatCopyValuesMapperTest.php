@@ -12,15 +12,6 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-/**
- * @internal
- */
-#[\PHPUnit\Framework\Attributes\CoversNothing]
-/**
- * @internal
- *
- * @coversNothing
- */
 final class ConcatCopyValuesMapperTest extends TestCase
 {
     public static function mappingDataProvider()
@@ -108,10 +99,9 @@ final class ConcatCopyValuesMapperTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
-    #[\PHPUnit\Framework\Attributes\Test]
-    public function dynamicResults(
-        mixed $expected,
-        mixed $input,
+    public function testDynamicResults(
+        $expected,
+        $input,
         PropertyPathInterface $outputField,
         string $glue,
         PropertyPathInterface ...$inputFields
@@ -123,10 +113,9 @@ final class ConcatCopyValuesMapperTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('mappingDataProvider')]
-    #[\PHPUnit\Framework\Attributes\Test]
-    public function compilationResultsWithSpaghettiStrategy(
-        mixed $expected,
-        mixed $input,
+    public function testCompilationResultsWithSpaghettiStrategy(
+        $expected,
+        $input,
         PropertyPathInterface $outputField,
         string $glue,
         PropertyPathInterface ...$inputFields
