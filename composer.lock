@@ -159,18 +159,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/configurator-contracts.git",
-                "reference": "a8011fab7af398848ebb4068698e53eb2b7a21c0"
+                "reference": "f17ac6f867132853ec10564801c7ad393134fdef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/configurator-contracts/zipball/a8011fab7af398848ebb4068698e53eb2b7a21c0",
-                "reference": "a8011fab7af398848ebb4068698e53eb2b7a21c0",
+                "url": "https://api.github.com/repos/php-etl/configurator-contracts/zipball/f17ac6f867132853ec10564801c7ad393134fdef",
+                "reference": "f17ac6f867132853ec10564801c7ad393134fdef",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.10",
                 "php": "^8.2",
-                "php-etl/packaging-contracts": "0.3.0",
+                "php-etl/packaging-contracts": "0.3.*",
                 "psr/log": "^3.0",
                 "symfony/config": "^6.0",
                 "symfony/expression-language": "^6.0"
@@ -210,7 +210,7 @@
                 "issues": "https://github.com/php-etl/configurator-contracts/issues",
                 "source": "https://github.com/php-etl/configurator-contracts/tree/v0.7.0"
             },
-            "time": "2023-04-06T10:24:39+00:00"
+            "time": "2023-04-12T13:47:02+00:00"
         },
         {
             "name": "php-etl/mapping-contracts",
@@ -442,12 +442,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/satellite-toolbox.git",
-                "reference": "1f82f60790f7110373232aadba0525d0fe79ab12"
+                "reference": "acfdf758359d3025fa01848e4a8316a41b6193be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/1f82f60790f7110373232aadba0525d0fe79ab12",
-                "reference": "1f82f60790f7110373232aadba0525d0fe79ab12",
+                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/acfdf758359d3025fa01848e4a8316a41b6193be",
+                "reference": "acfdf758359d3025fa01848e4a8316a41b6193be",
                 "shasum": ""
             },
             "require": {
@@ -500,7 +500,7 @@
                 "issues": "https://github.com/php-etl/satellite-toolbox/issues",
                 "source": "https://github.com/php-etl/satellite-toolbox/tree/v0.5.0"
             },
-            "time": "2023-04-12T13:15:58+00:00"
+            "time": "2023-04-12T13:48:45+00:00"
         },
         {
             "name": "phpactor/docblock",
