@@ -23,8 +23,8 @@
         "symfony/cache": "^6.0",
         "doctrine/inflector": "^2.0",
         "php-etl/metadata": "*",
-        "php-etl/mapping-contracts": "0.4.0",
-        "php-etl/metadata-contracts": "0.2.0",
+        "php-etl/mapping-contracts": "0.4.*",
+        "php-etl/metadata-contracts": "0.2.*",
         "php-etl/satellite-toolbox": "*"
     },
     "require-dev": {
@@ -34,7 +34,7 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^1.10",
         "rector/rector": "^0.15",
-        "php-etl/phpspec-extension": "0.4.0"
+        "php-etl/phpspec-extension": "*"
     },
     "autoload": {
         "psr-4": {
