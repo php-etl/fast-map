@@ -19,7 +19,7 @@ final class ReplaceValueMapper implements Mapping\FieldMapperInterface, Mapping\
     /** @var Node\Expr\Variable[] */
     private iterable $contextVariables = [];
 
-    public function __construct(private readonly PropertyPathInterface $inputPaths, private array $replacements = [])
+    public function __construct(private readonly PropertyPathInterface $inputPaths, private readonly array $replacements = [])
     {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
