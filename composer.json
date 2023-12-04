@@ -25,7 +25,7 @@
         "php-etl/metadata": "*",
         "php-etl/mapping-contracts": "0.4.*",
         "php-etl/metadata-contracts": "0.2.*",
-        "php-etl/satellite-toolbox": "*"
+        "php-etl/satellite-toolbox": "dev-feature/add-property-path-builder-from-fastmap"
     },
     "require-dev": {
         "mikey179/vfsstream": "^1.6",
