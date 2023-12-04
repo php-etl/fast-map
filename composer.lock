@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d79c7a1f03c1fe1c97a3c9ddd657412",
+    "content-hash": "ee016c845c8be443e7d1283b14dae102",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -438,16 +438,16 @@
         },
         {
             "name": "php-etl/satellite-toolbox",
-            "version": "dev-feature/add-property-path-builder-from-fastmap",
+            "version": "v0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/satellite-toolbox.git",
-                "reference": "608fa01dab611aa3c1bc7ae87ef47a251aa5b755"
+                "reference": "84e2bf19a2bf2f94012f894edcaf48c97a4935f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/608fa01dab611aa3c1bc7ae87ef47a251aa5b755",
-                "reference": "608fa01dab611aa3c1bc7ae87ef47a251aa5b755",
+                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/84e2bf19a2bf2f94012f894edcaf48c97a4935f5",
+                "reference": "84e2bf19a2bf2f94012f894edcaf48c97a4935f5",
                 "shasum": ""
             },
             "require": {
@@ -499,9 +499,9 @@
             "description": "This library aims at building and running lambda PHP functions",
             "support": {
                 "issues": "https://github.com/php-etl/satellite-toolbox/issues",
-                "source": "https://github.com/php-etl/satellite-toolbox/tree/feature/add-property-path-builder-from-fastmap"
+                "source": "https://github.com/php-etl/satellite-toolbox/tree/v0.5.2"
             },
-            "time": "2023-12-04T13:24:34+00:00"
+            "time": "2023-12-04T15:09:34+00:00"
         },
         {
             "name": "phpactor/docblock",
@@ -5468,9 +5468,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "php-etl/satellite-toolbox": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
