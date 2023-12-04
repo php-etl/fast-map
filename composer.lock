@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee016c845c8be443e7d1283b14dae102",
+    "content-hash": "6d79c7a1f03c1fe1c97a3c9ddd657412",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -438,29 +438,30 @@
         },
         {
             "name": "php-etl/satellite-toolbox",
-            "version": "v0.5.1",
+            "version": "dev-feature/add-property-path-builder-from-fastmap",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/satellite-toolbox.git",
-                "reference": "94552565ade7d29a632672aaed05ec98b623700d"
+                "reference": "608fa01dab611aa3c1bc7ae87ef47a251aa5b755"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/94552565ade7d29a632672aaed05ec98b623700d",
-                "reference": "94552565ade7d29a632672aaed05ec98b623700d",
+                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/608fa01dab611aa3c1bc7ae87ef47a251aa5b755",
+                "reference": "608fa01dab611aa3c1bc7ae87ef47a251aa5b755",
                 "shasum": ""
             },
             "require": {
-                "nikic/php-parser": "^4.10",
+                "nikic/php-parser": "^4.15",
                 "php": "^8.2",
                 "php-etl/configurator-contracts": "0.8.*",
-                "symfony/expression-language": "^6.0"
+                "symfony/expression-language": "^6.0",
+                "symfony/property-access": "^6.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "infection/infection": "^0.26.18",
+                "friendsofphp/php-cs-fixer": "^3.38",
+                "infection/infection": "^0.26",
                 "mikey179/vfsstream": "^1.6",
-                "php-etl/phpunit-extension": "*",
+                "php-etl/phpunit-extension": "0.7.*",
                 "phpstan/phpstan": "^1.10",
                 "phpunit/php-invoker": "*",
                 "phpunit/phpunit": "^10.0",
@@ -498,9 +499,9 @@
             "description": "This library aims at building and running lambda PHP functions",
             "support": {
                 "issues": "https://github.com/php-etl/satellite-toolbox/issues",
-                "source": "https://github.com/php-etl/satellite-toolbox/tree/v0.5.1"
+                "source": "https://github.com/php-etl/satellite-toolbox/tree/feature/add-property-path-builder-from-fastmap"
             },
-            "time": "2023-04-20T08:03:07+00:00"
+            "time": "2023-12-04T13:24:34+00:00"
         },
         {
             "name": "phpactor/docblock",
@@ -5467,7 +5468,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "php-etl/satellite-toolbox": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
