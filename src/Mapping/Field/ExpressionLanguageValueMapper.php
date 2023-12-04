@@ -35,10 +35,7 @@ final class ExpressionLanguageValueMapper implements Mapping\FieldMapperInterfac
         $this->accessor->setValue(
             $output,
             $outputPath,
-            $this->interpreter->evaluate($this->expression, array_merge($this->variables, [
-                'input' => $input,
-                'output' => $output,
-            ]))
+            $this->interpreter->evaluate($this->expression, [...$this->variables, 'input' => $input, 'output' => $output])
         );
 
         return $output;
