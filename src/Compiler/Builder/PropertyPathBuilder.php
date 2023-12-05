@@ -4,55 +4,9 @@ declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
-use PhpParser\Builder;
-use PhpParser\Node;
-use Symfony\Component\PropertyAccess\PropertyPathInterface;
+trigger_deprecation('php-etl/fast-map', '0.5', 'The "%s" class is deprecated, use "%s" instead.', 'Kiboko\\Component\\FastMap\\Compiler\\Builder\\PropertyPathBuilder', \Kiboko\Component\SatelliteToolbox\Builder\PropertyPathBuilder::class);
 
-final readonly class PropertyPathBuilder implements Builder
-{
-    public function __construct(
-        private \IteratorAggregate&PropertyPathInterface $propertyPath,
-        private Node\Expr $pathNode,
-        private ?int $limit = null
-    ) {
-    }
-
-    public function getNode(): Node\Expr
-    {
-        $pathNode = $this->pathNode;
-
-        $iterator = $this->propertyPath->getIterator();
-        if ($this->limit < 0) {
-            $iterator = new \LimitIterator($iterator, 0, iterator_count($iterator) + $this->limit);
-        } elseif (null !== $this->limit) {
-            $iterator = new \LimitIterator($iterator, 0, $this->limit);
-        }
-
-        try {
-            foreach ($iterator as $index => $child) {
-                if ($this->propertyPath->isIndex($index)) {
-                    if (\is_int($child)) {
-                        $pathNode = new Node\Expr\ArrayDimFetch(
-                            $pathNode,
-                            new Node\Scalar\LNumber($child)
-                        );
-                    } else {
-                        $pathNode = new Node\Expr\ArrayDimFetch(
-                            $pathNode,
-                            new Node\Scalar\String_($child)
-                        );
-                    }
-                } elseif ($this->propertyPath->isProperty($index)) {
-                    $pathNode = new Node\Expr\PropertyFetch(
-                        $pathNode,
-                        new Node\Name($child)
-                    );
-                }
-            }
-        } catch (\OutOfBoundsException) {
-            // Case when the iterator is empty
-        }
-
-        return $pathNode;
-    }
-}
+/*
+ * @deprecated since FastMap 0.5, use Kiboko\Component\SatelliteToolbox\Builder\PropertyPathBuilder instead.
+ */
+class_alias(\Kiboko\Component\SatelliteToolbox\Builder\PropertyPathBuilder::class, 'Kiboko\\Component\\FastMap\\Compiler\\Builder\\PropertyPathBuilder');

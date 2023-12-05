@@ -9,9 +9,7 @@ use PhpParser\Node;
 
 final readonly class ConstantValueBuilder implements Builder
 {
-    public function __construct(private mixed $value)
-    {
-    }
+    public function __construct(private mixed $value) {}
 
     public function getNode(): Node
     {

@@ -13,8 +13,7 @@ final readonly class ArrayInitialisationPreconditionBuilder implements Builder
     public function __construct(
         private PropertyPath $propertyPath,
         private Node\Expr $pathNode
-    ) {
-    }
+    ) {}
 
     public function getNode(): Node
     {
