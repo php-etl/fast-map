@@ -15,9 +15,7 @@ final readonly class ExpressionLanguageToPhpParserBuilder implements Builder
     /**
      * @param string[] $variables
      */
-    public function __construct(private ExpressionLanguage $interpreter, private Expression $expression, private array $variables = [])
-    {
-    }
+    public function __construct(private ExpressionLanguage $interpreter, private Expression $expression, private array $variables = []) {}
 
     public function getNode(): Node\Expr
     {

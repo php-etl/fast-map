@@ -15,8 +15,7 @@ final readonly class ObjectInitialisationPreconditionBuilder implements Builder
         private PropertyPath $propertyPath,
         private Node\Expr $pathNode,
         private ClassTypeMetadata $metadata
-    ) {
-    }
+    ) {}
 
     public function getNode(): Node
     {

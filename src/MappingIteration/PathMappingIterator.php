@@ -9,9 +9,7 @@ use Symfony\Component\PropertyAccess\PropertyPathIteratorInterface;
 
 final readonly class PathMappingIterator implements \Iterator
 {
-    public function __construct(private PropertyPathIteratorInterface $inner, private TypeMetadataInterface $metadata)
-    {
-    }
+    public function __construct(private PropertyPathIteratorInterface $inner, private TypeMetadataInterface $metadata) {}
 
     public function current(): mixed
     {

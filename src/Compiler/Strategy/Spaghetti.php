@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Strategy;
 
-use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
+use Kiboko\Component\SatelliteToolbox\Builder\PropertyPathBuilder;
 use Kiboko\Contract\Mapping\CompilableMapperInterface;
 use Kiboko\Contract\Mapping\CompiledMapperInterface;
 use Kiboko\Contract\Mapping\Compiler\Strategy\StrategyInterface;

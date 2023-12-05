@@ -16,8 +16,7 @@ final readonly class CompositeInitialisationPreconditionBuilder implements Build
         private TypeMetadataInterface $metadata,
         private PropertyPath $propertyPath,
         private Node\Expr $pathNode
-    ) {
-    }
+    ) {}
 
     public function getNode(): Node
     {

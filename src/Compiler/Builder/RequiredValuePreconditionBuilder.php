@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Compiler\Builder;
 
+use Kiboko\Component\SatelliteToolbox\Builder\PropertyPathBuilder;
 use PhpParser\Builder;
 use PhpParser\Node;
 use Symfony\Component\PropertyAccess\PropertyPath;
@@ -13,8 +14,7 @@ final readonly class RequiredValuePreconditionBuilder implements Builder
     public function __construct(
         private PropertyPath $propertyPath,
         private Node\Expr $pathNode
-    ) {
-    }
+    ) {}
 
     public function getNode(): Node
     {

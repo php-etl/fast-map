@@ -15,8 +15,7 @@ final readonly class StandardCompilationContext implements CompilationContextInt
         private PropertyPathInterface $propertyPath,
         private ?string $path = null,
         private ?ClassMetadataInterface $class = null
-    ) {
-    }
+    ) {}
 
     public static function build(PropertyPathInterface $propertyPath, string $cachePath, string $fqcn): self
     {

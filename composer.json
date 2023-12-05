@@ -37,6 +37,7 @@
         "php-etl/phpspec-extension": "*"
     },
     "autoload": {
+        "files": ["src/Compiler/Builder/PropertyPathBuilder.php"],
         "psr-4": {
             "Kiboko\\Component\\FastMap\\": "src/"
         }

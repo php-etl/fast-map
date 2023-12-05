@@ -12,9 +12,7 @@ final readonly class ScopedCodeBuilder implements Builder
     /**
      * @param \PhpParser\Node\Stmt[] $stmts
      */
-    public function __construct(private Node\Expr $input, private Node\Expr $output, private array $stmts)
-    {
-    }
+    public function __construct(private Node\Expr $input, private Node\Expr $output, private array $stmts) {}
 
     public function getNode(): Node\Expr
     {

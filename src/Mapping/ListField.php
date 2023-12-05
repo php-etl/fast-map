@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Kiboko\Component\FastMap\Mapping;
 
 use Kiboko\Component\FastMap\Compiler\Builder\ExpressionLanguageToPhpParserBuilder;
-use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\FastMap\Compiler\Builder\ScopedCodeBuilder;
 use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Component\SatelliteToolbox\Builder\PropertyPathBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
@@ -24,7 +24,7 @@ final class ListField implements Mapping\FieldScopingInterface, Mapping\Compilab
         private PropertyPathInterface $outputPath,
         private readonly ExpressionLanguage $interpreter,
         private readonly Expression $inputExpression,
-        private readonly Mapping\CompilableMapperInterface&Mapping\ArrayMapperInterface $child
+        private readonly Mapping\ArrayMapperInterface&Mapping\CompilableMapperInterface $child
     ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }

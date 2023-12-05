@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kiboko\Component\FastMap\Mapping;
 
-use Kiboko\Component\FastMap\Compiler\Builder\PropertyPathBuilder;
 use Kiboko\Component\FastMap\PropertyAccess\EmptyPropertyPath;
+use Kiboko\Component\SatelliteToolbox\Builder\PropertyPathBuilder;
 use Kiboko\Contract\Mapping;
 use PhpParser\Node;
 use Symfony\Component\ExpressionLanguage\Expression;
