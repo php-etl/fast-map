@@ -32,8 +32,8 @@
         "phpunit/phpunit": "^10.0",
         "phpunit/php-invoker": "*",
         "friendsofphp/php-cs-fixer": "^3.38",
-        "phpstan/phpstan": "^2.2",
-        "rector/rector": "^2.0",
+        "phpstan/phpstan": "^2.1",
+        "rector/rector": "^2.3",
         "php-etl/phpspec-extension": "*"
     },
     "autoload": {
